@@ -1,0 +1,160 @@
+Java Automaton and Grammar User Application Resources (Jaguar)
+(C) 2001 by Ivan Hernandez Serrano
+
+
+For system requirements and compilation see the README file.
+
+========================================================================
+1. Introduction
+2. Using the Jaguar
+   2.1 Describing the Machine's components
+   2.2 Using Machines
+   2.3 Using Converters
+3. Examples of machines and grammar specifications
+4. Author
+========================================================================
+
+
+
+1. Introduction
+
+
+Jaguar is a Free Software tool written in Java (tm) for people in
+Computer Theory area.  For instructions on how to get, and compile
+Jaguar please see the README file in this same directory.  We assume
+you already have a working Jaguar installation, and that you are able
+to see the Jaguar Center (JCenter from now on) after running either:
+
+			 ant jcenter
+
+or, 
+
+			 java -jar jaguar-<version>.jar
+
+(if you have the binary distribution, change <version> for your correct version)
+
+
+
+2. Using the Jaguar
+
+You can select one of the following options: 
+
+	o	FA: finite automatons ,
+	o	SFA: stack finite automaton,
+	o	Grammars: type 2 and 3 grammar, or
+	o	TM: the Turing machine.
+
+
+2.1 Describing the Machine's components
+
+I will describe the stack finite automaton's (SFA) components, however
+all the other machines (NFA, DFA and Turing Machines) have similar
+components. Once you have selected the SFA a frame (called JSFAFrame)
+will show up.  This frame has several components:
+
+   + One menu bar with the items [File] and [Test]. 
+
+     Using the [File] menu you can load a SFA from one file with the
+     format shown in the test/sfa directory.  
+
+     Once you have loaded a SFA, you can use the [Test...] menu to
+     create or load a string  which will be check if it is element of
+     the L(AFS).
+
+     See the examples (machine specifications, and sample strings)
+     provided in the directory test/sfa.
+  
+   + The [State] component, this one will show you the current state
+   on the current transition of the SFA over the given string.
+ 
+   + The [Rule] component, this one will show you the used rule on the
+   current transition of the SFA over the given string.
+
+   + The [Stack] component, this one will show you the configuration
+   of the stack along the execution of the SFA over the given string.
+
+   + The [String] component, identifies with a different color the
+   current symbol.
+
+   + The [Configuration] canvas will show you the graphical
+   representation of the loaded SFA using the next codes:
+
+	- All states are circles with labels
+
+	- All final states have the circumference painted with a
+	different color
+
+	- All initial states have an inner circle
+
+	- All defined transitions are lines with arrow-heads pointing
+	towards the destiny state
+
+        - The current transition is of a different color
+ 
+   + Finally, on the frame's bottom we have _five basic buttons_ to
+     control the execution of the SFA over the input string:
+
+        - [Next Step] performs one transition, if there are no
+        possible transition to make, then it displays a message with
+        it's acceptance verdict.
+
+        - [Run SFA] runs the SFA over the string automatically
+        performing one transition every six seconds, until the SFA can
+        deliver it's acceptance verdict.
+
+   	- [Stop SFA], stops the execution of the current SFA (see [Run
+   	SFA]).
+
+	- [Quick test], run the SFA engine over the string non-stop
+	until completion.  No graphical representation of the
+	transitions is performed.
+
+	- [Reset SFA], reset the SFA configuration to its initial state.
+
+
+
+2.2 Using Machines
+
+The use of any machine it's pretty easy. In short, you just have to
+select the Machine (from the JCenter), load the machine's description
+of the same type, either load or construct one test string, and,
+finally, run the machine over the string using the _five basic buttos_
+described on the previous section.
+
+To Use any of the SFA examples included, open the JSfa (from the
+JCenter), load a JSfa description from a file (see the test
+directory), load/construct one test string (using the menu item
+[Test...]) and finally, use the _five basic buttos_ to run the JSfa on
+the string.
+
+The use of all other abstract machines is analogous.
+
+
+2.3 The converters are a lot easier to use than the machines. One
+    converter frame has tree basic components:
+	
+    - One menu bar, with the items on this component you can load the
+      source object specification and start the conversion.
+
+    - The inner frames area, on this area all the objects are
+      displayed, the source and its conversion.
+
+    - Details area, you can trace all the operations performed by the
+      conversion algorithms.
+
+
+3. Examples of machines and grammar specifications
+
+If you get the source distribution, all the examples are in the
+directory test. Also, you can get the test files package separately
+from http://sourceforge.net/projects/ijaguar/
+
+4. Author
+
+Please send your comments, improvements, or suggestions to the following address:
+
+	Ivan Hernandez Serrano
+	School of Sciencie, Universidad Nacional Autónoma de México
+	ivanx@users.sourceforge.net
+	http://sourceforge.net/projects/ijaguar
+

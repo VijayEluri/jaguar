@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE dfa SYSTEM "../dfa.dtd">
+
+<!-- Un DFA  M es un quíntuplo (Q,Sigma,delta,q0,F) -->
+
+<dfa>
+
+   <description>Reconoce declaraciones en FORTRAN</description>
+
+   <stateSet>
+	<state>1</state>
+	<state>2</state>
+	<state>3</state>
+	<state>4</state>
+	<state>5</state>
+	<state>6</state>
+	<state>7</state>
+	<state>8</state>
+	<state>E</state>
+   </stateSet>
+
+   <alph>
+	<sym>v</sym>
+	<sym>c</sym>
+	<sym>,</sym>
+	<sym>(</sym>
+	<sym>)</sym>
+   </alph>
+
+   <delta>
+	
+ <trans> <state>1</state> <sym>v</sym> <state>2</state> </trans>
+ <trans> <state>1</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>1</state> <sym>,</sym> <state>E</state> </trans>
+ <trans> <state>1</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>1</state> <sym>)</sym> <state>E</state> </trans>
+
+
+ <trans> <state>2</state> <sym>v</sym> <state>E</state> </trans>
+ <trans> <state>2</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>2</state> <sym>,</sym> <state>8</state> </trans>
+ <trans> <state>2</state> <sym>(</sym> <state>3</state> </trans>
+ <trans> <state>2</state> <sym>)</sym> <state>E</state> </trans>
+
+
+ <trans> <state>3</state> <sym>v</sym> <state>6</state> </trans>
+ <trans> <state>3</state> <sym>c</sym> <state>4</state> </trans>
+ <trans> <state>3</state> <sym>,</sym> <state>E</state> </trans>
+ <trans> <state>3</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>3</state> <sym>)</sym> <state>E</state> </trans>
+
+
+ <trans> <state>4</state> <sym>v</sym> <state>E</state> </trans>
+ <trans> <state>4</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>4</state> <sym>,</sym> <state>5</state> </trans>
+ <trans> <state>4</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>4</state> <sym>)</sym> <state>7</state> </trans>
+
+
+ <trans> <state>5</state> <sym>v</sym> <state>6</state> </trans>
+ <trans> <state>5</state> <sym>c</sym> <state>4</state> </trans>
+ <trans> <state>5</state> <sym>,</sym> <state>E</state> </trans>
+ <trans> <state>5</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>5</state> <sym>)</sym> <state>E</state> </trans>
+
+
+ <trans> <state>6</state> <sym>v</sym> <state>E</state> </trans>
+ <trans> <state>6</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>6</state> <sym>,</sym> <state>5</state> </trans>
+ <trans> <state>6</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>6</state> <sym>)</sym> <state>7</state> </trans>
+
+
+ <trans> <state>7</state> <sym>v</sym> <state>E</state> </trans>
+ <trans> <state>7</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>7</state> <sym>,</sym> <state>8</state> </trans>
+ <trans> <state>7</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>7</state> <sym>)</sym> <state>E</state> </trans>
+
+
+ <trans> <state>8</state> <sym>v</sym> <state>2</state> </trans>
+ <trans> <state>8</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>8</state> <sym>,</sym> <state>E</state> </trans>
+ <trans> <state>8</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>8</state> <sym>)</sym> <state>E</state> </trans>
+
+
+ <trans> <state>E</state> <sym>v</sym> <state>E</state> </trans>
+ <trans> <state>E</state> <sym>c</sym> <state>E</state> </trans>
+ <trans> <state>E</state> <sym>,</sym> <state>E</state> </trans>
+ <trans> <state>E</state> <sym>(</sym> <state>E</state> </trans>
+ <trans> <state>E</state> <sym>)</sym> <state>E</state> </trans>
+
+
+
+   </delta>
+
+   <state>1</state>
+
+   <stateSet>
+	   <state>2</state>
+	   <state>7</state>
+   </stateSet>
+
+</dfa>

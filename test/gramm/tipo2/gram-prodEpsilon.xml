@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE gram SYSTEM "../grammar.dtd">
+
+<gram>
+
+ <description> Una gram'atica con producciones epsilon</description>
+
+  <!-- El alfabeto N de no terminales  -->
+  <alph> <sym>S</sym> <sym>A</sym> <sym>B</sym>  <sym>C</sym> </alph>
+
+  <!-- El alfabeto T de terminales  -->
+  <alph> <sym>a</sym> <sym>b</sym> </alph>
+
+  <!-- El conjunto de producciones P -->
+  <productionSet>
+
+      <p> 
+        <left> <str> <sym>S</sym> </str> </left>
+        <right> <str> <sym>A</sym>  <sym>B</sym>   <sym>C</sym> </str> </right>
+      </p>
+      <p> 
+        <left> <str> <sym>A</sym> </str> </left>
+        <right> <str> <sym>B</sym>  <sym>B</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>A</sym> </str> </left>
+        <right> <str> <epsilon/> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B</sym> </str> </left>
+        <right> <str> <sym>C</sym>   <sym>C</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B</sym> </str> </left>
+        <right> <str> <sym>a</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>C</sym> </str> </left>
+        <right> <str> <sym>A</sym> <sym>A</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>C</sym> </str> </left>
+        <right> <str> <sym>b</sym> </str> </right>
+      </p>
+
+  </productionSet>
+
+  <!-- El símbolo inicial S -->
+
+  <sym>S</sym>
+
+</gram>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!ELEMENT sym (#PCDATA)>
+
+<!ELEMENT alph (sym)*>
+
+<!ELEMENT str (epsilon|(sym)+)>
+
+<!ELEMENT epsilon EMPTY>
+
+<!ELEMENT state (#PCDATA)>
+
+<!ATTLIST state xpos CDATA #IMPLIED
+                ypos CDATA #IMPLIED>
+
+<!ELEMENT stateSet (state)*>
+
+<!ELEMENT description (#PCDATA)>
+
+<!-- Aquí comienza, propiamente la definición de un DFA --> 
+
+<!ELEMENT left EMPTY>
+
+<!ELEMENT right EMPTY>
+
+<!ELEMENT QxGammaxDirection (state, sym, (left|right))>
+
+<!ELEMENT trans (state, sym, QxGammaxDirection)>
+
+<!ELEMENT delta (trans)*>
+
+<!ELEMENT turing (stateSet, alph, alph, delta, state, sym, stateSet)>

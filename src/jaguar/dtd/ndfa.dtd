@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!ELEMENT sym (#PCDATA)>
+
+<!ELEMENT alph (sym)*>
+
+<!ELEMENT str (epsilon|(sym)+)>
+
+<!ELEMENT epsilon EMPTY>
+
+<!ELEMENT state (#PCDATA)>
+<!ATTLIST state final (true|false) #IMPLIED
+                xpos CDATA #IMPLIED
+                ypos CDATA #IMPLIED>
+
+<!ELEMENT stateSet (state)*>
+
+<!ELEMENT description (#PCDATA)>
+
+<!-- Aquí comienza, propiamente la definición de un NDFA --> 
+
+<!ELEMENT trans (state, sym, stateset)>
+
+<!ELEMENT delta (trans)*>
+
+<!ELEMENT ndfa (description?, stateSet, alph, delta, stateSet, stateSet)>
+

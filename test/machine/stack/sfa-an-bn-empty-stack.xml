@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE stack SYSTEM "afs.dtd">
+
+<!--   Q = {q0, q1} -->
+<!--   Sigma = {a, b} -->
+<!--   Gamma = {A} -->
+<!--   F = {q0, q1} -->
+
+<!--   d(q0, a, <epsilon/>) = { (q0, A) } -->
+<!--   d(q0, b, A) = { (q1, <epsilon/>) } -->
+<!--   d(q1, b, A) = { (q1, <epsilon/>) } -->
+
+<stack>
+  <description>  Pushdown automaton to accept L= { a^ib^i :i > 0 }</description>
+
+<!--  El conjunto de estados Q  -->
+ <stateSet> <state>q0</state> <state>q1</state> </stateSet>
+
+<!--  Alfabeto de entrada Sigma  -->
+ <alph> <sym>a</sym> <sym>b</sym> </alph>
+
+<!--  Alfabeto del stack Gamma  -->
+ <alph> <sym>Z0</sym> <sym>A</sym> </alph>
+
+<!--  Función de transición delta -->
+ <delta> 
+   <trans> <state>q0</state> <sym>a</sym> <sym>Z0</sym> 
+	   <QxGammaStarSet>
+	      <QxGammaStar> <state>q0</state> <str><sym>A</sym></str> </QxGammaStar>
+	   </QxGammaStarSet>
+   </trans>
+
+   <trans> <state>q0</state> <sym>a</sym> <sym>A</sym> 
+	   <QxGammaStarSet>
+	      <QxGammaStar> <state>q0</state> <str> <sym>A</sym> <sym>A</sym> </str> </QxGammaStar>
+	   </QxGammaStarSet>
+   </trans>
+
+   <trans> <state>q0</state> <sym>b</sym> <sym>A</sym> 
+	   <QxGammaStarSet>
+	      <QxGammaStar> <state>q1</state> <str><epsilon/></str> </QxGammaStar>
+	   </QxGammaStarSet>
+   </trans>
+
+   <trans> <state>q1</state> <sym>b</sym> <sym>A</sym> 
+	    <QxGammaStarSet>
+	      <QxGammaStar> <state>q1</state> <str><epsilon/></str> </QxGammaStar>
+	   </QxGammaStarSet>
+   </trans>
+
+ </delta>
+
+ <state>q0</state>
+
+ <sym>Z0</sym>
+
+ <stateSet> </stateSet>
+
+</stack>

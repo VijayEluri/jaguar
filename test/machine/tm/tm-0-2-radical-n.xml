@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+<!DOCTYPE turing SYSTEM "turing.dtd">
+
+<turing>
+
+<description>Acepta el lenguaje L = { 0^{2^{n}} | n >= 0}</description>
+
+<stateSet>
+	<state>q1</state>
+	<state>q2</state>
+	<state>q3</state>
+	<state>q4</state>
+	<state>q5</state>
+	<state>qaccept</state>
+	<state>qreject</state>
+</stateSet>
+
+<alph>
+	<sym>0</sym>
+</alph>
+
+<alph>
+	<sym>x</sym> <sym>_</sym>
+</alph>
+
+<delta>
+
+<trans> <state>q1</state> <sym>0</sym>
+	<QxGammaxDirection> <state>q2</state> <sym>_</sym> <right/> </QxGammaxDirection></trans>
+
+<trans> <state>q1</state> <sym>_</sym>
+		<QxGammaxDirection>
+		<state>qreject</state>
+		<sym>_</sym><right/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q1</state> <sym>x</sym><QxGammaxDirection> <state>qreject</state> <sym>x</sym> <right/> </QxGammaxDirection>
+</trans>
+
+<trans> <state>q2</state> <sym>x</sym><QxGammaxDirection> <state>q2</state> <sym>x</sym> <right/></QxGammaxDirection> 
+</trans>
+
+<trans> <state>q2</state>
+<sym>_</sym><QxGammaxDirection>
+		<state>qaccept</state>
+		<sym>_</sym><right/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q2</state>
+<sym>0</sym><QxGammaxDirection>
+		<state>q3</state>
+		<sym>x</sym><right/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q3</state>
+<sym>x</sym><QxGammaxDirection>
+		<state>q3</state>
+		<sym>x</sym><right/></QxGammaxDirection>
+</trans>
+<trans> <state>q3</state>
+<sym>_</sym><QxGammaxDirection>
+		<state>q5</state>
+		<sym>_</sym><left/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q3</state>
+<sym>0</sym><QxGammaxDirection>
+		<state>q4</state>
+		<sym>0</sym><right/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q4</state>
+<sym>x</sym><QxGammaxDirection>
+		<state>q4</state>
+		<sym>x</sym><right/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q4</state>
+<sym>0</sym><QxGammaxDirection>
+		<state>q3</state>
+		<sym>x</sym><right/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q5</state>
+<sym>0</sym><QxGammaxDirection>
+		<state>q5</state>
+		<sym>0</sym><left/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q5</state>
+<sym>x</sym><QxGammaxDirection>
+		<state>q5</state>
+		<sym>x</sym><left/></QxGammaxDirection>
+</trans>
+
+<trans> <state>q5</state>
+<sym>_</sym><QxGammaxDirection>
+		<state>q2</state>
+		<sym>_</sym><right/></QxGammaxDirection>
+</trans></delta><state>q1</state>
+
+<sym>_</sym>
+
+<stateSet> <state>qaccept</state>  </stateSet>
+
+
+</turing>
+
+

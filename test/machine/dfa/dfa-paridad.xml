@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE dfa SYSTEM "dfa.dtd">
+
+<!-- Un DFA  M es un quíntuplo (Q,Sigma,delta,q0,F) -->
+
+<dfa>
+
+<description>Este autómata checa si el número de 1s en una cadena de {0,1}^* es par</description>
+
+   <stateSet><state xpos="123" ypos="987">PAR</state><state>IMPAR</state></stateSet>
+
+   <alph>
+	<sym>0</sym>
+	<sym>1</sym>
+   </alph>
+
+   <delta>
+	<trans> <state>PAR</state> <sym>0</sym> <state>PAR</state> </trans>
+	<trans> <state>PAR</state> <sym>1</sym> <state>IMPAR</state> </trans>
+	<trans> <state>IMPAR</state> <sym>0</sym> <state>IMPAR</state> </trans>
+	<trans> <state>IMPAR</state> <sym>1</sym> <state>PAR</state> </trans>
+   </delta>
+
+   <state>PAR</state>
+
+   <stateSet>
+	   <state>PAR</state>
+   </stateSet>
+
+</dfa>

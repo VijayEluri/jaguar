@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE gram SYSTEM "../grammar.dtd">
+
+<gram>
+
+  <!-- El alfabeto N de no terminales  -->
+  <alph> <sym>S</sym> <sym>B</sym> </alph>
+
+  <!-- El alfabeto T de terminales  -->
+  <alph> <sym>0</sym> <sym>1</sym> </alph>
+
+  <!-- El conjunto de producciones P -->
+  <productionSet>
+
+      <p> 
+        <left> <str> <sym>S</sym> </str> </left>
+        <right> <str> <sym>0</sym> <sym>B</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B</sym> </str> </left>
+        <right> <str> <sym>0</sym> <sym>B</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B</sym> </str> </left>
+        <right> <str> <sym>1</sym> <sym>S</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B</sym> </str> </left>
+        <right> <str> <sym>0</sym> </str> </right>
+      </p>
+  </productionSet>
+
+  <!-- El símbolo inicial S -->
+
+  <sym>S</sym>
+
+</gram>

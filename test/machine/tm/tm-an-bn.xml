@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+<!DOCTYPE turing SYSTEM "turing.dtd">
+
+<turing>
+
+<description>Reconoce el lenguaje {0^n1^n | n > 0}</description>
+
+<!--   El conjunto de estados  Q -->
+
+	<stateSet> 
+		<state>q0</state>
+		<state>q1</state>
+		<state>q2</state>
+		<state>q3</state>
+		<state>q4</state>
+		<state>q5</state>
+	</stateSet>
+
+<!--   El alphabeto Sigma -->
+
+	<alph>
+		<sym>0</sym> <sym>1</sym>
+	</alph>
+
+<!--   El alphabeto Gamma -->
+
+	<alph>
+		<sym>0</sym> <sym>1</sym> <sym>_</sym> <sym>X</sym> <sym>Y</sym>
+	</alph>
+
+<!--   La función de transición Delta -->
+
+	<delta>
+		<trans> <state>q0</state> <sym>0</sym>
+			<QxGammaxDirection> <state>q1</state> <sym>X</sym> <right/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q1</state> <sym>0</sym>
+			<QxGammaxDirection> <state>q1</state> <sym>0</sym> <right/> </QxGammaxDirection>
+		</trans>
+		<trans> <state>q1</state> <sym>1</sym>
+			<QxGammaxDirection> <state>q2</state> <sym>Y</sym> <left/> </QxGammaxDirection>
+		</trans>
+		<trans> <state>q1</state> <sym>Y</sym>
+			<QxGammaxDirection> <state>q1</state> <sym>Y</sym> <right/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q2</state> <sym>0</sym>
+			<QxGammaxDirection> <state>q4</state> <sym>0</sym> <left/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q2</state> <sym>X</sym>
+			<QxGammaxDirection> <state>q3</state> <sym>X</sym> <right/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q2</state> <sym>Y</sym>
+			<QxGammaxDirection> <state>q2</state> <sym>Y</sym> <left/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q3</state> <sym>Y</sym>
+			<QxGammaxDirection> <state>q3</state> <sym>Y</sym> <right/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q3</state> <sym>_</sym>
+			<QxGammaxDirection> <state>q5</state> <sym>Y</sym> <right/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q4</state> <sym>0</sym>
+			<QxGammaxDirection> <state>q4</state> <sym>0</sym> <left/> </QxGammaxDirection>
+		</trans>
+
+		<trans> <state>q4</state> <sym>X</sym>
+			<QxGammaxDirection> <state>q0</state> <sym>X</sym> <right/> </QxGammaxDirection>
+		</trans>
+	</delta>
+
+
+
+<!--   El estado  -->
+
+	<state>q0</state>
+
+<!--   El blanco  -->
+
+	<sym>_</sym>
+
+<!--   El conjunto de estados finales -->
+
+	<stateSet>
+		<state>q5</state>
+	</stateSet>
+
+</turing>		

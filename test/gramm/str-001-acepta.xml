@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE str SYSTEM "grammar.dtd">
+
+<str> <sym>0</sym> <sym>0</sym> <sym>0</sym> <sym>1</sym> <sym>1</sym> <sym>1</sym> </str>
+
+<!-- <str> <sym>0</sym> <sym>0</sym> <sym>1</sym> <sym>1</sym> <sym>1</sym> </str> -->
+
+<!-- <str> <epsilon/> </str> -->
+
+<!-- 800 5 52 2222 -->
+
+<!-- 528 04 12 -->
+

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding="iso-8859-1" ?>
+
+<!DOCTYPE gram SYSTEM "../grammar.dtd">
+
+<gram>
+
+  <description>Genera el lenguaje {a^{n}b^{m} | n >= 2 , m >=3}</description>
+
+  <!--   El alfabeto N de no terminales  -->
+  <alph> <sym>S</sym> <sym>A1</sym> <sym>A2</sym>  <sym>B1</sym> <sym>B2</sym> </alph>
+
+  <!-- El alfabeto T de terminales  -->
+  <alph> <sym>a</sym> <sym>b</sym> </alph>
+
+  <!-- El conjunto de producciones P -->
+  <productionSet>
+
+      <p> 
+        <left> <str> <sym>S</sym> </str> </left>
+        <right> <str> <sym>a</sym> <sym>A1</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>A1</sym> </str> </left>
+        <right> <str> <sym>a</sym> <sym>A2</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>A2</sym> </str> </left>
+        <right> <str> <sym>a</sym> <sym>A2</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>A2</sym> </str> </left>
+        <right> <str> <sym>b</sym> <sym>B1</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B1</sym> </str> </left>
+        <right> <str> <sym>b</sym> <sym>B2</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B2</sym> </str> </left>
+        <right> <str> <sym>b</sym> <sym>B2</sym> </str> </right>
+      </p>
+
+      <p> 
+        <left> <str> <sym>B2</sym> </str> </left>
+        <right> <str> <sym>b</sym> </str> </right>
+      </p>
+
+
+  </productionSet>
+
+
+  <!-- El símbolo inicial S -->
+
+  <sym>S</sym>
+
+</gram>
