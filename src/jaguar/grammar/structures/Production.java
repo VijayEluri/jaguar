@@ -41,7 +41,7 @@ import org.xml.sax.*;
  * Representa las producciones de la grámatica, para cada una de las gramaticas  especializa estas producciones
  * 
  * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:02 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:02 $
  */
 abstract public class Production implements Cloneable{
     /**

@@ -47,7 +47,7 @@ import org.xml.sax.*;
  * La máquina de Turing
  * 
  * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:05 $
  */
 public class Turing extends Machine implements Cloneable{
     /**

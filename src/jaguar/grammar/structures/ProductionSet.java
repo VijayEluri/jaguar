@@ -40,7 +40,7 @@ import org.xml.sax.*;
  * El conjunto de producciones que va a tener una gramatica
  * 
  * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:02 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:02 $
  */
 abstract public class ProductionSet extends HashSet implements Cloneable{
     /**

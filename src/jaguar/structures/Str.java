@@ -28,7 +28,7 @@ package jaguar.structures;
 /**
  *
  * @author <a href="mailto: ivanx@users.sourceforge.net">Ivan Hernández Serrano</a>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:05 $
  */
 
 import java.util.*;

@@ -33,7 +33,7 @@ package jaguar.machine;
  * Created: Wed Feb 21 00:15:15 2001
  *
  * @author <a href="mailto: "</a>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:03 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:03 $
  */
 
 import java.awt.Graphics;

@@ -31,7 +31,7 @@
  * Created: Wed Feb  7 00:36:45 2001
  *
  * @author <a href="mailto:ivanx@users.sourceforge.net">Ivan Hernandez Serrano</a>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:05 $
  */
 package jaguar.structures;
 

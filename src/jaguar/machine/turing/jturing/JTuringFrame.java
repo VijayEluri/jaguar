@@ -50,7 +50,7 @@ import java.io.File;
  * Created: Sun Feb 11 20:21:47 2001
  *
  * @author <a href="mailto:ivanx@users.sourceforge.net">Ivan Hernandez Serrano</a>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:05 $
  **/
 public class JTuringFrame extends JMachineFrame{
     

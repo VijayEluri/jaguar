@@ -48,7 +48,7 @@ import org.xml.sax.*;
  * Created: Wed Dec 20 21:33:00 2000
  *
  * @author <a href="mailto:ivanx@users.sourceforge.net">Ivan Hern'andez</a>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:03 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:03 $
  */
 
 public class NDFA extends Machine {

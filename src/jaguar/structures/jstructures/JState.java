@@ -41,7 +41,7 @@ import java.lang.Math;
  *
  * Created: Sat Feb 10 15:20:26 2001
  * @author <a href="mailto:ivanx@users.sourceforge.net">Ivan Hernandez Serrano</a>
- * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
+ * @version $Revision: 1.1.1.1 $ $Date: 2005/01/31 19:25:05 $
  */
 
 public class JState extends jaguar.structures.State{
