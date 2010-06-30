@@ -60,7 +60,7 @@ public class JDeltaPainter{
     /**
      * El color del cual se pintarán las etiquetas
      **/
-    public static final Color ARROW_COLOR = new Color(71,43,255);
+    public static final Color ARROW_COLOR = Color.black;
 
      /**
       * El diagrama que define la delta
@@ -71,8 +71,8 @@ public class JDeltaPainter{
      * @return el valor actual de jdelta
      * @see #jdelta
      */
-    public JDeltaGraphic getJDelta(){
-  return jdelta;
+    public JDeltaGraphic getJDelta() {
+        return jdelta;
     }
 
     /**
@@ -80,28 +80,28 @@ public class JDeltaPainter{
      * @param new_jdelta el nuevo valor para jdelta
      * @see #jdelta
      */
-    public void setJDelta(JDeltaGraphic new_jdelta){
-  jdelta=new_jdelta;
+    public void setJDelta(JDeltaGraphic new_jdelta) {
+        jdelta=new_jdelta;
     }
 
     public JDeltaPainter (){
-  super();
+        super();
     }
 
     /**
      * Constructor sin parámetros.
      * Inicializa el objeto usando los valores por omision.
      */
-    public JDeltaPainter (JDeltaGraphic _jdelta){
+    public JDeltaPainter (JDeltaGraphic _jdelta) {
   this();
   jdelta = _jdelta;
     }
 
-    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest){
+    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest) {
         paintArrowHead(g2d, orig, dest, ARROW_COLOR, "una etiqueta");
     }
     // Este es el rudísimo (juanger)
-    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest, Color c, String label){
+    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest, Color c, String label) {
         double slope = (orig.getY()-dest.getY())/(orig.getX()-dest.getX());
         double headWidth = 5;
         double headLength = 40;
@@ -158,7 +158,7 @@ public class JDeltaPainter{
     }
 
     ////este es el de salva
-    public void paintArrowHead2(Graphics2D g2d, Point orig, Point dest, Color c){
+    public void paintArrowHead2(Graphics2D g2d, Point orig, Point dest, Color c) {
         Point newp   = new Point();
         double nx = (orig.getX()+ dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
         newp.setLocation((nx+dest.getX())/2,(ny+dest.getY())/2);
@@ -178,28 +178,29 @@ public class JDeltaPainter{
                              RenderingHints.VALUE_ANTIALIAS_ON);
     }
 
-    public void paintLabelSelfState(Graphics2D g2d, Point p, Symbol sym){
-  paintLabelSelfState(g2d, p, sym.toString());
+    public void paintLabelSelfState(Graphics2D g2d, Point p, Symbol sym) {
+        paintLabelSelfState(g2d, p, sym.toString());
     }
-    public void paintLabelSelfState(Graphics2D g2d, Point p, String label){
-  g2d.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
-  java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
-  Point p1 = new Point();
-  p1.setLocation((float)p.getX(), (float)p.getY()+40);
-  Point p2 = new Point();
-  p2.setLocation((float)p.getX(), (float)p.getY()+53);
-  l2d.setLine(p1,p2);
-  g2d.draw(l2d);
-  p1.translate(-5,0);
-  l2d.setLine(p1,p2);
-  g2d.draw(l2d);
+
+    public void paintLabelSelfState(Graphics2D g2d, Point p, String label) {
+        g2d.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+        java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
+        Point p1 = new Point();
+        p1.setLocation((float)p.getX(), (float)p.getY()+40);
+        Point p2 = new Point();
+        p2.setLocation((float)p.getX(), (float)p.getY()+53);
+        l2d.setLine(p1,p2);
+        g2d.draw(l2d);
+        p1.translate(-5,0);
+        l2d.setLine(p1,p2);
+        g2d.draw(l2d);
 
 
-  g2d.setColor(ARROW_LABEL_COLOR);
-  g2d.drawString(label,(float)p.getX(), (float)p.getY()+30);
-  g2d.setColor(ARROW_COLOR);
-  g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-           RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setColor(ARROW_LABEL_COLOR);
+        g2d.drawString(label,(float)p.getX(), (float)p.getY()+30);
+        g2d.setColor(ARROW_COLOR);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                             RenderingHints.VALUE_ANTIALIAS_ON);
     }
 
 

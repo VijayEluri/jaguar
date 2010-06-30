@@ -50,7 +50,7 @@ public class JState extends jaguar.structures.State {
     /**
      * El diametro del circulo circunscrito que identificará gráficamente a un estado inicial
      */
-    public static final double DIAMETRO_INITIAL_STATE = 15;
+    public static final double DIAMETRO_FINAL_STATE = 42;
 
     /**
      * El diametro de un JState, son graficos 50 pixels
@@ -66,23 +66,23 @@ public class JState extends jaguar.structures.State {
     /**
      * El circulo cinscuncrito con el que identificaremos a los estados iniciales
      */
-    protected Ellipse2D circuloCinscunscritoEstadoInicial;
+    protected Ellipse2D circuloCinscunscritoEstadoFinal;
 
     /**
-     * funcion de acceso para obtener el valor de circuloCinscunscritoEstadoInicial
-     * @return el valor actual de circuloCinscunscritoEstadoInicial
-     * @see #circuloCinscunscritoEstadoInicial
+     * funcion de acceso para obtener el valor de circuloCinscunscritoEstadoFinal
+     * @return el valor actual de circuloCinscunscritoEstadoFinal
+     * @see #circuloCinscunscritoEstadoFinal
      */
-    protected Ellipse2D getCirculoCinscunscritoEstadoInicial() {
-        return circuloCinscunscritoEstadoInicial;
+    protected Ellipse2D getCirculoCinscunscritoEstadoFinal() {
+        return circuloCinscunscritoEstadoFinal;
     }
     /**
-     * funcion de acceso para modificar circuloCinscunscritoEstadoInicial
-     * @param new_circuloCinscunscritoEstadoInicial el nuevo valor para circuloCinscunscritoEstadoInicial
-     * @see #circuloCinscunscritoEstadoInicial
+     * funcion de acceso para modificar circuloCinscunscritoEstadoFinal
+     * @param new_circuloCinscunscritoEstadoFinal el nuevo valor para circuloCinscunscritoEstadoFinal
+     * @see #circuloCinscunscritoEstadoFinal
      */
-    protected void setCirculoCinscunscritoEstadoInicial(Ellipse2D new_circuloCinscunscritoEstadoInicial) {
-        circuloCinscunscritoEstadoInicial=new_circuloCinscunscritoEstadoInicial;
+    protected void setCirculoCinscunscritoEstadoFinal(Ellipse2D new_circuloCinscunscritoEstadoFinal) {
+        circuloCinscunscritoEstadoFinal=new_circuloCinscunscritoEstadoFinal;
     }
 
     /**
@@ -134,8 +134,10 @@ public class JState extends jaguar.structures.State {
 
     private void updateEllipse2D(){
         e2d = new Ellipse2D.Double(getX(),getY(),DIAMETRO,DIAMETRO);
-        circuloCinscunscritoEstadoInicial = new Ellipse2D.Double(getX()+5+DIAMETRO/4,getY()+5+DIAMETRO/4,
-                                                        DIAMETRO_INITIAL_STATE,DIAMETRO_INITIAL_STATE);
+        circuloCinscunscritoEstadoFinal = new Ellipse2D.Double(
+                                                    getX()+(DIAMETRO-DIAMETRO_FINAL_STATE)/2,
+                                                    getY()+(DIAMETRO-DIAMETRO_FINAL_STATE)/2,
+                                                    DIAMETRO_FINAL_STATE,DIAMETRO_FINAL_STATE);
     }
 
     protected Ellipse2D getEllipse(){
@@ -175,9 +177,9 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * El color por default es orange
+     * El color por default es blue
      **/
-    public static final Color DEFAULT_BG_COLOR = new Color(102, 153,255);// Color.orange;
+    public static final Color DEFAULT_BG_COLOR = Color.white;// Color.blue;
 
 
     /**
@@ -188,7 +190,7 @@ public class JState extends jaguar.structures.State {
     /**
      * El color por default es orange
      **/
-    public static final Color DEFAULT_FG_COLOR = Color.black;
+    public static final Color DEFAULT_STROKE_COLOR = Color.black;
 
     /**
      * La constante booleana para pintar un estado current
@@ -275,8 +277,10 @@ public class JState extends jaguar.structures.State {
         location = new Point();
         setLocation(x,y);
         e2d = new Ellipse2D.Double(getX(),getY(),DIAMETRO,DIAMETRO);
-        circuloCinscunscritoEstadoInicial= new Ellipse2D.Double(getX()+5+DIAMETRO/4,getY()+5+DIAMETRO/4,
-                                                        DIAMETRO_INITIAL_STATE,DIAMETRO_INITIAL_STATE);
+        circuloCinscunscritoEstadoFinal= new Ellipse2D.Double(
+                                                    getX()+(DIAMETRO-DIAMETRO_FINAL_STATE)/2,
+                                                    getY()+(DIAMETRO-DIAMETRO_FINAL_STATE)/2,
+                                                    DIAMETRO_FINAL_STATE,DIAMETRO_FINAL_STATE);
     }
 
 
@@ -327,17 +331,22 @@ public class JState extends jaguar.structures.State {
             g.setColor(DEFAULT_BG_CURRENT_STATE_COLOR);
         }
         g2d.fill(getEllipse());
-        if (getIsInF()) {
-            g.setColor(DEFAULT_FINAL_BG_COLOR);
-            g2d.setStroke(new BasicStroke(3.0f));
-            g2d.draw(getEllipse());
+        g.setColor(DEFAULT_STROKE_COLOR);
+        g2d.setStroke(new BasicStroke(3.0f));
+        g2d.draw(getEllipse());
+        if (getIsInF()) { // es final
+            g.setColor(DEFAULT_STROKE_COLOR);
+            g2d.setStroke(new BasicStroke(1.0f));
+            g2d.draw(getCirculoCinscunscritoEstadoFinal());
         }
-        if (getEsEstadoInicial()) {
-            g.setColor(DEFAULT_POINT_INITIAL_STATE);
-            g2d.fill(getCirculoCinscunscritoEstadoInicial());
+        if (getEsEstadoInicial()) { // es inicial
+            // TODO
         }
-        g.setColor(DEFAULT_FG_COLOR);
-        g2d.drawString(getLabel(),(int)(getX()+3),(int)(getY()+(DIAMETRO/2)));
+        // Dibuja la etiqueta
+        g.setColor(DEFAULT_STROKE_COLOR);
+        g2d.drawString(getLabel(),
+            (int)(getX()+(DIAMETRO/2)-3),
+            (int)(getY()+(DIAMETRO/2)+6));
         g2d.setStroke(origS);
     }
 
