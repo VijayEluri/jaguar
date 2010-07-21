@@ -44,6 +44,7 @@ import java.io.*;
 import java.util.*;
 import java.awt.Graphics;
 import java.awt.Dimension;
+import javax.swing.event.TableModelEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -425,6 +426,10 @@ public class JAFS extends AFS implements JMachine{
 	afsframe.getJdc().paint(g);
     }    
     
+    
+    public void tableChanged(TableModelEvent e) {
+        
+    }
 }
 
 /* JAFS.java ends here. */

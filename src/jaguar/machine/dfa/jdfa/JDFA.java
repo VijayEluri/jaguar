@@ -75,7 +75,7 @@ public class JDFA extends DFA implements JMachine{
      * @return value of g.
      */
     public Graphics getG() {
-  return g;
+        return g;
     }
 
     /**
@@ -83,7 +83,7 @@ public class JDFA extends DFA implements JMachine{
      * @param v  Value to assign to g.
      */
     public void setG(Graphics  v) {
-  g = v;
+        g = v;
     }
 
     private JDfaFrame dfaframe;
@@ -93,7 +93,7 @@ public class JDFA extends DFA implements JMachine{
      * @return value of dfaframe.
      */
     public JMachineFrame getMachineFrame() {
-  return dfaframe;
+        return dfaframe;
     }
 
     /**
@@ -101,7 +101,7 @@ public class JDFA extends DFA implements JMachine{
      * @param v  Value to assign to dfaframe.
      */
     public void setJMachineFrame(JMachineFrame  v) {
-  this.dfaframe = (JDfaFrame)v;
+        this.dfaframe = (JDfaFrame)v;
     }
 
     /**
@@ -115,7 +115,7 @@ public class JDFA extends DFA implements JMachine{
      * @return value of strToTestOrig.
      */
     public JStr getStrToTestOrig() {
-  return strToTestOrig;
+        return strToTestOrig;
     }
 
     /**
@@ -123,7 +123,7 @@ public class JDFA extends DFA implements JMachine{
      * @param v  Value to assign to strToTestOrig.
      */
     public void setStrToTestOrig(JStr  v) {
-  strToTestOrig = v;
+        strToTestOrig = v;
     }
 
 
@@ -137,7 +137,7 @@ public class JDFA extends DFA implements JMachine{
      * @return value of strToTest.
      */
     public JStr getStrToTest() {
-  return strToTest;
+        return strToTest;
     }
 
     /**
@@ -145,7 +145,7 @@ public class JDFA extends DFA implements JMachine{
      * @param v  Value to assign to strToTest.
      */
     public void setStrToTest(JStr  v) {
-  this.strToTest = v;
+        this.strToTest = v;
     }
 
 
@@ -178,7 +178,7 @@ public class JDFA extends DFA implements JMachine{
      * @see #previousNotNullCurrentState
      */
     public State getPreviousNotNullCurrentState(){
-  return previousNotNullCurrentState;
+        return previousNotNullCurrentState;
     }
     /**
      * funcion de acceso para modificar previousNotNullCurrentState
@@ -186,7 +186,7 @@ public class JDFA extends DFA implements JMachine{
      * @see #previousNotNullCurrentState
      */
     public void setPreviousNotNullCurrentState(State new_previousNotNullCurrentState){
-  previousNotNullCurrentState=new_previousNotNullCurrentState;
+        previousNotNullCurrentState = new_previousNotNullCurrentState;
     }
 
     private State currentState;
@@ -196,7 +196,7 @@ public class JDFA extends DFA implements JMachine{
      * @return value of currentState.
      */
     public State getCurrentState() {
-  return currentState;
+        return currentState;
     }
 
     /**
@@ -204,29 +204,29 @@ public class JDFA extends DFA implements JMachine{
      * @param v  Value to assign to currentState.
      */
     public void setCurrentState(State  v) {
-  this.currentState = v;
+        this.currentState = v;
     }
 
 
     public JDFA(Alphabet _Sigma, StateSet _Q, StateSet _F, DfaDelta _delta,  State _q0, Graphics _g){
-  this(_Sigma, _Q, _F, _delta, _q0);
-  setG(_g);
+        this(_Sigma, _Q, _F, _delta, _q0);
+        setG(_g);
     }
 
     public JDFA(DFA dfa){
-  this(dfa.getSigma(),new JStateSet(dfa.getQ()) ,new JStateSet(dfa.getF()), (DfaDelta)dfa.getDelta(),new JState(dfa.getQ0()));
-  setDelta(new JDfaDelta((DfaDelta)getDelta(),(JStateSet)getQ()));
+        this(dfa.getSigma(),new JStateSet(dfa.getQ()) ,new JStateSet(dfa.getF()), (DfaDelta)dfa.getDelta(),new JState(dfa.getQ0()));
+        setDelta(new JDfaDelta((DfaDelta)getDelta(),(JStateSet)getQ()));
     }
 
 
     public JDFA(Alphabet _Sigma, StateSet _Q, StateSet _F, DfaDelta _delta,  State _q0){
-  super(_Sigma, _Q, _F, _delta, _q0);
-  setCurrentState(getQ0());
-  setPreviousNotNullCurrentState(getQ0());
+        super(_Sigma, _Q, _F, _delta, _q0);
+        setCurrentState(getQ0());
+        setPreviousNotNullCurrentState(getQ0());
     }
 
     protected JDFA(){
-  super();
+        super();
     }
 
     /**
@@ -234,7 +234,7 @@ public class JDFA extends DFA implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/dfa.dtd">dfa.dtd</a>
      */
     public JDFA(String filename)throws Exception{
-  this(new File(filename));
+        this(new File(filename));
     }
 
     /**
@@ -243,7 +243,7 @@ public class JDFA extends DFA implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/dfa.dtd">dfa.dtd</a>
      */
     public JDFA(String filename, JDfaFrame jdfaframe)throws Exception{
-  this(new File(filename),jdfaframe);
+        this(new File(filename),jdfaframe);
     }
 
     /**
@@ -252,10 +252,10 @@ public class JDFA extends DFA implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/dfa.dtd">dfa.dtd</a>
      */
     public JDFA(File file, JDfaFrame jdfaframe)throws Exception{
-  this(file);
-  setJMachineFrame(jdfaframe);
-  initStatesPosition(dfaframe.getJScrollPaneCanvas().getViewport().getViewSize());
-  dfaframe.getJdc().repaint();
+        this(file);
+        setJMachineFrame(jdfaframe);
+        initStatesPosition(dfaframe.getJScrollPaneCanvas().getViewport().getViewSize());
+        dfaframe.getJdc().repaint();
     }
 
     /**
@@ -263,15 +263,15 @@ public class JDFA extends DFA implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/dfa.dtd">dfa.dtd</a>
      */
     public JDFA(File file)throws Exception{
-  super(file);
-  setQ(new JStateSet(getQ()));
-  setQ0(new JState(getQ0()));
-  setF(new JStateSet(getF()));
-  setDelta(new JDfaDelta((DfaDelta)getDelta(),(JStateSet)getQ()));
+        super(file);
+        setQ(new JStateSet(getQ()));
+        setQ0(new JState(getQ0()));
+        setF(new JStateSet(getF()));
+        setDelta(new JDfaDelta((DfaDelta)getDelta(),(JStateSet)getQ()));
 
-  setPreviousNotNullCurrentState((JState)getQ0());
-  makeStateReferences();
-  setCurrentState((JState)getQ0());
+        setPreviousNotNullCurrentState((JState)getQ0());
+        makeStateReferences();
+        setCurrentState((JState)getQ0());
     }
 
     /**
@@ -283,14 +283,14 @@ public class JDFA extends DFA implements JMachine{
      *       <code>setStrToTestOrig(JStr)</code></li>
      */
     public void resetMachine(){
-  ((JDfaDelta)delta).setCurrent_p(new JState("resetP"));
-  ((JDfaDelta)delta).setCurrent_q(new JState("resetQ"));
-  setCurrentState(getQ0());
-  setPreviousNotNullCurrentState(getQ0());
-  setStrToTest(getStrToTestOrig());
-  setSubStrTested(new JStr());
-  ((JDfaDelta)delta).setCurrent_sym(new Symbol("reset"));
-  ((JDfaFrame)getMachineFrame()).getJdc().repaint();
+        ((JDfaDelta)delta).setCurrent_p(new JState("resetP"));
+        ((JDfaDelta)delta).setCurrent_q(new JState("resetQ"));
+        setCurrentState(getQ0());
+        setPreviousNotNullCurrentState(getQ0());
+        setStrToTest(getStrToTestOrig());
+        setSubStrTested(new JStr());
+        ((JDfaDelta)delta).setCurrent_sym(new Symbol("reset"));
+        ((JDfaFrame)getMachineFrame()).getJdc().repaint();
     }
 
 
@@ -301,13 +301,13 @@ public class JDFA extends DFA implements JMachine{
      * @return el valor de  delta(currentS,cad.getFirst())
      */
     protected State doTransition(State currentS, JStr cad){
-  State result;
-  result  = super.doTransition(currentS,(Str)cad);
-  ((JDfaDelta)delta).setCurrent_p(currentS);
-  ((JDfaDelta)delta).setCurrent_sym(cad.getFirst());
-  ((JDfaDelta)delta).setCurrent_q(result);
-  dfaframe.getJdc().repaint();
-  return result;
+        State result;
+        result  = super.doTransition(currentS,(Str)cad);
+        ((JDfaDelta)delta).setCurrent_p(currentS);
+        ((JDfaDelta)delta).setCurrent_sym(cad.getFirst());
+        ((JDfaDelta)delta).setCurrent_q(result);
+        dfaframe.getJdc().repaint();
+        return result;
     }
 
     /**
@@ -412,7 +412,7 @@ public class JDFA extends DFA implements JMachine{
     public Vector<Vector> getTableVector(){
         if(tableVector == DEFAULT_TABLEVECTOR) {
             Object aSigma[] = getSigma().toArray();
-            Object aQ[] = getQ().toArray();
+            State aQ[] = getQ().toArray();
             Vector<String> header = new Vector<String>();
             Vector<String> currentRow;
             Vector<Vector<String>>data = new Vector<Vector<String>>();
@@ -420,7 +420,7 @@ public class JDFA extends DFA implements JMachine{
             for (int i = 0 ; i < aQ.length ; i++) {
                 currentRow = new Vector<String>();
                 for (int j = 0 ; j < aSigma.length ; j++) {
-                    entry = ((DfaDelta)getDelta()).apply((State)aQ[i],(Symbol)aSigma[j]);
+                    entry = ((DfaDelta)getDelta()).apply(aQ[i],(Symbol)aSigma[j]);
                     currentRow.add((entry != null)?entry.toString():null);
                 }
                 currentRow.add(0,aQ[i].toString());
@@ -460,6 +460,7 @@ public class JDFA extends DFA implements JMachine{
 
         int row = e.getFirstRow();
         int column = e.getColumn();
+
         TableModel model = (TableModel)e.getSource();
         String toStateLabel = (String) model.getValueAt(row, column);
         Object[] aQ = getQ().toArray();

@@ -53,6 +53,7 @@ import java.util.Vector;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import javax.swing.event.TableModelEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
@@ -372,6 +373,10 @@ public class JTuring extends Turing implements JMachine{
      **/
     public boolean esInicial(State p){
 	return p.equals(getQ0());
+    }
+    
+    public void tableChanged(TableModelEvent e) {
+        
     }
 }
 

@@ -223,9 +223,9 @@ public class Ndfa2Dfa{
 	StateSet S = getNdfa().getQ0();
 	Vector vSigma = getNdfa().getSigma().toVector();	
 	NDfaDelta ndel = (NDfaDelta)getNdfa().getDelta();	
-	LinkedList toAnalize = new LinkedList();	
-	Hashtable transTable = new Hashtable();
-	Vector vEntry;
+	LinkedList<StateSet> toAnalize = new LinkedList<StateSet>();	
+	Hashtable<StateSet, Vector> transTable = new Hashtable<StateSet, Vector>();
+	Vector<StateSet> vEntry;
 	StateSet resultingSts;
 	if(! S.isEmpty())
 	    toAnalize.add(S);
@@ -236,11 +236,11 @@ public class Ndfa2Dfa{
 	    showStatus("\n=>> Processing  "+ currentSts, debug_level);	    
 	    if( ! transTable.containsKey(currentSts)){		
 		Object [] oSts = currentSts.toArray();
-		vEntry = new Vector();	    
+		vEntry = new Vector<StateSet>();	    
 		for (int j = 0; j < vSigma.size(); j++){
 		    resultingSts = new StateSet();
 		    for(int i  = 0 ; i < oSts.length; i++){
-			Collection c =  ndel.apply((State)oSts[i],(Symbol)vSigma.elementAt(j));
+			StateSet c =  ndel.apply((State)oSts[i],(Symbol)vSigma.elementAt(j));
 			if( c != null)
 			    resultingSts.addAll(c);
 		    }

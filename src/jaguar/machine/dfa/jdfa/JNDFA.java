@@ -56,6 +56,7 @@ import java.util.Vector;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+import javax.swing.event.TableModelEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
@@ -398,7 +399,7 @@ public class JNDFA extends NDFA implements JMachine{
 	    for(int i = 0 ; i < aQ.length ; i++){
 		currentRow = new Vector();
 		for(int j = 0 ; j < aSigma.length ; j++){
-		    entry = ((DfaDelta)getDelta()).apply((State)aQ[i],(Symbol)aSigma[j]);
+		    entry = ((NDfaDelta)getDelta()).apply((State)aQ[i],(Symbol)aSigma[j]);
 		    currentRow.add((entry != null)?entry.toString():null);
 		}
 		currentRow.add(0,aQ[i]);
@@ -412,6 +413,10 @@ public class JNDFA extends NDFA implements JMachine{
 	    tableVector.add(data);
 	}
 	return tableVector;
+    }
+
+    public void tableChanged(TableModelEvent e) {
+        
     }
 
     /**

@@ -201,6 +201,7 @@ public class JNDfaFrame extends JMachineFrame{
 	    nextButton.setEnabled(true);
 	    resetButton.setEnabled(true);
 	    runAllButton.setEnabled(true);
+	    tabular.setEnabled(true);
 	    stopButton.setEnabled(false);	    
 	    currentStateLabel.setText(jmachine.getCurrentState().toString());
 	    jmachine.setStrToTest(new JStr());

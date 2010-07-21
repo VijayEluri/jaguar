@@ -187,7 +187,7 @@ public class Minimizer{
 	showStatus("\nThe partitions are:" + particiones+"\n");
 
 	// Ahora comenzamos a renombrar
-	Hashtable mapNewNamesTable = new Hashtable();
+	Hashtable<StateSet, State> mapNewNamesTable = new Hashtable<StateSet, State>();
 	Object []oKeys = particiones.toArray();
 
 	StateSet currentClass;
@@ -329,7 +329,7 @@ public class Minimizer{
 			nuevaClase.remove(ek);
 		}
 		currentClassModified.removeAll(nuevaClase);
-		result.add(nuevaClase);
+		result.addAll(nuevaClase);
 	    }
 	}
 	return result;
@@ -374,8 +374,8 @@ public class Minimizer{
 	nofinales = (StateSet)dfa.getQ().clone();
 	nofinales.removeAll(finales);
 	StateSet result = new StateSet();
-	result.add(finales);
-	result.add(nofinales);
+	result.addAll(finales);
+	result.addAll(nofinales);
 	return result;
     }
 

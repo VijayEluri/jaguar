@@ -33,6 +33,7 @@ import java.awt.*;
 import java.awt.print.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.text.*;
 import javax.swing.border.*;
@@ -69,7 +70,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     Thread thread;
 
     public void setLabelStringSSSD(JStr js){
-  sssd.insertStr(js);
+        sssd.insertStr(js);
     }
 
     protected boolean stopExecution = true;
@@ -107,37 +108,36 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     public static final Dimension DEFAULT_SIZE  = new Dimension(700,700);
 
     public JMachineFrame(){
-  this((JMachine)null);
+        this((JMachine)null);
     }
 
     public JMachineFrame(JMachine _jmachine){
-  this(_jmachine,"JMachineFrame");
+        this(_jmachine,"JMachineFrame");
     }
 
     public JMachineFrame(String title){
-  super(title);
+        super(title);
     }
 
     public JMachineFrame(JMachine _jmachine, String title){
-  this(_jmachine,title,DEFAULT_SIZE);
+        this(_jmachine,title,DEFAULT_SIZE);
     }
 
     public JMachineFrame(JMachine _jmachine, String title, Dimension _dimension){
-  super(title);
-  jmachine = _jmachine;
-  addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent e) {dispose();}
-    public void windowOpened(WindowEvent e) {}
-      });
+        super(title);
+        jmachine = _jmachine;
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {dispose();}
+            public void windowOpened(WindowEvent e) {}
+        });
 
-  addComponentListener(this);
+        addComponentListener(this);
 
-  setJMenuBar(createMenu());
+        setJMenuBar(createMenu());
 
-  setSize(_dimension);
-  fc = new JFileChooser();
+        setSize(_dimension);
+        fc = new JFileChooser();
     }
-
 
     protected String THIS_MACHINE_TYPE;
 
@@ -515,10 +515,15 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             Vector columnNames = (Vector)v.get(0);
             Vector data = (Vector)v.get(1);
             MyJTable table = new MyJTable(data,columnNames);
+
             table.getModel().addTableModelListener(listener);
+            table.getColumnModel().getColumn(0).setPreferredWidth(100);
+            table.setDefaultRenderer(Object.class, new MyJTableCellRenderer());
+            table.getTableHeader().setDefaultRenderer(new MyJTableCellRenderer());
+
             table.setPreferredScrollableViewportSize(new Dimension(650, 95));
-            table.getTableHeader().setReorderingAllowed(false);
-            table.setFont(new Font("SansSerif",Font.BOLD,10));
+            // table.getTableHeader().setReorderingAllowed(false);
+            // table.setFont(new Font("SansSerif",Font.BOLD,10));
             JScrollPane scrollPane = new JScrollPane(table);
             getContentPane().add(scrollPane, BorderLayout.CENTER);
             addWindowListener(new WindowAdapter() {
@@ -531,13 +536,58 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         }
     }
 
+    protected static class MyJTableCellRenderer extends DefaultTableCellRenderer {
+        public Component getTableCellRendererComponent(JTable table,
+                                                       Object value,
+                                                       boolean isSelected,
+                                                       boolean hasFocus,
+                                                       int row,
+                                                       int column) {
+
+            Component c = super.getTableCellRendererComponent(table, value,
+                                                             isSelected, hasFocus,
+                                                             row, column);
+            Color foreground = Color.black;
+            Color background = Color.white;
+
+            // Sólo el header
+            if (row == -1) {
+                ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+                foreground = Color.white;
+                background = Color.gray;
+            } else {
+                // Sólo la primera columna
+                if (column == 0) {
+                    foreground = Color.white;
+                    background = Color.gray;
+                    ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
+                } else {
+                    ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+                }
+            }
+
+            c.setForeground(foreground);
+            c.setBackground(background);
+
+            return c;
+        }
+    }
+
     protected class MyJTable extends JTable{
         MyJTable(Vector v1, Vector v2){
             super(v1,v2);
         }
 
         public boolean isCellEditable(int row,int column) {
-            return true;
+            if (row >= 0 && column > 0) {
+                // Transiciones
+                return true;
+            }
+            // TODO:
+            // Nombres de estados
+            // Nombres de símbolos
+
+            return false;
         }
     }
 

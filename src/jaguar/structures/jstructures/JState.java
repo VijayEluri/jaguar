@@ -340,7 +340,7 @@ public class JState extends jaguar.structures.State {
             g2d.draw(getCirculoCinscunscritoEstadoFinal());
         }
         if (getEsEstadoInicial()) { // es inicial
-            // TODO
+            // TODO: flechita para los iniciales
         }
         // Dibuja la etiqueta
         g.setColor(DEFAULT_STROKE_COLOR);

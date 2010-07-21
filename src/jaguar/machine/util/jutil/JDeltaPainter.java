@@ -239,6 +239,8 @@ public class JDeltaPainter{
                 if(!currentDestinos.contains(p)){
                     currentDestinos.add(p);
                     Graphics2D g2d = (Graphics2D) g;
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                         RenderingHints.VALUE_ANTIALIAS_ON);
                     Stroke origS = g2d.getStroke();
                     if(q.equals(jdelta.getCurrent_p()) && p.equals(jdelta.getCurrent_q()) && sym.equals(jdelta.getCurrent_sym())) {
                         g.setColor(CURRENT_TRANSITION_COLOR);
@@ -288,8 +290,6 @@ public class JDeltaPainter{
 
                         paintArrowHead(g2d,x,y,g.getColor(), jdelta.getLabelString((JState)q,(JState)p));
                     }
-                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
                     g2d.setStroke(origS);
                 }
             }

@@ -59,7 +59,7 @@ structures):
      + Type 3 grammar into NFA conversion, transforms a given type
        3 grammar into an equivalent NFA.
 
-     + DFA to Type 3 grammar  conversion, transforms a given 
+     + DFA to Type 3 grammar  conversion, transforms a given
        NFA into an equivalent type 3 grammar.
 
      + Type 2 grammar standardization. Given a Free Context Grammar
@@ -77,7 +77,7 @@ section XX for examples.
 
 You can get the Jaguar package and found more about it from:
 
-		    http://sourceforge.net/projects/ijaguar/
+        http://sourceforge.net/projects/ijaguar/
 
 
 2. System requirements
@@ -87,8 +87,8 @@ with the Java Foundation Classes (JFC) -- usually the JFC are included
 in the standard distribution of the major vendors. You can get your
 favorite JVM, from the next sources:
 
-	http://www.blackdown.org
-	http://www.java.sun.com
+  http://www.blackdown.org
+  http://www.java.sun.com
 
 If you just want to run Jaguar it's enough to have any Java 2 Runtime
 Environment (JRE).  To compile the sources you will also need a java
@@ -105,25 +105,25 @@ You need ant for compile the sources. The version of ant was 1.6.2.
 
 Usually the sources will be delivered on a package such as:
 
-		jaguar.x-yz.src.tbz2
+    jaguar.x-yz.src.tbz2
 
 you need follow the next steps.
 
    3.1 Extract the sources.
-   
-   	   tar yxvf jaguar.x-yz.src.tbz2
-   
-       the previos command will generate the directory 
-   	   
-   	   jaguar.x-yz/
-   
+
+        tar yxvf jaguar.x-yz.src.tbz2
+
+       the previos command will generate the directory
+
+        jaguar.x-yz/
+
    3.2 Change to the jaguar.x-yz/ directory.
-   
+
    3.4 Type `ant', and wait a few moments.
-   
+
    3.5 Now you can execute Jaguar as in:
 
-	  ant jcenter
+    ant jcenter
 
        and you should see the Jaguar Center.
 
@@ -134,9 +134,9 @@ you need follow the next steps.
 The binary distribution will be delivered on a jar file, so you only
 need to execute the Jaguar in the next way
 
-	java -jar jaguar-<version>.jar
+  java -jar jaguar-<version>.jar
 
-(change <version> for your correct version) and you should see the Jaguar 
+(change <version> for your correct version) and you should see the Jaguar
 Center.
 
 
@@ -150,22 +150,22 @@ Center.
 
 Please send your comments, improvements, or suggestions to the following address:
 
-	Ivan Hernández Serrano
-	School of Sciencie, Universidad Nacional Autónoma de México
-	ivanx@users.sourceforge.net
-	http://sourceforge.net/projects/ijaguar
+  Ivan Hernández Serrano
+  School of Sciencie, Universidad Nacional Autónoma de México
+  ivanx@users.sourceforge.net
+  http://sourceforge.net/projects/ijaguar
 
 You may ask for suppor to
 
 Ivan Hernández
 ivanx@users.sourceforge.net
 
-and 
+and
 
-Ismael Hernández González
+Ismael Hernndez González
 ismaelhz@users.sourceforge.net
 
-both of us are the main developer team :) 
+both of us are the main developer team :)
 
 
 7. Contributors
