@@ -61,11 +61,12 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     private Dimension dimension;
     protected JMachine jmachine; //DFA jdfa;
 
+    protected File file;
     protected JLabel currentStateLabel;
     protected JTextPane textPane;
     protected MachineGrammarStyledDocument sssd;
     protected JFileChooser fc;
-    protected JMenuItem loadTest, consTest, tabular, printM,descriptionMI;
+    protected JMenuItem loadTest, consTest, tabular, save, printM,descriptionMI;
 
     Thread thread;
 
@@ -285,6 +286,10 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
 //      Debug.println("La representacion tabular");
       showTabular();
         }
+        if (e.getActionCommand().equals("save")) {
+        //      Debug.println("La representacion tabular");
+            saveMachine();
+        }
         if (e.getActionCommand().equals("print")) {
       Debug.println("Printing");
       print();
@@ -335,7 +340,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
   fc.setDialogTitle("Open Machine Definition");
   int returnVal = fc.showOpenDialog(this);
   if (returnVal == JFileChooser.APPROVE_OPTION) {
-      File file = fc.getSelectedFile();
+      file = fc.getSelectedFile();
       initJMachine(file);
       sssd.reset();
   }
@@ -417,7 +422,15 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
   loadJdfa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
   menu.add(loadJdfa);
 
-  tabular = new  JMenuItem("Show tabular ...",KeyEvent.VK_S);
+  save = new  JMenuItem("Save",KeyEvent.VK_S);
+  save.getAccessibleContext().setAccessibleDescription("Guarda la Máquina");
+  save.addActionListener(this);
+  save.setActionCommand("save");
+  save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
+  save.setEnabled(false);
+  menu.add(save);
+
+  tabular = new  JMenuItem("Show tabular ...",KeyEvent.VK_T);
   tabular.getAccessibleContext().setAccessibleDescription("Muestra la representación tabular de la Máquina");
   tabular.addActionListener(this);
   tabular.setActionCommand("tabular");
@@ -506,6 +519,10 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
 
     public void showTabular(){
         TabularMachine ttm = new TabularMachine(jmachine.getTableVector(), jmachine);
+    }
+
+    public void saveMachine() {
+        jmachine.toFile(file.getAbsolutePath());
     }
 
     protected class TabularMachine extends JFrame {

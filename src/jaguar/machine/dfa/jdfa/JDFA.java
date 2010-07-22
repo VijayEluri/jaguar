@@ -355,7 +355,7 @@ public class JDFA extends DFA implements JMachine{
     }
 
     public void print(Graphics g){
-  dfaframe.getJdc().paint(g);
+        dfaframe.getJdc().paint(g);
     }
 
     /**
@@ -391,7 +391,7 @@ public class JDFA extends DFA implements JMachine{
      * Regresa la representación como cadena del JDFA
      **/
     public String toString(){
-  return "J" + super.toString();
+        return "J" + super.toString();
     }
     /**
      * La representación en vector de la función de transición delta
@@ -411,19 +411,19 @@ public class JDFA extends DFA implements JMachine{
      */
     public Vector<Vector> getTableVector(){
         if(tableVector == DEFAULT_TABLEVECTOR) {
-            Object aSigma[] = getSigma().toArray();
-            State aQ[] = getQ().toArray();
+            Symbol[] aSigma = getSigma().toArray();
+            State[] aQ = getQ().toArray();
             Vector<String> header = new Vector<String>();
             Vector<String> currentRow;
             Vector<Vector<String>>data = new Vector<Vector<String>>();
-            Object entry;
-            for (int i = 0 ; i < aQ.length ; i++) {
+            State entry;
+            for (State i : aQ) {
                 currentRow = new Vector<String>();
-                for (int j = 0 ; j < aSigma.length ; j++) {
-                    entry = ((DfaDelta)getDelta()).apply(aQ[i],(Symbol)aSigma[j]);
+                for (Symbol j : aSigma) {
+                    entry = ((DfaDelta) getDelta()).apply(i,(Symbol) j);
                     currentRow.add((entry != null)?entry.toString():null);
                 }
-                currentRow.add(0,aQ[i].toString());
+                currentRow.add(0,i.toString());
                 data.add(currentRow);
             }
 
@@ -444,7 +444,7 @@ public class JDFA extends DFA implements JMachine{
      ** @return true si <code>p</code> es estado inicial
      **/
     public boolean esInicial(State p){
-  return p.equals(getQ0());
+        return p.equals(getQ0());
     }
 
 
@@ -462,7 +462,7 @@ public class JDFA extends DFA implements JMachine{
         int column = e.getColumn();
 
         TableModel model = (TableModel)e.getSource();
-        String toStateLabel = (String) model.getValueAt(row, column);
+        String toStateLabel = (String) model.getValueAt(row, column); // Value edited
         Object[] aQ = getQ().toArray();
         String symbol = model.getColumnName(column);
         JState fromState = (JState)aQ[row];
@@ -471,7 +471,7 @@ public class JDFA extends DFA implements JMachine{
         } else {
             JState toState;
             for (Object state : aQ) {
-                if (((JState) state).getLabel().equals(toStateLabel)) {
+                if (((JState) state).getLabel().equals(toStateLabel)) { // find the state in Q corresponding to the label
                     toState = (JState) state;
                     // Change the DFADelta transition
                     ((DfaDelta)getDelta()).addTransition(fromState, new Symbol(symbol), toState);

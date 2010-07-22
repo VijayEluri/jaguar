@@ -240,12 +240,14 @@ public class DFA extends Machine implements Cloneable{
 	try{
 	    fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
 	    fw.write("<!DOCTYPE dfa SYSTEM \"dfa.dtd\">"+"\n");	    
-	    if(machineDescription.trim().length() > 0){
-		fw.write(DESCRIPTION_BEG_TAG);
-		fw.write(getMachineDescription());
-		fw.write(DESCRIPTION_END_TAG+"\n");
-	    }
 	    fw.write(BEG_TAG);
+        if (machineDescription.trim().length() > 0) {
+            fw.write("\n\n <!-- Descripción --> \n");
+            fw.write(DESCRIPTION_BEG_TAG);
+            fw.write(getMachineDescription());
+            fw.write(DESCRIPTION_END_TAG+"\n");
+        }
+	    
 	    fw.write("\n\n <!-- Conjunto de States Q --> \n");
 	    getQ().toFile(fw);
 	    fw.write("\n\n <!-- Alphabet de entrada Sigma --> \n");

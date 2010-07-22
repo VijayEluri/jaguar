@@ -192,7 +192,7 @@ abstract public class Machine {
      * @param FileName El nombre del archivo donde se guardará el DFA.
      */
     public void toFile(String FileName){
-	toFile(FileName,"");	
+        toFile(FileName,"");	
     }
     
     /** 
@@ -204,13 +204,13 @@ abstract public class Machine {
      *
      */
     public void toFile(String FileName, String comment ){
-	try{ 
-	    toFile(new FileWriter(FileName),comment);	
-	}catch(Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "El archivo " +  FileName + " no se pudo abrir: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try { 
+            toFile(new FileWriter(FileName),comment);	
+        } catch(Exception ouch) {
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
+                                + "El archivo " +  FileName + " no se pudo abrir: " ); 
+            ouch.printStackTrace(); 
+        }
     }
     
     /**
@@ -221,13 +221,13 @@ abstract public class Machine {
      * @param comment Comentario que se escribirá al principio de la descripción de la Máquina.
      */
     public void toFile(FileWriter fw, String comment){
-	try{ 
-	    toFile(fw);	
-	} catch (Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "Trying to toFile: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try{ 
+            toFile(fw);	
+        } catch (Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
+                                + "Trying to toFile: " ); 
+            ouch.printStackTrace(); 
+        }
     }
     
     /** 

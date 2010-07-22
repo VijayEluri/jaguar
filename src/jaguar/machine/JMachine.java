@@ -200,4 +200,6 @@ public  interface JMachine extends TableModelListener {
      * Imprime la jmachine en un ambiente gráfico
      */
     public void print(Graphics g);
+
+    public void toFile(String filename);
 }

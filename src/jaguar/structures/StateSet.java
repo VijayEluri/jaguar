@@ -198,6 +198,12 @@ public class StateSet extends HashSet<State> {
         return toArray(ary);
     }
 
+    public String toCommaSeparatedList() {
+        String s = toString();
+        int i = s.length();
+        return s.substring(1,i-1);
+    }
+
 }
 
 
