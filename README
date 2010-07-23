@@ -15,7 +15,7 @@ Java Automaton and Grammar User Application Resources (Jaguar)
 1. Introduction
 
 
-Jaguar is a Free Software tool written in Java (tm) for people in the
+Jaguar is a Free Software tool written in Java (TM) for people in the
 Computer Theory area.  Jaguar provides an infrastructure of libraries,
 engines and graphical applications that support most of the models and
 algorithms reviewed in a regular undergraduate computer theory
@@ -95,7 +95,7 @@ Environment (JRE).  To compile the sources you will also need a java
 compiler, also readily available.
 
 This project was developed and tested using the Java 2 v1.4.2_06 from
-java.sun.com. In the other hand the minimium hardware requirements
+java.sun.com. In the other hand the minimum hardware requirements
 are the specified by the vendor of the JVM of your choice.
 
 You need ant for compile the sources. The version of ant was 1.6.2.
@@ -143,7 +143,7 @@ Center.
 
 5. Using the Jaguar
 
-  For a quick Howto use Jaguar see the file MANUAL in this same directory.
+  For a quick HowTo use Jaguar see the file MANUAL in this same directory.
 
 
 6. Author
@@ -155,7 +155,7 @@ Please send your comments, improvements, or suggestions to the following address
   ivanx@users.sourceforge.net
   http://sourceforge.net/projects/ijaguar
 
-You may ask for suppor to
+You may ask for support to
 
 Ivan Hernández
 ivanx@users.sourceforge.net
@@ -172,5 +172,5 @@ both of us are the main developer team :)
 
 Special thanks to Ismael Hernández González
 (ismaelhz@users.sourceforge.net) for his support and active
-contributions to this project. I also want to thank to Fernada Sánchez
+contributions to this project. I also want to thank to Fernanda Sánchez
 Puig for her bug fixes and support using this material in her courses.
