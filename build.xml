@@ -8,9 +8,10 @@
   <!-- Establece las propiedades globales del build -->
   <property name="src"          value="src"/>
   <property name="build"        value="build/classes"/>
+  <property name="schema"       value="${build}/schema"/>
   <property name="dist"         value="dist"/>
   <property name="doc"          value="docs"/>
-  <property name="version"	value="1.0"/>
+  <property name="version"  value="1.0"/>
   <property name="packagenames" value="jaguar.*"/>
 
   <target name="init">
@@ -18,11 +19,18 @@
     <tstamp/>
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
+    <mkdir dir="${schema}"/>
+    <copy todir="${schema}">
+      <fileset dir="${src}/jaguar/schema"/>
+    </copy>
   </target>
 
   <target name="compile" depends="init" description="compile the source " >
     <!-- Compile the java code from ${src} to ${build}/${classes} -->
-    <javac srcdir="${src}" destdir="${build}" debug="on"/>
+    <javac srcdir="${src}" destdir="${build}" debug="on">
+      <!-- <compilerarg value="-Xlint:unchecked"/> -->
+      <!-- <compilerarg value="-Xlint:deprecation"/> -->
+    </javac>
   </target>
 
   <target name="dist" depends="compile" description="generate the distribution" >

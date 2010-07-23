@@ -130,65 +130,69 @@ public class JDfaFrame extends JMachineFrame{
      ** Realiza un paso en la ejecución de la Máquina y regresa verdarero o falso dependiendo si puede seguir con la ejecución o no
      ** @return boolean <code>true</code> si se puede continuar con la ejecución de la máquina, <code>false</code> en  otro caso.
      **/
-    public boolean nextStep(){
-  //jdfa.nextStep();
-  boolean masTrans=jmachine.nextStep();
-  nextStep(masTrans);
-  if(!jmachine.getStrToTestOrig().isEpsilon()){
-      JStr foo = jmachine.getSubStrTested();
-      if(jmachine.getCurrentState() != null)
-    currentStateLabel.setText(jmachine.getCurrentState().toString());
-      Str pre, post;
-      Symbol curr;
-      pre = foo.substring(0,foo.length()-1);
+    public boolean nextStep() {
+        //jdfa.nextStep();
+        boolean masTrans=jmachine.nextStep();
+        nextStep(masTrans);
+        if (!jmachine.getStrToTestOrig().isEpsilon()) {
+            JStr foo = jmachine.getSubStrTested();
+            if (jmachine.getCurrentState() != null)
+                currentStateLabel.setText(jmachine.getCurrentState().toString());
+            Str pre, post;
+            Symbol curr;
+            pre = foo.substring(0,foo.length()-1);
+            curr = foo.getLast();
+            post = jmachine.getStrToTest();
+            sssd.insertStr(pre,curr,post);
+        }
 
-      curr = foo.getLast();
-      post = jmachine.getStrToTest();
-      sssd.insertStr(pre,curr,post);
-  }
-
-  if(!masTrans){
-      stopExecution = true;
-      runAllButton.setEnabled(false);
+        if (!masTrans) {
+            stopExecution = true;
+            runAllButton.setEnabled(false);
             quickTestButton.setEnabled(false);
-      jmachine.displayResult();
-  }//else Debug.println("mmm there are more transitions!!!");
+            jmachine.displayResult();
+        }//else Debug.println("mmm there are more transitions!!!");
 
-  return masTrans;
+        return masTrans;
     }
 
 
 
-    protected void initJMachine(File file){
-  System.err.println("\nLoading...  " + file +" \n");
-  try{
-      jmachine = new JDFA(file,this);
-//      System.err.println(jmachine);
-      jdc.initJMachineCanvas((JDFA)jmachine);
-      printM.setEnabled(true);
-      tabular.setEnabled(true);
-      save.setEnabled(true);
-      nextButton.setEnabled(true);
-      resetButton.setEnabled(true);
-      runAllButton.setEnabled(true);
-      quickTestButton.setEnabled(true);
-      stopButton.setEnabled(false);
-      currentStateLabel.setText(jmachine.getCurrentState().toString());
-      jmachine.setStrToTest(new JStr());
-      jmachine.setStrToTestOrig(new JStr());
-      sssd.insertStr(jmachine.getStrToTest());
+    protected JMachine createNew() {
+        // return new JDfa();
+        return null;
+    }
 
-      jmachine.setJMachineFrame(this);
-      loadTest.setEnabled(true);
-      consTest.setEnabled(true);
-      jScrollPaneCanvas.getViewport().setViewPosition(new Point(0,0));
-      jmachine.resetMachine();
-      descriptionMI.setEnabled(true);
-  }catch(Exception ex){
-      jmachine = null;
-      ex.printStackTrace();
-      JOptionPane.showMessageDialog(null,"Error loading  JDFA file "+file,"JDFA",JOptionPane.ERROR_MESSAGE);
-  }
+    protected void initJMachine(File file){
+        System.err.println("\nLoading...  " + file +" \n");
+        try {
+            jmachine = new JDFA(file,this);
+            //      System.err.println(jmachine);
+            jdc.initJMachineCanvas((JDFA)jmachine);
+            printM.setEnabled(true);
+            tabular.setEnabled(true);
+            save.setEnabled(true);
+            nextButton.setEnabled(true);
+            resetButton.setEnabled(true);
+            runAllButton.setEnabled(true);
+            quickTestButton.setEnabled(true);
+            stopButton.setEnabled(false);
+            currentStateLabel.setText(jmachine.getCurrentState().toString());
+            jmachine.setStrToTest(new JStr());
+            jmachine.setStrToTestOrig(new JStr());
+            sssd.insertStr(jmachine.getStrToTest());
+
+            jmachine.setJMachineFrame(this);
+            loadTest.setEnabled(true);
+            consTest.setEnabled(true);
+            jScrollPaneCanvas.getViewport().setViewPosition(new Point(0,0));
+            jmachine.resetMachine();
+            descriptionMI.setEnabled(true);
+        } catch (Exception ex) {
+            jmachine = null;
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Error loading  JDFA file "+file,"JDFA",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void componentHidden(ComponentEvent e) {}
@@ -196,17 +200,16 @@ public class JDfaFrame extends JMachineFrame{
     public void componentMoved(ComponentEvent e) {}
 
     public void componentResized(ComponentEvent e) {
-  if(jdc !=null){
-      jdc.setSize(e.getComponent().getSize());
-  }
+        if(jdc !=null){
+            jdc.setSize(e.getComponent().getSize());
+        }
     }
 
     public void componentShown(ComponentEvent e) {}
 
-
     public static void main(String []argv){
-  JDfaFrame f = new JDfaFrame();
-  f.show();
+        JDfaFrame f = new JDfaFrame();
+        f.show();
     }
 
 } // JDfaFrame

@@ -66,7 +66,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     protected JTextPane textPane;
     protected MachineGrammarStyledDocument sssd;
     protected JFileChooser fc;
-    protected JMenuItem loadTest, consTest, tabular, save, printM,descriptionMI;
+    protected JMenuItem newMachine, loadTest, consTest, tabular, save, printM,descriptionMI;
 
     Thread thread;
 
@@ -147,52 +147,52 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
      */
     protected void setControls(String machineType){
         THIS_MACHINE_TYPE=machineType;
-  JPanel p = new JPanel();
-  p.setLayout(new BoxLayout(p,BoxLayout.X_AXIS));
+        JPanel p = new JPanel();
+        p.setLayout(new BoxLayout(p,BoxLayout.X_AXIS));
 
-  nextButton = new JButton("Next Step");
-  nextButton.setMnemonic(KeyEvent.VK_X);
-  nextButton.setActionCommand("next");
-  nextButton.setToolTipText("Click this button to execute the next step");
-  nextButton.addActionListener(this);
+        nextButton = new JButton("Next Step");
+        nextButton.setMnemonic(KeyEvent.VK_X);
+        nextButton.setActionCommand("next");
+        nextButton.setToolTipText("Click this button to execute the next step");
+        nextButton.addActionListener(this);
 
-  resetButton = new JButton("Reset " + machineType);
-  resetButton.setMnemonic(KeyEvent.VK_R);
-  resetButton.setActionCommand("reset");
-  resetButton.setToolTipText("Click this button to reset the "  + machineType);
-  resetButton.addActionListener(this);
+        resetButton = new JButton("Reset " + machineType);
+        resetButton.setMnemonic(KeyEvent.VK_R);
+        resetButton.setActionCommand("reset");
+        resetButton.setToolTipText("Click this button to reset the "  + machineType);
+        resetButton.addActionListener(this);
 
-  runAllButton = new JButton("Run " + machineType);
-  runAllButton.setMnemonic(KeyEvent.VK_U);
-  runAllButton.setActionCommand("rundfa");
-  runAllButton.setToolTipText("Click this button to run the " + machineType);
-  runAllButton.addActionListener(this);
+        runAllButton = new JButton("Run " + machineType);
+        runAllButton.setMnemonic(KeyEvent.VK_U);
+        runAllButton.setActionCommand("rundfa");
+        runAllButton.setToolTipText("Click this button to run the " + machineType);
+        runAllButton.addActionListener(this);
 
         /** Para que no este jorobando el Vaz **/
-  quickTestButton = new JButton("Quick Test");
-  quickTestButton.setMnemonic(KeyEvent.VK_K);
-  quickTestButton.setActionCommand("quickTest");
-  quickTestButton.setToolTipText("Click this button to performe a quick test");
+        quickTestButton = new JButton("Quick Test");
+        quickTestButton.setMnemonic(KeyEvent.VK_K);
+        quickTestButton.setActionCommand("quickTest");
+        quickTestButton.setToolTipText("Click this button to performe a quick test");
         quickTestButton.addActionListener(this);
 
-  stopButton  = new JButton("Stop "  + machineType);
-  stopButton.setMnemonic(KeyEvent.VK_S);
-  stopButton.setActionCommand("stopdfa");
-  stopButton.setToolTipText("Click this button to stop " + machineType);
-  stopButton.addActionListener(this);
+        stopButton  = new JButton("Stop "  + machineType);
+        stopButton.setMnemonic(KeyEvent.VK_S);
+        stopButton.setActionCommand("stopdfa");
+        stopButton.setToolTipText("Click this button to stop " + machineType);
+        stopButton.addActionListener(this);
 
-  p.add(Box.createRigidArea(new Dimension(10, 0)));
-  p.add(nextButton);
-  p.add(Box.createRigidArea(new Dimension(10, 0)));
-  p.add(runAllButton);
-  p.add(Box.createRigidArea(new Dimension(10, 0)));
-  p.add(stopButton);
-  p.add(Box.createHorizontalGlue());
-        p.add(quickTestButton);
-  p.add(Box.createHorizontalGlue());
-  p.add(resetButton);
-  p.add(Box.createRigidArea(new Dimension(10, 0)));
-  getContentPane().add(p, BorderLayout.SOUTH);
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+        p.add(nextButton);
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+        p.add(runAllButton);
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+        p.add(stopButton);
+        p.add(Box.createHorizontalGlue());
+              p.add(quickTestButton);
+        p.add(Box.createHorizontalGlue());
+        p.add(resetButton);
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+        getContentPane().add(p, BorderLayout.SOUTH);
     }
 
     public static final int MAX_CHARS = 1000;
@@ -213,89 +213,101 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     }
 
     protected void setLabels(String labelString, String labelEstado){
-  JPanel p = new JPanel();
-  p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
-  sssd = new  MachineGrammarStyledDocument(MAX_CHARS);
-  textPane = new JTextPane(sssd);
-  textPane.setEditable(false);
-  if(jmachine != null){
-      currentStateLabel = new JLabel(jmachine.getCurrentState().toString());
-      sssd.insertStr(jmachine.getStrToTest());
-  }else {
-      currentStateLabel = new JLabel("");
-      sssd.insertString("");
-  }
-  currentStateLabel.setToolTipText("Current State in the execution");
+        JPanel p = new JPanel();
+        p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
+        sssd = new  MachineGrammarStyledDocument(MAX_CHARS);
+        textPane = new JTextPane(sssd);
+        textPane.setEditable(false);
+        if(jmachine != null){
+            currentStateLabel = new JLabel(jmachine.getCurrentState().toString());
+            sssd.insertStr(jmachine.getStrToTest());
+        }else {
+            currentStateLabel = new JLabel("");
+            sssd.insertString("");
+        }
+        currentStateLabel.setToolTipText("Current State in the execution");
 
-  p.add(Box.createRigidArea(new Dimension(10, 0)));
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
 
-  p.add(createJPanelBorder(currentStateLabel,labelEstado));
-  p.add(Box.createRigidArea(new Dimension(10, 0)));
-        p.add(createJPanelBorder(textPane,labelString));
-  p.add(Box.createHorizontalGlue());
+        p.add(createJPanelBorder(currentStateLabel,labelEstado));
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+              p.add(createJPanelBorder(textPane,labelString));
+        p.add(Box.createHorizontalGlue());
 
-  getContentPane().add(p, BorderLayout.NORTH);
+        getContentPane().add(p, BorderLayout.NORTH);
     }
 
     public Dimension getMinimumSize(){
-  return new Dimension(300,300);
+        return new Dimension(300,300);
     }
 
     public void nextStep(boolean b){
-  nextButton.setEnabled(b);
+        nextButton.setEnabled(b);
     }
 
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("next")) {
-      nextStep();
+            nextStep();
+            return;
         }
-  if (e.getActionCommand().equals("reset")) {
-      resetMachine();
+        if (e.getActionCommand().equals("reset")) {
+            resetMachine();
+            return;
         }
-  if (e.getActionCommand().equals("load")) {
-      loadMachineFromFile();
+        if (e.getActionCommand().equals("load")) {
+            loadMachineFromFile();
+            return;
         }
-  if (e.getActionCommand().equals("loadtest")) {
-      loadTestStringFromFile();
+        if (e.getActionCommand().equals("loadtest")) {
+            loadTestStringFromFile();
+            return;
         }
-  if (e.getActionCommand().equals("constest")){
-      JStrConstructor jcons = new JStrConstructor(this);
-//      Debug.println("JStrConstructor - construyeron => " + jcons.getConstructedJStr());
-      loadTestString(jcons.getConstructedJStr());
-  }
-
-  if (e.getActionCommand().equals("rundfa")){
-      stopExecution = false;
-      runAllButton.setEnabled(false);
+        if (e.getActionCommand().equals("constest")){
+            JStrConstructor jcons = new JStrConstructor(this);
+            loadTestString(jcons.getConstructedJStr());
+            return;
+        }
+        if (e.getActionCommand().equals("rundfa")){
+            stopExecution = false;
+            runAllButton.setEnabled(false);
             quickTestButton.setEnabled(false);
-      stopButton.setEnabled(true);
-      run();
-  }
-  if (e.getActionCommand().equals("stopdfa")){
-      stopExecution  = true;
-      runAllButton.setEnabled(true);
-            quickTestButton.setEnabled(true);
-      stopButton.setEnabled(false);
-      Debug.println("STOOOOOOOOOOOOOP!!!!!!!!!!!!!!!!!!!!!!!!!");
-  }
-  if (e.getActionCommand().equals("quickTest")){
+            stopButton.setEnabled(true);
+            run();
+            return;
+        }
+        if (e.getActionCommand().equals("stopdfa")){
+            stopExecution  = true;
+            runAllButton.setEnabled(true);
+                  quickTestButton.setEnabled(true);
+            stopButton.setEnabled(false);
+            Debug.println("STOOOOOOOOOOOOOP!!!!!!!!!!!!!!!!!!!!!!!!!");
+            return;
+        }
+        if (e.getActionCommand().equals("quickTest")){
             makeQuickTest();
-  }
+            return;
+        }
         if (e.getActionCommand().equals("tabular")) {
-//      Debug.println("La representacion tabular");
-      showTabular();
+            showTabular();
+            return;
         }
         if (e.getActionCommand().equals("save")) {
-        //      Debug.println("La representacion tabular");
             saveMachine();
+            return;
+        }
+        if (e.getActionCommand().equals("new")) {
+            newMachine();
+            return;
         }
         if (e.getActionCommand().equals("print")) {
-      Debug.println("Printing");
-      print();
+            Debug.println("Printing");
+            print();
+            return;
         }
-  if(e.getActionCommand().equals("showDescription"))
-      JOptionPane.showMessageDialog(this,THIS_MACHINE_TYPE +": "+ ((((Machine)jmachine).getMachineDescription().trim().length()==0)?"No provided":((Machine)jmachine).getMachineDescription()),THIS_MACHINE_TYPE+"'s description", JOptionPane.INFORMATION_MESSAGE);
+        if (e.getActionCommand().equals("showDescription")) {
+            JOptionPane.showMessageDialog(this,THIS_MACHINE_TYPE +": "+ ((((Machine)jmachine).getMachineDescription().trim().length()==0)?"No provided":((Machine)jmachine).getMachineDescription()),THIS_MACHINE_TYPE+"'s description", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     /**
      * Checa <em>rápidamente</em> si la cadena que está cargada en la
@@ -309,42 +321,41 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         resetMachine();
         nextButton.setEnabled(false);
         runAllButton.setEnabled(false);
-  stopButton.setEnabled(false);
+        stopButton.setEnabled(false);
         JOptionPane.showMessageDialog(this,"The "+THIS_MACHINE_TYPE+ ((((Machine)jmachine).runMachine(jmachine.getStrToTestOrig()))?" ACCEPTS ":" DOESN'T ACCEPT ") +" the string "+ jmachine.getStrToTestOrig(),THIS_MACHINE_TYPE+"Result", JOptionPane.INFORMATION_MESSAGE);
         resetMachine();
     }
 
 
     public void print(){
-  PrinterJob printJob = PrinterJob.getPrinterJob();
-  printJob.setPrintable(this);
-  if (printJob.printDialog()) {
-      try {
-    printJob.print();
-      } catch (Exception ex) {
-    ex.printStackTrace();
-      }
-  }
+        PrinterJob printJob = PrinterJob.getPrinterJob();
+        printJob.setPrintable(this);
+        if (printJob.printDialog()) {
+            try {
+                printJob.print();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
-    public int print(Graphics g, PageFormat pf, int pi)
-  throws PrinterException {
-  if (pi >= 1) {
-      return Printable.NO_SUCH_PAGE;
-  }
-  jmachine.print((Graphics2D) g);
-  return Printable.PAGE_EXISTS;
+    public int print(Graphics g, PageFormat pf, int pi) throws PrinterException {
+        if (pi >= 1) {
+            return Printable.NO_SUCH_PAGE;
+        }
+        jmachine.print((Graphics2D) g);
+        return Printable.PAGE_EXISTS;
     }
 
-    public boolean loadMachineFromFile(){
-  fc.setDialogTitle("Open Machine Definition");
-  int returnVal = fc.showOpenDialog(this);
-  if (returnVal == JFileChooser.APPROVE_OPTION) {
-      file = fc.getSelectedFile();
-      initJMachine(file);
-      sssd.reset();
-  }
-  return true;
+    public boolean loadMachineFromFile() {
+        fc.setDialogTitle("Open Machine Definition");
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+            initJMachine(file);
+            sssd.reset();
+        }
+        return true;
     }
 
     /**
@@ -354,33 +365,29 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     abstract public boolean nextStep();
 
     public boolean loadTestStringFromFile(){
-  fc.setDialogTitle("Open String to execution");
-  int returnVal = fc.showOpenDialog(this);
-  if (returnVal == JFileChooser.APPROVE_OPTION) {
-      File file = fc.getSelectedFile();
-      try{
-    JStr jstr = new JStr(file, false);
-    Debug.println("cadena de archivo => " + jstr);
-    loadTestString(jstr);
-      }catch(Exception ex){
-    ex.printStackTrace();
-    JOptionPane.showMessageDialog(null,"Error loading  JStr file "+file,"JDfa",JOptionPane.ERROR_MESSAGE);
-      }
-  }
-  return true;
+        fc.setDialogTitle("Open String to execution");
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            try {
+                JStr jstr = new JStr(file, false);
+                Debug.println("cadena de archivo => " + jstr);
+                loadTestString(jstr);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Error loading  JStr file "+file,"JDfa",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return true;
     }
-
-
 
     protected void loadTestString(JStr jstr){
-  if(jstr ==null)
-      return;
-  jmachine.setStrToTest(jstr);
-  jmachine.setStrToTestOrig(jstr);
-  resetMachine();
-//  jmachine.resetMachine();
+        if(jstr ==null)
+            return;
+        jmachine.setStrToTest(jstr);
+        jmachine.setStrToTestOrig(jstr);
+        resetMachine();
     }
-
 
     /**
      ** Pone todos los componentes en un estado inicial Entre los
@@ -393,8 +400,8 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         jmachine.resetMachine();
         sssd.reset();
         sssd.insertStr(jmachine.getStrToTestOrig());
-  currentStateLabel.setText(jmachine.getCurrentState().toString());
-   nextButton.setEnabled(true);
+        currentStateLabel.setText(jmachine.getCurrentState().toString());
+        nextButton.setEnabled(true);
         runAllButton.setEnabled(true);
         quickTestButton.setEnabled(true);
         stopButton.setEnabled(false);
@@ -411,110 +418,116 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
      * Crea el menú con las configuraciones básicas de este Frame
      */
     protected JMenuBar createMenu() {
-  JMenuBar mb = new JMenuBar();
-  JMenu menu = new JMenu("File");
-  menu.setMnemonic(KeyEvent.VK_F);
+        JMenuBar mb = new JMenuBar();
+        JMenu menu = new JMenu("File");
+        menu.setMnemonic(KeyEvent.VK_F);
 
-  JMenuItem loadJdfa = new  JMenuItem("Load Machine...",KeyEvent.VK_L);
-  loadJdfa.getAccessibleContext().setAccessibleDescription("Loads a new Machine");
-  loadJdfa.addActionListener(this);
-  loadJdfa.setActionCommand("load");
-  loadJdfa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
-  menu.add(loadJdfa);
+        // newMachine = new  JMenuItem("New...",KeyEvent.VK_N);
+        // newMachine.getAccessibleContext().setAccessibleDescription("Crea una nueva máquina");
+        // newMachine.addActionListener(this);
+        // newMachine.setActionCommand("new");
+        // newMachine.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
+        // newMachine.setEnabled(true);
+        // menu.add(save);
 
-  save = new  JMenuItem("Save",KeyEvent.VK_S);
-  save.getAccessibleContext().setAccessibleDescription("Guarda la Máquina");
-  save.addActionListener(this);
-  save.setActionCommand("save");
-  save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
-  save.setEnabled(false);
-  menu.add(save);
+        JMenuItem loadJdfa = new  JMenuItem("Load Machine...",KeyEvent.VK_L);
+        loadJdfa.getAccessibleContext().setAccessibleDescription("Loads a new Machine");
+        loadJdfa.addActionListener(this);
+        loadJdfa.setActionCommand("load");
+        loadJdfa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2,0));
+        menu.add(loadJdfa);
 
-  tabular = new  JMenuItem("Show tabular ...",KeyEvent.VK_T);
-  tabular.getAccessibleContext().setAccessibleDescription("Muestra la representación tabular de la Máquina");
-  tabular.addActionListener(this);
-  tabular.setActionCommand("tabular");
-  tabular.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9,0));
-  tabular.setEnabled(false);
-  menu.add(tabular);
+        save = new  JMenuItem("Save",KeyEvent.VK_S);
+        save.getAccessibleContext().setAccessibleDescription("Guarda la Máquina");
+        save.addActionListener(this);
+        save.setActionCommand("save");
+        save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
+        save.setEnabled(false);
+        menu.add(save);
 
-  descriptionMI = new  JMenuItem("Machine's Description...",KeyEvent.VK_D);
-  descriptionMI.getAccessibleContext().setAccessibleDescription("Shows this Machine's description, if it's available");
-  descriptionMI.addActionListener(this);
-  descriptionMI.setActionCommand("showDescription");
-  descriptionMI.setEnabled(false);
-  menu.add(descriptionMI);
+        tabular = new  JMenuItem("Show tabular ...",KeyEvent.VK_T);
+        tabular.getAccessibleContext().setAccessibleDescription("Muestra la representación tabular de la Máquina");
+        tabular.addActionListener(this);
+        tabular.setActionCommand("tabular");
+        tabular.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9,0));
+        tabular.setEnabled(false);
+        menu.add(tabular);
 
-  printM = new  JMenuItem("Print Machine...",KeyEvent.VK_P);
-  printM.getAccessibleContext().setAccessibleDescription("Imprime la Máquina");
-  printM.addActionListener(this);
-  printM.setActionCommand("print");
-  printM.setEnabled(false);
+        descriptionMI = new  JMenuItem("Machine's Description...",KeyEvent.VK_D);
+        descriptionMI.getAccessibleContext().setAccessibleDescription("Shows this Machine's description, if it's available");
+        descriptionMI.addActionListener(this);
+        descriptionMI.setActionCommand("showDescription");
+        descriptionMI.setEnabled(false);
+        menu.add(descriptionMI);
 
-  JMenuItem quit = new JMenuItem(new AbstractAction("Quit") {
-    public void actionPerformed(ActionEvent e) {
-        dispose();
-    }
-      });
-  quit.setMnemonic(KeyEvent.VK_Q);
-  menu.add(quit);
+        printM = new  JMenuItem("Print Machine...",KeyEvent.VK_P);
+        printM.getAccessibleContext().setAccessibleDescription("Imprime la Máquina");
+        printM.addActionListener(this);
+        printM.setActionCommand("print");
+        printM.setEnabled(false);
 
-  JMenu mtest = new JMenu("Test...");
-  mtest.setMnemonic(KeyEvent.VK_T);
-  loadTest = new  JMenuItem("Load test String...",KeyEvent.VK_S);
-  loadTest.getAccessibleContext().setAccessibleDescription("Loads a new JStr");
-  loadTest.addActionListener(this);
-  loadTest.setActionCommand("loadtest");
-  loadTest.setEnabled(false);
-  mtest.add(loadTest);
+        JMenuItem quit = new JMenuItem(new AbstractAction("Quit") {
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+          }
+            });
+        quit.setMnemonic(KeyEvent.VK_Q);
+        menu.add(quit);
 
-  consTest = new  JMenuItem("Build  test String...",KeyEvent.VK_C);
-  consTest.getAccessibleContext().setAccessibleDescription("Builts a new  JStr");
-  consTest.addActionListener(this);
-  consTest.setActionCommand("constest");
-  consTest.setEnabled(false);
-  consTest.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5,0));
-  mtest.add(consTest);
+        JMenu mtest = new JMenu("Test...");
+        mtest.setMnemonic(KeyEvent.VK_T);
+        loadTest = new  JMenuItem("Load test String...",KeyEvent.VK_S);
+        loadTest.getAccessibleContext().setAccessibleDescription("Loads a new JStr");
+        loadTest.addActionListener(this);
+        loadTest.setActionCommand("loadtest");
+        loadTest.setEnabled(false);
+        mtest.add(loadTest);
 
+        consTest = new  JMenuItem("Build  test String...",KeyEvent.VK_C);
+        consTest.getAccessibleContext().setAccessibleDescription("Builts a new  JStr");
+        consTest.addActionListener(this);
+        consTest.setActionCommand("constest");
+        consTest.setEnabled(false);
+        consTest.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5,0));
+        mtest.add(consTest);
 
-
-
-  mb.add(menu);
-  mb.add(mtest);
-  return mb;
+        mb.add(menu);
+        mb.add(mtest);
+        return mb;
     }
 
     static public JPanel createJPanelBorder(Component c, String borderTitle){
-  Border border = BorderFactory.createEtchedBorder();
-  TitledBorder title = BorderFactory.createTitledBorder(border,borderTitle);
-  title.setTitleJustification(TitledBorder.DEFAULT_JUSTIFICATION);
-  title.setTitlePosition(TitledBorder.DEFAULT_POSITION);
-  JPanel bcomp = new JPanel(false);
+        Border border = BorderFactory.createEtchedBorder();
+        TitledBorder title = BorderFactory.createTitledBorder(border,borderTitle);
+        title.setTitleJustification(TitledBorder.DEFAULT_JUSTIFICATION);
+        title.setTitlePosition(TitledBorder.DEFAULT_POSITION);
+        JPanel bcomp = new JPanel(false);
         bcomp.setLayout(new GridLayout(1, 1));
         bcomp.add(c);
         bcomp.setBorder(title);
-  return bcomp;
+
+        return bcomp;
     }
 
 
     Timer t = new Timer();
     public void run() {
-  TimerTask tt = new TimerTask(){
-    public void run(){
-        boolean maspasos = true;
-        try{
-      if(!stopExecution && maspasos ){
-          Debug.println("HOLA 1");
-          maspasos = nextStep();
-          repaint();
-          Debug.println(jmachine.getStrToTest().toString());
-      }
-        }catch(Exception e){
-      e.printStackTrace();
-        }
-    }
-      };
-  t.schedule(tt,0,6000);
+        TimerTask tt = new TimerTask(){
+            public void run(){
+                boolean maspasos = true;
+                try {
+                    if (!stopExecution && maspasos ) {
+                        Debug.println("HOLA 1");
+                        maspasos = nextStep();
+                        repaint();
+                        Debug.println(jmachine.getStrToTest().toString());
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t.schedule(tt,0,6000);
     }
 
     public void showTabular(){
@@ -524,6 +537,25 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     public void saveMachine() {
         jmachine.toFile(file.getAbsolutePath());
     }
+
+    public void newMachine() {
+        int n = 1;
+        // Alert of possible loss of data if jmachine != null and there are changes pending (TODO)
+        if (jmachine != null) {
+            n = JOptionPane.showConfirmDialog(this,
+                "¿Estás seguro de que quieres crear un nuevo archivo?"
+                + "Los datos no guardados se perderán.",
+                "Puedes perder información!",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+        }
+        // Prompt for new machine data (new method in JMachine)
+        if (n == 1) {
+            jmachine = createNew();
+        }
+    }
+
+    abstract protected JMachine createNew();
 
     protected class TabularMachine extends JFrame {
         TabularMachine(Vector v, JMachine listener) {

@@ -192,4 +192,9 @@ public class JTuringFrame extends JMachineFrame{
 	JTuringFrame f = new JTuringFrame();
 	f.show();	
     }
+    
+    protected JMachine createNew() {
+        // return new JDfa();
+        return null;
+    }
 } // JTuringFrame

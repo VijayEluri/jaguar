@@ -152,10 +152,10 @@ public class ProductionT3Set extends ProductionSet{
 	return false;
     }
     
-    public boolean add(Object o){
+    public boolean add(ProductionT3 o){
 	if(!(o instanceof ProductionT3))
 	    Debug.println("dfa.structures.ProductionSet WARNING: Solo se pueden agregar Producciones Tipo 3 a este conjunto, ["+o+", "+ o.getClass().getName()+"]  AGREGADO!!");
-	return super.add(o);
+	    return super.add(o);
     }
     
     public boolean remove(Object o) {

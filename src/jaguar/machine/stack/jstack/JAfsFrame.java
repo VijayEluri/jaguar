@@ -362,4 +362,9 @@ public class JAfsFrame extends JMachineFrame{
 	f.show();	
     }
 
+    protected JMachine createNew() {
+        // return new JDfa();
+        return null;
+    }
+
 } // JAfsFrame

@@ -1,15 +1,13 @@
 <?xml version='1.0' encoding="iso-8859-1" ?>
 
-<!DOCTYPE str SYSTEM "dfa.dtd">
-
 <str>
-	<sym>1</sym>
-	<sym>0</sym>
-	<sym>1</sym>
-	<sym>0</sym>
-	<sym>1</sym>
-	<sym>1</sym>
-	<sym>1</sym>
-	<sym>0</sym>
-	<sym>1</sym>
+  <sym>1</sym>
+  <sym>0</sym>
+  <sym>1</sym>
+  <sym>0</sym>
+  <sym>1</sym>
+  <sym>1</sym>
+  <sym>1</sym>
+  <sym>0</sym>
+  <sym>1</sym>
 </str>
