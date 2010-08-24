@@ -179,13 +179,13 @@ public class JState extends jaguar.structures.State {
     /**
      * El color por default es blue
      **/
-    public static final Color DEFAULT_BG_COLOR = Color.white;// Color.blue;
+    public static final Color DEFAULT_BG_COLOR = Color.white;
 
 
     /**
      * El color por default es orange
      **/
-    public static final Color DEFAULT_FINAL_BG_COLOR = new Color(255, 102,0);// Color.orange;
+    public static final Color DEFAULT_FINAL_BG_COLOR = new Color(255, 102,0);
 
     /**
      * El color por default es orange
@@ -350,29 +350,29 @@ public class JState extends jaguar.structures.State {
             (int)(getY()+(DIAMETRO/2)+6));
         g2d.setStroke(origS);
     }
-    
+
     public void paintArrowHead(Graphics2D g2d, Color c) {
             Point center = getCentro().getLocation();
             double stateRadius = JState.DIAMETRO/2;
             Point tip = new Point(center);
             tip.translate((int) -stateRadius,0);
-            
+
             Point start = new Point(tip);
             start.translate((int) -stateRadius*2,0);
             double headWidth = 5;
             double headLength = 40;
             java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
             g2d.setColor(c);
+            g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+
             l2d.setLine(start,tip);
             g2d.draw(l2d);
-            
-            g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
-            
+
             start = new Point(tip);
             start.translate((int) -headLength/2,(int) headWidth);
             l2d.setLine(start,tip);
             g2d.draw(l2d);
-            
+
             start = new Point(tip);
             start.translate((int) -headLength/2,(int) -headWidth);
             l2d.setLine(start,tip);
@@ -382,7 +382,7 @@ public class JState extends jaguar.structures.State {
                                  RenderingHints.VALUE_ANTIALIAS_ON);
 
         }
-    
+
 
     /**
      * Pinta un estado en un contexto gráfico con el background del
