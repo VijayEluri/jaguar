@@ -340,15 +340,49 @@ public class JState extends jaguar.structures.State {
             g2d.draw(getCirculoCinscunscritoEstadoFinal());
         }
         if (getEsEstadoInicial()) { // es inicial
+            paintArrowHead(g2d,DEFAULT_STROKE_COLOR);
             // TODO: flechita para los iniciales
         }
         // Dibuja la etiqueta
         g.setColor(DEFAULT_STROKE_COLOR);
         g2d.drawString(getLabel(),
-            (int)(getX()+(DIAMETRO/2)-3),
+            (int)(getX()+(DIAMETRO/2)-(4*getLabel().length())),
             (int)(getY()+(DIAMETRO/2)+6));
         g2d.setStroke(origS);
     }
+    
+    public void paintArrowHead(Graphics2D g2d, Color c) {
+            Point center = getCentro().getLocation();
+            double stateRadius = JState.DIAMETRO/2;
+            Point tip = new Point(center);
+            tip.translate((int) -stateRadius,0);
+            
+            Point start = new Point(tip);
+            start.translate((int) -stateRadius*2,0);
+            double headWidth = 5;
+            double headLength = 40;
+            java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
+            g2d.setColor(c);
+            l2d.setLine(start,tip);
+            g2d.draw(l2d);
+            
+            g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
+            
+            start = new Point(tip);
+            start.translate((int) -headLength/2,(int) headWidth);
+            l2d.setLine(start,tip);
+            g2d.draw(l2d);
+            
+            start = new Point(tip);
+            start.translate((int) -headLength/2,(int) -headWidth);
+            l2d.setLine(start,tip);
+            g2d.draw(l2d);
+
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                 RenderingHints.VALUE_ANTIALIAS_ON);
+
+        }
+    
 
     /**
      * Pinta un estado en un contexto gráfico con el background del
