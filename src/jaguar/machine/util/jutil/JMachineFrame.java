@@ -557,13 +557,18 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
 
     abstract protected JMachine createNew();
 
+
+
+
     protected class TabularMachine extends JFrame {
-        TabularMachine(Vector v, JMachine listener) {
+        private MyJTable table;
+
+        public TabularMachine(Vector v, JMachine listener) {
             super("Tabular Machine");
             if(v==null) return;
             Vector columnNames = (Vector)v.get(0);
             Vector data = (Vector)v.get(1);
-            MyJTable table = new MyJTable(data,columnNames);
+            table = new MyJTable(data,columnNames);
 
             table.getModel().addTableModelListener(listener);
             table.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -582,6 +587,33 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             });
             pack();
             setVisible(true);
+        }
+
+        public TabularMachine(String[] columnNames, Object[][] data, JMachine listener) {
+            super("Tabular Machine");
+            table = new MyJTable(data,columnNames);
+
+            table.getModel().addTableModelListener(listener);
+            table.getColumnModel().getColumn(0).setPreferredWidth(100);
+            table.setDefaultRenderer(Object.class, new MyJTableCellRenderer());
+            table.getTableHeader().setDefaultRenderer(new MyJTableCellRenderer());
+
+            table.setPreferredScrollableViewportSize(new Dimension(650, 95));
+            // table.getTableHeader().setReorderingAllowed(false);
+            // table.setFont(new Font("SansSerif",Font.BOLD,10));
+            JScrollPane scrollPane = new JScrollPane(table);
+            getContentPane().add(scrollPane, BorderLayout.CENTER);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    dispose();
+                }
+            });
+            pack();
+            setVisible(true);
+        }
+
+        public MyJTable getMyJTable() {
+            return table;
         }
     }
 
@@ -627,6 +659,10 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             super(v1,v2);
         }
 
+        MyJTable(Object[][] data, Object[] columnNames){
+            super(data,columnNames);
+        }
+
         public boolean isCellEditable(int row,int column) {
             if (row >= 0 && column > 0) {
                 // Transiciones
@@ -634,9 +670,19 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             }
             // TODO:
             // Nombres de estados
-            // Nombres de símbolos
+            // Nombres de símbolos JTableHeader subclass
 
             return false;
+        }
+
+        /*
+         * JTable uses this method to determine the default renderer/
+         * editor for each cell.  If we didn't implement this method,
+         * then the last column would contain text ("true"/"false"),
+         * rather than a check box.
+         */
+        public Class getColumnClass(int c) {
+            return getValueAt(0, c).getClass();
         }
     }
 
