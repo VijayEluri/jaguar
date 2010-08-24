@@ -252,8 +252,8 @@ abstract public class Machine {
      * Solo inicializa el <code>DocumentBuilderFactory</code> para que cheque la entrada contra el DTD asociado a cada máquina
      */
     protected Machine(){
-	factory = DocumentBuilderFactory.newInstance();
-	factory.setValidating(true);
+        factory = DocumentBuilderFactory.newInstance();
+        factory.setValidating(false);
     }   
 
     /**
