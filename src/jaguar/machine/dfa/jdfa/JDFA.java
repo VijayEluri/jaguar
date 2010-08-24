@@ -58,6 +58,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.table.TableModel;
 import javax.swing.event.TableModelEvent;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
@@ -402,6 +404,44 @@ public class JDFA extends DFA implements JMachine{
      */
     public static final Vector<Vector> DEFAULT_TABLEVECTOR=null;
 
+    public String[] getColumnNames() {
+        Symbol[] aSigma = getSigma().toArray();
+        String[] colNames = new String[getSigma().size() + 3];
+        colNames[0] = "Q";
+        for (int i = 0; i < getSigma().size(); i++ ) {
+            colNames[i+1] = aSigma[i].getSym();
+        }
+        colNames[aSigma.length+1] = "Initial";
+        colNames[aSigma.length+2] = "Final";
+        return colNames;
+    }
+
+    public Object[][] getData() {
+        State[] aQ = getQ().toArray();
+        Symbol[] aSigma = getSigma().toArray();
+        Object[][] data = new Object[aQ.length][aSigma.length+3];
+        int k = 0;
+        int l = 1;
+        State entry;
+        ButtonGroup inicialSelector = new ButtonGroup();
+        for (State i : aQ) {
+            for (Symbol j : aSigma) {
+                entry = ((DfaDelta) getDelta()).apply(i,(Symbol) j);
+                data[k][l] = (entry != null) ? entry.toString() : null;
+                ++l;
+            }
+            data[k][0] = i.toString();
+            JRadioButton inicial = new JRadioButton("",esInicial(i));
+            inicialSelector.add(inicial);
+            data[k][aSigma.length+1] = inicial;
+            data[k][aSigma.length+2] = new Boolean(i.getIsInF());
+
+            l = 1;
+            ++k;
+        }
+        return data;
+    }
+
     /**
      * funcion de acceso para obtener el valor de tableVector
      * @return el valor actual de tableVector, donde la entrada
@@ -424,6 +464,8 @@ public class JDFA extends DFA implements JMachine{
                     currentRow.add((entry != null)?entry.toString():null);
                 }
                 currentRow.add(0,i.toString());
+                currentRow.add(aSigma.length+1,""+esInicial(i));
+                currentRow.add(aSigma.length+2,""+i.getIsInF());
                 data.add(currentRow);
             }
 
@@ -431,6 +473,8 @@ public class JDFA extends DFA implements JMachine{
                 header.add(((Symbol)aSigma[j]).getSym());
             }
             header.add(0,"Q");
+            header.add(aSigma.length+1,"Initial");
+            header.add(aSigma.length+2,"Final");
             tableVector = new Vector<Vector>();
             tableVector.add(header);
             tableVector.add(data);
@@ -455,6 +499,8 @@ public class JDFA extends DFA implements JMachine{
         // TODO:
         //   Editar nombres de estados
         // ✓ Editar transiciones
+        // ✓ Editar inicial
+        // ✓ Editar final
         //   Agregar estados
         //   Agregar símbolos
 
@@ -462,21 +508,44 @@ public class JDFA extends DFA implements JMachine{
         int column = e.getColumn();
 
         TableModel model = (TableModel)e.getSource();
-        String toStateLabel = (String) model.getValueAt(row, column); // Value edited
-        Object[] aQ = getQ().toArray();
-        String symbol = model.getColumnName(column);
-        JState fromState = (JState)aQ[row];
-        if (toStateLabel.isEmpty()) {
-            ((DfaDelta)getDelta()).removeTransition(fromState, new Symbol(symbol));
-        } else {
-            JState toState;
-            for (Object state : aQ) {
-                if (((JState) state).getLabel().equals(toStateLabel)) { // find the state in Q corresponding to the label
-                    toState = (JState) state;
-                    // Change the DFADelta transition
-                    ((DfaDelta)getDelta()).addTransition(fromState, new Symbol(symbol), toState);
-                    break;
+        State[] aQ = getQ().toArray();
+
+        if (column <= getSigma().size()) {
+            String toStateLabel = (String) model.getValueAt(row, column); // Value edited
+            String symbol = model.getColumnName(column);
+            JState fromState = (JState)aQ[row];
+            if (toStateLabel.isEmpty()) {
+                ((DfaDelta)getDelta()).removeTransition(fromState, new Symbol(symbol));
+            } else {
+                JState toState;
+                for (Object state : aQ) {
+                    if (((JState) state).getLabel().equals(toStateLabel)) { // find the state in Q corresponding to the label
+                        toState = (JState) state;
+                        // Change the DFADelta transition
+                        ((DfaDelta)getDelta()).addTransition(fromState, new Symbol(symbol), toState);
+                        break;
+                    }
                 }
+            }
+        } else {
+            boolean flag;
+            int idx = column - (getSigma().size()+1);
+            switch (idx) {
+                case 0:
+                    flag = ((JRadioButton) model.getValueAt(row, column)).isSelected();
+                    ((JState) getQ0()).setEsEstadoInicial(false);
+                    setQ0(aQ[row]);
+                    ((JState) aQ[row]).setEsEstadoInicial(true);
+                    break;
+                case 1:
+                    flag = ((Boolean) model.getValueAt(row, column)).booleanValue();
+                    aQ[row].setIsInF(flag);
+                    if (flag) { // Marked as Final
+                        getF().add(aQ[row]);
+                    } else {
+                        getF().remove(aQ[row]);
+                    }
+                    break;
             }
         }
 

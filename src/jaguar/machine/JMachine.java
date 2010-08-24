@@ -181,6 +181,9 @@ public  interface JMachine extends TableModelListener {
      */
     public Vector getTableVector();
 
+    public String[] getColumnNames();
+    public Object[][] getData();
+
     /**
      * funcion de acceso para obtener el valor de previousNotNullCurrentState
      * @return el valor actual de previousNotNullCurrentState
