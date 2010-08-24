@@ -33,6 +33,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.*;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.border.*;
 import jaguar.machine.dfa.structures.*;
 import jaguar.machine.dfa.jdfa.jstructures.*;
@@ -44,6 +45,7 @@ import jaguar.machine.util.jutil.*;
 import jaguar.util.jutil.*;
 import jaguar.machine.*;
 import java.io.File;
+
 
 /**
  * JDfaFrame.java
@@ -210,6 +212,50 @@ public class JDfaFrame extends JMachineFrame{
     public static void main(String []argv){
         JDfaFrame f = new JDfaFrame();
         f.show();
+    }
+
+    private static class RadioButtonRenderer implements TableCellRenderer {
+      public Component getTableCellRendererComponent(JTable table, Object value,
+          boolean isSelected, boolean hasFocus, int row, int column) {
+        if (value == null)
+          return null;
+        return (Component) value;
+      }
+    }
+
+    private static class RadioButtonEditor extends DefaultCellEditor implements ItemListener {
+      private JRadioButton button;
+
+      public RadioButtonEditor(JCheckBox checkBox) {
+        super(checkBox);
+      }
+
+      public Component getTableCellEditorComponent(JTable table, Object value,
+          boolean isSelected, int row, int column) {
+        if (value == null)
+          return null;
+        button = (JRadioButton) value;
+        button.addItemListener(this);
+        return (Component) value;
+      }
+
+      public Object getCellEditorValue() {
+        button.removeItemListener(this);
+        return button;
+      }
+
+      public void itemStateChanged(ItemEvent e) {
+        super.fireEditingStopped();
+      }
+    }
+
+    public void showTabular(){
+        TabularMachine ttm = new TabularMachine(jmachine.getColumnNames(), jmachine.getData(), jmachine);
+        MyJTable table = ttm.getMyJTable();
+        table.getColumn("Initial").setCellRenderer(
+                new RadioButtonRenderer());
+        table.getColumn("Initial").setCellEditor(
+                new RadioButtonEditor(new JCheckBox()));
     }
 
 } // JDfaFrame
