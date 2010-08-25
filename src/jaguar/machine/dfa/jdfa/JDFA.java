@@ -404,6 +404,17 @@ public class JDFA extends DFA implements JMachine{
      */
     public static final Vector<Vector> DEFAULT_TABLEVECTOR=null;
 
+    public Class getColumnClass(int c) {
+        int idx = c - (getSigma().size()+1);
+        switch (idx) {
+            case 0:
+                return JRadioButton.class;
+            case 1:
+                return Boolean.class;
+        }
+        return String.class;
+    }
+
     public String[] getColumnNames() {
         Symbol[] aSigma = getSigma().toArray();
         String[] colNames = new String[getSigma().size() + 3];

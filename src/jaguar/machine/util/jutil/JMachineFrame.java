@@ -682,7 +682,14 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
          * rather than a check box.
          */
         public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
+            Object firstValue = getValueAt(0, c);
+
+            if (firstValue != null) {
+                return getValueAt(0, c).getClass();
+            }
+
+            return jmachine.getColumnClass(c);
+
         }
     }
 
