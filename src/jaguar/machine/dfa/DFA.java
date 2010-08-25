@@ -49,12 +49,14 @@ import jaguar.util.Debug;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.io.InputStream;
 import org.w3c.dom.*;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.Validator;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
@@ -128,9 +130,10 @@ public class DFA extends Machine implements Cloneable{
     public DFA(File file)throws Exception{
         this();
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        URL schemaURL = this.getClass().getClassLoader().getResource("schema/dfa.xsd");
-        File schemaFile = new File(schemaURL.toURI());
-        Schema schema = schemaFactory.newSchema(schemaFile);
+        InputStream schemaStream = this.getClass().getClassLoader().getResourceAsStream("schema/dfa.xsd");
+        StreamSource schemaSource = new StreamSource(schemaStream);
+        //File schemaFile = new File(schemaURL.toURI());
+        Schema schema = schemaFactory.newSchema(schemaSource);
         Validator validator = schema.newValidator();
         DocumentBuilder parser = factory.newDocumentBuilder();
         Document document = parser.parse(file);
