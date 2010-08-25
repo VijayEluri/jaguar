@@ -52,6 +52,9 @@ import java.io.FileWriter;
 import org.w3c.dom.*;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
@@ -128,8 +131,17 @@ public class DFA extends Machine implements Cloneable{
         URL schemaURL = this.getClass().getClassLoader().getResource("schema/dfa.xsd");
         File schemaFile = new File(schemaURL.toURI());
         Schema schema = schemaFactory.newSchema(schemaFile);
-        factory.setSchema(schema);
-        setupDFA(factory.newDocumentBuilder().parse(file),this);
+        Validator validator = schema.newValidator();
+        DocumentBuilder parser = factory.newDocumentBuilder();
+        Document document = parser.parse(file);
+
+        //factory.setSchema(schema);
+        try {
+            validator.validate(new DOMSource(document));
+            setupDFA(document,this);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
