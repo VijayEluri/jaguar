@@ -21,13 +21,13 @@
 
 <xs:complexType name="states">
   <xs:sequence>
-    <xs:element name="state" type="xs:string" maxOccurs="unbounded"/>
+    <xs:element name="state" type="xs:string"  minOccurs="0" maxOccurs="unbounded"/>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="transitions">
   <xs:sequence>
-    <xs:element name="trans" maxOccurs="unbounded">
+    <xs:element name="trans"  minOccurs="0" maxOccurs="unbounded">
       <xs:complexType>
         <xs:sequence>
           <xs:element name="state" type="xs:string"/>
