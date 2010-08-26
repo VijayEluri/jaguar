@@ -192,6 +192,8 @@ public class JState extends jaguar.structures.State {
      **/
     public static final Color DEFAULT_STROKE_COLOR = Color.black;
 
+    public static final Color CURRENT_STROKE_COLOR = Color.white;
+
     /**
      * La constante booleana para pintar un estado current
      **/
@@ -344,7 +346,11 @@ public class JState extends jaguar.structures.State {
             // TODO: flechita para los iniciales
         }
         // Dibuja la etiqueta
-        g.setColor(DEFAULT_STROKE_COLOR);
+        if (esEstadoActual==DEFAULT_CURRENT_STATE) {
+            g.setColor(CURRENT_STROKE_COLOR);
+        } else {
+            g.setColor(DEFAULT_STROKE_COLOR);
+        }
         g2d.drawString(getLabel(),
             (int)(getX()+(DIAMETRO/2)-(4*getLabel().length())),
             (int)(getY()+(DIAMETRO/2)+6));
