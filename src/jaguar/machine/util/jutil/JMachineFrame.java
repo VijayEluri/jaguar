@@ -422,13 +422,13 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         JMenu menu = new JMenu("File");
         menu.setMnemonic(KeyEvent.VK_F);
 
-        // newMachine = new  JMenuItem("New...",KeyEvent.VK_N);
-        // newMachine.getAccessibleContext().setAccessibleDescription("Crea una nueva máquina");
-        // newMachine.addActionListener(this);
-        // newMachine.setActionCommand("new");
-        // newMachine.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
-        // newMachine.setEnabled(true);
-        // menu.add(save);
+        newMachine = new  JMenuItem("New...",KeyEvent.VK_N);
+        newMachine.getAccessibleContext().setAccessibleDescription("Crea una nueva máquina");
+        newMachine.addActionListener(this);
+        newMachine.setActionCommand("new");
+        newMachine.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
+        newMachine.setEnabled(true);
+        menu.add(newMachine);
 
         JMenuItem loadJdfa = new  JMenuItem("Load Machine...",KeyEvent.VK_L);
         loadJdfa.getAccessibleContext().setAccessibleDescription("Loads a new Machine");
@@ -535,6 +535,15 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     }
 
     public void saveMachine() {
+        if (file == null) {
+            String filename = (String)JOptionPane.showInputDialog(
+                                this,
+                                "Enter the name of the file to save your machine",
+                                "Save Machine",
+                                JOptionPane.PLAIN_MESSAGE);
+            file = new File(filename);
+        }
+
         jmachine.toFile(file.getAbsolutePath());
     }
 
@@ -551,14 +560,11 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         }
         // Prompt for new machine data (new method in JMachine)
         if (n == 1) {
-            jmachine = createNew();
+            createNew();
         }
     }
 
     abstract protected JMachine createNew();
-
-
-
 
     protected class TabularMachine extends JFrame {
         private MyJTable table;
@@ -628,8 +634,15 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             Component c = super.getTableCellRendererComponent(table, value,
                                                              isSelected, hasFocus,
                                                              row, column);
-            Color foreground = Color.black;
-            Color background = Color.white;
+            Color foreground;
+            Color background;
+            if (isSelected) {
+                foreground = Color.white;
+                background = new Color(43,102,201);
+            } else {
+                foreground = Color.black;
+                background = Color.white;
+            }
 
             // Sólo el header
             if (row == -1) {
@@ -641,10 +654,10 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
                 if (column == 0) {
                     foreground = Color.white;
                     background = Color.gray;
-                    ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.LEFT);
-                } else {
-                    ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 }
+
+                ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
+
             }
 
             c.setForeground(foreground);

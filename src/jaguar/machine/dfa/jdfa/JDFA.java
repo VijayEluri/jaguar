@@ -353,7 +353,7 @@ public class JDFA extends DFA implements JMachine{
      * delta, bajo el contexto delta(p,s) = q
      **/
     protected void displayTransResult(State q){
-  ((JState)q).paint(dfaframe.getJdc().getGraphics(),JState.DEFAULT_CURRENT_STATE);
+        ((JState)q).paint(dfaframe.getJdc().getGraphics(),JState.DEFAULT_CURRENT_STATE);
     }
 
     public void print(Graphics g){

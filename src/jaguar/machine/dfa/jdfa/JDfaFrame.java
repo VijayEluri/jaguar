@@ -33,7 +33,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.*;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.border.*;
 import jaguar.machine.dfa.structures.*;
 import jaguar.machine.dfa.jdfa.jstructures.*;
@@ -160,16 +160,64 @@ public class JDfaFrame extends JMachineFrame{
 
 
 
+
     protected JMachine createNew() {
-        // return new JDfa();
-        return null;
+        String alphabetStr = (String)JOptionPane.showInputDialog(
+                            this,
+                            "You must enter a comma separated list of symbols for use as alphabet",
+                            "Provide an alphabet",
+                            JOptionPane.PLAIN_MESSAGE);
+
+        Alphabet sigma = new Alphabet(alphabetStr);
+
+        String stateNumbStr = (String)JOptionPane.showInputDialog(
+                            this,
+                            "You must enter number to set how many states your new DFA will have.",
+                            "How many states?",
+                            JOptionPane.PLAIN_MESSAGE);
+
+        int totalStates = Integer.parseInt(stateNumbStr);
+        JStateSet states = new JStateSet();
+        JState initial = new JState("q0");
+        states.add(initial);
+
+        for (int i = 1; i < totalStates; ++i) {
+            states.add(new JState("q" + i));
+        }
+
+        jmachine = new JDFA(sigma, states, new JStateSet(), new JDfaDelta(),  initial);
+
+        jdc.initJMachineCanvas((JDFA)jmachine);
+        printM.setEnabled(true);
+        tabular.setEnabled(true);
+        save.setEnabled(true);
+        nextButton.setEnabled(true);
+        resetButton.setEnabled(true);
+        runAllButton.setEnabled(true);
+        quickTestButton.setEnabled(true);
+        stopButton.setEnabled(false);
+        currentStateLabel.setText(jmachine.getCurrentState().toString());
+        jmachine.setStrToTest(new JStr());
+        jmachine.setStrToTestOrig(new JStr());
+        sssd.insertStr(jmachine.getStrToTest());
+
+        jmachine.setJMachineFrame(this);
+        loadTest.setEnabled(true);
+        consTest.setEnabled(true);
+        jScrollPaneCanvas.getViewport().setViewPosition(new Point(0,0));
+        jmachine.resetMachine();
+        descriptionMI.setEnabled(true);
+
+        ((JDFA) jmachine).initStatesPosition(getJScrollPaneCanvas().getViewport().getViewSize());
+
+
+        return jmachine;
     }
 
     protected void initJMachine(File file){
         System.err.println("\nLoading...  " + file +" \n");
         try {
             jmachine = new JDFA(file,this);
-            //      System.err.println(jmachine);
             jdc.initJMachineCanvas((JDFA)jmachine);
             printM.setEnabled(true);
             tabular.setEnabled(true);
@@ -214,11 +262,21 @@ public class JDfaFrame extends JMachineFrame{
         f.show();
     }
 
-    private static class RadioButtonRenderer implements TableCellRenderer {
+    private static class RadioButtonRenderer extends DefaultTableCellRenderer {
       public Component getTableCellRendererComponent(JTable table, Object value,
-          boolean isSelected, boolean hasFocus, int row, int column) {
-        if (value == null)
-          return null;
+                                                     boolean isSelected, boolean hasFocus,
+                                                     int row, int column) {
+        if (value == null){
+            return null;
+        }
+
+        if (isSelected) {
+            ((Component) value).setBackground(new Color(43,102,201));
+        } else {
+            ((Component) value).setBackground(Color.white);
+        }
+        ((JRadioButton) value).setHorizontalAlignment(SwingConstants.CENTER);
+
         return (Component) value;
       }
     }
