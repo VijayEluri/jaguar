@@ -136,7 +136,7 @@ public class Alphabet implements Cloneable {
      * Creamos un alfabeto vacio
      */
     public Alphabet (){
-  Sigma = new HashSet();
+        Sigma = new HashSet();
     }
 
     /**
@@ -144,23 +144,31 @@ public class Alphabet implements Cloneable {
      * @param S  el alfabeto a partir del cual crearemos uno nuevo
      */
     public Alphabet (Alphabet S){
-  Sigma = (HashSet)S.getSigma().clone();
+        Sigma = (HashSet)S.getSigma().clone();
     }
 
     public Alphabet(Symbol s){
-  this();
-  add(s);
+        this();
+        add(s);
+    }
+
+    public Alphabet(String str) {
+        this();
+        String[] syms = str.split(",");
+        for(String s : syms) {
+            add(new Symbol(s));
+        }
     }
 
     /**
      ** Construye un alfabeto dado el documento DOM
      **/
     public Alphabet(org.w3c.dom.Node domNode){
-  this();
-  NodeList domSymList = domNode.getChildNodes();
-  for(int i = 0; i < domSymList.getLength() ; i++)
-      if(domSymList.item(i).getNodeType() == Node.ELEMENT_NODE)
-    add(new Symbol(domSymList.item(i)));
+        this();
+        NodeList domSymList = domNode.getChildNodes();
+        for(int i = 0; i < domSymList.getLength() ; i++)
+            if(domSymList.item(i).getNodeType() == Node.ELEMENT_NODE)
+        add(new Symbol(domSymList.item(i)));
     }
 
 
@@ -169,7 +177,7 @@ public class Alphabet implements Cloneable {
      * son regresados no tienen un orden en particular
      */
     public Iterator iterator(){
-  return Sigma.iterator();
+        return Sigma.iterator();
     }
 
     /**
