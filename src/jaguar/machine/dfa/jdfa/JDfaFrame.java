@@ -209,7 +209,7 @@ public class JDfaFrame extends JMachineFrame{
         descriptionMI.setEnabled(true);
 
         ((JDFA) jmachine).initStatesPosition(getJScrollPaneCanvas().getViewport().getViewSize());
-
+        file = null;
 
         return jmachine;
     }

@@ -548,18 +548,18 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     }
 
     public void newMachine() {
-        int n = 1;
+        int n = 0;
         // Alert of possible loss of data if jmachine != null and there are changes pending (TODO)
         if (jmachine != null) {
             n = JOptionPane.showConfirmDialog(this,
-                "¿Estás seguro de que quieres crear un nuevo archivo?"
-                + "Los datos no guardados se perderán.",
-                "Puedes perder información!",
+                "Are you sure that you want to create a new file?"
+                + "All the saved data will be lost.",
+                "Data loss",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
         }
         // Prompt for new machine data (new method in JMachine)
-        if (n == 1) {
+        if (n == 0) {
             createNew();
         }
     }
