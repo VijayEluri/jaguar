@@ -37,6 +37,7 @@ package jaguar.machine;
  */
 
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 import jaguar.util.*;
 import jaguar.util.jutil.*;
 import jaguar.machine.util.jutil.*;
@@ -50,7 +51,7 @@ import javax.swing.event.TableModelListener;
 import java.io.IOException;
 import java.lang.Math;
 
-public  interface JMachine extends TableModelListener {
+public  interface JMachine extends TableModelListener, ActionListener {
     /**
      * Get the value of g.
      * @return value of g.

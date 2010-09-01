@@ -190,18 +190,18 @@ public class Alphabet implements Cloneable {
 
 
     public boolean contains(Symbol s){
-  return Sigma.contains(s);
+        return Sigma.contains(s);
     }
     /**
      * Regresa la representación de nuestro alfabeto como
      * <code>HashSet</code>
      * @return la representación de <code>HashSet</code> del <code>Alphabet</code>.
      */
-    public HashSet getSigma(){
-  return Sigma;
+    public HashSet<Symbol> getSigma(){
+        return Sigma;
     }
     protected void setSigma(HashSet hs){
-  Sigma = hs;
+        Sigma = hs;
     }
 
 
@@ -209,26 +209,25 @@ public class Alphabet implements Cloneable {
      * Crea y regresa una copia de este objeto
      */
     public Object clone() throws CloneNotSupportedException{
-  try{
-      Alphabet nuevo = (Alphabet)super.clone();
-      nuevo.Sigma = (HashSet)Sigma.clone();
-      return nuevo;
-  }
-  catch (CloneNotSupportedException e){
-      throw new InternalError(e.toString());
-  }
+        try{
+            Alphabet nuevo = (Alphabet)super.clone();
+            nuevo.Sigma = (HashSet)Sigma.clone();
+            return nuevo;
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError(e.toString());
+        }
     }
 
     /**
      * Regresa la representación en cadena del Alphabet
      */
     public String toString(){
-  String s="";
-  for (Iterator i = Sigma.iterator() ; i.hasNext() ;)
-      s += i.next() ;
-  return s;
-  //  return BEG_TAG + s + END_TAG;
-
+        String s="";
+        for (Iterator i = Sigma.iterator() ; i.hasNext() ;)
+            s += i.next() ;
+        return s;
+        //  return BEG_TAG + s + END_TAG;
     }
 
 
@@ -239,16 +238,16 @@ public class Alphabet implements Cloneable {
      * @param fw El FileWriter donde se guardará el Alphabet.
      */
     public void toFile(FileWriter fw){
-  try{
-      fw.write(BEG_TAG);
-      for (Iterator i = Sigma.iterator() ; i.hasNext() ;)
-    ((Symbol)i.next()).toFile(fw);
-      fw.write(END_TAG);
-  }catch( Exception ouch){
-      System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
-             + "Trying to toFile: " );
-      ouch.printStackTrace();
-  }
+        try{
+            fw.write(BEG_TAG);
+            for (Iterator i = Sigma.iterator() ; i.hasNext() ;)
+          ((Symbol)i.next()).toFile(fw);
+            fw.write(END_TAG);
+        }catch( Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
+        }
     }
 
     public int size(){ return Sigma.size();}
@@ -257,13 +256,13 @@ public class Alphabet implements Cloneable {
 
 
     public boolean contains(Alphabet A){
-  return Sigma.containsAll(A.getSigma());
+        return Sigma.containsAll(A.getSigma());
     }
 
     public boolean equals(Object o){
-  return (o instanceof Alphabet &&
-    ((Alphabet)o).size() == size() &&
-    ((Alphabet)o).contains(this));
+        return (o instanceof Alphabet &&
+            ((Alphabet)o).size() == size() &&
+            ((Alphabet)o).contains(this));
     }
 
     /**

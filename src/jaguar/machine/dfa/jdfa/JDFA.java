@@ -53,6 +53,8 @@ import jaguar.machine.dfa.structures.*;
 import jaguar.machine.dfa.jdfa.jstructures.*;
 import jaguar.machine.dfa.structures.exceptions.*;
 import java.util.Vector;
+import java.util.Hashtable;
+import java.util.Enumeration;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -66,6 +68,7 @@ import java.lang.Math;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
+import java.awt.event.ActionEvent;
 
 public class JDFA extends DFA implements JMachine{
     /**
@@ -370,23 +373,23 @@ public class JDFA extends DFA implements JMachine{
      * es el minimo entre el ancho y alto del canvas entre dos.
      */
     public  void initStatesPosition(Dimension d){
-  int cardinalidadQ = getQ().size();
-  if(cardinalidadQ > 0){
-      double radio;
-      if(d.getWidth() != 300 && d.getHeight() != 300)
-    radio = Math.min((d.getWidth() - 250)/2,(d.getHeight() - 250)/2);
-      else radio = Math.min((d.getWidth() - 75)/2,(d.getHeight() - 75 )/2);
-            radio +=10;
-      JState current;
-      double intervalo = 360 / cardinalidadQ;
-      double currentIntervalo = 0;
-      for (Iterator i = getQ().iterator() ; i.hasNext() ;) {
-    current = (JState)i.next();
-    current.setLocation(radio * Math.cos(Math.toRadians(currentIntervalo))+radio,
-            radio * Math.sin(Math.toRadians(currentIntervalo))+radio);
-    currentIntervalo += intervalo;
-      }
-  }
+        int cardinalidadQ = getQ().size();
+        if(cardinalidadQ > 0){
+            double radio;
+            if(d.getWidth() != 300 && d.getHeight() != 300)
+                radio = Math.min((d.getWidth() - 250)/2,(d.getHeight() - 250)/2);
+            else radio = Math.min((d.getWidth() - 75)/2,(d.getHeight() - 75 )/2);
+                radio +=10;
+            JState current;
+            double intervalo = 360 / cardinalidadQ;
+            double currentIntervalo = 0;
+            for (Iterator i = getQ().iterator() ; i.hasNext() ;) {
+                current = (JState)i.next();
+                current.setLocation(radio * Math.cos(Math.toRadians(currentIntervalo))+radio,
+                    radio * Math.sin(Math.toRadians(currentIntervalo))+radio);
+                currentIntervalo += intervalo;
+            }
+        }
     }
 
     /**
@@ -561,6 +564,57 @@ public class JDFA extends DFA implements JMachine{
         }
 
         dfaframe.getJdc().repaint();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if ("add_state".equals(e.getActionCommand())) {
+            JState newState = new JState("q"+Q.size());
+            Q.add(newState);
+            newState.setLocation(50,50);
+            dfaframe.getJdc().getJeList().add(newState);
+            //initStatesPositions();
+            dfaframe.showTabular();
+            dfaframe.getJdc().repaint();
+            return;
+        }
+
+        if ("remove_state".equals(e.getActionCommand())) {
+            // Ask for confirmation first
+            // find wich state is selected and delete it.
+            State[] states = Q.toArray();
+            int idx = dfaframe.getSelectedRowInTTM();
+            if (idx >= 0) {
+                JState state = (JState)states[idx];
+                int n = JOptionPane.showConfirmDialog(dfaframe,
+                    "Are you sure that you want to delete the state "
+                    + state + "?",
+                    "Confirm deletion",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+                if (n != 0) {
+                    return;
+                }
+                dfaframe.getJdc().getJeList().remove(state);
+                Q.remove(state);
+                Hashtable<State,Hashtable<Symbol,State>> deltaHash = delta.getD();
+                deltaHash.remove(state);
+
+                for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
+                    // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
+                    JState q = (JState)enu.nextElement();
+                    Hashtable<Symbol,State> toHash= deltaHash.get(q);
+                    for(Enumeration f = toHash.keys();  f.hasMoreElements() ;) {
+                        Symbol s = (Symbol)f.nextElement();
+                        if (toHash.get(s).equals(state)) {
+                            toHash.remove(s);
+                        }
+                    }
+                }
+
+                dfaframe.showTabular();
+                dfaframe.getJdc().repaint();
+            }
+        }
     }
 
 }// JDFA

@@ -147,7 +147,7 @@ public class JDeltaPainter{
         l2d.setLine(tmp, tip);
         g2d.draw(l2d);
 
-        double nx = (orig.getX()+ dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
+        double nx = (orig.getX() + dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
         g2d.setColor(ARROW_LABEL_COLOR);
         g2d.drawString(label,(float)nx,(float)ny);
         g2d.setColor(ARROW_COLOR);

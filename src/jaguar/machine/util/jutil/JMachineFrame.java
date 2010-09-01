@@ -64,6 +64,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     protected File file;
     protected JLabel currentStateLabel;
     protected JTextPane textPane;
+    protected TabularMachine ttm;
     protected MachineGrammarStyledDocument sssd;
     protected JFileChooser fc;
     protected JMenuItem newMachine, loadTest, consTest, tabular, save, printM,descriptionMI;
@@ -531,7 +532,13 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     }
 
     public void showTabular(){
-        TabularMachine ttm = new TabularMachine(jmachine.getTableVector(), jmachine);
+        if (ttm != null) {
+            Rectangle r = ttm.getBounds();
+            ttm.dispose();
+            ttm = new TabularMachine(jmachine.getColumnNames(), jmachine.getData(), jmachine, r);
+        } else {
+            ttm = new TabularMachine(jmachine.getColumnNames(), jmachine.getData(), jmachine);
+        }
     }
 
     public void saveMachine() {
@@ -564,16 +571,21 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         }
     }
 
+    public int getSelectedRowInTTM() {
+        if (ttm != null) {
+            return ttm.getMyJTable().getSelectedRow();
+        }
+        return -1;
+    }
+
+
     abstract protected JMachine createNew();
 
     protected class TabularMachine extends JFrame {
         private MyJTable table;
 
-        public TabularMachine(Vector v, JMachine listener) {
+        public TabularMachine(String[] columnNames, Object[][] data, JMachine listener, Rectangle r) {
             super("Tabular Machine");
-            if(v==null) return;
-            Vector columnNames = (Vector)v.get(0);
-            Vector data = (Vector)v.get(1);
             table = new MyJTable(data,columnNames);
 
             table.getModel().addTableModelListener(listener);
@@ -584,6 +596,29 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             table.setPreferredScrollableViewportSize(new Dimension(650, 95));
             // table.getTableHeader().setReorderingAllowed(false);
             // table.setFont(new Font("SansSerif",Font.BOLD,10));
+
+            JPanel buttons = new JPanel();
+
+            JButton b1 = new JButton("Add State");
+            b1.setVerticalTextPosition(AbstractButton.CENTER);
+            b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+            //b1.setMnemonic(KeyEvent.VK_A);
+            b1.setActionCommand("add_state");
+            b1.addActionListener(listener);
+
+            buttons.add(b1,BorderLayout.LINE_START);
+
+            b1 = new JButton("Remove State");
+            b1.setVerticalTextPosition(AbstractButton.CENTER);
+            b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
+            //b1.setMnemonic(KeyEvent.VK_A);
+            b1.setActionCommand("remove_state");
+            b1.addActionListener(listener);
+
+            buttons.add(b1,BorderLayout.LINE_START);
+
+            getContentPane().add(buttons, BorderLayout.PAGE_END);
+
             JScrollPane scrollPane = new JScrollPane(table);
             getContentPane().add(scrollPane, BorderLayout.CENTER);
             addWindowListener(new WindowAdapter() {
@@ -591,31 +626,16 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
                     dispose();
                 }
             });
+            if (r != null) {
+                setBounds(r);
+            }
             pack();
+            setDefaultCloseOperation ( JFrame.DISPOSE_ON_CLOSE );
             setVisible(true);
         }
 
         public TabularMachine(String[] columnNames, Object[][] data, JMachine listener) {
-            super("Tabular Machine");
-            table = new MyJTable(data,columnNames);
-
-            table.getModel().addTableModelListener(listener);
-            table.getColumnModel().getColumn(0).setPreferredWidth(100);
-            table.setDefaultRenderer(Object.class, new MyJTableCellRenderer());
-            table.getTableHeader().setDefaultRenderer(new MyJTableCellRenderer());
-
-            table.setPreferredScrollableViewportSize(new Dimension(650, 95));
-            // table.getTableHeader().setReorderingAllowed(false);
-            // table.setFont(new Font("SansSerif",Font.BOLD,10));
-            JScrollPane scrollPane = new JScrollPane(table);
-            getContentPane().add(scrollPane, BorderLayout.CENTER);
-            addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e) {
-                    dispose();
-                }
-            });
-            pack();
-            setVisible(true);
+            this(columnNames, data, listener, null);
         }
 
         public MyJTable getMyJTable() {

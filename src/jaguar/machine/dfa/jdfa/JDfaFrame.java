@@ -308,7 +308,7 @@ public class JDfaFrame extends JMachineFrame{
     }
 
     public void showTabular(){
-        TabularMachine ttm = new TabularMachine(jmachine.getColumnNames(), jmachine.getData(), jmachine);
+        super.showTabular();
         MyJTable table = ttm.getMyJTable();
         table.getColumn("Initial").setCellRenderer(
                 new RadioButtonRenderer());
