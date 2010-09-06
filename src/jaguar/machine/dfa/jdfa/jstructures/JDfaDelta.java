@@ -107,14 +107,14 @@ public class JDfaDelta extends DfaDelta implements JDeltaGraphic {
      * @return value of current_p.
      */
     public State getCurrent_p() {
-  return current_p;
+        return current_p;
     }
     /**
      * Set the value of current_p.
      * @param v  Value to assign to current_p.
      */
     public void setCurrent_p(State  v) {
-  this.current_p = v;
+        this.current_p = v;
     }
 
     /**
@@ -127,7 +127,7 @@ public class JDfaDelta extends DfaDelta implements JDeltaGraphic {
      * @return value of current_sym.
      */
     public Symbol getCurrent_sym() {
-  return current_sym;
+        return current_sym;
     }
 
     /**
@@ -135,7 +135,7 @@ public class JDfaDelta extends DfaDelta implements JDeltaGraphic {
      * @param v  Value to assign to current_sym.
      */
     public void setCurrent_sym(Symbol  v) {
-  this.current_sym = v;
+        this.current_sym = v;
     }
 
     /**
@@ -147,7 +147,7 @@ public class JDfaDelta extends DfaDelta implements JDeltaGraphic {
      * @return value of current_q.
      */
     public State getCurrent_q() {
-  return current_q;
+        return current_q;
     }
 
     /**
@@ -155,15 +155,15 @@ public class JDfaDelta extends DfaDelta implements JDeltaGraphic {
      * @param v  Value to assign to current_q.
      */
     public void setCurrent_q(State  v) {
-  this.current_q = v;
+        this.current_q = v;
     }
 
     public void paint(Graphics g, State _p, Symbol sym, State _q){
-//  Debug.println("El jdeltaPainter: " + jdeltaPainter);
-  current_p = _p;
-  current_sym = sym;
-  current_q = _q;
-  paint(g);
+        //  Debug.println("El jdeltaPainter: " + jdeltaPainter);
+        current_p = _p;
+        current_sym = sym;
+        current_q = _q;
+        paint(g);
     }
 
 
@@ -172,15 +172,15 @@ public class JDfaDelta extends DfaDelta implements JDeltaGraphic {
     }
 
     public String getLabelString(JState src, JState dest){
-  Vector v = getTransitions(src);
-  Vector vp;
-  String res = "";
-  for(int i = 0; i < v.size(); i++){
-      vp = (Vector) v.elementAt(i);
-      if(vp.elementAt(1).equals(dest))
-    res += ((Symbol)vp.elementAt(0))+";";
-  }
-  return res.substring(0,res.length()-1);
+        Vector v = getTransitions(src);
+        Vector vp;
+        String res = "";
+        for(int i = 0; i < v.size(); i++){
+            vp = (Vector) v.elementAt(i);
+            if(vp.elementAt(1).equals(dest))
+          res += ((Symbol)vp.elementAt(0))+",";
+        }
+        return res.substring(0,res.length()-1);
     }
 
 
