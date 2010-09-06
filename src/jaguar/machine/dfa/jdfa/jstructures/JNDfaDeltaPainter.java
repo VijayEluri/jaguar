@@ -90,16 +90,20 @@ public class JNDfaDeltaPainter extends JDeltaPainter{
 		    if(!currentDestinos.contains(p)){
 			Graphics2D g2d = (Graphics2D) g;	    
 			Stroke origS = g2d.getStroke();
-			
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					    RenderingHints.VALUE_ANTIALIAS_ON);
 			if(q.equals(jdelta.getCurrent_p()) && p.equals(jdelta.getCurrent_q()) && sym.equals(jdelta.getCurrent_sym()))
 			    g.setColor(CURRENT_TRANSITION_COLOR);		
 			g2d.setStroke(new BasicStroke(2.0f));
 			if(q.equals(p)){
 			    if(q.equals(jdelta.getCurrent_p()) && p.equals(jdelta.getCurrent_q()))
 				g.setColor(CURRENT_TRANSITION_COLOR);		
-			    java.awt.geom.QuadCurve2D.Double qc2d = new java.awt.geom.QuadCurve2D.Double();
-			    qc2d.setCurve(((JState)q).getQuadCurveP1(), ((JState)q).getQuadCurveCP(), ((JState)q).getQuadCurveP2());
-			    g2d.draw(qc2d);
+                Point c = ((JState)p).getCentro();
+                java.awt.geom.CubicCurve2D.Float curve = new java.awt.geom.CubicCurve2D.Float(
+                                    (float)c.getX()-5, (float)c.getY(), (float)(c.getX()-JState.DIAMETRO/1.5), (float)(c.getY() - JState.DIAMETRO*1.4),
+                                    (float)(c.getX()+JState.DIAMETRO/1.5), (float)(c.getY() - JState.DIAMETRO*1.4), (float)c.getX()+5, (float)c.getY());
+
+                g2d.draw(curve);
 			    paintLabelSelfState(g2d, ((JState)q).getQuadCurveCP(), jdelta.getLabelString((JState)q,(JState)p));
 			}else{		
 			    java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
@@ -134,8 +138,6 @@ public class JNDfaDeltaPainter extends JDeltaPainter{
 			    g2d.draw(l2d);
 			    paintArrowHead(g2d,x,y,ARROW_COLOR,jdelta.getLabelString((JState)q,(JState)p));
 			}
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-					    RenderingHints.VALUE_ANTIALIAS_ON);
 
 			g2d.setStroke(origS);
 		    }

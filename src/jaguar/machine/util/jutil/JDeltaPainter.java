@@ -194,8 +194,12 @@ public class JDeltaPainter{
         p1.translate(-5,0);
         l2d.setLine(p1,p2);
         g2d.draw(l2d);
-
-
+        // JState.DIAMETRO/2;
+        // java.awt.geom.CubicCurve2D.Float curve = new java.awt.geom.CubicCurve2D.Float(
+        //                     (float)p.getX(), (float)p.getY(), (float)(p.getX()-5), (float)(p.getY() + JState.DIAMETRO/2),
+        //                     (float)p.getX(), (float)p.getY(), (float)(p.getX()+5), (float)(p.getY() + JState.DIAMETRO/2));
+        //
+        //         g2d.draw(curve);
         g2d.setColor(ARROW_LABEL_COLOR);
         g2d.drawString(label,(float)p.getX(), (float)p.getY()+30);
         g2d.setColor(ARROW_COLOR);
@@ -250,9 +254,14 @@ public class JDeltaPainter{
                     if(q.equals(p)){
                         if(q.equals(jdelta.getCurrent_p()) && p.equals(jdelta.getCurrent_q()))
                             g.setColor(CURRENT_TRANSITION_COLOR);
-                        java.awt.geom.QuadCurve2D.Double qc2d = new java.awt.geom.QuadCurve2D.Double();
-                        qc2d.setCurve(((JState)q).getQuadCurveP1(), ((JState)q).getQuadCurveCP(), ((JState)q).getQuadCurveP2());
-                        g2d.draw(qc2d);
+
+                        Point c = ((JState)p).getCentro();
+                        java.awt.geom.CubicCurve2D.Float curve = new java.awt.geom.CubicCurve2D.Float(
+                                            (float)c.getX()-5, (float)c.getY(), (float)(c.getX()-JState.DIAMETRO/1.5), (float)(c.getY() - JState.DIAMETRO*1.4),
+                                            (float)(c.getX()+JState.DIAMETRO/1.5), (float)(c.getY() - JState.DIAMETRO*1.4), (float)c.getX()+5, (float)c.getY());
+
+                        g2d.draw(curve);
+
                         paintLabelSelfState(g2d, ((JState)q).getQuadCurveCP(), jdelta.getLabelString((JState)q,(JState)p));
                     } else {
                         java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
