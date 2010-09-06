@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:element name="dfa">
+<xs:element name="ndfa">
   <xs:complexType>
     <xs:sequence>
       <xs:element name="description" type="xs:string" minOccurs="0"/>
       <xs:element name="stateSet" type="states"/>
       <xs:element name="alph" type="alphabet"/>
       <xs:element name="delta" type="transitions"/>
-      <xs:element name="state" type="xs:string"/>
+      <xs:element name="stateSet" type="states"/>
       <xs:element name="stateSet" type="states"/>
     </xs:sequence>
   </xs:complexType>
@@ -32,7 +32,7 @@
         <xs:sequence>
           <xs:element name="state" type="xs:string"/>
           <xs:element name="sym" type="xs:string"/>
-          <xs:element name="state" type="xs:string"/>
+          <xs:element name="stateSet" type="states"/>
         </xs:sequence>
       </xs:complexType>
     </xs:element>

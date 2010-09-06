@@ -36,8 +36,16 @@ import jaguar.machine.dfa.structures.exceptions.*;
 import jaguar.util.Debug;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.IOException;
 import org.w3c.dom.*;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
 
@@ -91,7 +99,7 @@ public class NDFA extends Machine {
      * @see #Q0
      */
     public StateSet getQ0(){
-  return Q0;
+        return Q0;
     }
 
 
@@ -101,7 +109,7 @@ public class NDFA extends Machine {
      * @see #Q0
      */
     public void setQ0(StateSet new_Q0){
-  Q0 = new_Q0;
+        Q0 = new_Q0;
     }
 
     /**
@@ -123,17 +131,16 @@ public class NDFA extends Machine {
 
 
 
-    public NDFA(Alphabet _Sigma, StateSet _Q,
-    StateSet _F, NDfaDelta _delta,  StateSet _Q0){
-  Sigma = _Sigma;
-  Q = _Q;
-  F = _F;
-  delta = _delta;
-  Q0 = _Q0;
+    public NDFA(Alphabet _Sigma, StateSet _Q, StateSet _F, NDfaDelta _delta,  StateSet _Q0){
+        Sigma = _Sigma;
+        Q = _Q;
+        F = _F;
+        delta = _delta;
+        Q0 = _Q0;
     }
 
     protected NDFA(){
-  super();
+        super();
     }
 
     /**
@@ -141,7 +148,7 @@ public class NDFA extends Machine {
      * @see <a href="http://ijaguar.sourceforge.net/DTD/ndfa.dtd">ndfa.dtd</a>
      */
     public NDFA(String filename)throws Exception{
-  this(new File(filename));
+        this(new File(filename));
     }
 
     /**
@@ -149,8 +156,24 @@ public class NDFA extends Machine {
      * @see <a href="http://ijaguar.sourceforge.net/DTD/ndfa.dtd">ndfa.dtd</a>
      */
     public NDFA(File file)throws Exception{
-  this();
-  setupNDFA(factory.newDocumentBuilder().parse(file),this);
+        this();
+
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        InputStream schemaStream = this.getClass().getClassLoader().getResourceAsStream("schema/ndfa.xsd");
+        StreamSource schemaSource = new StreamSource(schemaStream);
+        //File schemaFile = new File(schemaURL.toURI());
+        Schema schema = schemaFactory.newSchema(schemaSource);
+        Validator validator = schema.newValidator();
+        DocumentBuilder parser = factory.newDocumentBuilder();
+        Document document = parser.parse(file);
+
+        //factory.setSchema(schema);
+        try {
+            validator.validate(new DOMSource(document));
+            setupNDFA(document,this);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -158,8 +181,8 @@ public class NDFA extends Machine {
      * @see <a href="http://ijaguar.sourceforge.net/DTD/ndfa.dtd">ndfa.dtd</a>
      */
     public NDFA(org.w3c.dom.Document document)throws Exception{
-  this();
-  setupNDFA(document,this);
+        this();
+        setupNDFA(document,this);
     }
 
     /**
@@ -169,107 +192,107 @@ public class NDFA extends Machine {
      * @see <a href="http://ijaguar.sourceforge.net/DTD/ndfa.dtd">ndfa.dtd</a>
      */
     public void setupNDFA(org.w3c.dom.Document document,NDFA r){
-  NodeList elementsList = document.getElementsByTagName(ELEMENT_NAME).item(0).getChildNodes();
-  int howManyElements = 6;
-  int j = (document.getElementsByTagName(DESCRIPTION_ELEMENT_NAME).getLength()==0)?1:0;
-  Node ndfaNode;
-  for(int i =  0; j < howManyElements; i++){
-      ndfaNode = elementsList.item(i);
-      if(ndfaNode.getNodeType() == Node.ELEMENT_NODE){
-    switch(j){
-    case 0: r.setMachineDescription(ndfaNode.getChildNodes().item(0).getNodeValue()); break;
-    case 1: r.setQ(new StateSet(ndfaNode)); break;// Q
-    case 2: r.setSigma(new Alphabet(ndfaNode)); break;//Sigma
-    case 3: r.setDelta(new NDfaDelta(ndfaNode)); break;//delta
-    case 4: r.setQ0(new StateSet(ndfaNode)); break;//q0
-    case 5: {
-        r.setF(new StateSet(ndfaNode));
-        r.setF(r.getQ().makeSubSetReferences(r.getF()));
-        r.getF().markAsFinal();
-    }; break;//F
-    }
-    j++;
-      }
-  }
+        NodeList elementsList = document.getElementsByTagName(ELEMENT_NAME).item(0).getChildNodes();
+        int howManyElements = 6;
+        int j = (document.getElementsByTagName(DESCRIPTION_ELEMENT_NAME).getLength()==0)?1:0;
+        Node ndfaNode;
+        for(int i =  0; j < howManyElements; i++){
+            ndfaNode = elementsList.item(i);
+            if(ndfaNode.getNodeType() == Node.ELEMENT_NODE){
+          switch(j){
+          case 0: r.setMachineDescription(ndfaNode.getChildNodes().item(0).getNodeValue()); break;
+          case 1: r.setQ(new StateSet(ndfaNode)); break;// Q
+          case 2: r.setSigma(new Alphabet(ndfaNode)); break;//Sigma
+          case 3: r.setDelta(new NDfaDelta(ndfaNode)); break;//delta
+          case 4: r.setQ0(new StateSet(ndfaNode)); break;//q0
+          case 5: {
+              r.setF(new StateSet(ndfaNode));
+              r.setF(r.getQ().makeSubSetReferences(r.getF()));
+              r.getF().markAsFinal();
+          }; break;//F
+          }
+          j++;
+            }
+        }
     }
 
 
 
     public boolean runMachine(Str str){
-   State st;
-  setStatesToApply(new LinkedList());
-  return doTransitions(Q0,str);
+        State st;
+        setStatesToApply(new LinkedList());
+        return doTransitions(Q0,str);
     }
 
     public boolean doTransitions(StateSet st, Str cad){
-  boolean res = false;
-  State p;
-  Debug.println("Q0 = " + st);
-  for(Iterator it = st.iterator(); it.hasNext();){
-      p = (State)it.next();
-      displayDeltaPSymb(p,cad);
-      if(res = (res || doTransitions(p,cad)))
-    return true;
-  }
-  return false;
+        boolean res = false;
+        State p;
+        Debug.println("Q0 = " + st);
+        for(Iterator it = st.iterator(); it.hasNext();){
+            p = (State)it.next();
+            displayDeltaPSymb(p,cad);
+            if(res = (res || doTransitions(p,cad)))
+          return true;
+        }
+        return false;
     }
 
     protected boolean doTransitions(State currentSt, Str cad){
-  if(cad.length() == 0){
-      return F.contains(currentSt);
-  }
-  StateSet nextSts;
-   if((nextSts = ((NDfaDelta)delta).apply(currentSt,cad.getFirst())) != null){
-      State ndfast;
-      statesToApply.addAll(nextSts);
-      displayTransResult(nextSts);
-      boolean result = false;
-      for(Iterator it = nextSts.iterator(); it.hasNext();){
-    ndfast = (State)it.next();
+        if(cad.length() == 0){
+            return F.contains(currentSt);
+        }
+        StateSet nextSts;
+         if((nextSts = ((NDfaDelta)delta).apply(currentSt,cad.getFirst())) != null){
+            State ndfast;
+            statesToApply.addAll(nextSts);
+            displayTransResult(nextSts);
+            boolean result = false;
+            for(Iterator it = nextSts.iterator(); it.hasNext();){
+          ndfast = (State)it.next();
 
-     if(cad.substring(1).length()==0)
-         displayTransResult(ndfast);
-     else displayDeltaPSymb(ndfast,cad.substring(1));
+           if(cad.substring(1).length()==0)
+               displayTransResult(ndfast);
+           else displayDeltaPSymb(ndfast,cad.substring(1));
 
-     if(cad.substring(1).length()== 0 && F.contains(ndfast))
-        return true;
+           if(cad.substring(1).length()== 0 && F.contains(ndfast))
+              return true;
 
-    if(result = result||doTransitions(ndfast,cad.substring(1)))
-        return true;
-      }
-      return result;
-   }else Debug.print(nextSts +"\n");
-  return false;
+          if(result = result||doTransitions(ndfast,cad.substring(1)))
+              return true;
+            }
+            return result;
+         }else Debug.print(nextSts +"\n");
+        return false;
     }
 
 
 
     protected State doTransition(State currentSt, Str cad){
-  if(cad.length() == 0)
-      return currentSt;
-  StateSet nextSts;
-   if((nextSts = ((NDfaDelta)delta).apply(currentSt,cad.getFirst())) != null){
-       Iterator it = nextSts.iterator();
-        State ndfast = (State)it.next();
-       return  ndfast;
-   }
-  return null;
+        if(cad.length() == 0)
+            return currentSt;
+        StateSet nextSts;
+         if((nextSts = ((NDfaDelta)delta).apply(currentSt,cad.getFirst())) != null){
+             Iterator it = nextSts.iterator();
+              State ndfast = (State)it.next();
+             return  ndfast;
+         }
+        return null;
     }
 
     /**
      * Desplieqga d(p,s) =
      */
     protected void displayDeltaPSymb(State p, Str s){
-  System.out.print("d( "+p+" , "+ s +" ) = ");
+        System.out.print("d( "+p+" , "+ s +" ) = ");
     }
     /**
      * imprime q, bajo el contexto d(p,s) = q
      **/
     protected void displayTransResult(State q){
-  System.out.println(q);
+        System.out.println(q);
     }
     protected void displayTransResult(StateSet sts){
-  System.out.println(sts);
+        System.out.println(sts);
     }
 
 
@@ -287,7 +310,7 @@ public class NDFA extends Machine {
      * Regresa la representación como cadena del NDFA
      **/
     public String toString(){
-  return "NDFA " + super.toString() + "N = \n\tQ=" + getQ() + "\n\tSigma = "+ getSigma() + "\n\tdelta = "+ getDelta() + "\n\tQ0 = "+getQ0()+"\n\tF= " + getF();
+        return "NDFA " + super.toString() + "N = \n\tQ=" + getQ() + "\n\tSigma = "+ getSigma() + "\n\tdelta = "+ getDelta() + "\n\tQ0 = "+getQ0()+"\n\tF= " + getF();
     }
 
     /**
@@ -297,35 +320,35 @@ public class NDFA extends Machine {
      * @param fw El FileWriter donde se guardará el NDFA.
      */
     public void toFile(FileWriter fw){
-  try{
+        try{
 
-      fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
-      fw.write("<!DOCTYPE ndfa SYSTEM \"ndfa.dtd\">"+"\n");
-      fw.write(BEG_TAG);
-      if (machineDescription.trim().length() > 0) {
-            fw.write("\n\n <!-- Descripción --> \n");
-            fw.write(DESCRIPTION_BEG_TAG);
-            fw.write(getMachineDescription());
-            fw.write(DESCRIPTION_END_TAG+"\n");
+            fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
+            fw.write("<!DOCTYPE ndfa SYSTEM \"ndfa.dtd\">"+"\n");
+            fw.write(BEG_TAG);
+            if (machineDescription.trim().length() > 0) {
+                  fw.write("\n\n <!-- Descripción --> \n");
+                  fw.write(DESCRIPTION_BEG_TAG);
+                  fw.write(getMachineDescription());
+                  fw.write(DESCRIPTION_END_TAG+"\n");
+              }
+
+            fw.write("\n\n <!-- Conjunto de States Q --> \n");
+            getQ().toFile(fw);
+            fw.write("\n\n <!-- Alphabet de entrada Sigma --> \n");
+            getSigma().toFile(fw);
+            fw.write("\n\n <!-- Función de Transición delta --> \n");
+            getDelta().toFile(fw);
+            fw.write("\n\n <!-- Conjunto de States iniciales Q0 --> \n");
+            getQ0().toFile(fw);
+            fw.write("\n\n <!-- Conjunto de estados finales F --> \n");
+            getF().toFile(fw);
+            fw.write("\n"+ END_TAG);
+            fw.flush();
+        }catch( Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
         }
-
-      fw.write("\n\n <!-- Conjunto de States Q --> \n");
-      getQ().toFile(fw);
-      fw.write("\n\n <!-- Alphabet de entrada Sigma --> \n");
-      getSigma().toFile(fw);
-      fw.write("\n\n <!-- Función de Transición delta --> \n");
-      getDelta().toFile(fw);
-      fw.write("\n\n <!-- Conjunto de States iniciales Q0 --> \n");
-      getQ0().toFile(fw);
-      fw.write("\n\n <!-- Conjunto de estados finales F --> \n");
-      getF().toFile(fw);
-      fw.write("\n"+ END_TAG);
-      fw.flush();
-  }catch( Exception ouch){
-      System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
-             + "Trying to toFile: " );
-      ouch.printStackTrace();
-  }
     }
 
     /**
@@ -333,23 +356,23 @@ public class NDFA extends Machine {
      ** Es útil cuando leemos por separado los estados y tenemos que hacer las referencias
      **/
     public void makeStateReferences(){
-  F = Q.makeSubSetReferences(getF());
-  Q0 = Q.makeSubSetReferences(getQ0());
+        F = Q.makeSubSetReferences(getF());
+        Q0 = Q.makeSubSetReferences(getQ0());
     }
 
     public static void main(String []argv){
-  Symbol cero = new Symbol("0");
-  Symbol uno = new Symbol("1");
-  Symbol as[] = {cero, uno, uno, cero,  uno, uno};
-  try{
-      NDFA Paridad = new NDFA(argv[0]);
-      System.err.println(Paridad);
+        Symbol cero = new Symbol("0");
+        Symbol uno = new Symbol("1");
+        Symbol as[] = {cero, uno, uno, cero,  uno, uno};
+        try{
+            NDFA Paridad = new NDFA(argv[0]);
+            System.err.println(Paridad);
             Str str = new Str(argv[1],false);
-      System.err.println("\nInput String: " + str +"\n");
-      Paridad.executeNdfa(str);
-  }catch(Exception e){
-      e.printStackTrace();
-  }
+            System.err.println("\nInput String: " + str +"\n");
+            Paridad.executeNdfa(str);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 

@@ -524,7 +524,7 @@ public class JDFA extends DFA implements JMachine{
         TableModel model = (TableModel)e.getSource();
         State[] aQ = getQ().toArray();
 
-        if (column <= getSigma().size()) {
+        if (column <= getSigma().size()) { // Changing delta
             String toStateLabel = (String) model.getValueAt(row, column); // Value edited
             String symbol = model.getColumnName(column);
             JState fromState = (JState)aQ[row];
@@ -541,7 +541,7 @@ public class JDFA extends DFA implements JMachine{
                     }
                 }
             }
-        } else {
+        } else { // changing final or initial
             boolean flag;
             int idx = column - (getSigma().size()+1);
             switch (idx) {

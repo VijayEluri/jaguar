@@ -53,6 +53,8 @@ import jaguar.machine.dfa.structures.*;
 import jaguar.machine.dfa.jdfa.jstructures.*;
 import jaguar.machine.dfa.structures.exceptions.*;
 import java.util.Vector;
+import java.util.Hashtable;
+import java.util.Enumeration;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -61,6 +63,7 @@ import javax.swing.event.TableModelEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.Math;
+import java.awt.event.ActionEvent;
 
 public class JNDFA extends NDFA implements JMachine{
     /**
@@ -386,6 +389,48 @@ public class JNDFA extends NDFA implements JMachine{
      */
     public static final Vector DEFAULT_TABLEVECTOR=null;
 
+    public Class getColumnClass(int c) {
+        if (c > getSigma().size()) {
+                return Boolean.class;
+        }
+        return String.class;
+    }
+
+    public String[] getColumnNames() {
+        Symbol[] aSigma = getSigma().toArray();
+        String[] colNames = new String[getSigma().size() + 3];
+        colNames[0] = "Q";
+        for (int i = 0; i < getSigma().size(); i++ ) {
+            colNames[i+1] = aSigma[i].getSym();
+        }
+        colNames[aSigma.length+1] = "Initial";
+        colNames[aSigma.length+2] = "Final";
+        return colNames;
+    }
+
+    public Object[][] getData() {
+        State[] aQ = getQ().toArray();
+        Symbol[] aSigma = getSigma().toArray();
+        Object[][] data = new Object[aQ.length][aSigma.length+3];
+        int k = 0;
+        int l = 1;
+        StateSet entry;
+        for (State i : aQ) {
+            for (Symbol j : aSigma) {
+                entry = ((NDfaDelta) getDelta()).apply(i,(Symbol) j);
+                data[k][l] = (entry != null) ? entry.toCommaSeparatedList() : null;
+                ++l;
+            }
+            data[k][0] = i.toString();
+            data[k][aSigma.length+1] = new Boolean(esInicial(i));
+            data[k][aSigma.length+2] = new Boolean(i.getIsInF());
+
+            l = 1;
+            ++k;
+        }
+        return data;
+    }
+
 
     /**
      * funcion de acceso para obtener el valor de tableVector
@@ -431,22 +476,52 @@ public class JNDFA extends NDFA implements JMachine{
         int column = e.getColumn();
 
         TableModel model = (TableModel)e.getSource();
-        String toStatesLabels = (String) model.getValueAt(row, column); // Value edited
         State[] aQ = getQ().toArray();
-        String symbol = model.getColumnName(column);
-        JState fromState = (JState)aQ[row];
 
-        ((NDfaDelta)getDelta()).removeTransition(fromState, new Symbol(symbol));
-
-        StateSet toStates = new StateSet();
-        for (String toStateLabel: toStatesLabels.split("\\s*,\\s*")) {
-            for (State state : aQ) {
-                if (((JState) state).getLabel().equals(toStateLabel)) { // find the states in Q corresponding to the label
-                    toStates.add((JState) state);
+        if (column <= getSigma().size()) { // Changing delta
+            String toStatesLabels = (String) model.getValueAt(row, column); // Value edited
+            String symbol = model.getColumnName(column);
+            JState fromState = (JState)aQ[row];
+            // if (toStatesLabels.isEmpty()) {
+            ((NDfaDelta)getDelta()).removeTransition(fromState, new Symbol(symbol));
+            // } else {
+            if (!toStatesLabels.isEmpty()) {
+                StateSet toStates = new StateSet();
+                for (String toStateLabel: toStatesLabels.split("\\s*,\\s*")) {
+                    for (State state : aQ) {
+                        if (((JState) state).getLabel().equals(toStateLabel)) { // find the states in Q corresponding to the label
+                            toStates.add((JState) state);
+                        }
+                    }
                 }
+                ((NDfaDelta)getDelta()).addTransition(fromState, new Symbol(symbol), toStates);
+            }
+        } else {
+            boolean flag;
+            int idx = column - (getSigma().size()+1);
+            switch (idx) {
+                case 0:
+                    flag = ((Boolean) model.getValueAt(row, column)).booleanValue();
+                    // ((JState) getQ0()).setEsEstadoInicial(false);
+                    // setQ0(aQ[row]);
+                    if (flag) {
+                        Q0.add(aQ[row]);
+                    } else {
+                        Q0.remove(aQ[row]);
+                    }
+                    ((JState) aQ[row]).setEsEstadoInicial(flag);
+                    break;
+                case 1:
+                    flag = ((Boolean) model.getValueAt(row, column)).booleanValue();
+                    aQ[row].setIsInF(flag);
+                    if (flag) { // Marked as Final
+                        getF().add(aQ[row]);
+                    } else {
+                        getF().remove(aQ[row]);
+                    }
+                    break;
             }
         }
-        ((NDfaDelta)getDelta()).addTransition(fromState, new Symbol(symbol), toStates);
 
         dfaframe.getJdc().repaint();
     }
@@ -458,6 +533,57 @@ public class JNDFA extends NDFA implements JMachine{
      **/
     public boolean esInicial(State p){
         return getQ0().contains(p);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if ("add_state".equals(e.getActionCommand())) {
+            JState newState = new JState("q"+Q.size());
+            Q.add(newState);
+            newState.setLocation(50,50);
+            dfaframe.getJdc().getJeList().add(newState);
+            //initStatesPositions();
+            dfaframe.showTabular();
+            dfaframe.getJdc().repaint();
+            return;
+        }
+
+        if ("remove_state".equals(e.getActionCommand())) {
+            // Ask for confirmation first
+            // find wich state is selected and delete it.
+            State[] states = Q.toArray();
+            int idx = dfaframe.getSelectedRowInTTM();
+            if (idx >= 0) {
+                JState state = (JState)states[idx];
+                int n = JOptionPane.showConfirmDialog(dfaframe,
+                    "Are you sure that you want to delete the state "
+                    + state + "?",
+                    "Confirm deletion",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+                if (n != 0) {
+                    return;
+                }
+                dfaframe.getJdc().getJeList().remove(state);
+                Q.remove(state);
+                Hashtable<State,Hashtable<Symbol,State>> deltaHash = delta.getD();
+                deltaHash.remove(state);
+
+                for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
+                    // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
+                    JState q = (JState)enu.nextElement();
+                    Hashtable<Symbol,State> toHash= deltaHash.get(q);
+                    for(Enumeration f = toHash.keys();  f.hasMoreElements() ;) {
+                        Symbol s = (Symbol)f.nextElement();
+                        if (toHash.get(s).equals(state)) {
+                            toHash.remove(s);
+                        }
+                    }
+                }
+
+                dfaframe.showTabular();
+                dfaframe.getJdc().repaint();
+            }
+        }
     }
 
 
