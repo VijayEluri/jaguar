@@ -1,26 +1,26 @@
 /**
 ** <JAFS.java> -- The AFS's graphical extension
-** 
+**
 ** Copyright (C) 2002 by  Ivan Hernández Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
+**
 ** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
-** 
+**
 **/
 
 
@@ -50,9 +50,9 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import java.lang.Math;
 
- /** 
+ /**
  * La extensión gráfica de la máquina de stack
- * 
+ *
  * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
@@ -71,7 +71,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #g
      */
     public Graphics getG(){
-	return g;
+        return g;
     }
     /**
      * funcion de acceso para modificar g
@@ -79,25 +79,25 @@ public class JAFS extends AFS implements JMachine{
      * @see #g
      */
     public void setG(Graphics new_g){
-	g=new_g;
+        g = new_g;
     }
 
     private JAfsFrame afsframe;
-    
+
     /**
      * Get the value of dfaframe.
      * @return value of dfaframe.
      */
     public JMachineFrame getMachineFrame() {
-	return afsframe;
+        return afsframe;
     }
-    
+
     /**
      * Set the value of dfaframe.
      * @param v  Value to assign to dfaframe.
      */
     public void setJMachineFrame(JMachineFrame  v) {
-	this.afsframe = (JAfsFrame)v;
+        this.afsframe = (JAfsFrame)v;
     }
 
     /**
@@ -114,7 +114,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #strToTestOrig
      */
     public JStr getStrToTestOrig(){
-	return strToTestOrig;
+        return strToTestOrig;
     }
     /**
      * funcion de acceso para modificar strToTestOrig
@@ -122,7 +122,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #strToTestOrig
      */
     public void setStrToTestOrig(JStr new_strToTestOrig){
-	strToTestOrig=new_strToTestOrig;
+        strToTestOrig = new_strToTestOrig;
     }
 
     /**
@@ -139,7 +139,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #strToTest
      */
     public JStr getStrToTest(){
-	return strToTest;
+        return strToTest;
     }
     /**
      * funcion de acceso para modificar strToTest
@@ -147,12 +147,12 @@ public class JAFS extends AFS implements JMachine{
      * @see #strToTest
      */
     public void setStrToTest(JStr new_strToTest){
-	strToTest=new_strToTest;
+        strToTest = new_strToTest;
     }
 
 
     /**
-     * La subcadena de la cadena de entrada que sobre la cual ya fue ejecutado el AFS 
+     * La subcadena de la cadena de entrada que sobre la cual ya fue ejecutado el AFS
      */
     protected JStr subStrTested;
     /**
@@ -165,7 +165,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #subStrTested
      */
     public JStr getSubStrTested(){
-	return subStrTested;
+        return subStrTested;
     }
     /**
      * funcion de acceso para modificar subStrTested
@@ -173,7 +173,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #subStrTested
      */
     public void setSubStrTested(JStr new_subStrTested){
-	subStrTested=new_subStrTested;
+        subStrTested = new_subStrTested;
     }
 
      /**
@@ -186,7 +186,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #previousNotNullCurrentState
      */
     public State getPreviousNotNullCurrentState(){
-	return previousNotNullCurrentState;
+        return previousNotNullCurrentState;
     }
     /**
      * funcion de acceso para modificar previousNotNullCurrentState
@@ -194,9 +194,9 @@ public class JAFS extends AFS implements JMachine{
      * @see #previousNotNullCurrentState
      */
     public void setPreviousNotNullCurrentState(State new_previousNotNullCurrentState){
-	previousNotNullCurrentState=new_previousNotNullCurrentState;
+        previousNotNullCurrentState = new_previousNotNullCurrentState;
     }
-    
+
     /**
      * El estado actual en el que se encuentra la máquina
      */
@@ -211,7 +211,7 @@ public class JAFS extends AFS implements JMachine{
      * @see #currentState
      */
     public State getCurrentState(){
-	return currentState;
+        return currentState;
     }
     /**
      * funcion de acceso para modificar currentState
@@ -219,26 +219,26 @@ public class JAFS extends AFS implements JMachine{
      * @see #currentState
      */
     public void setCurrentState(State new_currentState){
-	currentState=new_currentState;
+        currentState = new_currentState;
     }
 
-    
+
     public void resetMachine(){
-	((JStackDelta)delta).setCurrent_p(new JState("resetP"));	
-	((JStackDelta)delta).setCurrent_q(new JState("resetQ"));	
-	setCurrentState(getQ0());
-	setPreviousNotNullCurrentState(getQ0());	
-	setStrToTest(getStrToTestOrig());
-	setSubStrTested(new JStr());
-	setSobranteStr(getStrToTestOrig());
-	setStack(new Stack());
-	stack.push(getZ0());
-        ((JAfsFrame)afsframe).setJPanelStackContents(this);
-	((JAfsFrame)afsframe).getReglalabel().setText("");
-	((JStackDelta)delta).setCurrent_sym(new Symbol("reset"));	
-	((JAfsFrame)getMachineFrame()).getJdc().repaint();
+        ((JStackDelta)delta).setCurrent_p(new JState("resetP"));
+        ((JStackDelta)delta).setCurrent_q(new JState("resetQ"));
+        setCurrentState(getQ0());
+        setPreviousNotNullCurrentState(getQ0());
+        setStrToTest(getStrToTestOrig());
+        setSubStrTested(new JStr());
+        setSobranteStr(getStrToTestOrig());
+        setStack(new Stack());
+        stack.push(getZ0());
+              ((JAfsFrame)afsframe).setJPanelStackContents(this);
+        ((JAfsFrame)afsframe).getReglalabel().setText("");
+        ((JStackDelta)delta).setCurrent_sym(new Symbol("reset"));
+        ((JAfsFrame)getMachineFrame()).getJdc().repaint();
     }
-    
+
     /**
      * Aplica la función delta con los parametros dados
      * @param currentS el estado sobre el que estamos
@@ -247,17 +247,17 @@ public class JAFS extends AFS implements JMachine{
      * @return el valor de  delta(currentS,cad.getFirst())
      */
     protected State doTransition(State currentS, JStr cad, Symbol sym){
-	System.err.println("doTransition");
-	State result ;
-	result  = super.doTransition(currentS,(Str)cad);
-	((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_p(currentS);
-	((JStackDelta)delta).setCurrent_sym(cad.getFirst());
-	if(!stack.empty())
-	    ((JStackDelta)delta).setCurrent_zsym((Symbol)stack.peek());
-	((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_q(result);	
-	return result;	
+        System.err.println("doTransition");
+        State result ;
+        result  = super.doTransition(currentS,(Str)cad);
+        ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_p(currentS);
+        ((JStackDelta)delta).setCurrent_sym(cad.getFirst());
+        if(!stack.empty())
+            ((JStackDelta)delta).setCurrent_zsym((Symbol)stack.peek());
+        ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_q(result);
+        return result;
     }
-    
+
     /**
      * Regresa verdadero si podemo hacer un paso más o falso si no podemos
      * @return <code>true</code> - si podemos seguir aplicando la
@@ -266,85 +266,86 @@ public class JAFS extends AFS implements JMachine{
      * <code>null</code>. <br> <code>false</code> - en otro caso.
      */
     public boolean nextStep(){
- 	if(!strToTest.isEpsilon() && !stack.empty() && currentState!=null){
- 	    getSubStrTested().concat(new JStr(strToTest.getFirst()));	    
-	    setPreviousNotNullCurrentState(currentState);	    
-	    ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_p(currentState);
-	    ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_sym(strToTest.getFirst());
- 	    currentState = doTransition(currentState,strToTest);
-	    ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_q(currentState);
- 	    setStrToTest((JStr)strToTest.substring(1));
-// 	    if(!stack.empty())
-// 		Debug.println("===>>>> " + stack +"<<<=== En el tope tenemos ["+stack.peek()+"]");
-// 	    else
-// 		Debug.println("===>>>> [] <<<=== El stack ya esta vacio");
- 	    if(getStrToTest().isEpsilon() || stack.empty() || getAppliedRule() == null)
-		return false;
-	    return true;
-	}//else Debug.println("===>>>> strToTest:" + strToTest + "\n\tstack "+ stack + "\n\tcurrentState: " + currentState+" <<<===");
-	return false;
+        if (!strToTest.isEpsilon() && !stack.empty() && currentState!=null) {
+            getSubStrTested().concat(new JStr(strToTest.getFirst()));
+            setPreviousNotNullCurrentState(currentState);
+            ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_p(currentState);
+            ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_sym(strToTest.getFirst());
+            currentState = doTransition(currentState,strToTest);
+            ((jaguar.machine.stack.jstack.jstructures.JStackDelta)delta).setCurrent_q(currentState);
+            setStrToTest((JStr)strToTest.substring(1));
+            //       if(!stack.empty())
+            //     Debug.println("===>>>> " + stack +"<<<=== En el tope tenemos ["+stack.peek()+"]");
+            //       else
+            //     Debug.println("===>>>> [] <<<=== El stack ya esta vacio");
+            if(getStrToTest().isEpsilon() || stack.empty() || getAppliedRule() == null)
+                return false;
+            return true;
+        }//else Debug.println("===>>>> strToTest:" + strToTest + "\n\tstack "+ stack + "\n\tcurrentState: " + currentState+" <<<===");
+        return false;
     }
 
     public void displayResult(){
-	if(currentState == null)
-	    JOptionPane.showMessageDialog((JFrame)afsframe,"The SFA DOES NOT accept the string "+getStrToTestOrig(),"SFA Result", JOptionPane.INFORMATION_MESSAGE);
-	else if(getF().size() ==0){
-	    if(stack.empty() && getStrToTest().isEpsilon())
-		JOptionPane.showMessageDialog((JFrame)afsframe,"Criterion EMPTY STACK:  The SFA accepts the string "+getStrToTestOrig(), "SFA Result",JOptionPane.INFORMATION_MESSAGE);
-	    else JOptionPane.showMessageDialog((JFrame)afsframe,"Criterion EMPTY STACK:  The SFA DOES NOT accept the string "+getStrToTestOrig(), "SFA Result",JOptionPane.INFORMATION_MESSAGE);
-	}else
-	    JOptionPane.showMessageDialog((JFrame)afsframe,"Criterion FINAL STATE: The FSA "+(getCurrentState().getIsInF()?" accepts ":" DOES NOT accepts ") + "the string "+getStrToTestOrig(), "FSA Result",JOptionPane.INFORMATION_MESSAGE);
+        if(currentState == null)
+            JOptionPane.showMessageDialog((JFrame)afsframe,"The SFA DOES NOT accept the string "+getStrToTestOrig(),"SFA Result", JOptionPane.INFORMATION_MESSAGE);
+        else if (getF().size() ==0) {
+            if (stack.empty() && getStrToTest().isEpsilon())
+                JOptionPane.showMessageDialog((JFrame)afsframe,"Criterion EMPTY STACK:  The SFA accepts the string "+getStrToTestOrig(), "SFA Result",JOptionPane.INFORMATION_MESSAGE);
+            else
+                JOptionPane.showMessageDialog((JFrame)afsframe,"Criterion EMPTY STACK:  The SFA DOES NOT accept the string "+getStrToTestOrig(), "SFA Result",JOptionPane.INFORMATION_MESSAGE);
+        } else
+            JOptionPane.showMessageDialog((JFrame)afsframe,"Criterion FINAL STATE: The FSA "+(getCurrentState().getIsInF()?" accepts ":" DOES NOT accepts ") + "the string "+getStrToTestOrig(), "FSA Result",JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     /**
      * Pinta el estado como el estado actual, bajo el contexto de la aplicación más reciente de la función de transición
      * delta, bajo el contexto delta(p,s) = q
      **/
     protected void displayTransResult(State q){
-	((JState)q).paint(afsframe.getJdc().getGraphics(),JState.DEFAULT_CURRENT_STATE);
-    }  
+        ((JState)q).paint(afsframe.getJdc().getGraphics(),JState.DEFAULT_CURRENT_STATE);
+    }
 
     /**
-     * Esta función se usa para asignar posiciones a los centros de los  JStates.  Estas posiciones,     
+     * Esta función se usa para asignar posiciones a los centros de los  JStates.  Estas posiciones,
      * están alrededor de un circulo de radio <code>r</code>,  dividiendo y
      * encontramos la posición de cada estado por medio de coordenadas polares (<code>(x,y) =  (r*cos*theta, r*sin*theta)</code>).
      * Donde la  theta es cada uno de los intervalos de dividir 360 entre la cardinalidad de Q y r es el minimo entre el ancho y alto del
      * canvas entre dos.
      */
     public  void initStatesPosition(Dimension d){
-	int cardinalidadQ = getQ().size();
-	if(cardinalidadQ > 0){	    
-	    double radio;	    
-	    if(d.getWidth() != 300 && d.getHeight() != 300)
-		radio = Math.min((d.getWidth() - 250)/2,(d.getHeight() - 250)/2);
-	    else radio = Math.min((d.getWidth() - 75)/2,(d.getHeight() - 75 )/2);
+        int cardinalidadQ = getQ().size();
+        if(cardinalidadQ > 0){
+            double radio;
+            if(d.getWidth() != 300 && d.getHeight() != 300)
+                radio = Math.min((d.getWidth() - 250)/2,(d.getHeight() - 250)/2);
+            else radio = Math.min((d.getWidth() - 75)/2,(d.getHeight() - 75 )/2);
             radio +=10;
-	    JState current;	    
-	    double intervalo = 360 / cardinalidadQ;
-	    double currentIntervalo = 0;	
-	    for (Iterator i = getQ().iterator() ; i.hasNext() ;) {	    
-		current = (JState)i.next();
-		current.setLocation(radio * Math.cos(Math.toRadians(currentIntervalo))+radio,
-				    radio * Math.sin(Math.toRadians(currentIntervalo))+radio);	    
-		currentIntervalo += intervalo;	    
-	    }
-	}
+            JState current;
+            double intervalo = 360 / cardinalidadQ;
+            double currentIntervalo = 0;
+            for (Iterator i = getQ().iterator() ; i.hasNext() ;) {
+                current = (JState)i.next();
+                current.setLocation(radio * Math.cos(Math.toRadians(currentIntervalo))+radio,
+                    radio * Math.sin(Math.toRadians(currentIntervalo))+radio);
+                currentIntervalo += intervalo;
+            }
+        }
     }
 
 
     public JAFS(StateSet _Q,Alphabet _Sigma, Alphabet _Gamma, StackDelta _delta, State _q0, Symbol _Z0, StateSet _F, Graphics _g){
-	this( _Q, _Sigma, _Gamma, _delta, _q0, _Z0,  _F);	
-	setG(_g);	
+        this( _Q, _Sigma, _Gamma, _delta, _q0, _Z0,  _F);
+        setG(_g);
     }
 
     public JAFS(StateSet _Q,Alphabet _Sigma, Alphabet _Gamma, StackDelta _delta, State _q0, Symbol _Z0, StateSet _F){
-	super( _Q, _Sigma,  _Gamma, _delta, _q0, _Z0, _F);	
-	setCurrentState(_q0);
-	setPreviousNotNullCurrentState(_q0);	
+        super( _Q, _Sigma,  _Gamma, _delta, _q0, _Z0, _F);
+        setCurrentState(_q0);
+        setPreviousNotNullCurrentState(_q0);
     }
 
     protected JAFS(){
-	super();	
+        super();
     }
 
     /**
@@ -352,7 +353,7 @@ public class JAFS extends AFS implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
      */
     public JAFS(String filename)throws Exception{
-	this(new File(filename));	
+        this(new File(filename));
     }
 
     /**
@@ -361,7 +362,7 @@ public class JAFS extends AFS implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
      */
     public JAFS(String filename, JAfsFrame jafsframe)throws Exception{
-	this(new File(filename),jafsframe);	
+        this(new File(filename),jafsframe);
     }
 
     /**
@@ -370,47 +371,46 @@ public class JAFS extends AFS implements JMachine{
      * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
      */
     public JAFS(File file, JAfsFrame jafsframe)throws Exception{
-	this(file);	
-	setJMachineFrame(jafsframe);
-	initStatesPosition(afsframe.getJScrollPaneCanvas().getViewport().getViewSize());
-	afsframe.getJdc().repaint();
-    }      
+        this(file);
+        setJMachineFrame(jafsframe);
+        initStatesPosition(afsframe.getJScrollPaneCanvas().getViewport().getViewSize());
+        afsframe.getJdc().repaint();
+    }
 
     /**
      * Constructora que construye un JAFS a partir del nombre de un archivo que es valido segun el DTD de los AFSs
      * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
      */
     public JAFS(File file)throws Exception{
-	super(file);	
-	setQ(new JStateSet(getQ()));
-	setQ0(new JState(getQ0()));
-	setF(new JStateSet(getF()));
-	setDelta(new JStackDelta((StackDelta)getDelta(),(JStateSet)getQ()));
+        super(file);
+        setQ(new JStateSet(getQ()));
+        setQ0(new JState(getQ0()));
+        setF(new JStateSet(getF()));
+        setDelta(new JStackDelta((StackDelta)getDelta(),(JStateSet)getQ()));
 
-	setCurrentState((JState)getQ0());	    
-	setPreviousNotNullCurrentState((JState)getQ0());
-	makeStateReferences();	
+        setCurrentState((JState)getQ0());
+        setPreviousNotNullCurrentState((JState)getQ0());
+        makeStateReferences();
     }
 
 
     /**
      * funcion de acceso para obtener el valor de tableVector
-     * @return el valor actual de tableVector, donde la entrada tableVector.get(0) es el header y tableVector.get(1) es un vector que contiene los renglones 
+     * @return el valor actual de tableVector, donde la entrada tableVector.get(0) es el header y tableVector.get(1) es un vector que contiene los renglones
      */
     public Vector getTableVector(){return null;}
-    
-    /** 
+
+    /**
      * Rutinas de prueba para la clase JAFS.
      * La implementación por omisión simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
-	System.out.println("Esta es la clase JAFS. \n"
-			   +"Comentario: La extensión gráfica de la máquina de stack\n"
-			   +"Autor: Ivan Hernández Serrano\n"
-			   +"E-mail: ivanx@users.sourceforge.net\n");
- 	  
+        System.out.println("Esta es la clase JAFS. \n"
+               +"Comentario: La extensión gráfica de la máquina de stack\n"
+               +"Autor: Ivan Hernández Serrano\n"
+               +"E-mail: ivanx@users.sourceforge.net\n");
     }
 
     /**
@@ -419,16 +419,16 @@ public class JAFS extends AFS implements JMachine{
      ** @return true si <code>p</code> es estado inicial
      **/
     public boolean esInicial(State p){
-	return p.equals(getQ0());
+        return p.equals(getQ0());
     }
 
     public void print(Graphics g){
-	afsframe.getJdc().paint(g);
-    }    
-    
-    
+        afsframe.getJdc().paint(g);
+    }
+
+
     public void tableChanged(TableModelEvent e) {
-        
+
     }
 }
 
