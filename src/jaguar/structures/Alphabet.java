@@ -1,7 +1,7 @@
 /**
 ** <Alphabet.java> -- To use alphabets
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√†ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -35,7 +35,7 @@
  */
 package jaguar.structures;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Iterator;
 import java.io.File;
 import java.io.FileWriter;
@@ -54,12 +54,12 @@ public class Alphabet implements Cloneable {
      */
     public static final boolean TAGS_NO_LEIDOS = false;
     /**
-     * En este conjunto guardaremos la colecciÛn de sÌmbolos
+     * En este conjunto guardaremos la colecci√≥n de s√≠mbolos
      */
-    private HashSet<Symbol> Sigma;
+    private LinkedHashSet<Symbol> Sigma;
 
     /**
-     * Regresa la representaciÛn en arreglo del Alphabet, regresa un Object[]
+     * Regresa la representaci√≥n en arreglo del Alphabet, regresa un Object[]
      */
     public Symbol[] toArray(){
         Symbol[] ary = new Symbol[size()];
@@ -70,50 +70,50 @@ public class Alphabet implements Cloneable {
      * Regresa la union de esta instancia con el alfabeto dado
      **/
     public Alphabet union(Alphabet A){
-  Alphabet result = new Alphabet(this);
-  result.getSigma().addAll(A.getSigma());
-  return result;
+        Alphabet result = new Alphabet(this);
+        result.getSigma().addAll(A.getSigma());
+        return result;
     }
 
     /**
      * La diferencia de conjuntos
      */
     public Alphabet minus(Alphabet A){
-  Alphabet result = new Alphabet(this);
-  Object [] oArray = A.toArray();
-  for(int i = 0 ; i < oArray.length ; i++)
-      result.remove((Symbol)oArray[i]);
-  return result;
+        Alphabet result = new Alphabet(this);
+        Object [] oArray = A.toArray();
+        for(int i = 0 ; i < oArray.length ; i++)
+            result.remove((Symbol)oArray[i]);
+        return result;
     }
 
     public boolean remove(Symbol s){
-  return Sigma.remove(s);
+        return Sigma.remove(s);
     }
 
     /**
-     * Checa si la cadena dada se puede crear con sÌmbolos de este alfabeto
+     * Checa si la cadena dada se puede crear con s√≠mbolos de este alfabeto
      */
     public boolean strOnAlphabet(Str s){
-  try{
-      for(int i = 0 ; i < s.length() ; i ++)
-    if(!contains(s.getSymbol(i)))
-        return false;
-      return true;
-  }catch(Exception e){
-      e.printStackTrace();
-      System.exit(1);
-      return false;
-  }
+        try{
+            for(int i = 0 ; i < s.length() ; i ++)
+          if(!contains(s.getSymbol(i)))
+              return false;
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(1);
+            return false;
+        }
     }
     /**
-     * Regresa la representaciÛn en vector del Alphabet
+     * Regresa la representaci√≥n en vector del Alphabet
      */
     public Vector toVector(){
-  Object [] oArray =  Sigma.toArray();
-  Vector v = new Vector();
-  for (int i = 0 ; i < oArray.length ; i++)
-      v.add(oArray[i]);
-  return v;
+        Object [] oArray =  Sigma.toArray();
+        Vector v = new Vector();
+        for (int i = 0 ; i < oArray.length ; i++)
+            v.add(oArray[i]);
+        return v;
     }
 
     /**
@@ -132,11 +132,14 @@ public class Alphabet implements Cloneable {
      */
     public static final String END_TAG = "</"+ELEMENT_NAME+">";
 
+    public static final String BEG_SYM = "{";
+    public static final String END_SYM = "}";
+
     /**
      * Creamos un alfabeto vacio
      */
     public Alphabet (){
-        Sigma = new HashSet();
+        Sigma = new LinkedHashSet();
     }
 
     /**
@@ -144,7 +147,7 @@ public class Alphabet implements Cloneable {
      * @param S  el alfabeto a partir del cual crearemos uno nuevo
      */
     public Alphabet (Alphabet S){
-        Sigma = (HashSet)S.getSigma().clone();
+        Sigma = (LinkedHashSet)S.getSigma().clone();
     }
 
     public Alphabet(Symbol s){
@@ -181,11 +184,11 @@ public class Alphabet implements Cloneable {
     }
 
     /**
-     * Agrega un nuevo sÌmbolo al alfabeto
-     * @param sym un nuevo sÌmbolo en nuestro alfabeto
+     * Agrega un nuevo s√≠mbolo al alfabeto
+     * @param sym un nuevo s√≠mbolo en nuestro alfabeto
      */
     public void add(Symbol sym){
-  Sigma.add(sym);
+        Sigma.add(sym);
     }
 
 
@@ -193,14 +196,14 @@ public class Alphabet implements Cloneable {
         return Sigma.contains(s);
     }
     /**
-     * Regresa la representaciÛn de nuestro alfabeto como
+     * Regresa la representaci√≥n de nuestro alfabeto como
      * <code>HashSet</code>
-     * @return la representaciÛn de <code>HashSet</code> del <code>Alphabet</code>.
+     * @return la representaci√≥n de <code>HashSet</code> del <code>Alphabet</code>.
      */
-    public HashSet<Symbol> getSigma(){
+    public LinkedHashSet<Symbol> getSigma(){
         return Sigma;
     }
-    protected void setSigma(HashSet hs){
+    protected void setSigma(LinkedHashSet hs){
         Sigma = hs;
     }
 
@@ -211,7 +214,7 @@ public class Alphabet implements Cloneable {
     public Object clone() throws CloneNotSupportedException{
         try{
             Alphabet nuevo = (Alphabet)super.clone();
-            nuevo.Sigma = (HashSet)Sigma.clone();
+            nuevo.Sigma = (LinkedHashSet)Sigma.clone();
             return nuevo;
         }
         catch (CloneNotSupportedException e){
@@ -220,7 +223,7 @@ public class Alphabet implements Cloneable {
     }
 
     /**
-     * Regresa la representaciÛn en cadena del Alphabet
+     * Regresa la representaci√≥n en cadena del Alphabet
      */
     public String toString(){
         String s="";
@@ -232,10 +235,10 @@ public class Alphabet implements Cloneable {
 
 
     /**
-     * Guarda la representaciÛn del Alphabet en un archivo XML
-     * Escribe el alfabeto con su representaciÛn correspondiente con tags.
+     * Guarda la representaci√≥n del Alphabet en un archivo XML
+     * Escribe el alfabeto con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el Alphabet.
+     * @param fw El FileWriter donde se guardar√° el Alphabet.
      */
     public void toFile(FileWriter fw){
         try{
@@ -266,40 +269,41 @@ public class Alphabet implements Cloneable {
     }
 
     /**
-     * Reemplaza la apariciÛn de   <code>viejo</code> por <code>nuevo</code> en esta instancia del <code>Alphabet</code>
+     * Reemplaza la aparici√≥n de   <code>viejo</code> por <code>nuevo</code> en esta instancia del <code>Alphabet</code>
      *
-     * Reemplaza en esta  instancia de <code>Alphabet</code>  la apariciÛn de el sÌmbolo <code>viejo</code>
-     * por el sÌmbolo <code>nuevo</code>.
+     * Reemplaza en esta  instancia de <code>Alphabet</code>  la aparici√≥n de el s√≠mbolo <code>viejo</code>
+     * por el s√≠mbolo <code>nuevo</code>.
      *
-     * @param viejo El sÌmbolo que vamos a sustituir.
-     * @param nuevo El nuevo sÌmbolo que aparecer· en lugar de  <code>viejo</code>.
+     * @param viejo El s√≠mbolo que vamos a sustituir.
+     * @param nuevo El nuevo s√≠mbolo que aparecer√° en lugar de  <code>viejo</code>.
      *
      */
     public void replaceSymbol(Symbol viejo, Symbol nuevo){
-  if(remove(viejo))
-      add(nuevo);
+        if(remove(viejo)) {
+            add(nuevo);
+        }
     }
 
 
     /**
-     * Regresa un alfabeto que es subconjunto de esta instancia, este alfabeto est· formado
-     * de todos los simbolos que aparecen en <code>s</code> y est·n en esta instancia de Alfaeto
+     * Regresa un alfabeto que es subconjunto de esta instancia, este alfabeto est√° formado
+     * de todos los simbolos que aparecen en <code>s</code> y est√°n en esta instancia de Alfaeto
      */
     public Alphabet getSubsetInStr(Str s){
-  try{
-
-      Alphabet result = new Alphabet();
-      for ( int i = 0 ; i < s.length() ; i++)
-    if(contains(s.getSymbol(i)))
-        result.add(s.getSymbol(i));
-      return result;
-
-  }catch( StrIndexOutOfBoundsException ouch){
-      System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName());
-      ouch.printStackTrace();
-      System.exit(1);
-  }
-  return null;
+        try{
+            Alphabet result = new Alphabet();
+            for ( int i = 0 ; i < s.length() ; i++) {
+                if (contains(s.getSymbol(i))) {
+                    result.add(s.getSymbol(i));
+                }
+            }
+            return result;
+        }catch( StrIndexOutOfBoundsException ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName());
+            ouch.printStackTrace();
+            System.exit(1);
+        }
+        return null;
     }
 
 
