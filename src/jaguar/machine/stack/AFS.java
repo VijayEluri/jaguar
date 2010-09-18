@@ -1,7 +1,7 @@
 /**
 ** <AFS.java> -- The push down automata engine
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -27,11 +27,11 @@
 package jaguar.machine.stack;
 
  /**
-  * Un AutÛmata Finito de Stack P es un sistema <p> P = (Q,Sigma,Gamma,delta,q0,Z0,F) <p> donde: <p>
-  * Gamma es un alfabeto, llamado alfabeto de entrada; Z0 es el sÌmbolo en el fondo del stack al empezar a funcionar el AFS;
+  * Un Aut√≥mata Finito de Stack P es un sistema <p> P = (Q,Sigma,Gamma,delta,q0,Z0,F) <p> donde: <p>
+  * Gamma es un alfabeto, llamado alfabeto de entrada; Z0 es el s√≠mbolo en el fondo del stack al empezar a funcionar el AFS;
   * y todos los demas elementos del sistema son como se define en <code>machine</code>
   *
-  * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+  * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
   * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:04 $
   **/
 
@@ -48,6 +48,13 @@ import jaguar.machine.stack.structures.*;
 import jaguar.machine.stack.structures.exceptions.*;
 import jaguar.machine.stack.exceptions.*;
 import org.w3c.dom.*;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
 
@@ -71,29 +78,32 @@ public class AFS extends Machine{
     /**
      * El stack asociado al AFS
      */
-    protected Stack stack;
+    protected Stack<Symbol> stack;
     /**
      * funcion de acceso para obtener el valor de stack
      * @return el valor actual de stack
      * @see #stack
      */
-    public Stack getStack(){
+    public Stack<Symbol> getStack(){
         return stack;
     }
 
-    public Stack getStackReverse(){
-        Stack auxStack = (Stack)stack.clone();
-        Stack tmpStack = new Stack();
-        while(! auxStack.empty())
-            tmpStack.push(auxStack.pop());
-        return tmpStack;
-    }
+
+    // Commenting this method since you cannot get rid of the unchecked
+    // cast with java.util.Stack
+    // public Stack<Symbol> getStackReverse(){
+    //     Stack auxStack = (Stack)stack.clone();
+    //     Stack tmpStack = new Stack();
+    //     while(! auxStack.empty())
+    //         tmpStack.push(auxStack.pop());
+    //     return tmpStack;
+    // }
     /**
      * funcion de acceso para modificar stack
      * @param new_stack el nuevo valor para stack
      * @see #stack
      */
-    protected void setStack(Stack new_stack){
+    protected void setStack(Stack<Symbol> new_stack){
         stack = new_stack;
     }
 
@@ -120,11 +130,11 @@ public class AFS extends Machine{
     }
 
     /**
-     * Es el sÌmbolo en el fondo del stack al empezar a funcionar el AFS
+     * Es el s√≠mbolo en el fondo del stack al empezar a funcionar el AFS
      */
     protected Symbol Z0;
     /**
-     * El valor por omisiÛn para Z0
+     * El valor por omisi√≥n para Z0
      */
     public static final Symbol DEFAULT_Z0=null;
     /**
@@ -148,7 +158,7 @@ public class AFS extends Machine{
      */
     protected Alphabet Gamma;
     /**
-     * El valor por omisiÛn para Gamma
+     * El valor por omisi√≥n para Gamma
      */
     public static final Alphabet DEFAULT_GAMMA=null;
     /**
@@ -168,11 +178,11 @@ public class AFS extends Machine{
         Gamma = new_Gamma;
     }
     /**
-     ** Constante que usamos para seÒalar el modo de aceptar por stack vacÌo
+     ** Constante que usamos para se√±alar el modo de aceptar por stack vac√≠o
      **/
     public static final boolean ACCEPT_BY_EMPTY_STACK = false;
     /**
-     ** Constante que usamos para seÒalar el modo de aceptar por estado final
+     ** Constante que usamos para se√±alar el modo de aceptar por estado final
      **/
     public static final boolean ACCEPT_BY_FINAL_STATE = true;
     /**
@@ -180,7 +190,7 @@ public class AFS extends Machine{
      */
     protected boolean acceptMode;
     /**
-     * El valor por omisiÛn para acceptMode
+     * El valor por omisi√≥n para acceptMode
      */
     public static final boolean DEFAULT_ACCEPT_MODE=ACCEPT_BY_FINAL_STATE;
     /**
@@ -201,7 +211,7 @@ public class AFS extends Machine{
     }
 
      /**
-      * La regla que aplicamos actualmente para la ejecuciÛn de la m·quina
+      * La regla que aplicamos actualmente para la ejecuci√≥n de la m√°quina
       */
     protected QxGammaStar appliedRule;
     /**
@@ -224,7 +234,7 @@ public class AFS extends Machine{
 
     /**
      ** Construye un AFS con los parematros dados
-     ** Por omisiÛn asume que el AFS acepta por estado final
+     ** Por omisi√≥n asume que el AFS acepta por estado final
      **/
     public AFS(StateSet _Q, Alphabet _Sigma, Alphabet _Gamma, StackDelta _delta, State _q0, Symbol _Z0, StateSet _F){
         this(DEFAULT_ACCEPT_MODE, _Q, _Sigma, _Gamma, _delta, _q0, _Z0, _F);
@@ -250,12 +260,12 @@ public class AFS extends Machine{
     public AFS (boolean _acceptMode){
         super();
         acceptMode =  _acceptMode;
-        stack = new Stack();
+        stack = new Stack<Symbol>();
     }
 
     /**
      * Configura todos los campos del AFS dado a partir del documento valido que le pasamos
-     * @param document es un documento DOM que cumple con la especificaciÛn DTD para los AFSs
+     * @param document es un documento DOM que cumple con la especificaci√≥n DTD para los AFSs
      * @param r el AFS que configuramos
      * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
      */
@@ -288,7 +298,7 @@ public class AFS extends Machine{
 
 
     /**
-     * Construye un AFS a partir de un archivo como se especifica en la documentaciÛn, hay que hacer
+     * Construye un AFS a partir de un archivo como se especifica en la documentaci√≥n, hay que hacer
      * asignaciones posteriores del jafsframe sociado.
      */
     public AFS(String filename)throws Exception{
@@ -296,7 +306,7 @@ public class AFS extends Machine{
     }
 
     /**
-     * Construye un AFS a partir de un archivo como se especifica en la documentaciÛn, hay que hacer
+     * Construye un AFS a partir de un archivo como se especifica en la documentaci√≥n, hay que hacer
      * asignaciones posteriores del jafsframe sociado.
      */
     public AFS(String filename, boolean _acceptMode)throws Exception{
@@ -304,7 +314,7 @@ public class AFS extends Machine{
     }
 
     /**
-     * Construye un AFS a partir de un archivo como se especifica en la documentaciÛn, hay que hacer
+     * Construye un AFS a partir de un archivo como se especifica en la documentaci√≥n, hay que hacer
      * asignaciones posteriores del jafsframe sociado.
      */
     public AFS(File file)throws Exception{
@@ -312,12 +322,27 @@ public class AFS extends Machine{
     }
 
     /**
-     * Construye un AFS a partir de un archivo como se especifica en la documentaciÛn, hay que hacer
+     * Construye un AFS a partir de un archivo como se especifica en la documentaci√≥n, hay que hacer
      * asignaciones posteriores del jafsframe sociado.
      */
     public AFS(File file, boolean _acceptMode)throws Exception{
         this(_acceptMode);
-        setupAFS(factory.newDocumentBuilder().parse(file),this);
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        InputStream schemaStream = this.getClass().getClassLoader().getResourceAsStream("schema/afs.xsd");
+        StreamSource schemaSource = new StreamSource(schemaStream);
+        //File schemaFile = new File(schemaURL.toURI());
+        Schema schema = schemaFactory.newSchema(schemaSource);
+        Validator validator = schema.newValidator();
+        DocumentBuilder parser = factory.newDocumentBuilder();
+        Document document = parser.parse(file);
+
+        //factory.setSchema(schema);
+        try {
+            validator.validate(new DOMSource(document));
+            setupAFS(document,this);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -330,7 +355,7 @@ public class AFS extends Machine{
     }
 
      /**
-      * Lo que sobrÛ de la cadena de entrada cuando terminÛ la ejecuciÛn del AFS
+      * Lo que sobr√≥ de la cadena de entrada cuando termin√≥ la ejecuci√≥n del AFS
       */
     protected Str sobranteStr;
     /**
@@ -353,7 +378,7 @@ public class AFS extends Machine{
     public boolean runMachine(Str str){
         State st;
         setSobranteStr(str);
-        setStack(new Stack());
+        setStack(new Stack<Symbol>());
         stack.push(getZ0());
         System.out.println("\nConfiguraciones\t\t\tRegla");
         displayConfiguration(q0,str);
@@ -406,7 +431,7 @@ public class AFS extends Machine{
 
             return doTransitions(afsst,cad.substring(1));
         } else {
-            Debug.println(" ÿ");
+            Debug.println(" √ò");
         }
 
         return null;
@@ -446,7 +471,7 @@ public class AFS extends Machine{
           " acepta " + str);
     }
     /**
-     * Regresa una cadena con la configuraciÛn del AFS
+     * Regresa una cadena con la configuraci√≥n del AFS
      */
     protected void displayConfiguration(State p, Str s){
         System.out.println(" ( " + p + " , " + s + ", "+ stackToString() +  " )" );
@@ -490,7 +515,7 @@ public class AFS extends Machine{
     }
 
     /**
-     * Regresa una cadena con una representaciÛn del objeto.
+     * Regresa una cadena con una representaci√≥n del objeto.
      * Toma los campos y los imprime en una lista junto con sus valores.
      *
      * @return una cadena con los valores del objeto.
@@ -500,10 +525,10 @@ public class AFS extends Machine{
     }
 
     /**
-     * Escribe la representaciÛn del AFS en un archivo con el formato definido por el DTD correspondiente
-     * Escribe el AFS con su representaciÛn correspondiente con tags.
+     * Escribe la representaci√≥n del AFS en un archivo con el formato definido por el DTD correspondiente
+     * Escribe el AFS con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el AFS.
+     * @param fw El FileWriter donde se guardar√° el AFS.
      * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
      */
     public void toFile(FileWriter fw){
@@ -523,11 +548,11 @@ public class AFS extends Machine{
             getSigma().toFile(fw);
             fw.write("\n\n <!-- Alphabet del  Stack Gamma -->  \n");
             getGamma().toFile(fw);
-            fw.write("\n\n <!-- FunciÛn de TransiciÛn delta --> \n");
+            fw.write("\n\n <!-- Funci√≥n de Transici√≥n delta --> \n");
             getDelta().toFile(fw);
             fw.write("\n\n <!-- Inicial State q0 --> \n");
             getQ0().toFile(fw);
-            fw.write("\n\n <!-- Z0 SÌmbolo en el fondo del Stack cuando el AFS conmienza  su ejecuciÛn -->\n");
+            fw.write("\n\n <!-- Z0 S√≠mbolo en el fondo del Stack cuando el AFS conmienza  su ejecuci√≥n -->\n");
             getZ0().toFile(fw);
             fw.write("\n\n <!-- Conjunto de estados finales F --> \n");
             getF().toFile(fw);
@@ -542,7 +567,7 @@ public class AFS extends Machine{
 
     /**
      ** Hace la referencia de todos los estados con respecto a <code>Q</code>
-     ** Es ˙til cuando leemos por separado los estados y tenemos que hacer las referencias
+     ** Es √∫til cuando leemos por separado los estados y tenemos que hacer las referencias
      **/
     public void makeStateReferences(){
         F = Q.makeSubSetReferences(getF());

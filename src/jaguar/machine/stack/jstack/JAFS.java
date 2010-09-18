@@ -1,7 +1,7 @@
 /**
 ** <JAFS.java> -- The AFS's graphical extension
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -44,25 +44,28 @@ import java.io.*;
 import java.util.*;
 import java.awt.Graphics;
 import java.awt.Dimension;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.event.TableModelEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import java.lang.Math;
+import java.awt.event.ActionEvent;
 
  /**
- * La extensiÛn gr·fica de la m·quina de stack
+ * La extensi√≥n gr√°fica de la m√°quina de stack
  *
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JAFS extends AFS implements JMachine{
     /**
-     * El contexto gr·fico sobre el cual se dibujar·  el AFS
+     * El contexto gr√°fico sobre el cual se dibujar√°  el AFS
      */
     protected Graphics g;
     /**
-     * El valor por omisiÛn para g
+     * El valor por omisi√≥n para g
      */
     public static final Graphics DEFAULT_G=null;
     /**
@@ -105,7 +108,7 @@ public class JAFS extends AFS implements JMachine{
      */
     protected JStr strToTestOrig;
     /**
-     * El valor por omisiÛn para strToTestOrig
+     * El valor por omisi√≥n para strToTestOrig
      */
     public static final JStr DEFAULT_STRTOTESTORIG=null;
     /**
@@ -130,7 +133,7 @@ public class JAFS extends AFS implements JMachine{
      */
     protected JStr strToTest;
     /**
-     * El valor por omisiÛn para strToTest
+     * El valor por omisi√≥n para strToTest
      */
     public static final JStr DEFAULT_STRTOTEST=null;
     /**
@@ -156,7 +159,7 @@ public class JAFS extends AFS implements JMachine{
      */
     protected JStr subStrTested;
     /**
-     * El valor por omisiÛn para subStrTested
+     * El valor por omisi√≥n para subStrTested
      */
     public static final JStr DEFAULT_SUBSTRTESTED=null;
     /**
@@ -177,7 +180,7 @@ public class JAFS extends AFS implements JMachine{
     }
 
      /**
-      * El estado anterior antes de ser nulo, esto nos sirve para dar un ˙ltimo estado y checar si esta en los finales, en caso de tener que hacer este chequeo
+      * El estado anterior antes de ser nulo, esto nos sirve para dar un √∫ltimo estado y checar si esta en los finales, en caso de tener que hacer este chequeo
       */
     protected State previousNotNullCurrentState;
     /**
@@ -198,11 +201,11 @@ public class JAFS extends AFS implements JMachine{
     }
 
     /**
-     * El estado actual en el que se encuentra la m·quina
+     * El estado actual en el que se encuentra la m√°quina
      */
     protected State currentState;
     /**
-     * El valor por omisiÛn para currentState
+     * El valor por omisi√≥n para currentState
      */
     public static final State DEFAULT_CURRENTSTATE=null;
     /**
@@ -231,7 +234,7 @@ public class JAFS extends AFS implements JMachine{
         setStrToTest(getStrToTestOrig());
         setSubStrTested(new JStr());
         setSobranteStr(getStrToTestOrig());
-        setStack(new Stack());
+        setStack(new Stack<Symbol>());
         stack.push(getZ0());
               ((JAfsFrame)afsframe).setJPanelStackContents(this);
         ((JAfsFrame)afsframe).getReglalabel().setText("");
@@ -240,10 +243,10 @@ public class JAFS extends AFS implements JMachine{
     }
 
     /**
-     * Aplica la funciÛn delta con los parametros dados
+     * Aplica la funci√≥n delta con los parametros dados
      * @param currentS el estado sobre el que estamos
-     * @param cad la cadena sobre cuyo primer sÌmbolo aplicaremos la delta
-     * @param sym el sÌmbolo en el tope del stack
+     * @param cad la cadena sobre cuyo primer s√≠mbolo aplicaremos la delta
+     * @param sym el s√≠mbolo en el tope del stack
      * @return el valor de  delta(currentS,cad.getFirst())
      */
     protected State doTransition(State currentS, JStr cad, Symbol sym){
@@ -259,9 +262,9 @@ public class JAFS extends AFS implements JMachine{
     }
 
     /**
-     * Regresa verdadero si podemo hacer un paso m·s o falso si no podemos
+     * Regresa verdadero si podemo hacer un paso m√°s o falso si no podemos
      * @return <code>true</code> - si podemos seguir aplicando la
-     * funciÛn de transiciÛn delte, i.e. si la cadena a checar no es
+     * funci√≥n de transici√≥n delte, i.e. si la cadena a checar no es
      * <epsilon> y si el estado en el que estamos es distinto de
      * <code>null</code>. <br> <code>false</code> - en otro caso.
      */
@@ -298,7 +301,7 @@ public class JAFS extends AFS implements JMachine{
     }
 
     /**
-     * Pinta el estado como el estado actual, bajo el contexto de la aplicaciÛn m·s reciente de la funciÛn de transiciÛn
+     * Pinta el estado como el estado actual, bajo el contexto de la aplicaci√≥n m√°s reciente de la funci√≥n de transici√≥n
      * delta, bajo el contexto delta(p,s) = q
      **/
     protected void displayTransResult(State q){
@@ -306,9 +309,9 @@ public class JAFS extends AFS implements JMachine{
     }
 
     /**
-     * Esta funciÛn se usa para asignar posiciones a los centros de los  JStates.  Estas posiciones,
-     * est·n alrededor de un circulo de radio <code>r</code>,  dividiendo y
-     * encontramos la posiciÛn de cada estado por medio de coordenadas polares (<code>(x,y) =  (r*cos*theta, r*sin*theta)</code>).
+     * Esta funci√≥n se usa para asignar posiciones a los centros de los  JStates.  Estas posiciones,
+     * est√°n alrededor de un circulo de radio <code>r</code>,  dividiendo y
+     * encontramos la posici√≥n de cada estado por medio de coordenadas polares (<code>(x,y) =  (r*cos*theta, r*sin*theta)</code>).
      * Donde la  theta es cada uno de los intervalos de dividir 360 entre la cardinalidad de Q y r es el minimo entre el ancho y alto del
      * canvas entre dos.
      */
@@ -400,22 +403,76 @@ public class JAFS extends AFS implements JMachine{
      */
     public Vector getTableVector(){return null;}
 
+    public Class getColumnClass(int c) {
+        int idx = c - (getSigma().size()+2);
+        switch (idx) {
+            case 0:
+                return JRadioButton.class;
+            case 1:
+                return Boolean.class;
+        }
+        return String.class;
+    }
+
+    public String[] getColumnNames() {
+        Symbol[] aSigma = getSigma().toArray();
+        String[] colNames = new String[getSigma().size() + 4];
+        colNames[0] = "Q";
+        colNames[1] = "Gamma";
+        for (int i = 0; i < getSigma().size(); i++ ) {
+            colNames[i+2] = aSigma[i].getSym();
+        }
+        colNames[aSigma.length+2] = "Initial";
+        colNames[aSigma.length+3] = "Final";
+        return colNames;
+    }
+
+    public Object[][] getData() {
+        State[] aQ = getQ().toArray();
+        Symbol[] aSigma = getSigma().toArray();
+        Symbol[] aGamma = getGamma().toArray();
+        Object[][] data = new Object[aQ.length*aGamma.length][aSigma.length+4];
+        int k = 0;
+        int l = 2;
+        QxGammaStarSet entry;
+        ButtonGroup inicialSelector = new ButtonGroup();
+        for (State i : aQ) {
+            data[k][0] = i.toString();
+            JRadioButton inicial = new JRadioButton("",esInicial(i));
+            inicialSelector.add(inicial);
+            data[k][aSigma.length+2] = inicial;
+            data[k][aSigma.length+3] = new Boolean(i.getIsInF());
+            for (Symbol h : aGamma) {
+                data[k][1] = h.toString();
+
+                for (Symbol j : aSigma) {
+                    entry = ((StackDelta) getDelta()).apply(i,j,h);
+                    data[k][l] = (entry != null) ? entry.toString() : null;
+                    ++l;
+                }
+                ++k;
+                l = 2;
+            }
+        }
+        return data;
+    }
+
     /**
      * Rutinas de prueba para la clase JAFS.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
         System.out.println("Esta es la clase JAFS. \n"
-               +"Comentario: La extensiÛn gr·fica de la m·quina de stack\n"
-               +"Autor: Ivan Hern·ndez Serrano\n"
+               +"Comentario: La extensi√≥n gr√°fica de la m√°quina de stack\n"
+               +"Autor: Ivan Hern√°ndez Serrano\n"
                +"E-mail: ivanx@users.sourceforge.net\n");
     }
 
     /**
      ** Dado un estado dice si es o no es un estado inicial
-     ** @param p el estado sobre el cual preguntaremos si es o no inicial en Èsta m·quina
+     ** @param p el estado sobre el cual preguntaremos si es o no inicial en √©sta m√°quina
      ** @return true si <code>p</code> es estado inicial
      **/
     public boolean esInicial(State p){
@@ -429,6 +486,57 @@ public class JAFS extends AFS implements JMachine{
 
     public void tableChanged(TableModelEvent e) {
 
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if ("add_state".equals(e.getActionCommand())) {
+            // JState newState = new JState("q"+Q.size());
+            // Q.add(newState);
+            // newState.setLocation(50,50);
+            // dfaframe.getJdc().getJeList().add(newState);
+            // //initStatesPositions();
+            // dfaframe.showTabular();
+            // dfaframe.getJdc().repaint();
+            return;
+        }
+
+        if ("remove_state".equals(e.getActionCommand())) {
+            // // Ask for confirmation first
+            // // find wich state is selected and delete it.
+            // State[] states = Q.toArray();
+            // int idx = dfaframe.getSelectedRowInTTM();
+            // if (idx >= 0) {
+            //     JState state = (JState)states[idx];
+            //     int n = JOptionPane.showConfirmDialog(dfaframe,
+            //         "Are you sure that you want to delete the state "
+            //         + state + "?",
+            //         "Confirm deletion",
+            //         JOptionPane.YES_NO_OPTION,
+            //         JOptionPane.WARNING_MESSAGE);
+            //     if (n != 0) {
+            //         return;
+            //     }
+            //     dfaframe.getJdc().getJeList().remove(state);
+            //     Q.remove(state);
+            //     Hashtable<State,Hashtable<Symbol,State>> deltaHash = delta.getD();
+            //     deltaHash.remove(state);
+            //
+            //     for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
+            //         // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
+            //         JState q = (JState)enu.nextElement();
+            //         Hashtable<Symbol,State> toHash= deltaHash.get(q);
+            //         for(Enumeration f = toHash.keys();  f.hasMoreElements() ;) {
+            //             Symbol s = (Symbol)f.nextElement();
+            //             if (toHash.get(s).equals(state)) {
+            //                 toHash.remove(s);
+            //             }
+            //         }
+            //     }
+            //
+            //     dfaframe.showTabular();
+            //     dfaframe.getJdc().repaint();
+            // }
+        }
     }
 }
 

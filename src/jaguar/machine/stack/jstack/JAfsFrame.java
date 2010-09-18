@@ -1,26 +1,26 @@
 /**
 ** <JAfsFrame.java> -- The frame to show JAFSs
-** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+**
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
@@ -34,6 +34,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.text.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.border.*;
 import jaguar.machine.structures.*;
 import jaguar.machine.stack.structures.*;
@@ -60,28 +61,29 @@ import java.io.File;
 
 public class JAfsFrame extends JMachineFrame{
 
-    public static final String MACHINE_TYPE = "FSA";    
+    public static final String MACHINE_TYPE = "FSA";
+
     private JAfsCanvas jdc;
-    
+
     /**
      * Get the value of jdc.
      * @return value of jdc.
      */
     public JAfsCanvas getJdc() {
-	return jdc;
+        return jdc;
     }
-    
+
     /**
      * Set the value of jdc.
      * @param v  Value to assign to jdc.
      */
     public void setJdc(JAfsCanvas  v) {
-	jdc = v;
+        jdc = v;
     }
 
-    
+
     /**
-     * La representaciÛn gr·fica del stack
+     * La representaci√≥n gr√°fica del stack
       */
     protected JPanel jPanelStack;
 
@@ -90,7 +92,7 @@ public class JAfsFrame extends JMachineFrame{
      * @return el valor actual de gStack
      */
     public JPanel getJPanelStack(){
-	return jPanelStack;
+        return jPanelStack;
     }
     /**
      * funcion de acceso para modificar gStack.
@@ -100,9 +102,9 @@ public class JAfsFrame extends JMachineFrame{
         jPanelStack=_jPanelStack;
     }
 
-    
+
      /**
-      * La representaciÛn gr·fica del stack
+      * La representaci√≥n gr√°fica del stack
       */
     protected JList gStack;
 
@@ -112,7 +114,7 @@ public class JAfsFrame extends JMachineFrame{
      * @see #gStack
      */
     public JList getGstack(){
-	return gStack;
+        return gStack;
     }
     /**
      * funcion de acceso para modificar gStack
@@ -120,11 +122,11 @@ public class JAfsFrame extends JMachineFrame{
      * @see #gStack
      */
     public void setGstack(JList new_gStack){
-	gStack=new_gStack;
+        gStack = new_gStack;
     }
 
      /**
-      * La etiqueta que nos mostrar· la regla que usamos en el paso actual
+      * La etiqueta que nos mostrar√° la regla que usamos en el paso actual
       */
     protected JLabel reglaLabel;
     /**
@@ -133,7 +135,7 @@ public class JAfsFrame extends JMachineFrame{
      * @see #reglaLabel
      */
     public JLabel getReglalabel(){
-	return reglaLabel;
+        return reglaLabel;
     }
     /**
      * funcion de acceso para modificar reglaLabel
@@ -141,230 +143,284 @@ public class JAfsFrame extends JMachineFrame{
      * @see #reglaLabel
      */
     public void setReglalabel(JLabel new_reglaLabel){
-	reglaLabel=new_reglaLabel;
-    }    
-    
-    public JAfsFrame(){
-	this(null);	
+        reglaLabel=new_reglaLabel;
     }
-    /** La dimensiÛn de cada una de las celdas del stack **/ 
+
+    public JAfsFrame(){
+        this(null);
+    }
+    /** La dimensi√≥n de cada una de las celdas del stack **/
     public static final Dimension STACK_CELL_DIMENSION = new Dimension(75,20);
-    
+
     /** Esta es para la primera vez **/
     private void createJPanelStack(JAFS jafs){
-	if(jafs!=null)
-            setJPanelStackContents(jafs);
-        else{
-            jPanelStack = new JPanel();
-            jPanelStack.setLayout(new BoxLayout(jPanelStack,BoxLayout.Y_AXIS));
-	    jPanelStack.add(Box.createRigidArea(new Dimension(70,0)));
-	    jPanelStack.setBackground(Color.white);
-            jPanelStack.setMinimumSize(new Dimension(85,20));
-	}
-	JScrollPane jscrollp=new JScrollPane(jPanelStack,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-					     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	jscrollp.getVerticalScrollBar().setUnitIncrement(20);
-	jscrollp.getHorizontalScrollBar().setUnitIncrement(10);
-	getContentPane().add(JMachineFrame.createJPanelBorder(jscrollp,"Stack"), BorderLayout.EAST);
+        if(jafs!=null)
+                  setJPanelStackContents(jafs);
+              else{
+                  jPanelStack = new JPanel();
+                  jPanelStack.setLayout(new BoxLayout(jPanelStack,BoxLayout.Y_AXIS));
+            jPanelStack.add(Box.createRigidArea(new Dimension(70,0)));
+            jPanelStack.setBackground(Color.white);
+                  jPanelStack.setMinimumSize(new Dimension(85,20));
+        }
+        JScrollPane jscrollp=new JScrollPane(jPanelStack,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                     JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jscrollp.getVerticalScrollBar().setUnitIncrement(20);
+        jscrollp.getHorizontalScrollBar().setUnitIncrement(10);
+        getContentPane().add(JMachineFrame.createJPanelBorder(jscrollp,"Stack"), BorderLayout.EAST);
     }
 
     protected void setJPanelStackContents(JAFS jafs){
         Stack srev = (Stack)jafs.getStack().clone();
-      if(jPanelStack == null){
+        if (jPanelStack == null) {
             jPanelStack = new JPanel();
             jPanelStack.setLayout(new BoxLayout(jPanelStack,BoxLayout.Y_AXIS));
-	    jPanelStack.add(Box.createRigidArea(new Dimension(70,0)));
+            jPanelStack.add(Box.createRigidArea(new Dimension(70,0)));
             jPanelStack.setBackground(Color.white);
-	    jPanelStack.setMinimumSize(new Dimension(85,20));
-      }//else jPanelStack.removeAll();
-      jPanelStack.removeAll();
+            jPanelStack.setMinimumSize(new Dimension(85,20));
+        }//else jPanelStack.removeAll();
+
+        jPanelStack.removeAll();
         JTextField jt=null;
         jPanelStack.add(Box.createVerticalGlue());
-        while(!srev.isEmpty()){
+        while (!srev.isEmpty()) {
             jt = new JTextField(srev.pop().toString());
             jt.setHorizontalAlignment(JTextField.CENTER);
             jt.setBackground(Color.white);
             jt.setEditable(false);
-	    jt.setPreferredSize(STACK_CELL_DIMENSION);
+            jt.setPreferredSize(STACK_CELL_DIMENSION);
             jt.setMinimumSize(STACK_CELL_DIMENSION);
             jt.setMaximumSize(STACK_CELL_DIMENSION);
             jPanelStack.add(jt);
         }
-	jPanelStack.add(Box.createRigidArea(new Dimension(70,0)));
-	jPanelStack.repaint();
+        jPanelStack.add(Box.createRigidArea(new Dimension(70,0)));
+        jPanelStack.repaint();
     }
-    
-    public static final Dimension JAFSFRAME_DEFAULT_SIZE  = new Dimension(700,600);    
+
+    public static final Dimension JAFSFRAME_DEFAULT_SIZE  = new Dimension(700,600);
 
     public static final String JAFSFRAME_NAME = "JSFA Frame";
-    
+
     public JAfsFrame(JAFS _jafs){
-	super(JAFSFRAME_NAME);
-	jmachine = _jafs;
-	addWindowListener(new WindowAdapter() {
-		public void windowClosing(WindowEvent e) {dispose();}
-		public void windowOpened(WindowEvent e) {}
-	    });
-	
-	addComponentListener(this);			    
+        super(JAFSFRAME_NAME);
+        jmachine = _jafs;
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {dispose();}
+            public void windowOpened(WindowEvent e) {}
+        });
 
-	setJMenuBar(createMenu());
-	
-	setSize(JAFSFRAME_DEFAULT_SIZE);
-	if(jmachine != null){
-	    jdc = new JAfsCanvas(DEFAULT_SIZE,(JAFS)jmachine);
-	}
-	else {
-	    jdc = new JAfsCanvas(DEFAULT_SIZE);
-	}
-	
-	jScrollPaneCanvas = new JScrollPane(jdc, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);	
-	jScrollPaneCanvas.getHorizontalScrollBar().setUnitIncrement(20);
-	jScrollPaneCanvas.getVerticalScrollBar().setUnitIncrement(20);
-	
-	createJPanelStack((JAFS)jmachine);
+        addComponentListener(this);
 
-        
-	setLabels();	
-	getContentPane().add(createJPanelBorder(jScrollPaneCanvas,"Configuration"), BorderLayout.CENTER);
-	setControls(MACHINE_TYPE);	
-	if(jmachine == null){
-	    printM.setEnabled(false);
-	    nextButton.setEnabled(false);
-	    resetButton.setEnabled(false);
-	    runAllButton.setEnabled(false);
+        setJMenuBar(createMenu());
+
+        setSize(JAFSFRAME_DEFAULT_SIZE);
+        if (jmachine != null) {
+            jdc = new JAfsCanvas(DEFAULT_SIZE,(JAFS)jmachine);
+        } else {
+            jdc = new JAfsCanvas(DEFAULT_SIZE);
+        }
+
+        jScrollPaneCanvas = new JScrollPane(jdc, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPaneCanvas.getHorizontalScrollBar().setUnitIncrement(20);
+        jScrollPaneCanvas.getVerticalScrollBar().setUnitIncrement(20);
+
+        createJPanelStack((JAFS)jmachine);
+
+        setLabels();
+        getContentPane().add(createJPanelBorder(jScrollPaneCanvas,"Configuration"), BorderLayout.CENTER);
+        setControls(MACHINE_TYPE);
+        if (jmachine == null) {
+            printM.setEnabled(false);
+            nextButton.setEnabled(false);
+            resetButton.setEnabled(false);
+            runAllButton.setEnabled(false);
             quickTestButton.setEnabled(false);
-	    stopButton.setEnabled(false);	   
-	    loadTest.setEnabled(false);
-	    consTest.setEnabled(false);
-	    descriptionMI.setEnabled(false);	    
-	}
-	fc = new JFileChooser();
+            stopButton.setEnabled(false);
+            loadTest.setEnabled(false);
+            consTest.setEnabled(false);
+            descriptionMI.setEnabled(false);
+        }
+        fc = new JFileChooser();
     }
 
     /**
      * Pone las etiquetas de estado actual y la cadena actual con la configuraci'on de symbolo actual  en otro color, si es la primera vez, la cadena es epsilon]
      */
     protected void setLabels(){
-	JPanel pEstadoRegla = new JPanel();
-	
-	JPanel p = new JPanel();
-	p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
-	pEstadoRegla.setLayout(new BoxLayout(pEstadoRegla,BoxLayout.X_AXIS));
-	sssd = new  MachineGrammarStyledDocument(MAX_CHARS);
-	textPane = new JTextPane(sssd);
-	textPane.setEditable(false);	
-	if(jmachine != null){
-	    currentStateLabel = new JLabel(jmachine.getCurrentState().toString());
-	    sssd.insertStr(jmachine.getStrToTest());	    
-	}else {
-	    currentStateLabel = new JLabel("");
-	    sssd.insertString("");	    
-	}
-	currentStateLabel.setToolTipText("Current State in the execution");	
-	reglaLabel = new JLabel("");
-	reglaLabel.setToolTipText("Used rule");	
-	pEstadoRegla.add(Box.createRigidArea(new Dimension(10, 10)));
-	pEstadoRegla.add(createJPanelBorder(currentStateLabel,"State"));
-	pEstadoRegla.add(Box.createRigidArea(new Dimension(10, 10)));
-	pEstadoRegla.add(createJPanelBorder(reglaLabel,"Rule"));
+        JPanel pEstadoRegla = new JPanel();
 
-	
-	p.add(Box.createRigidArea(new Dimension(10, 0)));
-	p.add(pEstadoRegla);
-	p.add(Box.createRigidArea(new Dimension(10, 0)));
-	p.add(createJPanelBorder(textPane,"String"));	
-	p.add(Box.createHorizontalGlue());
+        JPanel p = new JPanel();
+        p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
+        pEstadoRegla.setLayout(new BoxLayout(pEstadoRegla,BoxLayout.X_AXIS));
+        sssd = new  MachineGrammarStyledDocument(MAX_CHARS);
+        textPane = new JTextPane(sssd);
+        textPane.setEditable(false);
+        if(jmachine != null){
+            currentStateLabel = new JLabel(jmachine.getCurrentState().toString());
+            sssd.insertStr(jmachine.getStrToTest());
+        }else {
+            currentStateLabel = new JLabel("");
+            sssd.insertString("");
+        }
+        currentStateLabel.setToolTipText("Current State in the execution");
+        reglaLabel = new JLabel("");
+        reglaLabel.setToolTipText("Used rule");
+        pEstadoRegla.add(Box.createRigidArea(new Dimension(10, 10)));
+        pEstadoRegla.add(createJPanelBorder(currentStateLabel,"State"));
+        pEstadoRegla.add(Box.createRigidArea(new Dimension(10, 10)));
+        pEstadoRegla.add(createJPanelBorder(reglaLabel,"Rule"));
 
-	getContentPane().add(p, BorderLayout.NORTH);
+
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+        p.add(pEstadoRegla);
+        p.add(Box.createRigidArea(new Dimension(10, 0)));
+        p.add(createJPanelBorder(textPane,"String"));
+        p.add(Box.createHorizontalGlue());
+
+        getContentPane().add(p, BorderLayout.NORTH);
     }
-    
+
     /**
-     ** Realiza un paso en la ejecuciÛn de la M·quina y regresa verdarero o falso dependiendo si puede seguir con la ejecuciÛn o no
-     ** @return boolean <code>true</code> si se puede continuar con la ejecuciÛn de la m·quina, <code>false</code> en  otro caso.
+     ** Realiza un paso en la ejecuci√≥n de la M√°quina y regresa verdarero o falso dependiendo si puede seguir con la ejecuci√≥n o no
+     ** @return boolean <code>true</code> si se puede continuar con la ejecuci√≥n de la m√°quina, <code>false</code> en  otro caso.
      **/
     public boolean nextStep(){
-	boolean masTrans=jmachine.nextStep();	    
-	nextStep(masTrans);	    
-	if(!jmachine.getStrToTestOrig().isEpsilon()){
-	    JStr foo = jmachine.getSubStrTested();
-	    if(jmachine.getCurrentState() != null)
-		currentStateLabel.setText(jmachine.getCurrentState().toString());	    
-	    reglaLabel.setText(""+((JAFS)jmachine).getAppliedRule());
+        boolean masTrans=jmachine.nextStep();
+        nextStep(masTrans);
+        if(!jmachine.getStrToTestOrig().isEpsilon()){
+            JStr foo = jmachine.getSubStrTested();
+            if(jmachine.getCurrentState() != null)
+          currentStateLabel.setText(jmachine.getCurrentState().toString());
+            reglaLabel.setText(""+((JAFS)jmachine).getAppliedRule());
 
-	    Str pre, post;
-	    Symbol curr;
-	    pre = foo.substring(0,foo.length()-1);
-	    curr = foo.getLast();
-	    post = jmachine.getStrToTest();
-	    sssd.insertStr(pre,curr,post);
-	}
-        setJPanelStackContents((JAFS)jmachine);
+            Str pre, post;
+            Symbol curr;
+            pre = foo.substring(0,foo.length()-1);
+            curr = foo.getLast();
+            post = jmachine.getStrToTest();
+            sssd.insertStr(pre,curr,post);
+        }
+              setJPanelStackContents((JAFS)jmachine);
 
-	getJdc().repaint();
-	if(!masTrans){
-	    stopExecution = true;
-	    runAllButton.setEnabled(false);
-            quickTestButton.setEnabled(false);
-	    jmachine.displayResult();
-	}//else Debug.println("mmm there are more transitions!!!");
-	return masTrans;
+        getJdc().repaint();
+        if(!masTrans){
+            stopExecution = true;
+            runAllButton.setEnabled(false);
+                  quickTestButton.setEnabled(false);
+            jmachine.displayResult();
+        }//else Debug.println("mmm there are more transitions!!!");
+        return masTrans;
     }
-    
+
 
     protected void initJMachine(File file){
-	System.err.println("\nLoading...  " + file +" \n");
-	try{		    
-	    jmachine = new JAFS(file,this);
-//	    System.err.println("\nJFSA = " + jmachine);
-	    jdc.initJMachineCanvas((JAFS)jmachine);	    
-	    printM.setEnabled(true);
-	    nextButton.setEnabled(true);
-	    resetButton.setEnabled(true);
-	    runAllButton.setEnabled(true);
+        System.err.println("\nLoading...  " + file +" \n");
+        try{
+            jmachine = new JAFS(file,this);
+            //      System.err.println("\nJFSA = " + jmachine);
+            jdc.initJMachineCanvas((JAFS)jmachine);
+            printM.setEnabled(true);
+            nextButton.setEnabled(true);
+            resetButton.setEnabled(true);
+            runAllButton.setEnabled(true);
             quickTestButton.setEnabled(true);
-	    stopButton.setEnabled(false);	    
-	    currentStateLabel.setText(jmachine.getCurrentState().toString());
-	    reglaLabel.setText("");
-	    jmachine.setStrToTest(new JStr());
-	    jmachine.setStrToTestOrig(new JStr());
-	    sssd.insertStr(jmachine.getStrToTest());
-	    loadTest.setEnabled(true);
-	    consTest.setEnabled(true);
-	    jScrollPaneCanvas.getViewport().setViewPosition(new Point(0,0));
+            tabular.setEnabled(true);
+            stopButton.setEnabled(false);
+            currentStateLabel.setText(jmachine.getCurrentState().toString());
+            reglaLabel.setText("");
+            jmachine.setStrToTest(new JStr());
+            jmachine.setStrToTestOrig(new JStr());
+            sssd.insertStr(jmachine.getStrToTest());
+            loadTest.setEnabled(true);
+            consTest.setEnabled(true);
+            jScrollPaneCanvas.getViewport().setViewPosition(new Point(0,0));
             setJPanelStackContents((JAFS)jmachine);
-            
-	    jmachine.resetMachine();	    
-	    descriptionMI.setEnabled(true);
-	}catch(Exception ex){
-	    jmachine = null;
-	    ex.printStackTrace();
-	    JOptionPane.showMessageDialog(null,"Error loading  JAFS file "+file,"JAFS",JOptionPane.ERROR_MESSAGE);
-	}	
+
+            jmachine.resetMachine();
+            descriptionMI.setEnabled(true);
+        } catch(Exception ex) {
+            jmachine = null;
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Error loading  JAFS file "+file,"JAFS",JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
+
 
     public void componentHidden(ComponentEvent e) {}
-    
+
     public void componentMoved(ComponentEvent e) {}
 
     public void componentResized(ComponentEvent e) {
-	if(jdc !=null){
-	    jdc.setSize(e.getComponent().getSize());
-	}
+        if (jdc !=null) {
+            jdc.setSize(e.getComponent().getSize());
+        }
     }
 
     public void componentShown(ComponentEvent e) {}
 
 
     public static void main(String []argv){
-	JAfsFrame f = new JAfsFrame();
-	f.show();	
+        JAfsFrame f = new JAfsFrame();
+        f.setVisible(true);
     }
 
     protected JMachine createNew() {
         // return new JDfa();
         return null;
+    }
+
+    private static class RadioButtonRenderer extends DefaultTableCellRenderer {
+      public Component getTableCellRendererComponent(JTable table, Object value,
+                                                     boolean isSelected, boolean hasFocus,
+                                                     int row, int column) {
+        if (value == null){
+            return null;
+        }
+
+        if (isSelected) {
+            ((Component) value).setBackground(new Color(43,102,201));
+        } else {
+            ((Component) value).setBackground(Color.white);
+        }
+        ((JRadioButton) value).setHorizontalAlignment(SwingConstants.CENTER);
+
+        return (Component) value;
+      }
+    }
+
+    private static class RadioButtonEditor extends DefaultCellEditor implements ItemListener {
+      private JRadioButton button;
+
+      public RadioButtonEditor(JCheckBox checkBox) {
+        super(checkBox);
+      }
+
+      public Component getTableCellEditorComponent(JTable table, Object value,
+          boolean isSelected, int row, int column) {
+        if (value == null)
+          return null;
+        button = (JRadioButton) value;
+        button.addItemListener(this);
+        return (Component) value;
+      }
+
+      public Object getCellEditorValue() {
+        button.removeItemListener(this);
+        return button;
+      }
+
+      public void itemStateChanged(ItemEvent e) {
+        super.fireEditingStopped();
+      }
+    }
+
+    public void showTabular(){
+        super.showTabular();
+        MyJTable table = ttm.getMyJTable();
+        table.getColumn("Initial").setCellRenderer(
+                new RadioButtonRenderer());
+        table.getColumn("Initial").setCellEditor(
+                new RadioButtonEditor(new JCheckBox()));
     }
 
 } // JAfsFrame

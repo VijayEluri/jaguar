@@ -1,26 +1,26 @@
 /**
 ** <StackDelta.java> -- The AFS's specific delta
-** 
-** Copyright (C) 2002 by  Ivan Hern醤dez Serrano
+**
+** Copyright (C) 2002 by  Ivan Hern谩ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern醤dez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern谩ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
@@ -39,242 +39,243 @@ import java.io.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
-/** 
- * Funci髇 de transici髇 delta<p> d: Q x Sigma x Gamma --> <em>P</em> (Q x Gamma^{*})
- * 
- * @author Ivan Hern醤dez Serrano <ivanx@users.sourceforge.net>
+/**
+ * Funci贸n de transici贸n delta<p> d: Q x Sigma x Gamma --> <em>P</em> (Q x Gamma^{*})
+ *
+ * @author Ivan Hern谩ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
-public class StackDelta extends Delta{
-
-
+public class StackDelta extends Delta<State,Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>>> {
     /**
-     * Constructor sin par醡etros.
+     * Constructor sin par谩metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public StackDelta (){
-	super();	
+        super();
     }
 
     public StackDelta(org.w3c.dom.Node node)throws Exception{
-	NodeList transitions = node.getChildNodes();
-	Node pNode=null,ssNode=null,gsNode=null,qxgssNode=null;
-	int j;
-	boolean itemFound = false;	
-	for(int i = 0 ; i < transitions.getLength() ; i++){
-	    if(transitions.item(i).getNodeType() == Node.ELEMENT_NODE){
-		itemFound = false;
-		NodeList currentTransition = transitions.item(i).getChildNodes();		
-		for(j = 0 ; !itemFound &&  j < currentTransition.getLength(); j++)
-		    if(currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE){
-			pNode = currentTransition.item(j);
-			itemFound = true;
-		    }
-		itemFound = false;	
-		for( ; !itemFound &&  j < currentTransition.getLength(); j++)
-		    if(currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE){
-			ssNode = currentTransition.item(j);
-			itemFound = true;
-		    }
-		itemFound = false;	
-		for( ; !itemFound &&  j < currentTransition.getLength(); j++)
-		    if(currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE){
-			gsNode = currentTransition.item(j);
-			itemFound = true;
-		    }
-		itemFound = false;	
-		for( ; !itemFound &&  j < currentTransition.getLength(); j++)
-		    if(currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE){
-			qxgssNode = currentTransition.item(j);
-			itemFound = true;
-		    }
-		addTransition(new State(pNode),new Symbol(ssNode),new Symbol(gsNode),new QxGammaStarSet(qxgssNode));
-	    }
-	}
-    }    
+        NodeList transitions = node.getChildNodes();
+        Node pNode=null,ssNode=null,gsNode=null,qxgssNode=null;
+        int j;
+        boolean itemFound = false;
+        for (int i = 0 ; i < transitions.getLength() ; i++) {
+            if (transitions.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                itemFound = false;
+                NodeList currentTransition = transitions.item(i).getChildNodes();
+                for (j = 0 ; !itemFound &&  j < currentTransition.getLength(); j++) {
+                    if (currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE) {
+                        pNode = currentTransition.item(j);
+                        itemFound = true;
+                    }
+                }
+                itemFound = false;
+                for ( ; !itemFound &&  j < currentTransition.getLength(); j++) {
+                    if (currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE) {
+                        ssNode = currentTransition.item(j);
+                        itemFound = true;
+                    }
+                }
+                itemFound = false;
+                for ( ; !itemFound &&  j < currentTransition.getLength(); j++) {
+                    if (currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE) {
+                        gsNode = currentTransition.item(j);
+                        itemFound = true;
+                    }
+                }
+                itemFound = false;
+                for( ; !itemFound &&  j < currentTransition.getLength(); j++) {
+                    if (currentTransition.item(j).getNodeType() == Node.ELEMENT_NODE) {
+                        qxgssNode = currentTransition.item(j);
+                        itemFound = true;
+                    }
+                }
+                addTransition(new State(pNode),new Symbol(ssNode),new Symbol(gsNode),new QxGammaStarSet(qxgssNode));
+            }
+        }
+    }
 
     public String toString(){
-	String s  = "";
-	Object oKeys [] = delta.keySet().toArray();
-	Object oKeysSub [];	
-	for(int i = 0 ; i < oKeys.length;  i ++){
-	    s += "\n\t\t "+ oKeys[i];
-	    oKeysSub =  ((Hashtable)delta.get(oKeys[i])).keySet().toArray();
-	    for(int j = 0 ; j < oKeysSub.length;  j ++){
-		s += "\n\t\t\t " + oKeysSub[j] +" " + ((Hashtable)delta.get(oKeys[i])).get(oKeysSub[j]);
-	    }
-	}
-	return s;	
+        String s  = "";
+        Object oKeys [] = delta.keySet().toArray();
+        Object oKeysSub [];
+        for(int i = 0 ; i < oKeys.length;  i ++){
+            s += "\n\t\t "+ oKeys[i];
+            oKeysSub =  ((Hashtable)delta.get(oKeys[i])).keySet().toArray();
+            for(int j = 0 ; j < oKeysSub.length;  j ++){
+          s += "\n\t\t\t " + oKeysSub[j] +" " + ((Hashtable)delta.get(oKeys[i])).get(oKeysSub[j]);
+            }
+        }
+        return s;
     }
-    
-    /** 
-     ** Agrega una transici髇 a la funci髇 de transici髇 delta.
+
+    /**
+     ** Agrega una transici贸n a la funci贸n de transici贸n delta.
      ** Checa que la cadena <code>strGamma</code> este sobre Gamma^{*}.
      **
-     ** Con los dos 鷏timos parametros es como si le dieramos solo un elemento del conjunto {QxGamma^{*}}
+     ** Con los dos 煤ltimos parametros es como si le dieramos solo un elemento del conjunto {QxGamma^{*}}
      ** @param p primer entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param sigmaSym segunda entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param gammaSym tercer entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param q primer entrada del par ordenado  Q x Gamma^{*}.
-     ** @param gammaStr segunda entrada del par ordenado  Q x Gamma^{*}, si la transici髇 ya estaba definida se agrega este elemento al conjunto
+     ** @param gammaStr segunda entrada del par ordenado  Q x Gamma^{*}, si la transici贸n ya estaba definida se agrega este elemento al conjunto
      **
      **/
     public void addTransition(State p, Symbol sigmaSym, Symbol gammaSym, State q, Str gammaStr){
-	addTransition(p, sigmaSym, gammaSym, new QxGammaStar(q,gammaStr));
+        addTransition(p, sigmaSym, gammaSym, new QxGammaStar(q,gammaStr));
     }
 
-    /** 
-     ** Agrega una transici髇 a la funci髇 de transici髇 delta.
+    /**
+     ** Agrega una transici贸n a la funci贸n de transici贸n delta.
      ** Checa que la cadena <code>strGamma</code> este sobre Gamma^{*}.
      **
      ** @param p primer entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param sigmaSym segunda entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param gammaSym tercer entrada de la tercia ordenada Q x Sigma x Gamma.
-     ** @param qtgStar es un elemento del conjunto {QxGamma^{*}},si la transici髇 ya estaba definida se agrega este elemento al conjunto
+     ** @param qtgStar es un elemento del conjunto {QxGamma^{*}},si la transici贸n ya estaba definida se agrega este elemento al conjunto
      **
      **/
     public void addTransition(State p, Symbol sigmaSym, Symbol gammaSym, QxGammaStar qtgStar){
-	QxGammaStarSet tmp = new QxGammaStarSet();
-	tmp.add(qtgStar);
-	addTransition(p, sigmaSym, gammaSym, tmp);	
+        QxGammaStarSet tmp = new QxGammaStarSet();
+        tmp.add(qtgStar);
+        addTransition(p, sigmaSym, gammaSym, tmp);
     }
 
-    /** 
-     ** Agrega una transici髇 a la funci髇 de transici髇 delta.
+    /**
+     ** Agrega una transici贸n a la funci贸n de transici贸n delta.
      ** Checa que la cadena <code>strGamma</code> este sobre Gamma^{*}.
      **
      ** @param p primer entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param sigmaSym segunda entrada de la tercia ordenada Q x Sigma x Gamma.
      ** @param gammaSym tercer entrada de la tercia ordenada Q x Sigma x Gamma.
-     ** @param qtgStarSet el conjunto {QxGamma^{*}}, si la transici髇 ya estaba definida se hace la union entre el anterior y este conjunto 
+     ** @param qtgStarSet el conjunto {QxGamma^{*}}, si la transici贸n ya estaba definida se hace la union entre el anterior y este conjunto
      **
      **/
-    public void addTransition(State p, Symbol sigmaSym, Symbol gammaSym, QxGammaStarSet qtgStarSet){	
-	Hashtable tQ = (Hashtable)delta.get(p);
-	if(tQ == null)
-	    tQ = new Hashtable();
-	Hashtable tSigmaSym = (Hashtable)tQ.get(sigmaSym);
-	if(tSigmaSym == null)
-	    tSigmaSym = new Hashtable();
-	QxGammaStarSet transicionesHS = (QxGammaStarSet)tSigmaSym.get(gammaSym);
-	if(transicionesHS == null)
-	    transicionesHS = new QxGammaStarSet();
-	
-	transicionesHS.addAll(qtgStarSet);
-	tSigmaSym.put(gammaSym,transicionesHS);
-	tQ.put(sigmaSym,tSigmaSym);
-	delta.put(p,tQ);
+    public void addTransition(State p, Symbol sigmaSym, Symbol gammaSym, QxGammaStarSet qtgStarSet){
+        Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>> tQ = delta.get(p);
+        if(tQ == null)
+            tQ = new Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>>();
+        Hashtable<Symbol,QxGammaStarSet> tSigmaSym = tQ.get(sigmaSym);
+        if(tSigmaSym == null)
+            tSigmaSym = new Hashtable<Symbol,QxGammaStarSet>();
+        QxGammaStarSet transicionesHS = tSigmaSym.get(gammaSym);
+        if(transicionesHS == null)
+            transicionesHS = new QxGammaStarSet();
+
+        transicionesHS.addAll(qtgStarSet);
+        tSigmaSym.put(gammaSym,transicionesHS);
+        tQ.put(sigmaSym,tSigmaSym);
+        delta.put(p,tQ);
     }
 
     public void toFile(FileWriter fw){
-	try{ 
-	    fw.write("\n"+BEG_TAG);
-	    Object [] oKeys = delta.keySet().toArray();
-	    State currentSt;
-	    Symbol currentSym;
-	    /** El estado resultante de la combinaci髇 QxSigma **/
-	    State currentResSt;
-	    Vector vaux, vtrans;
-	    for(int i = 0 ; i < oKeys.length; i++){		
-		currentSt = (State)oKeys[i];
-		vaux = getTransitions(currentSt);
-		for(int j = 0 ; j < vaux.size(); j ++){
-		    /** checamos que el resultado de la transici髇 sea distinto de nulo **/
-		    vtrans=(Vector)vaux.get(j);    
-		    if(vtrans.get(1) != null){		    
-			fw.write("\n\t"+TRANS_BEG_TAG);
-			currentSt.toFile(fw);
-			((Symbol)vtrans.get(0)).toFile(fw);
-			((Symbol)vtrans.get(1)).toFile(fw);
-			((QxGammaStarSet)vtrans.get(2)).toFile(fw);			
-			fw.write(TRANS_END_TAG);
-		    }
-		}
-	    }
-	    fw.write("\n" + END_TAG+"\n");
-	    fw.flush();	    
-	}catch( Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "Trying to toFile: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try{
+            fw.write("\n"+BEG_TAG);
+            Object [] oKeys = delta.keySet().toArray();
+            State currentSt;
+            Symbol currentSym;
+            /** El estado resultante de la combinaci贸n QxSigma **/
+            State currentResSt;
+            Vector vaux, vtrans;
+            for (int i = 0 ; i < oKeys.length; i++) {
+                currentSt = (State)oKeys[i];
+                vaux = getTransitions(currentSt);
+                for (int j = 0 ; j < vaux.size(); j ++) {
+                    /** checamos que el resultado de la transici贸n sea distinto de nulo **/
+                    vtrans=(Vector)vaux.get(j);
+                    if (vtrans.get(1) != null) {
+                        fw.write("\n\t"+TRANS_BEG_TAG);
+                        currentSt.toFile(fw);
+                        ((Symbol)vtrans.get(0)).toFile(fw);
+                        ((Symbol)vtrans.get(1)).toFile(fw);
+                        ((QxGammaStarSet)vtrans.get(2)).toFile(fw);
+                        fw.write(TRANS_END_TAG);
+                    }
+                }
+            }
+            fw.write("\n" + END_TAG+"\n");
+            fw.flush();
+        }catch( Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
+        }
 
     }
 
     /**
      ** Regresa un estado con todas sus transiciones
-     ** @param p el estado del cual queremos conocer todas sus transiciones 
-     ** @return v un vector <code>v</code> donde cada entrada es un vector <code>vi</code> de tama駉 3 con la siguiente estructura: <p>
+     ** @param p el estado del cual queremos conocer todas sus transiciones
+     ** @return v un vector <code>v</code> donde cada entrada es un vector <code>vi</code> de tama帽o 3 con la siguiente estructura: <p>
      ** <ul>
-     **   <li> <code> v.elelemAt(0) </code> tiene el s韒bolo <code>s0</code> en Sigma, segundo elemento del par ordenado d:Q x Sigmma  x Gamma</li>
-     **   <li> <code> v.elelemAt(1) </code> tiene el s韒bolo <code>s1</code> en Gamma, tercer elemento del par ordenado d:Q x Sigmma  x Gamma</li>
+     **   <li> <code> v.elelemAt(0) </code> tiene el s铆mbolo <code>s0</code> en Sigma, segundo elemento del par ordenado d:Q x Sigmma  x Gamma</li>
+     **   <li> <code> v.elelemAt(1) </code> tiene el s铆mbolo <code>s1</code> en Gamma, tercer elemento del par ordenado d:Q x Sigmma  x Gamma</li>
      **   <li> <code> v.elelemAt(2) </code> tiene el conjunto de transiciones <code>QxGammaStarSet</code> resultante de aplicar
-     **          la funci髇 de transici髇 delta d(<code>p,s0,s1</code>), un subconjunto de <em>P(</em>Q x Gamma^{*}<em>)</em> </li>
+     **          la funci贸n de transici贸n delta d(<code>p,s0,s1</code>), un subconjunto de <em>P(</em>Q x Gamma^{*}<em>)</em> </li>
      ** </ul>
-     ** el tama駉 de v es el n鷐ero de transiciones definidas desde el  estado  <code>p</code>
+     ** el tama帽o de v es el n煤mero de transiciones definidas desde el  estado  <code>p</code>
      **/
-    public Vector getTransitions(State p){
-	Vector v = new Vector(), vi;
-	Hashtable htQ = (Hashtable)delta.get(p);
-	if(htQ == null) return v;
-	Object [] sigmaSymKeys = htQ.keySet().toArray();
-	Object [] gammaSymKeys;	
-	Symbol sSigma;
-	Hashtable htGammaSym;
-	QxGammaStar qtgStar;	
-	for(int i = 0 ; i < sigmaSymKeys.length; i++){
-	    sSigma = (Symbol)sigmaSymKeys[i];	    
-	    htGammaSym = (Hashtable) htQ.get(sSigma);	    
-	    gammaSymKeys = htGammaSym.keySet().toArray();	    
-	    for( int j = 0 ; j < gammaSymKeys.length; j++){
-		vi = new Vector();
-		vi.add(sSigma);
-		vi.add(gammaSymKeys[j]);
-		vi.add(htGammaSym.get(gammaSymKeys[j]));
-		v.add(vi);		
-	    }
-	}
-	return v;	
+    public Vector<Vector> getTransitions(State p){
+        Vector<Vector> v = new Vector<Vector>();
+        Vector<Object> vi;
+        Hashtable htQ = (Hashtable)delta.get(p);
+        if(htQ == null) return v;
+        Object [] sigmaSymKeys = htQ.keySet().toArray();
+        Object [] gammaSymKeys;
+        Symbol sSigma;
+        Hashtable htGammaSym;
+        QxGammaStar qtgStar;
+        for(int i = 0 ; i < sigmaSymKeys.length; i++){
+            sSigma = (Symbol)sigmaSymKeys[i];
+            htGammaSym = (Hashtable) htQ.get(sSigma);
+            gammaSymKeys = htGammaSym.keySet().toArray();
+            for( int j = 0 ; j < gammaSymKeys.length; j++){
+                vi = new Vector<Object>();
+                vi.add(sSigma);
+                vi.add(gammaSymKeys[j]);
+                vi.add(htGammaSym.get(gammaSymKeys[j]));
+                v.add(vi);
+            }
+        }
+        return v;
     }
 
     /**
-     * Regresa el valor de la aplicar la funci髇 de transici髇 delta <em>d</em>(<code>p,symSigma,symGamma</code>)
-     * @param p el primer elemento de la terc韆 ordenada d: Q x Sigma x Gamma
-     * @param symSigma el segundo elemento de la terc韆 ordenada d: Q x Sigma x Gamma
-     * @param symGamma el tercer elemento de la terc韆 ordenada d: Q x Sigma x Gamma
+     * Regresa el valor de la aplicar la funci贸n de transici贸n delta <em>d</em>(<code>p,symSigma,symGamma</code>)
+     * @param p el primer elemento de la terc铆a ordenada d: Q x Sigma x Gamma
+     * @param symSigma el segundo elemento de la terc铆a ordenada d: Q x Sigma x Gamma
+     * @param symGamma el tercer elemento de la terc铆a ordenada d: Q x Sigma x Gamma
      * @return QxGammaStarSet StateSet un conjunto de estados que es todos los estaodos  a los que se transifiere
-     * el automata con el s韒bolo symb en el estado q
+     * el automata con el s铆mbolo symb en el estado q
      */
     public QxGammaStarSet apply(State p, Symbol symSigma, Symbol symGamma){
-	Hashtable tP = (Hashtable)delta.get(p);
-	if(tP == null)
-	    return null;
-	Hashtable tsymSigma = (Hashtable)tP.get(symSigma);
-	if(tsymSigma == null)
-	    return null;
-	return (QxGammaStarSet)tsymSigma.get(symGamma);
+        Hashtable tP = (Hashtable)delta.get(p);
+        if (tP == null)
+            return null;
+        Hashtable tsymSigma = (Hashtable)tP.get(symSigma);
+        if (tsymSigma == null)
+            return null;
+        return (QxGammaStarSet)tsymSigma.get(symGamma);
     }
 
     public String getStringTransitions(State p){
-	Vector v = getTransitions(p);
-	Vector vp;	
-	String res = "";
-	QxGammaStar qtgs;	
-	for(int i = 0; i < v.size(); i++){
-	    vp = (Vector) v.elementAt(i);	    
-	    res += "<br> &nbsp; d(<font color=blue>"+p.getLabel()+"</font>,<font color=red>"+((Symbol)vp.elementAt(0))+"</font>,<font color=red>"+((Symbol)vp.elementAt(1))+"</font>) = <font color=blue>"+ vp.elementAt(2)+"</font> &nbsp;";
-	}
-	return res;	
-    } 
+        Vector v = getTransitions(p);
+        Vector vp;
+        String res = "";
+        QxGammaStar qtgs;
+        for(int i = 0; i < v.size(); i++){
+            vp = (Vector) v.elementAt(i);
+            res += "<br> &nbsp; d(<font color=blue>"+p.getLabel()+"</font>,<font color=red>"+((Symbol)vp.elementAt(0))+"</font>,<font color=red>"+((Symbol)vp.elementAt(1))+"</font>) = <font color=blue>"+ vp.elementAt(2)+"</font> &nbsp;";
+        }
+        return res;
+    }
     /**
-     * Regresa una cadena con formato  html para los tooltips que nos muestra todas las transiciones deifinidas para el estado dado 
+     * Regresa una cadena con formato  html para los tooltips que nos muestra todas las transiciones deifinidas para el estado dado
      * @param p el estado de quien queremos ver todas sus transiciones definidas
      **/
     public String getToolTipString(State p){
-	return "<html> &nbsp; <font color=blue>" + p.toString() +  (p.getIsInF()?" Final State ":"") + "</font>" + getStringTransitions(p)+"</html>";
+        return "<html> &nbsp; <font color=blue>" + p.toString() +  (p.getIsInF()?" Final State ":"") + "</font>" + getStringTransitions(p)+"</html>";
     }
-
-
 }
 
 
