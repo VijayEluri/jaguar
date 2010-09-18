@@ -1,7 +1,7 @@
 /**
 ** <NDfaDelta.java> -- The NDFA's  specific delta
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -55,7 +55,7 @@ public class NDfaDelta extends Delta<State,Hashtable<Symbol,StateSet>>{
 
 
     /**
-     * Iinicializa una funciÛn de transiciÛn delta
+     * Iinicializa una funci√≥n de transici√≥n delta
      */
     public NDfaDelta(){
         super();
@@ -94,15 +94,15 @@ public class NDfaDelta extends Delta<State,Hashtable<Symbol,StateSet>>{
 
 
     /**
-     * Agrega una transiciÛn de la forma delta(q,symb)=transition
+     * Agrega una transici√≥n de la forma delta(q,symb)=transition
      * @param q estado , primer elemento del par ordenado QxSigma
-     * @param symb sÌmbolo , segundo elemento del par ordenado QxSigma
+     * @param symb s√≠mbolo , segundo elemento del par ordenado QxSigma
      * @param transitions conjunto de transiciones resultante
      */
     public void addTransition(State q, Symbol symb, StateSet transitions){
-        Hashtable t = (Hashtable)delta.get(q);
+        Hashtable<Symbol, StateSet> t = delta.get(q);
         if(t == null)
-            t = new Hashtable();
+            t = new Hashtable<Symbol, StateSet>();
         StateSet v = (StateSet)t.get(symb);
         if(v == null)
             v = new StateSet();
@@ -124,88 +124,88 @@ public class NDfaDelta extends Delta<State,Hashtable<Symbol,StateSet>>{
     }
 
     /**
-     * Regresa el valor de la aplicar la funciÛn de transiciÛn delta,
+     * Regresa el valor de la aplicar la funci√≥n de transici√≥n delta,
      * @return StateSet un conjunto de estados que es todos los estaodos  a los que se transifiere
-     * el automata con el sÌmbolo symb en el estado q
+     * el automata con el s√≠mbolo symb en el estado q
      */
     public StateSet apply(State q, Symbol symb){
-  Hashtable t = (Hashtable)delta.get(q);
-  if(t == null)
-      return null;
-  return (StateSet)t.get(symb);
+        Hashtable t = (Hashtable)delta.get(q);
+        if(t == null)
+            return null;
+        return (StateSet)t.get(symb);
     }
 
     /**
      * Obtiene todas las transiciones de un estado p en delta
-     * @return un vector de estados donde est·n todos los estoaos a los que se transfiere a partir de estado p
+     * @return un vector de estados donde est√°n todos los estoaos a los que se transfiere a partir de estado p
      */
-    public Vector getTransitions(State p){
-  Vector v = new  Vector();
-  Hashtable t = (Hashtable)delta.get(p);
-  Symbol s;
-  StateSet sts;
+    public Vector<Vector> getTransitions(State p){
+        Vector<Vector> v = new  Vector<Vector>();
+        Hashtable<Symbol,StateSet> t = delta.get(p);
+        Symbol s;
+        StateSet sts;
 
-  if(t != null)
-  for(Enumeration e = t.keys(); e.hasMoreElements(); ){
-      s = (Symbol)e.nextElement();
-      sts = (StateSet)t.get(s);
-      Vector vp = new Vector();
-      vp.add(s);
-      vp.add(sts);
-      v.add(vp);
-  }
-  return v;
+        if(t != null)
+        for(Enumeration e = t.keys(); e.hasMoreElements(); ){
+            s = (Symbol)e.nextElement();
+            sts = (StateSet)t.get(s);
+            Vector<Object> vp = new Vector<Object>();
+            vp.add(s);
+            vp.add(sts);
+            v.add(vp);
+        }
+        return v;
     }
 
 
     /**
-     * Escribe la representaciÛn de la funciÛn de transiciÛn delta en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la delta con su representaciÛn correspondiente con tags.
+     * Escribe la representaci√≥n de la funci√≥n de transici√≥n delta en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la delta con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se escribir· la delta
+     * @param fw El FileWriter donde se escribir√° la delta
      */
     public void toFile(FileWriter fw){
-  try{
-      fw.write("\n"+BEG_TAG);
-      Object [] oKeys = delta.keySet().toArray();
-      State currentSt;
-      Symbol currentSym;
-      /** El estado resultante de la combinaciÛn QxSigma **/
-      State currentResSt;
-      Vector vaux, vtrans;
-      for(int i = 0 ; i < oKeys.length; i++){
-    currentSt = (State)oKeys[i];
-    vaux = getTransitions(currentSt);
-    for(int j = 0 ; j < vaux.size(); j ++){
-        /** checamos que el resultado de la transiciÛn sea distinto de nulo **/
-        vtrans=(Vector)vaux.get(j);
-        if(vtrans.get(1) != null){
-      fw.write("\n\t"+TRANS_BEG_TAG);
-      currentSt.toFile(fw);
-      ((Symbol)vtrans.get(0)).toFile(fw);
-      ((StateSet)vtrans.get(1)).toFile(fw);
-      fw.write(TRANS_END_TAG);
+        try{
+            fw.write("\n"+BEG_TAG);
+            Object [] oKeys = delta.keySet().toArray();
+            State currentSt;
+            Symbol currentSym;
+            /** El estado resultante de la combinaci√≥n QxSigma **/
+            State currentResSt;
+            Vector vaux, vtrans;
+            for(int i = 0 ; i < oKeys.length; i++){
+          currentSt = (State)oKeys[i];
+          vaux = getTransitions(currentSt);
+          for(int j = 0 ; j < vaux.size(); j ++){
+              /** checamos que el resultado de la transici√≥n sea distinto de nulo **/
+              vtrans=(Vector)vaux.get(j);
+              if(vtrans.get(1) != null){
+            fw.write("\n\t"+TRANS_BEG_TAG);
+            currentSt.toFile(fw);
+            ((Symbol)vtrans.get(0)).toFile(fw);
+            ((StateSet)vtrans.get(1)).toFile(fw);
+            fw.write(TRANS_END_TAG);
+              }
+          }
+            }
+            fw.write("\n" + END_TAG+"\n");
+        }catch( Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
         }
-    }
-      }
-      fw.write("\n" + END_TAG+"\n");
-  }catch( Exception ouch){
-      System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
-             + "Trying to toFile: " );
-      ouch.printStackTrace();
-  }
 
     }
 
     public String getStringTransitions(State p){
-  Vector v = getTransitions(p);
-  Vector vp;
-  String res = "";
-  for(int i = 0; i < v.size(); i++){
-      vp = (Vector) v.elementAt(i);
-      res += "<br> &nbsp; d(<font color=blue>"+p.getLabel()+"</font>,<font color=red>"+((Symbol)vp.elementAt(0))+"</font>) = <font color=blue>"+ ((StateSet)vp.elementAt(1))+"</font> &nbsp;";
-  }
-  return res;
+        Vector v = getTransitions(p);
+        Vector vp;
+        String res = "";
+        for(int i = 0; i < v.size(); i++){
+            vp = (Vector) v.elementAt(i);
+            res += "<br> &nbsp; d(<font color=blue>"+p.getLabel()+"</font>,<font color=red>"+((Symbol)vp.elementAt(0))+"</font>) = <font color=blue>"+ ((StateSet)vp.elementAt(1))+"</font> &nbsp;";
+        }
+        return res;
     }
 
     /**
@@ -213,7 +213,7 @@ public class NDfaDelta extends Delta<State,Hashtable<Symbol,StateSet>>{
      * @param p el estado de quien queremos ver todas sus transiciones definidas
      **/
     public String getToolTipString(State p){
-  return "<html> &nbsp; <font color=blue>" + p.toString() +  (p.getIsInF()?" Final State ":"") + "</font>" + getStringTransitions(p)+"</html>";
+        return "<html> &nbsp; <font color=blue>" + p.toString() +  (p.getIsInF()?" Final State ":"") + "</font>" + getStringTransitions(p)+"</html>";
     }
 
 }

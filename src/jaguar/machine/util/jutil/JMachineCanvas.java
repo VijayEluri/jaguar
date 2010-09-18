@@ -1,7 +1,7 @@
 /**
 ** <JMachineCanvas.java> -- The generic machine canvas
 **
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -41,14 +41,14 @@ import jaguar.machine.Machine;
 import jaguar.machine.JMachine;
 
 /**
- * Esta clase es la encargada de llamar a los painters de la máquina, ademas de detectar los movimientos  en el lienzo
+ * Esta clase es la encargada de llamar a los painters de la mÃ¡quina, ademas de detectar los movimientos  en el lienzo
  *
- * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 abstract public class JMachineCanvas extends JPanel{
     /**
-     * La dimensión del canvas para el Canvas
+     * La dimensiÃ³n del canvas para el Canvas
      **/
     private Dimension size;
 
@@ -78,17 +78,17 @@ abstract public class JMachineCanvas extends JPanel{
     }
 
     /**
-     * La dimensión mínima del DfaCanvas
+     * La dimensiÃ³n mÃ­nima del DfaCanvas
      */
     public static Dimension MINIMUM_DIMENSION = new Dimension(300,300);
 
     /**
-     * La dimensión adecuada (preferred) del DfaCanvas
+     * La dimensiÃ³n adecuada (preferred) del DfaCanvas
      */
     public static Dimension PREFERRED_DIMENSION = new Dimension(600,600);
 
     /**
-     * La dimensión máxima del DfaCanvas
+     * La dimensiÃ³n mÃ¡xima del DfaCanvas
      */
 //    public static Dimension MAXIMUM_DIMENSION = new Dimension(750,750);
     public static Dimension MAXIMUM_DIMENSION = new Dimension(1500,1500);
@@ -97,13 +97,13 @@ abstract public class JMachineCanvas extends JPanel{
     /**
      * La lista de los JStates
      **/
-    private Vector jeList;
+    private Vector<JState> jeList;
 
     /**
      * Get the value of jestadosList.
      * @return value of jestadosList.
      */
-    public Vector getJeList() {
+    public Vector<JState> getJeList() {
         return jeList;
     }
 
@@ -111,12 +111,12 @@ abstract public class JMachineCanvas extends JPanel{
      * Set the value of jestadosList.
      * @param v  Value to assign to jestadosList.
      */
-    public void setJeList(Vector  v) {
+    public void setJeList(Vector<JState>  v) {
         jeList = v;
     }
 
     /**
-     * Constructor sin parámetros.
+     * Constructor sin parÃ¡metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JMachineCanvas (){
@@ -143,7 +143,7 @@ abstract public class JMachineCanvas extends JPanel{
 
     public void initJMachineCanvas(JMachine _jmachine){
         jmachine = _jmachine;
-        Vector v = new Vector();
+        Vector<JState> v = new Vector<JState>();
         JState jeCurrent;
         for (Iterator i = ((Machine)jmachine).getQ().iterator() ; i.hasNext() ;) {
             jeCurrent = (JState)i.next();
@@ -195,13 +195,13 @@ abstract public class JMachineCanvas extends JPanel{
         return MINIMUM_DIMENSION;
     }
     /**
-     * Regresa la dimensión adecuada al layout manager
+     * Regresa la dimensiÃ³n adecuada al layout manager
      */
      public Dimension getPreferredSize(){
    return super.getSize();
      }
     /**
-     * Regresa la dimensión adecuada al layout manager
+     * Regresa la dimensiÃ³n adecuada al layout manager
      */
     public Dimension getMinimumSize(){
         return MINIMUM_DIMENSION;
