@@ -1,53 +1,53 @@
 /**
-** 
-** Copyright (C) 2002 by  Ivan Hern醤dez Serrano
+**
+** Copyright (C) 2002 by  Ivan Hern谩ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern醤dez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern谩ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
 package jaguar.machine.dfa.structures.exception;
 
 /**
- * representa la situacion en la que  La delta no tiene definida una transici髇
- * 
- * @author Ivan Hern醤dez Serrano <ivanx@users.sourceforge.net>
+ * representa la situacion en la que  La delta no tiene definida una transici贸n
+ *
+ * @author Ivan Hern谩ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class DfaDeltaNotDefinedTransitionException extends Exception{
     /**
-     * Constructor sin par醡etros.
-     * La excepcion presenta el mensaje por omisi髇, el cual es
-     * <code>La delta no tiene definida una transici髇</code>
-     */ 
+     * Constructor sin par谩metros.
+     * La excepcion presenta el mensaje por omisi贸n, el cual es
+     * <code>La delta no tiene definida una transici贸n</code>
+     */
     public DfaDeltaNotDefinedTransitionException(){
-	super("La delta no tiene definida una transici髇");
+        super("La delta no tiene definida una transici贸n");
     }
     /**
      * Constructor.
      * Usa el mensaje especificado como parametro del constructor de la superclase.
      *
-     * @param mensaje que contiene esta excepci髇.
+     * @param mensaje que contiene esta excepci贸n.
      */
     public DfaDeltaNotDefinedTransitionException(String mensaje){
-	super(mensaje);
+        super(mensaje);
     }
 }
 /* DfaDeltaNotDefinedTransitionException.java ends here. */
