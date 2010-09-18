@@ -385,8 +385,10 @@ public class JDFA extends DFA implements JMachine{
             double currentIntervalo = 0;
             for (Iterator i = getQ().iterator() ; i.hasNext() ;) {
                 current = (JState)i.next();
-                current.setLocation(radio * Math.cos(Math.toRadians(currentIntervalo))+radio,
-                    radio * Math.sin(Math.toRadians(currentIntervalo))+radio);
+                if (current.getLocation().getX() == 0 && current.getLocation().getY() == 0) {
+                    current.setLocation(radio * Math.cos(Math.toRadians(currentIntervalo))+radio,
+                        radio * Math.sin(Math.toRadians(currentIntervalo))+radio);
+                }
                 currentIntervalo += intervalo;
             }
         }

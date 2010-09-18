@@ -86,24 +86,11 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * El punto dode se localiza en el componente gráfico
-     **/
-    protected Point location;
-
-    /**
-     * Get the value of location.
-     * @return value of location.
-     */
-    public Point getLocation() {
-        return location;
-    }
-
-    /**
      * Set the value of location.
      * @param p Value to assign to location.
      */
     public void setLocation(Point  p) {
-        location = p;
+        super.setLocation(p);
         updateEllipse2D();
     }
 
@@ -113,7 +100,7 @@ public class JState extends jaguar.structures.State {
      * @param y the y coordinate
      */
     public void setLocation(double x, double y) {
-        location.setLocation(x,y);
+        super.setLocation(x,y);
         updateEllipse2D();
     }
 
@@ -234,7 +221,7 @@ public class JState extends jaguar.structures.State {
     }
 
     public JState(State st) {
-        this(st.getLabel(), st.getIsInF());
+        this(st.getLabel(), st.getLocation().getX(), st.getLocation().getY(), st.getIsInF() );
     }
 
 
@@ -275,9 +262,7 @@ public class JState extends jaguar.structures.State {
      *@param _isInF verdadero si es un estado final, falso si no lo es
      **/
     public JState(String label, double x, double y, boolean _isInF) {
-        super(label,_isInF);
-        location = new Point();
-        setLocation(x,y);
+        super(label,x,y,_isInF);
         e2d = new Ellipse2D.Double(getX(),getY(),DIAMETRO,DIAMETRO);
         circuloCinscunscritoEstadoFinal= new Ellipse2D.Double(
                                                     getX()+(DIAMETRO-DIAMETRO_FINAL_STATE)/2,

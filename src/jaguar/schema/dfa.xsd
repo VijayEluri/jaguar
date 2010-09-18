@@ -15,7 +15,16 @@
 
 <xs:complexType name="states">
   <xs:sequence>
-    <xs:element name="state" type="xs:string"  minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="state" minOccurs="0" maxOccurs="unbounded">
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="xpos" type="xs:positiveInteger"/>
+            <xs:attribute name="ypos" type="xs:positiveInteger"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
   </xs:sequence>
 </xs:complexType>
 

@@ -271,7 +271,7 @@ public class DFA extends Machine implements Cloneable{
             }
 
             fw.write("\n\n <!-- Conjunto de States Q --> \n");
-            getQ().toFile(fw);
+            getQ().toFile(fw, true);
             fw.write("\n\n <!-- Alphabet de entrada Sigma --> \n");
             getSigma().toFile(fw);
             fw.write("\n\n <!-- Función de Transición delta --> \n");

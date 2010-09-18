@@ -27,7 +27,7 @@
 
 package jaguar.structures;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Iterator;
 import java.io.File;
 import java.io.FileWriter;
@@ -36,7 +36,7 @@ import jaguar.util.*;
 import java.lang.Class;
 import org.w3c.dom.*;
 
-public class StateSet extends HashSet<State> {
+public class StateSet extends LinkedHashSet<State> {
     /**
      ** El nombre del elemento que debe de ser igual al especificado en su respectivo DTD
      ** El valor de esta variable debe de ser igual a org.w3c.dom.Node.getNodeName()
@@ -162,11 +162,15 @@ public class StateSet extends HashSet<State> {
      *
      * @param fw El FileWriter donde se guardará el StateSet.
      */
-    public void toFile(FileWriter fw){
+    public void toFile(FileWriter fw) {
+        toFile(fw, false);
+    }
+
+    public void toFile(FileWriter fw, boolean withLocation) {
         try {
             fw.write(BEG_TAG);
             for (State state : this) {
-                state.toFile(fw);
+                state.toFile(fw, withLocation);
             }
             fw.write(END_TAG);
         } catch( Exception ouch ){
@@ -175,6 +179,7 @@ public class StateSet extends HashSet<State> {
             ouch.printStackTrace();
         }
     }
+
     /**
      * Regresa si este conjunto se intersecta con el conjunto que le pasamos como parametro.
      *

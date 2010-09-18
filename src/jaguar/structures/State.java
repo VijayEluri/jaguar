@@ -26,7 +26,7 @@
 
 package jaguar.structures;
 
-
+import java.awt.Point;
 import java.io.FileWriter;
 import java.io.File;
 import jaguar.structures.exceptions.StateNotFoundException;
@@ -128,7 +128,13 @@ public class State{
      ** Construye un state dado el documento DOM
      **/
     public State(org.w3c.dom.Node domNode){
-	this(domNode.getChildNodes().item(0).getNodeValue());
+        this(domNode.getChildNodes().item(0).getNodeValue());
+        NamedNodeMap attributes = domNode.getAttributes();
+        if (attributes.getLength() > 0) {
+            int xpos = Integer.parseInt(attributes.getNamedItem("xpos").getNodeValue());
+            int ypos = Integer.parseInt(attributes.getNamedItem("ypos").getNodeValue());
+            this.setLocation(xpos, ypos);
+        }
     }
     
     /**
@@ -147,8 +153,20 @@ public class State{
      * @param _isInF indica si es un estado final
      */
     public State(String _label, boolean _isInF){
-	label = _label;
-	isInF = _isInF;
+        this(_label, 0, 0, _isInF);
+    }
+
+    /**
+     * La constructura con la etiqueta como parametro, y un booleano
+     * que indica si es o no es un estado final  
+     * @param _label la etiqueta del estado
+     * @param _isInF indica si es un estado final
+     */
+    public State(String _label, double x, double y, boolean _isInF){
+        label = _label;
+        isInF = _isInF;
+        location = new Point();
+        setLocation(x,y);
     }    
 
     
@@ -167,9 +185,14 @@ public class State{
      *
      * @param fw El FileWriter donde se guardará el State.
      */
-    public void toFile(FileWriter fw){
+    public void toFile(FileWriter fw, boolean withLocation){
 	try{ 
-	    fw.write(BEG_TAG + getLabel() + END_TAG);
+	    if (withLocation) {
+            fw.write("<" + ELEMENT_NAME + " xpos=\"" + ((int) location.getX()) + "\" " + "ypos=\"" + ((int) location.getY()) + "\" >" + getLabel() + END_TAG);
+	    } else {
+            fw.write(BEG_TAG + getLabel() + END_TAG);
+	    }
+	    
 	}catch( Exception ouch){
 	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
 			       + "Trying to toFile: " ); 
@@ -177,6 +200,39 @@ public class State{
 	}
     }
     
+     public void toFile(FileWriter fw) {
+         toFile(fw, false);
+     }
+    
+    /**
+     * El punto dode se localiza en el componente gráfico
+     **/
+    protected Point location;
+
+    /**
+     * Get the value of location.
+     * @return value of location.
+     */
+    public Point getLocation() {
+        return location;
+    }
+
+    /**
+     * Set the value of location.
+     * @param p Value to assign to location.
+     */
+    public void setLocation(Point  p) {
+        location = p;
+    }
+
+    /**
+     * Set the value of location.
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
+    public void setLocation(double x, double y) {
+        location.setLocation(x,y);
+    }
 }
 
 /* State.java ends here */
