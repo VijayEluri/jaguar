@@ -1,7 +1,7 @@
 /**
 * <StateSet.java> -- To use state sets
 *
-* Copyright (C) 2002 by  Ivan Hernández Serrano
+* Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 *
 * This file is part of JAGUAR
 *
@@ -19,7 +19,7 @@
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-* Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+* Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 *
 * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
 **/
@@ -55,7 +55,7 @@ public class StateSet extends LinkedHashSet<State> {
     public static final String END_TAG = "</"+ELEMENT_NAME+">";
 
     /**
-     * Crea un conjunto de estados vacío
+     * Crea un conjunto de estados vacï¿½o
      */
     public StateSet(){
         super();
@@ -105,7 +105,7 @@ public class StateSet extends LinkedHashSet<State> {
     }
 
     /**
-     * Checa si el estado q esta presente en el conjunto y de ser así hace la referencia pertinente
+     * Checa si el estado q esta presente en el conjunto y de ser asÃ­ hace la referencia pertinente
      */
     public State makeStateReference(State q){
         State superItem;
@@ -157,10 +157,10 @@ public class StateSet extends LinkedHashSet<State> {
     }
 
     /**
-     * Escribe la representación del <code>StateSet</code> en un archivo con el formato definido por el DTD correspondiente
-     * Escribe el StateSet con su representación correspondiente con tags.
+     * Escribe la representaciÃ³n del <code>StateSet</code> en un archivo con el formato definido por el DTD correspondiente
+     * Escribe el StateSet con su representaciÃ³n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardará el StateSet.
+     * @param fw El FileWriter donde se guardarÃ¡ el StateSet.
      */
     public void toFile(FileWriter fw) {
         toFile(fw, false);
@@ -183,7 +183,7 @@ public class StateSet extends LinkedHashSet<State> {
     /**
      * Regresa si este conjunto se intersecta con el conjunto que le pasamos como parametro.
      *
-     * @param sts El conjunto de estados con quien haremos la intesección .
+     * @param sts El conjunto de estados con quien haremos la intesecciÃ³n .
      * @return <code>true</code> si los conjuntos se intersectan <code>false</code> de otra forma
      *
      */

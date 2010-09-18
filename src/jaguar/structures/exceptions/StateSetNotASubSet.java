@@ -41,7 +41,7 @@ public class StateSetNotASubSet extends Exception{
     * Constructor.
     * Recibe los valores para msg.
     * Para el resto de los campos usa el valor por omision.
-    * @param msg el valor con el que se inicalizar� el campo msg
+    * @param msg el valor con el que se inicalizará el campo msg
     * @see #msg
     */
     public StateSetNotASubSet (String msg){

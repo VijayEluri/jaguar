@@ -1,7 +1,7 @@
 /**
 ** <Symbol.java> -- to use a symbol
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -81,7 +81,7 @@ public class Symbol{
     }
 
     /**
-     * La representaciÛn de como cadena de este sÌmbolo, el
+     * La representaci√≥n de como cadena de este s√≠mbolo, el
      * comportamiento de esta funcion depende de la constructora que
      * se haya usado
      * @see #Symbol(String, boolean)
@@ -93,10 +93,10 @@ public class Symbol{
     }
 
     /**
-     * Escribe la representaciÛn del Symbol en un archivo con el formato definido por el DTD correspondiente
-     * Escribe el Symbol con su representaciÛn correspondiente con tags.
+     * Escribe la representaci√≥n del Symbol en un archivo con el formato definido por el DTD correspondiente
+     * Escribe el Symbol con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el Symbol.
+     * @param fw El FileWriter donde se guardar√° el Symbol.
      */
     public void toFile(FileWriter fw){
         try{
@@ -108,7 +108,7 @@ public class Symbol{
         }
     }
     /**
-     * La representaciÛn de como cadena de este sÌmbolo, el
+     * La representaci√≥n de como cadena de este s√≠mbolo, el
      * comportamiento de esta funcion depende de la constructora que
      * se haya usado
      * @see #Symbol(String,boolean)
@@ -119,43 +119,43 @@ public class Symbol{
 
 
     /**
-     * Construye un sÌmbolo con la cadena _sym  <code>_sym</code>
-     * Por omisiÛn mostrara los tags con toString, es equivalente a
+     * Construye un s√≠mbolo con la cadena _sym  <code>_sym</code>
+     * Por omisi√≥n mostrara los tags con toString, es equivalente a
      * usar <code>Symbol(_sym,false)</code>
-     * @param _sym la etiqueta que tendr· el <code>Symbol</code>
+     * @param _sym la etiqueta que tendr√° el <code>Symbol</code>
      */
     public Symbol (String _sym){
         this(_sym,WITHOUT_TAGS);
     }
 
     /**
-     * Construye un sÌmbolo con la cadena _sym  <code>_sym</code>
-     * y define si se deber·n de mostrar los tags en el toString
-     * @param _sym la etiqueta que tendr· el <code>Symbol</code>
-     * @param tags <code>true</code> - mostrar· los tags,
-     * <code>false</code> no mostrar· los tags
+     * Construye un s√≠mbolo con la cadena _sym  <code>_sym</code>
+     * y define si se deber√°n de mostrar los tags en el toString
+     * @param _sym la etiqueta que tendr√° el <code>Symbol</code>
+     * @param tags <code>true</code> - mostrar√° los tags,
+     * <code>false</code> no mostrar√° los tags
      */
     public Symbol (String _sym, boolean tags){
         sym =_sym;
         showTags = tags;
     }
     /**
-     * Construye un sÌmbolo igual al definido por el <code>Symbol _sym</code>
-     * Por omisiÛn mostrara los tags con toString, es equivalente a
+     * Construye un s√≠mbolo igual al definido por el <code>Symbol _sym</code>
+     * Por omisi√≥n mostrara los tags con toString, es equivalente a
      * usar <code>Symbol(_sym,false)</code>
-     * @param _sym  el <code>Symbol</code> a partir del cual se crear·
+     * @param _sym  el <code>Symbol</code> a partir del cual se crear√°
      * esta instacia
      */
     public Symbol (Symbol _sym){
         this( _sym.getSym(), _sym.getShowTags());
     }
     /**
-     * Construye un sÌmbolo igual al definido   por el <code>Symbol _sym</code>
-     * y define si se deber·n de mostrar los tags en el toString
+     * Construye un s√≠mbolo igual al definido   por el <code>Symbol _sym</code>
+     * y define si se deber√°n de mostrar los tags en el toString
      * @param _sym  el <code>Symbol</code> a partir del cual se crea
      * esta instancia
-     * @param tags <code>true</code> - mostrar· los tags,
-     * <code>false</code> no mostrar· los tags
+     * @param tags <code>true</code> - mostrar√° los tags,
+     * <code>false</code> no mostrar√° los tags
      */
     public Symbol (Symbol _sym, boolean tags){
         this(_sym);
@@ -180,7 +180,7 @@ public class Symbol{
     public void setShowTags(boolean  v) {this.showTags = v;}
 
     /**
-     ** Construye un sÌmbolo dado el documento DOM
+     ** Construye un sÔøΩmbolo dado el documento DOM
      **/
     public Symbol(org.w3c.dom.Node domNode){
         this(domNode.getChildNodes().item(0).getNodeValue());
@@ -188,7 +188,7 @@ public class Symbol{
 
     /**
      * Obtiene el hash code de este <code>Symbol</code>
-     * @return el hash code de este sÌmbolo
+     * @return el hash code de este s√≠mbolo
      */
     public int hashCode(){
         return getSym().hashCode();

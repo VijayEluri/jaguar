@@ -1,7 +1,7 @@
 /**
 ** <JState.java> -- The State's graphical extension
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -48,7 +48,7 @@ public class JState extends jaguar.structures.State {
 
 
     /**
-     * El diametro del circulo circunscrito que identificar· gr·ficamente a un estado inicial
+     * El diametro del circulo circunscrito que identificar√° gr√°ficamente a un estado inicial
      */
     public static final double DIAMETRO_FINAL_STATE = 42;
 
@@ -245,7 +245,7 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Construye un estado gr·fico con su posiciÛn, por omision no es estado final es equivalente a usar <code>JState(label,x,y,false)</code>
+     * Construye un estado gr√°fico con su posici√≥n, por omision no es estado final es equivalente a usar <code>JState(label,x,y,false)</code>
      *@param label La etiquta del estado
      *@param x posicion sobre el eje X
      *@param y posicion sobre el eje Y
@@ -255,7 +255,7 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Construye un estado gr·fico con su posiciÛn y hace explicito si es un estado final o no
+     * Construye un estado gr√°fico con su posici√≥n y hace explicito si es un estado final o no
      *@param label La etiquta del estado
      *@param x posicion sobre el eje X
      *@param y posicion sobre el eje Y
@@ -276,11 +276,11 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Este nos dice si es un estado inicial para identificarlo gr·ficamente
+     * Este nos dice si es un estado inicial para identificarlo gr√°ficamente
      */
     protected boolean esEstadoInicial;
     /**
-     * El valor por omisiÛn para esEstadoInicial
+     * El valor por omisi√≥n para esEstadoInicial
      */
     public static final boolean DEFAULT_ESESTADOINICIAL=false;
     /**
@@ -301,9 +301,9 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Pinta un estado en un contexto gr·fico dependiendo del parametro lo pinta
+     * Pinta un estado en un contexto gr√°fico dependiendo del parametro lo pinta
      * en tercera dimension levantado o presionado
-     * @param g El contexto gr·fico sobre el que se pintar· el estado
+     * @param g El contexto gr√°fico sobre el que se pintar√° el estado
      * @param esEstadoActual si es verdadero lo hace levantado, si es falso lo dibuja aplastado
      */
     public void paint(Graphics g, boolean esEstadoActual){
@@ -376,9 +376,9 @@ public class JState extends jaguar.structures.State {
 
 
     /**
-     * Pinta un estado en un contexto gr·fico con el background del
+     * Pinta un estado en un contexto gr√°fico con el background del
      * color definido en <code>DEFAULT_BG_COLOR</code>
-     * @param g El contexto gr·fico sobre el que se pintar· el estado
+     * @param g El contexto gr√°fico sobre el que se pintar√° el estado
      * @see #DEFAULT_BG_COLOR
      */
     public void paint(Graphics g) {

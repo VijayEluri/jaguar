@@ -109,10 +109,10 @@ public class Alphabet implements Cloneable {
      * Regresa la representación en vector del Alphabet
      */
     public Vector toVector(){
-        Object [] oArray =  Sigma.toArray();
-        Vector v = new Vector();
-        for (int i = 0 ; i < oArray.length ; i++)
-            v.add(oArray[i]);
+        Vector<Symbol> v = new Vector<Symbol>();
+        for (Symbol i : Sigma) {
+            v.add(i);
+        }
         return v;
     }
 
@@ -139,7 +139,7 @@ public class Alphabet implements Cloneable {
      * Creamos un alfabeto vacio
      */
     public Alphabet (){
-        Sigma = new LinkedHashSet();
+        Sigma = new LinkedHashSet<Symbol>();
     }
 
     /**
@@ -147,7 +147,7 @@ public class Alphabet implements Cloneable {
      * @param S  el alfabeto a partir del cual crearemos uno nuevo
      */
     public Alphabet (Alphabet S){
-        Sigma = (LinkedHashSet)S.getSigma().clone();
+        Sigma = new LinkedHashSet<Symbol>(S.getSigma());
     }
 
     public Alphabet(Symbol s){
@@ -203,7 +203,7 @@ public class Alphabet implements Cloneable {
     public LinkedHashSet<Symbol> getSigma(){
         return Sigma;
     }
-    protected void setSigma(LinkedHashSet hs){
+    protected void setSigma(LinkedHashSet<Symbol> hs){
         Sigma = hs;
     }
 
@@ -214,7 +214,7 @@ public class Alphabet implements Cloneable {
     public Object clone() throws CloneNotSupportedException{
         try{
             Alphabet nuevo = (Alphabet)super.clone();
-            nuevo.Sigma = (LinkedHashSet)Sigma.clone();
+            nuevo.Sigma = new LinkedHashSet<Symbol>(Sigma);
             return nuevo;
         }
         catch (CloneNotSupportedException e){

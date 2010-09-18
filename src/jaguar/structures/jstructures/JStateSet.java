@@ -1,7 +1,7 @@
 /**
 * <JStateSet.java> -- The StateSet's graphical extension
 *
-* Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+* Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 *
 * This file is part of JAGUAR
 *
@@ -19,7 +19,7 @@
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-* Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+* Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 *
 * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
 **/
@@ -35,7 +35,7 @@ import jaguar.structures.exceptions.StateSetNotFoundException;
 public class JStateSet extends StateSet {
 
     /**
-     * Crea un conjunto vacio de estados
+     * Crea un conjunto vac√≠o de estados
      */
     public JStateSet(){
         super();
@@ -55,7 +55,7 @@ public class JStateSet extends StateSet {
     public boolean remove(State e){
         return super.remove(e);
     }
-    /** Removes the given element from this set if it is present. NO USAR. generar· el siguiente mensaje
+    /** Removes the given element from this set if it is present. NO USAR. generar√° el siguiente mensaje
      * "dfa.structures.JStateSet.Remove(Object):Warning: Solo se pueden remover States d este conjunto"
      */
     public boolean remove(Object o) {

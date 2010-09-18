@@ -1,33 +1,33 @@
 /**
 ** <Str.java> -- To use strings
-** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+**
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
 package jaguar.structures;
 /**
  *
- * @author <a href="mailto: ivanx@users.sourceforge.net">Ivan Hern·ndez Serrano</a>
+ * @author <a href="mailto: ivanx@users.sourceforge.net">Ivan Hern√°ndez Serrano</a>
  * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
  */
 
@@ -45,7 +45,7 @@ public class Str implements Cloneable {
     /**
      * Estructura para manejar la secuencia de <code>Symbol</code>s
      */
-    private LinkedList symSeq = new LinkedList();
+    private LinkedList<Symbol> symSeq = new LinkedList<Symbol>();
     /**
      * <code>Alphabet</code> sobre debe de estar definida la cadena
      * @see dfa.structures.Alphabet
@@ -61,13 +61,13 @@ public class Str implements Cloneable {
      **/
     static final public String ELEMENT_NAME = "str";
     /**
-     * El tag con el que se define el inicio del objeto de un 
+     * El tag con el que se define el inicio del objeto de un
      * en un archivo
      */
     public static final String BEG_TAG = "<"+ELEMENT_NAME+">";
 
     /**
-     * El tag con el que se define el fin del objeto de un 
+     * El tag con el que se define el fin del objeto de un
      * en un archivo
      */
     public static final String END_TAG = "</"+ELEMENT_NAME+">";
@@ -77,9 +77,9 @@ public class Str implements Cloneable {
      **/
     static final public String EPSILON_ELEMENT_NAME = "epsilon";
     /**
-     * El tag con el que se define una cadena vacia en un archivo 
+     * El tag con el que se define una cadena vacia en un archivo
      */
-    public static final String EPSILON_TAG = "<"+EPSILON_ELEMENT_NAME+"/>";    
+    public static final String EPSILON_TAG = "<"+EPSILON_ELEMENT_NAME+"/>";
 
     public static final boolean WITH_TAGS = false;
     public static final boolean WITHOUT_TAGS = false;
@@ -87,148 +87,144 @@ public class Str implements Cloneable {
      ** Para que tengan la capacidad de leer checando la entrada con el DTD
      **/
     protected DocumentBuilderFactory factory;
-    
+
     /**
-     * Crea una cadena de longitud cero. Por omisiÛn no muestra los
+     * Crea una cadena de longitud cero. Por omisi√≥n no muestra los
      * tags, es equivalente a usar <code>Str(false)</code>
      * @see #Str(boolean)
      */
     public Str (){
-	this(false);	
+        this(false);
     }
 
     /**
      * Crea un cadena default longitud cero definiendo si deben default mostrarse los tags default inicio y final
-     * al usar el mÈtodo <code>toString</code>.
-     * @param tags, <code>true</code> se mostraran los tags, <code>false</code>  no se mostrar·n los tags
+     * al usar el m√©todo <code>toString</code>.
+     * @param tags, <code>true</code> se mostraran los tags, <code>false</code>  no se mostrar√°n los tags
      * @see #toString
      */
-    public Str (boolean tags){	
-	symSeq = new LinkedList();
-	Sigma = new Alphabet();
-	show_tags = tags;
-	factory = DocumentBuilderFactory.newInstance();
-	factory.setValidating(true);	
+    public Str (boolean tags){
+        symSeq = new LinkedList<Symbol>();
+        Sigma = new Alphabet();
+        show_tags = tags;
+        factory = DocumentBuilderFactory.newInstance();
+        factory.setValidating(true);
     }
 
     /**
-     * Construye una cadena a partir default un sÌmbolo, i.e. una cadena default longitud 1, por omisiÛn
-     * mostrar· los tags. Es equivalente a usar <code>Str(s,true)</code> 
+     * Construye una cadena a partir default un s√≠mbolo, i.e. una cadena default longitud 1, por omisi√≥n
+     * no mostrar√° los tags. Es equivalente a usar <code>Str(s,false)</code>
      * @param s, la cadena de longitud uno
      * @see #Str(Symbol,boolean)
      */
     public Str (Symbol s){
-	this(s,true);
+        this(s,false);
     }
 
     /**
-     * Construye una cadena a partir default un sÌmbolo, i.e. una cadena default longitud 1, por omisiÛn
-     * mostrar· los tags. Es equivalente a usar <code>Str(s,true)</code> 
+     * Construye una cadena a partir default un s√≠mbolo, i.e. una cadena default longitud 1, por omisi√≥n
+     * mostrar√° los tags. Es equivalente a usar <code>Str(s,true)</code>
      * @param s, la cadena de longitud uno
-     * @param tags <code>true</code> - mostrar· los tags, <code>false</code> no mostrar· los tags
+     * @param tags <code>true</code> - mostrar√° los tags, <code>false</code> no mostrar√° los tags
      */
     public Str (Symbol s, boolean tags){
-	symSeq = new LinkedList();
-	Sigma = new Alphabet();
-	symSeq.add(s);
-	length();
-	show_tags = tags;
-    }    
+        symSeq = new LinkedList<Symbol>();
+        Sigma = new Alphabet();
+        symSeq.add(s);
+        length();
+        show_tags = tags;
+    }
     /**
      *  Construye una cadena a partir default <code>Str aStr</code> y checa este definida sobre else <code>Alphabet _Sigma</code>
-     *  Por omisiÛn se mostrar·n los tags de cadena, es equivalente a usar <code>Str(aStr,_Sigma,true)</code>
-     *  @param aStr la cadena a partir de la cual se crear· esta instancia
-     * @param _Sigma alfabeto sobre el cual deber· estar definida esta instancia
+     *  Por omisi√≥n no se mostrar√°n los tags de cadena, es equivalente a usar <code>Str(aStr,_Sigma,false)</code>
+     *  @param aStr la cadena a partir de la cual se crear√° esta instancia
+     * @param _Sigma alfabeto sobre el cual deber√° estar definida esta instancia
      * @see #Str(Str,Alphabet,boolean)
      */
     public Str (Str aStr, Alphabet _Sigma){
- 	this(aStr,_Sigma,true);
+        this(aStr,_Sigma,false);
     }
 
     /**
      *  Construye una cadena a partir default <code>Str aStr</code> y checa este definida sobre else <code>Alphabet _Sigma</code>
-     *  Por omisiÛn se mostrar·n los tags de cadena, es equivalente a usar <code>Str(aStr,_Sigma,true)</code>
-     *  @param aStr la cadena a partir de la cual se crear· esta instancia
-     * @param _Sigma alfabeto sobre el cual deber· estar definida esta instancia
-     * @param tags <code>true</code> mostrar· los tags de Str. <code>false</code> no los mostrar·
+     *  Por omisi√≥n se mostrar√°n los tags de cadena, es equivalente a usar <code>Str(aStr,_Sigma,true)</code>
+     *  @param aStr la cadena a partir de la cual se crear√° esta instancia
+     * @param _Sigma alfabeto sobre el cual deber√° estar definida esta instancia
+     * @param tags <code>true</code> mostrar√° los tags de Str. <code>false</code> no los mostrar√°
      */
     public Str (Str aStr, Alphabet _Sigma, boolean tags){
- 	this();
-	try{	    
-	    symSeq = (LinkedList)aStr.getSeq().clone();
-	    Sigma = (Alphabet)_Sigma.clone();
-	    show_tags = tags;
-	}catch(Exception e){
-	    e.printStackTrace();
-	}
+        this();
+        try{
+            symSeq = new LinkedList<Symbol>(aStr.getSeq());
+            Sigma = (Alphabet)_Sigma.clone();
+            show_tags = tags;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public Str(Vector vSymbols){
-	this(vSymbols,new Alphabet());
+    public Str(Vector<Symbol> vSymbols){
+        this(vSymbols,new Alphabet());
     }
     /**
-     *  Construye una cadena a partir de la secuencia de sÌmbolos definida en el arrego de simbolos
+     *  Construye una cadena a partir de la secuencia de s√≠mbolos definida en el arrego de simbolos
      * <code>Symbol nuevoStr[]</code> y checa este definida sobre else <code>Alphabet _Sigma</code>
-     *  Por omisiÛn se mostrar·n los tags de cadena, es equivalente a usar <code>Str(nuevoStr,_Sigma,true)</code>
-     *  @param nuevoStr[]  la secuencia de sÌmbolos a partir de la cual se crear· esta instancia
-     * @param _Sigma alfabeto sobre el cual deber· estar definida esta instancia
+     *  Por omisi√≥n se mostrar√°n los tags de cadena, es equivalente a usar <code>Str(nuevoStr,_Sigma,true)</code>
+     *  @param nuevoStr[]  la secuencia de s√≠mbolos a partir de la cual se crear√° esta instancia
+     * @param _Sigma alfabeto sobre el cual deber√° estar definida esta instancia
      */
-    public Str(Vector vSymbols, Alphabet _Sigma){
-	this();		    
-	try{
-	    for(int i =0; i<vSymbols.size() ; i++){
-		if(vSymbols.elementAt(i) instanceof Symbol)
-		    symSeq.add(vSymbols.elementAt(i));		
-		else{
-		    Debug.println("Str(Vector,Alphabet): el vector tiene instancias distitas de Symbol");
-		    return;		    
-		}
-	    }
-	    Sigma = (Alphabet)_Sigma.clone();
-	}catch(Exception e){
-	    e.printStackTrace();	  
-	}	
-    }
-    
-    public Str(Vector vSymbols, Alphabet _Sigma, boolean show_tags){
-	this(vSymbols,_Sigma);
-	this.show_tags = show_tags;
-	for(int i = 0; i < symSeq.size(); i++)
-	    ((Symbol)symSeq.get(i)).setShowTags(show_tags);
+    public Str(Vector<Symbol> vSymbols, Alphabet _Sigma){
+        this();
+        try{
+            for(Symbol i : vSymbols){
+                symSeq.add(i);
+            }
+            Sigma = (Alphabet)_Sigma.clone();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
-    
+    public Str(Vector<Symbol> vSymbols, Alphabet _Sigma, boolean show_tags){
+        this(vSymbols,_Sigma);
+        this.show_tags = show_tags;
+        for(int i = 0; i < symSeq.size(); i++) {
+            ((Symbol)symSeq.get(i)).setShowTags(show_tags);
+        }
+    }
+
+
     /**
-     *  Construye una cadena a partir de la secuencia de sÌmbolos definida en el arrego de simbolos
+     *  Construye una cadena a partir de la secuencia de s√≠mbolos definida en el arrego de simbolos
      * <code>Symbol nuevoStr[]</code> y checa este definida sobre else <code>Alphabet _Sigma</code>
-     *  Por omisiÛn se mostrar·n los tags de cadena, es equivalente a usar <code>Str(nuevoStr,_Sigma,true)</code>
-     *  @param nuevoStr[]  la secuencia de sÌmbolos a partir de la cual se crear· esta instancia
-     * @param _Sigma alfabeto sobre el cual deber· estar definida esta instancia
+     *  Por omisi√≥n se mostrar√°n los tags de cadena, es equivalente a usar <code>Str(nuevoStr,_Sigma,true)</code>
+     *  @param nuevoStr[]  la secuencia de s√≠mbolos a partir de la cual se crear√° esta instancia
+     * @param _Sigma alfabeto sobre el cual deber√° estar definida esta instancia
      */
     public Str(Symbol nuevoStr[], Alphabet _Sigma){
-	this();		    
-	try{
-	    for(int i =0; i<nuevoStr.length ; i++)
-		symSeq.add(nuevoStr[i]);
-	    Sigma = (Alphabet)_Sigma.clone();
-	}catch(Exception e){
-	    e.printStackTrace();	  
-	}	
+        this();
+        try{
+            for(int i =0; i<nuevoStr.length ; i++)
+          symSeq.add(nuevoStr[i]);
+            Sigma = (Alphabet)_Sigma.clone();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
-    
+
     /**
-     *  Construye una cadena a partir de la secuencia de sÌmbolos definida en el arrego de simbolos
+     *  Construye una cadena a partir de la secuencia de s√≠mbolos definida en el arrego de simbolos
      * <code>Symbol nuevoStr[]</code> y checa este definida sobre else <code>Alphabet _Sigma</code>
-     *  @param nuevoStr[]  la secuencia de sÌmbolos a partir de la cual se crear· esta instancia
-     * @param _Sigma alfabeto sobre el cual deber· estar definida esta instancia
-     * @param tags <code>true</code> mostrar· los tags de Str. <code>false</code> no los mostrar·
+     *  @param nuevoStr[]  la secuencia de s√≠mbolos a partir de la cual se crear√° esta instancia
+     * @param _Sigma alfabeto sobre el cual deber√° estar definida esta instancia
+     * @param tags <code>true</code> mostrar√° los tags de Str. <code>false</code> no los mostrar√°
      */
     public Str(Symbol nuevoStr[], Alphabet _Sigma, boolean tags){
-	this( nuevoStr,  _Sigma);
-	show_tags = tags;
-	for(int i = 0; i < symSeq.size(); i++)
-	    ((Symbol)symSeq.get(i)).setShowTags(show_tags);
+        this( nuevoStr,  _Sigma);
+        show_tags = tags;
+        for(int i = 0; i < symSeq.size(); i++)
+            ((Symbol)symSeq.get(i)).setShowTags(show_tags);
     }
 
     /**
@@ -236,15 +232,15 @@ public class Str implements Cloneable {
      ** @see #DFA_DTD
      **/
     public Str(String filename)throws Exception{
-	this(new File(filename),false);
+        this(new File(filename),false);
     }
-    
+
     /**
      ** Constructora que construye un Str a partir del nombre de un archivo que es valido segun el DTD de los Strs
      ** @see #DFA_DTD
      **/
     public Str(String filename, boolean tags)throws Exception{
-	this(new File(filename),tags);
+        this(new File(filename),tags);
     }
 
     /**
@@ -252,17 +248,17 @@ public class Str implements Cloneable {
      ** @see #DFA_DTD
      **/
     public Str(File file)throws Exception{
-	this(file,false);
+        this(file,false);
     }
-    
+
     /**
      ** Constructora que construye un Str a partir del nombre de un archivo que es valido segun el DTD de los Strs
      ** @see #DFA_DTD
      **/
     public Str(File file, boolean tags)throws Exception{
-	this(tags);
-	Document document = factory.newDocumentBuilder().parse(file);
-	setupStr(document.getElementsByTagName("str").item(0),this);
+        this(tags);
+        Document document = factory.newDocumentBuilder().parse(file);
+        setupStr(document.getElementsByTagName("str").item(0),this);
     }
 
 
@@ -271,8 +267,8 @@ public class Str implements Cloneable {
      ** @see #DFA_DTD
      **/
     public Str(org.w3c.dom.Node domNode,boolean tags)throws Exception{
-	this(tags);
-	setupStr(domNode,this);
+        this(tags);
+        setupStr(domNode,this);
     }
 
     /**
@@ -280,30 +276,31 @@ public class Str implements Cloneable {
      ** @see #DFA_DTD
      **/
     public Str(org.w3c.dom.Node domNode)throws Exception{
-	this(domNode,true);
+        this(domNode,false);
     }
 
-    
+
     /**
      ** Construye un <code>Str</code> dado el documento DOM
      **/
     public void setupStr(org.w3c.dom.Node domNode, Str str)throws Exception{
-	NodeList domSymList = domNode.getChildNodes();
-	for(int i = 0; i < domSymList.getLength() ; i++)
-	    if(domSymList.item(i).getNodeType() == Node.ELEMENT_NODE)
-		if(domSymList.item(i).getNodeName().equals("epsilon")){
-		    str = new Str();
-		    return;		    
-		}else str.append(new Symbol(domSymList.item(i)));
-	    
+        NodeList domSymList = domNode.getChildNodes();
+        for(int i = 0; i < domSymList.getLength() ; i++)
+            if(domSymList.item(i).getNodeType() == Node.ELEMENT_NODE)
+         if (domSymList.item(i).getNodeName().equals("epsilon")) {
+            str = new Str();
+            return;
+        } else {
+            str.append(new Symbol(domSymList.item(i)));
+        }
     }
-    
+
     /**
      * Regresa verdadero si la cadena es epsilon o falso de no serlo
      * @returns <code>true</code> si la cadena es de longitud cero, <code>false</code> en otro caso.
     */
     public boolean isEpsilon(){
-	return (symSeq.size() == 0);
+        return (symSeq.size() == 0);
     }
 
     /**
@@ -311,25 +308,25 @@ public class Str implements Cloneable {
      * @returns <code>true</code> si la cadena es de longitud cero, <code>false</code> en otro caso.
     */
     public boolean getEpsilon(){
-	return isEpsilon();
+        return isEpsilon();
     }
 
     /**
-     * Regresa una cadena que es la  concatenaciÛn de  la cadena <code>s1</code> con la cadena <code>s2</code>
+     * Regresa una cadena que es la  concatenaci√≥n de  la cadena <code>s1</code> con la cadena <code>s2</code>
      * @returns una nueva instancia de <code>Str</code> que es el resultado de concatenar <code>s1</code> con <code>s2</code>
      */
     static public Str concat(Str s1, Str s2){
-	Str r  = new Str();
-	r.getSeq().addAll(s1.getSeq());
-	r.getSeq().addAll(s2.getSeq());
-	return r;	
+        Str r  = new Str();
+        r.getSeq().addAll(s1.getSeq());
+        r.getSeq().addAll(s2.getSeq());
+        return r;
     }
 
     /**
-     * Concatena la cadena actual con la cadena <code>s</code>, el resultado se qued· en est· instancia
+     * Concatena la cadena actual con la cadena <code>s</code>, el resultado se qued√° en est√° instancia
      */
     public void concat(Str s){
-	symSeq.addAll(s.getSeq());
+        symSeq.addAll(s.getSeq());
     }
 
     /**
@@ -341,18 +338,18 @@ public class Str implements Cloneable {
      * La reversa de esta cadena, la cadena original no se altera
      */
     public Str reverse(){
-	Str tmp = null;
-	LinkedList l = new LinkedList();
-	try{ 
-	    tmp = (Str)this.clone();
-	}catch( CloneNotSupportedException ouch){	
-	    ouch.printStackTrace(); 
-	}
-	int len = length();	
-	for(int i = 0 ; i < len ; i++)
-	    l.add(tmp.getSeq().removeLast());
-	tmp.symSeq = l;
-	return tmp;	
+        Str tmp = null;
+        LinkedList<Symbol> l = new LinkedList<Symbol>();
+        try{
+            tmp = (Str)this.clone();
+        }catch( CloneNotSupportedException ouch){
+            ouch.printStackTrace();
+        }
+        int len = length();
+        for(int i = 0 ; i < len ; i++)
+            l.add(tmp.getSeq().removeLast());
+        tmp.symSeq = l;
+        return tmp;
     }
 
     /**
@@ -361,262 +358,281 @@ public class Str implements Cloneable {
      * @return la reversa de la cadena <code>s<|code>
      */
     static Str reverse(Str s){
-	Str tmp = null;
-	LinkedList l = new LinkedList();
-	try{ 
-	    tmp = (Str)s.clone();
-	}catch( CloneNotSupportedException ouch){	
-	    ouch.printStackTrace(); 
-	}
-	int len = s.length();	
-	for(int i = 0 ; i < len ; i++)
-	    l.add(tmp.getSeq().removeLast());	
-	tmp.symSeq = l;
-	return tmp;	
+        Str tmp = null;
+        LinkedList<Symbol> l = new LinkedList<Symbol>();
+        try{
+            tmp = (Str)s.clone();
+        }catch( CloneNotSupportedException ouch){
+            ouch.printStackTrace();
+        }
+        int len = s.length();
+        for(int i = 0 ; i < len ; i++)
+            l.add(tmp.getSeq().removeLast());
+        tmp.symSeq = l;
+        return tmp;
     }
 
-    
+
 
     /**
      * Crea y regresa una copia de este objeto
      * @returns crea y regresa la copia de este objeto
      */
     public Object clone() throws CloneNotSupportedException{
-         try{
-	     Str nuevo = (Str)super.clone();
-	     nuevo.symSeq = (LinkedList)symSeq.clone();
-	     return nuevo;
-         }
-         catch (CloneNotSupportedException e){
+        try{
+            Str nuevo = (Str)super.clone();
+            nuevo.symSeq = new LinkedList<Symbol>(symSeq);
+            return nuevo;
+         } catch (CloneNotSupportedException e) {
              throw new InternalError(e.toString());
          }
     }
 
     /**
-     * Regresa la representaciÛn como cadena de este objeto
-     * @returns la representaciÛn como cadena de este objeto seg˙n el valor de <code>show_tags</code> se agregar·n, o no, los tags
+     * Regresa la representaci√≥n como cadena de este objeto
+     * @returns la representaci√≥n como cadena de este objeto seg√∫n el valor de <code>show_tags</code> se agregar√°n, o no, los tags
      */
     public String toString() {
-	String r="";
-	if(isEpsilon()){
-	    r = EPSILON_TAG;
-	}
-	else
-	    for(int i = 0 ; i< symSeq.size() ; i++)
-		r+= ((Symbol)symSeq.get(i));
-	if(show_tags)
-	    r = BEG_TAG + r + END_TAG;
-	return  r;
+        String r = "";
+        if(isEpsilon()) {
+            if (show_tags) {
+                r = EPSILON_TAG;
+            } else {
+                r = "Œµ";
+            }
+        }
+        else {
+            for (int i = 0 ; i< symSeq.size() ; i++) {
+                r+= ((Symbol)symSeq.get(i));
+            }
+        }
+        if (show_tags)
+            r = BEG_TAG + r + END_TAG;
+        return  r;
     }
 
-    /** 
-     * Escribe la representaciÛn del <code>Str</code> en un archivo con el formato definido por el DTD correspondiente
-     * Escribe el Str con su representaciÛn correspondiente con tags.
+    /**
+     * Escribe la representaci√≥n del <code>Str</code> en un archivo con el formato definido por el DTD correspondiente
+     * Escribe el Str con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el Str.
+     * @param fw El FileWriter donde se guardar√° el Str.
      */
     public void toFile(FileWriter fw){
-	try{ 
-	    fw.write(BEG_TAG);
-	    if(isEpsilon())
-		fw.write(EPSILON_TAG);
-	    else
-		for(int i = 0 ; i< symSeq.size() ; i++)
-		    ((Symbol)symSeq.get(i)).toFile(fw);
-	    fw.write(END_TAG);
-	}catch( Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "Trying to toFile: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try{
+            fw.write(BEG_TAG);
+            if(isEpsilon()) {
+                fw.write(EPSILON_TAG);
+            } else {
+                for(int i = 0 ; i< symSeq.size() ; i++) {
+                    ((Symbol)symSeq.get(i)).toFile(fw);
+                }
+            }
+            fw.write(END_TAG);
+        } catch( Exception ouch) {
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
+        }
     }
-    
+
 
     public Str substring(int beginIndex, int endIndex){
-	    try{	    
-		Str r = (Str)this.clone();
-		int origLen = r.length();	    
-		for(int i = 0 ; i < beginIndex && i <origLen; i++)
-		    r.removeFirst();		
-		for(int i = 0 ; i< (origLen - endIndex)   && i < origLen; i++)
-		    r.removeLast();
-		return r;	
-	    }catch(CloneNotSupportedException cnse){
-		cnse.printStackTrace();	    
-	    }
-	return null;
+        try{
+            Str r = (Str)this.clone();
+            int origLen = r.length();
+            for(int i = 0 ; i < beginIndex && i <origLen; i++) {
+                r.removeFirst();
+            }
+            for(int i = 0 ; i< (origLen - endIndex)   && i < origLen; i++) {
+                r.removeLast();
+            }
+            return r;
+        } catch (CloneNotSupportedException cnse) {
+            cnse.printStackTrace();
+        }
+        return null;
     }
 
     public Str substring(int beginIndex){
-	return substring(beginIndex,this.length());
+        return substring(beginIndex,this.length());
     }
-	
+
     /**
      * Elimina el primer caracter de la cadena actual
      */
     public void removeFirst(){
-	symSeq.removeFirst();
+        symSeq.removeFirst();
     }
 
     /**
      * Elimina el primer caracter de la cadena actual
      */
     public void removeLast(){
-	symSeq.removeLast();
+        symSeq.removeLast();
     }
     /**
      * Regresa la longitud de la cadena actual
      */
     public int length(){
-	return symSeq.size();	
+        return symSeq.size();
     }
 
     /**
-     *  Regresa la representaciÛn de la cadena actual como lista ligada
-     *  @returns LinkedList  regresa la representaciÛn de la cadena actual como lista ligada que es la secuencia de los sÌmbolos que la forman
+     *  Regresa la representaci√≥n de la cadena actual como lista ligada
+     *  @returns LinkedList  regresa la representaci√≥n de la cadena actual como lista ligada que es la secuencia de los s√≠mbolos que la forman
      */
-    public LinkedList getSeq(){
-	return symSeq;
+    public LinkedList<Symbol> getSeq(){
+        return symSeq;
     }
 
     /**
-     * Obtiene el primer sÌmbolo de la  cadena actual
-     * @returns el primer sÌmbolo de la  cadena actual
+     * Obtiene el primer s√≠mbolo de la  cadena actual
+     * @returns el primer s√≠mbolo de la  cadena actual
      */
     public Symbol getFirst(){
-	try{
-	    return (Symbol) symSeq.getFirst();
-	}catch(NoSuchElementException e){
-	    return null;	    
-	}
+        try{
+            return (Symbol) symSeq.getFirst();
+        }catch(NoSuchElementException e){
+            return null;
+        }
     }
 
     /**
-     * Obtiene el ˙ltimo sÌmbolo de la  cadena actual
-     * @returns el ˙ltimo sÌmbolo de la  cadena actual
+     * Obtiene el √∫ltimo s√≠mbolo de la  cadena actual
+     * @returns el √∫ltimo s√≠mbolo de la  cadena actual
      */
     public Symbol getLast(){
-	try{
-	    return (Symbol) symSeq.getLast();
-	}catch(NoSuchElementException e){
-	    return null;	    
-	}
+        try{
+            return (Symbol) symSeq.getLast();
+        }catch(NoSuchElementException e){
+            return null;
+        }
     }
 
     /**
-     * Obtiene el sÌmbolo en la posiciÛn especifÌcada
-     * @param index Ìndice del sÌmbolo que se quiere obtener
-     * @returns el sÌmbolo en la posiciÛn especifÌcada
-     * @throws StrIndexOutOfBoundsException si el Ìndice especificado esta fuera del rang (index < 0 || index >= length()).
+     * Obtiene el s√≠mbolo en la posici√≥n especif√≠cada
+     * @param index √≠ndice del s√≠mbolo que se quiere obtener
+     * @returns el s√≠mbolo en la posici√≥n especif√≠cada
+     * @throws StrIndexOutOfBoundsException si el √≠ndice especificado esta fuera del rang (index < 0 || index >= length()).
      */
     public Symbol getSymbol(int index) throws StrIndexOutOfBoundsException{
-	if(index < 0 || index >= length())
-	    throw new StrIndexOutOfBoundsException("El Ìndice dado no est· en el rango v·lido, index -->> "+index );
-	return (Symbol) symSeq.get(index);
+        if(index < 0 || index >= length()) {
+            throw new StrIndexOutOfBoundsException("El √≠ndice dado no est√° en el rango v√°lido, index -->> "+index );
+        }
+        return (Symbol) symSeq.get(index);
     }
     /**
      * Checa si la cadena esta sobre el alfabeto dado
      *
-     * Checa si esta cadena se puede formar de sÌmbolos del alfabeto dado
+     * Checa si esta cadena se puede formar de s√≠mbolos del alfabeto dado
      * @param Alf El alfabeto donde checaremos si esta definida la cadena
-     * @returns <code>true<code> si la cadena est· sobre <code>Alf</code>. <code>false</code> e.o.c.
+     * @returns <code>true<code> si la cadena est√° sobre <code>Alf</code>. <code>false</code> e.o.c.
      */
-    public boolean isOnAlphabet(Alphabet A){	
-	try{ 
-	    for(int i = 0 ; i <  length(); i++)
-		if(! A.contains(getSymbol(i)))
-		    return false;
-	    return  true;	
-	}catch( StrIndexOutOfBoundsException ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + " No cazan la longitud regresada por length() y el getSymbol(i) : " ); 
-	    ouch.printStackTrace(); 
-	    return false;	    
-	}
+    public boolean isOnAlphabet(Alphabet A){
+        try{
+            for(int i = 0 ; i <  length(); i++) {
+                if (! A.contains(getSymbol(i))) {
+                    return false;
+                }
+            }
+            return  true;
+        }catch( StrIndexOutOfBoundsException ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + " No cazan la longitud regresada por length() y el getSymbol(i) : " );
+            ouch.printStackTrace();
+            return false;
+        }
     }
-    
+
     public static void main(String argv[]){
-	try{
-	    Str str = new Str(new Symbol("a"));
-	    str.concat(new Str(new Symbol("b")));
-	    str.concat(new Str(new Symbol("c")));
-	    System.out.println("\n" + str);
-	    System.out.println("\nreverse" + str.reverse()+"\n");
-	    System.out.println("\n" + str);
-	}catch (Exception e){
-	    e.printStackTrace();
-	}
+        try{
+            Str str = new Str(new Symbol("a"));
+            str.concat(new Str(new Symbol("b")));
+            str.concat(new Str(new Symbol("c")));
+            System.out.println("\n" + str);
+            System.out.println("\nreverse" + str.reverse()+"\n");
+            System.out.println("\n" + str);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-    
+
     public boolean containsSymbol(Symbol s){
-	return symSeq.contains(s);	
+        return symSeq.contains(s);
     }
 
     /**
-     * Regresa verdadero si contiene  todos los sÌmbolos del alfabeto A
+     * Regresa verdadero si contiene  todos los s√≠mbolos del alfabeto A
      */
     public boolean containsSymbols(Alphabet A){
-	Object [] oArray = A.toArray();
-	for(int i = 0 ; i < oArray.length ; i++)
-	    if(!containsSymbol((Symbol)oArray[i]))
-		return false;
-	return true;
+        Object [] oArray = A.toArray();
+        for (int i = 0 ; i < oArray.length ; i++) {
+            if (!containsSymbol((Symbol)oArray[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int hashCode(){
-	String  s = "";
-	for(int i = 0 ; i < length() ; i++)
-	    s += symSeq.get(i);
-	return s.hashCode();
+        String  s = "";
+        for(int i = 0 ; i < length() ; i++) {
+            s += symSeq.get(i);
+        }
+        return s.hashCode();
     }
 
     public String stringToHashCode(){
-	String  s = "";
-	for(int i = 0 ; i < length() ; i++)
-	    s += symSeq.get(i);
-	return s;
+        String  s = "";
+        for(int i = 0 ; i < length() ; i++) {
+            s += symSeq.get(i);
+        }
+        return s;
     }
-    
+
     public boolean equals(Object o){
-	if(o instanceof Str){
-	    if(symSeq.equals(((Str)o).getSeq())){
-		return true;		
-	    }
-	}
-	return false;	
+        if (o instanceof Str) {
+            if (symSeq.equals(((Str)o).getSeq())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Alphabet getAlphabetMinimo(){
-	Alphabet result = new Alphabet();
-	for(int i = 0 ; i < length(); i++)
-	    result.add((Symbol)symSeq.get(i));
-	return result;
+        Alphabet result = new Alphabet();
+        for(int i = 0 ; i < length(); i++) {
+            result.add((Symbol)symSeq.get(i));
+        }
+        return result;
     }
-    /** 
+    /**
      * Regresa una nueva instancia de <code>Str</code> reemplazando todas las apariciones de  <code>viejo</code> por <code>nuevo</code> .
      *
-     * Regresa una nueva instancia de <code>Str</code> con todas las apariciones de un sÌmbolo <code>viejo</code> cambiadas
-     * por un sÌmbolo <code>nuevo</code>.
+     * Regresa una nueva instancia de <code>Str</code> con todas las apariciones de un s√≠mbolo <code>viejo</code> cambiadas
+     * por un s√≠mbolo <code>nuevo</code>.
      *
-     * @param viejo El sÌmbolo que vamos a sustituir.
-     * @param nuevo El nuevo sÌmbolo que aparecer· en lugar de los sÌmbolos viejos.
-     * @return Regresa una nueva instancia con todos los simbolos cambiados como se especÌfica antes.
+     * @param viejo El s√≠mbolo que vamos a sustituir.
+     * @param nuevo El nuevo s√≠mbolo que aparecer√° en lugar de los s√≠mbolos viejos.
+     * @return Regresa una nueva instancia con todos los simbolos cambiados como se espec√≠fica antes.
      *
      */
     public Str replaceSymbol(Symbol viejo, Symbol nuevo){
-	Str result = new Str();
-	try{ 
-	    for(int i = 0 ; i < length() ; i++){
-		if(viejo.equals(getSymbol(i)))
-		    result.append(nuevo);
-		else result.append(getSymbol(i));
-	    }
-	}catch(StrIndexOutOfBoundsException ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + " Str.replaceSymbol("+viejo+","+nuevo+") se rompio, al parecer nos pasamos en el indice: " ); 
-	    ouch.printStackTrace(); 
-	}
-	return result;
+        Str result = new Str();
+        try{
+            for(int i = 0 ; i < length() ; i++) {
+                if(viejo.equals(getSymbol(i))) {
+                    result.append(nuevo);
+                } else {
+                    result.append(getSymbol(i));
+                }
+            }
+        }catch(StrIndexOutOfBoundsException ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + " Str.replaceSymbol("+viejo+","+nuevo+") se rompio, al parecer nos pasamos en el indice: " );
+            ouch.printStackTrace();
+        }
+        return result;
     }
 
 }// Str

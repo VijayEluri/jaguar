@@ -1,25 +1,25 @@
 /**
 * <State.java> -- to use a state
-* 
-* Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+*
+* Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 *
 * This file is part of JAGUAR
-* 
+*
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 2
 * of the License, or (at your option) any later version.
-* 
+*
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
-* 
+*
 * You should have received a copy of the GNU General Public License
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-* 
-* Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+*
+* Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:05 $
 **/
 
@@ -39,17 +39,17 @@ public class State{
      **/
     static final public String ELEMENT_NAME = "state";
     /**
-     * El tag con el que se define el inicio del objeto de un 
+     * El tag con el que se define el inicio del objeto de un
      * en un archivo
      */
     public static final String BEG_TAG = "<"+ELEMENT_NAME+">";
 
     /**
-     * El tag con el que se define el fin del objeto de un 
+     * El tag con el que se define el fin del objeto de un
      * en un archivo
      */
     public static final String END_TAG = "</"+ELEMENT_NAME+">";
-    
+
     /**
      * El estado por default no es un estado final
      **/
@@ -59,56 +59,56 @@ public class State{
      * @return value of isInF.
      */
     public boolean getIsInF() {
-	return isInF;
+        return isInF;
     }
-    
+
     /**
      * Set the value of isInF.
      * @param _isInF  Value to assign to isInF.
      */
     public void setIsInF(boolean  _isInF) {
-	isInF = _isInF;
+        isInF = _isInF;
     }
     /**
      * Marca este  estado como un estado final
      */
     public void markAsFinal(){
-	setIsInF(true);	
+        setIsInF(true);
     }
-    
+
     /**
      * La etiqueta del estado
      **/
-    protected String label = null;    
+    protected String label = null;
     /**
      * Get the value of label.
      * @return value of label.
      */
     public String getLabel() {
-	return label;
+        return label;
     }
-    
+
     /**
      * Set the value of label.
      * @param v  Value to assign to label.
      */
     public void setLabel(String  v) {
-	this.label = v;
-    }       
+        this.label = v;
+    }
     /**
-     * FunciÛn equals
+     * Funci√≥n equals
      **/
     public boolean equals(Object o){
-	if(o instanceof State && label.equals(((State)o).getLabel()))
-	    return true;
-	return false;
+        if(o instanceof State && label.equals(((State)o).getLabel()))
+            return true;
+        return false;
     }
 
      /**
       * Regresa el hashCode, basado en <code>label</code>
       **/
      public int hashCode(){
-	 return getLabel().hashCode();
+         return getLabel().hashCode();
      }
 
     /**
@@ -117,11 +117,11 @@ public class State{
      * @param _label la etiqueta del estado
      */
     private State(){
-	this("",false);
+        this("",false);
     }
 
     public State(State p){
-	this(p.getLabel(),p.getIsInF());
+        this(p.getLabel(),p.getIsInF());
     }
 
     /**
@@ -136,19 +136,19 @@ public class State{
             this.setLocation(xpos, ypos);
         }
     }
-    
+
     /**
      * La constructura con la etiqueta como parametro, por default es
      * un estado no final, es equivalente a usar la construtora <code>State(_label,false)</code>
      * @param _label la etiqueta del estado
      */
     public State(String _label){
-	this(_label,false);
+        this(_label,false);
     }
 
     /**
      * La constructura con la etiqueta como parametro, y un booleano
-     * que indica si es o no es un estado final  
+     * que indica si es o no es un estado final
      * @param _label la etiqueta del estado
      * @param _isInF indica si es un estado final
      */
@@ -158,7 +158,7 @@ public class State{
 
     /**
      * La constructura con la etiqueta como parametro, y un booleano
-     * que indica si es o no es un estado final  
+     * que indica si es o no es un estado final
      * @param _label la etiqueta del estado
      * @param _isInF indica si es un estado final
      */
@@ -167,45 +167,45 @@ public class State{
         isInF = _isInF;
         location = new Point();
         setLocation(x,y);
-    }    
+    }
 
-    
+
     /**
-     * FunciÛn que regresa la representaciÛn como cadena de
+     * Funci√≥n que regresa la representaci√≥n como cadena de
      * <code>State</code>
      **/
     public String toString(){
-	return getLabel();
+        return getLabel();
     }
 
 
-    /** 
-     * Escribe la representaciÛn del <code>State</code> en un archivo con el formato definido por el DTD correspondiente
-     * Escribe el State con su representaciÛn correspondiente con tags.
+    /**
+     * Escribe la representaci√≥n del <code>State</code> en un archivo con el formato definido por el DTD correspondiente
+     * Escribe el State con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el State.
+     * @param fw El FileWriter donde se guardar√° el State.
      */
     public void toFile(FileWriter fw, boolean withLocation){
-	try{ 
-	    if (withLocation) {
-            fw.write("<" + ELEMENT_NAME + " xpos=\"" + ((int) location.getX()) + "\" " + "ypos=\"" + ((int) location.getY()) + "\" >" + getLabel() + END_TAG);
-	    } else {
-            fw.write(BEG_TAG + getLabel() + END_TAG);
-	    }
-	    
-	}catch( Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "Trying to toFile: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try{
+            if (withLocation) {
+                  fw.write("<" + ELEMENT_NAME + " xpos=\"" + ((int) location.getX()) + "\" " + "ypos=\"" + ((int) location.getY()) + "\" >" + getLabel() + END_TAG);
+            } else {
+                  fw.write(BEG_TAG + getLabel() + END_TAG);
+            }
+
+        }catch( Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
+        }
     }
-    
+
      public void toFile(FileWriter fw) {
          toFile(fw, false);
      }
-    
+
     /**
-     * El punto dode se localiza en el componente gr·fico
+     * El punto dode se localiza en el componente gr√°fico
      **/
     protected Point location;
 
