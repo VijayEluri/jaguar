@@ -33,8 +33,8 @@ package jaguar.grammar.tipo3.structures.exception;
  */
 public class NotAProductionT3Exception extends Exception{
     /**
-     * Constructor sin par�metros.
-     * La excepcion presenta el mensaje por omisi�n, el cual es
+     * Constructor sin parámetros.
+     * La excepcion presenta el mensaje por omisión, el cual es
      */
     public NotAProductionT3Exception(){
         super();
@@ -43,7 +43,7 @@ public class NotAProductionT3Exception extends Exception{
      * Constructor.
      * Usa el mensaje especificado como parametro del constructor de la superclase.
      *
-     * @param mensaje que contiene esta excepci�n.
+     * @param mensaje que contiene esta excepción.
      */
     public NotAProductionT3Exception(String mensaje){
         super(mensaje);

@@ -34,7 +34,7 @@ package jaguar.grammar.tipo2.structures.exception;
 public class NotAProductionT2Exception extends Exception{
     /**
      * Constructor sin parámetros.
-     * La excepcion presenta el mensaje por omisi�n, el cual es
+     * La excepcion presenta el mensaje por omisión, el cual es
      */
     public NotAProductionT2Exception(){
         super();
@@ -43,7 +43,7 @@ public class NotAProductionT2Exception extends Exception{
      * Constructor.
      * Usa el mensaje especificado como parametro del constructor de la superclase.
      *
-     * @param mensaje que contiene esta excepci�n.
+     * @param mensaje que contiene esta excepción.
      */
     public NotAProductionT2Exception(String mensaje){
         super(mensaje);

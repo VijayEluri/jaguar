@@ -34,7 +34,7 @@ package jaguar.grammar.structures.exception;
 public class ProductionSetNotValidTypeException extends Exception{
     /**
      * Constructor sin parámetros.
-    * La excepcion presenta el mensaje por omisi�n, el cual es
+    * La excepcion presenta el mensaje por omisión, el cual es
     * <code></code>
     */
     public ProductionSetNotValidTypeException(){
