@@ -45,6 +45,7 @@ import java.util.*;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
 import javax.swing.event.TableModelEvent;
 import javax.swing.JOptionPane;
@@ -60,6 +61,7 @@ import java.awt.event.ActionEvent;
  * @version 0.1
  */
 public class JAFS extends AFS implements JMachine{
+
     /**
      * El contexto gráfico sobre el cual se dibujará  el AFS
      */
@@ -67,7 +69,7 @@ public class JAFS extends AFS implements JMachine{
     /**
      * El valor por omisión para g
      */
-    public static final Graphics DEFAULT_G=null;
+    public static final Graphics DEFAULT_G = null;
     /**
      * funcion de acceso para obtener el valor de g
      * @return el valor actual de g
@@ -76,6 +78,11 @@ public class JAFS extends AFS implements JMachine{
     public Graphics getG(){
         return g;
     }
+
+    public int getFirstEditableColumn() {
+        return 2;
+    }
+
     /**
      * funcion de acceso para modificar g
      * @param new_g el nuevo valor para g
@@ -88,16 +95,16 @@ public class JAFS extends AFS implements JMachine{
     private JAfsFrame afsframe;
 
     /**
-     * Get the value of dfaframe.
-     * @return value of dfaframe.
+     * Get the value of afsframe.
+     * @return value of afsframe.
      */
     public JMachineFrame getMachineFrame() {
         return afsframe;
     }
 
     /**
-     * Set the value of dfaframe.
-     * @param v  Value to assign to dfaframe.
+     * Set the value of afsframe.
+     * @param v  Value to assign to afsframe.
      */
     public void setJMachineFrame(JMachineFrame  v) {
         this.afsframe = (JAfsFrame)v;
@@ -107,7 +114,7 @@ public class JAFS extends AFS implements JMachine{
      * La cadena que vamos a pasarle al AFS P para ver si pertenece a L(P)
      */
     protected JStr strToTestOrig;
-    /**
+        /**
      * El valor por omisión para strToTestOrig
      */
     public static final JStr DEFAULT_STRTOTESTORIG=null;
@@ -441,7 +448,7 @@ public class JAFS extends AFS implements JMachine{
             JRadioButton inicial = new JRadioButton("",esInicial(i));
             inicialSelector.add(inicial);
             data[k][aSigma.length+2] = inicial;
-            data[k][aSigma.length+3] = new Boolean(i.getIsInF());
+            data[k][aSigma.length+3] = new JCheckBox("",i.getIsInF());
             for (Symbol h : aGamma) {
                 data[k][1] = h.toString();
 
@@ -490,52 +497,62 @@ public class JAFS extends AFS implements JMachine{
 
     public void actionPerformed(ActionEvent e) {
         if ("add_state".equals(e.getActionCommand())) {
-            // JState newState = new JState("q"+Q.size());
-            // Q.add(newState);
-            // newState.setLocation(50,50);
-            // dfaframe.getJdc().getJeList().add(newState);
-            // //initStatesPositions();
-            // dfaframe.showTabular();
-            // dfaframe.getJdc().repaint();
+            JState newState = new JState("q"+Q.size());
+            Q.add(newState);
+            newState.setLocation(50,50);
+            afsframe.getJdc().getJeList().add(newState);
+            //initStatesPositions();
+            afsframe.showTabular();
+            afsframe.getJdc().repaint();
             return;
         }
 
         if ("remove_state".equals(e.getActionCommand())) {
-            // // Ask for confirmation first
-            // // find wich state is selected and delete it.
-            // State[] states = Q.toArray();
-            // int idx = dfaframe.getSelectedRowInTTM();
-            // if (idx >= 0) {
-            //     JState state = (JState)states[idx];
-            //     int n = JOptionPane.showConfirmDialog(dfaframe,
-            //         "Are you sure that you want to delete the state "
-            //         + state + "?",
-            //         "Confirm deletion",
-            //         JOptionPane.YES_NO_OPTION,
-            //         JOptionPane.WARNING_MESSAGE);
-            //     if (n != 0) {
-            //         return;
-            //     }
-            //     dfaframe.getJdc().getJeList().remove(state);
-            //     Q.remove(state);
-            //     Hashtable<State,Hashtable<Symbol,State>> deltaHash = delta.getD();
-            //     deltaHash.remove(state);
-            //
-            //     for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
-            //         // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
-            //         JState q = (JState)enu.nextElement();
-            //         Hashtable<Symbol,State> toHash= deltaHash.get(q);
-            //         for(Enumeration f = toHash.keys();  f.hasMoreElements() ;) {
-            //             Symbol s = (Symbol)f.nextElement();
-            //             if (toHash.get(s).equals(state)) {
-            //                 toHash.remove(s);
-            //             }
-            //         }
-            //     }
-            //
-            //     dfaframe.showTabular();
-            //     dfaframe.getJdc().repaint();
-            // }
+            // Ask for confirmation first
+            // find wich state is selected and delete it.
+            State[] states = Q.toArray();
+            int rowIdx = afsframe.getSelectedRowInTTM();
+            int idx = rowIdx/3;
+            if (idx >= 0) {
+                JState state = (JState)states[idx];
+                int n = JOptionPane.showConfirmDialog(afsframe,
+                    "Are you sure that you want to delete the state "
+                    + state + "?",
+                    "Confirm deletion",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+                if (n != 0) {
+                    return;
+                }
+                afsframe.getJdc().getJeList().remove(state);
+                Q.remove(state);
+                Hashtable<State,Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>>> deltaHash = ((StackDelta)delta).getD();
+                deltaHash.remove(state);
+
+                for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
+                    // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
+                    JState q = (JState)enu.nextElement();
+                    Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>> toHash = deltaHash.get(q);
+                    for(Symbol s : toHash.keySet()) {
+                        Hashtable<Symbol,QxGammaStarSet> setHash = toHash.get(s);
+                        for (Symbol a : setHash.keySet()) {
+                            QxGammaStarSet set = setHash.get(a);
+                            for (QxGammaStar qxg : set) {
+                                if (qxg.getQ().equals(state)) {
+                                    set.remove(qxg);
+                                }
+
+                                if (set.isEmpty()) {
+                                    setHash.remove(a);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                afsframe.showTabular();
+                afsframe.getJdc().repaint();
+            }
         }
     }
 }

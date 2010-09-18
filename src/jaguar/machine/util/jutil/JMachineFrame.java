@@ -1,7 +1,7 @@
 /**
 ** <JMachineFrame.java> -- The generic machine frame
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -311,10 +311,10 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         }
     }
     /**
-     * Checa <em>r·pidamente</em> si la cadena que est· cargada en la
-     * m·quina pertenece al lenguaje L(jmachine) y despliega un
+     * Checa <em>r√°pidamente</em> si la cadena que est√° cargada en la
+     * m√°quina pertenece al lenguaje L(jmachine) y despliega un
      * dialogo con el resultado, no muestra los movimientos en ningun
-     * otro componente y despuÈs de mostrar el resultado, hace un <code>resetMachine</code>
+     * otro componente y despu√©s de mostrar el resultado, hace un <code>resetMachine</code>
      * @see #resetMachine
      * @see JMachine#getStrToTestOrig
      */
@@ -360,8 +360,8 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     }
 
     /**
-     ** Realiza un paso en la ejecuciÛn de la M·quina y regresa verdarero o falso dependiendo si puede seguir con la ejecuciÛn o no
-     ** @return boolean <code>true</code> si se puede continuar con la ejecuciÛn de la m·quina, <code>false</code> en  otro caso.
+     ** Realiza un paso en la ejecuci√≥n de la M√°quina y regresa verdarero o falso dependiendo si puede seguir con la ejecuci√≥n o no
+     ** @return boolean <code>true</code> si se puede continuar con la ejecuci√≥n de la m√°quina, <code>false</code> en  otro caso.
      **/
     abstract public boolean nextStep();
 
@@ -392,9 +392,9 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
 
     /**
      ** Pone todos los componentes en un estado inicial Entre los
-     ** compononentes que resetea est·n: la cadena en el componente
+     ** compononentes que resetea est√°n: la cadena en el componente
      ** "String", "Current State" regresa al estado inicial; habilita
-     ** los botones "next", "run", "quick test" y deshabilita el botÛn
+     ** los botones "next", "run", "quick test" y deshabilita el bot√≥n
      ** "stop".
      **/
     protected void resetMachine(){
@@ -409,14 +409,14 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
     }
 
     /**
-     * Crea una instancia de JMachine a partir de la descripciÛn en un archivo, ademlas inicializa los botones y la configuraciÛn en general del
+     * Crea una instancia de JMachine a partir de la descripci√≥n en un archivo, ademlas inicializa los botones y la configuraci√≥n en general del
      * JMachineFrame
-     * @param file es el archivo donde esta la descripciÛn de la m·quina en cuestiÛn.
+     * @param file es el archivo donde esta la descripci√≥n de la m√°quina en cuesti√≥n.
      */
     abstract protected void initJMachine(File file);
 
     /**
-     * Crea el men˙ con las configuraciones b·sicas de este Frame
+     * Crea el men√∫ con las configuraciones b√°sicas de este Frame
      */
     protected JMenuBar createMenu() {
         JMenuBar mb = new JMenuBar();
@@ -424,7 +424,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         menu.setMnemonic(KeyEvent.VK_F);
 
         newMachine = new  JMenuItem("New...",KeyEvent.VK_N);
-        newMachine.getAccessibleContext().setAccessibleDescription("Crea una nueva m·quina");
+        newMachine.getAccessibleContext().setAccessibleDescription("Crea una nueva m√°quina");
         newMachine.addActionListener(this);
         newMachine.setActionCommand("new");
         newMachine.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
@@ -439,7 +439,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         menu.add(loadJdfa);
 
         save = new  JMenuItem("Save",KeyEvent.VK_S);
-        save.getAccessibleContext().setAccessibleDescription("Guarda la M·quina");
+        save.getAccessibleContext().setAccessibleDescription("Guarda la M√°quina");
         save.addActionListener(this);
         save.setActionCommand("save");
         save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
@@ -447,7 +447,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         menu.add(save);
 
         tabular = new  JMenuItem("Show tabular ...",KeyEvent.VK_T);
-        tabular.getAccessibleContext().setAccessibleDescription("Muestra la representaciÛn tabular de la M·quina");
+        tabular.getAccessibleContext().setAccessibleDescription("Muestra la representaci√≥n tabular de la M√°quina");
         tabular.addActionListener(this);
         tabular.setActionCommand("tabular");
         tabular.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9,0));
@@ -462,7 +462,7 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         menu.add(descriptionMI);
 
         printM = new  JMenuItem("Print Machine...",KeyEvent.VK_P);
-        printM.getAccessibleContext().setAccessibleDescription("Imprime la M·quina");
+        printM.getAccessibleContext().setAccessibleDescription("Imprime la M√°quina");
         printM.addActionListener(this);
         printM.setActionCommand("print");
         printM.setEnabled(false);
@@ -586,23 +586,19 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
 
         public TabularMachine(String[] columnNames, Object[][] data, JMachine listener, Rectangle r) {
             super("Tabular Machine");
-            table = new MyJTable(data,columnNames);
+            table = new MyJTable(data,columnNames,listener);
 
             table.getModel().addTableModelListener(listener);
             table.getColumnModel().getColumn(0).setPreferredWidth(100);
-            table.setDefaultRenderer(Object.class, new MyJTableCellRenderer());
-            table.getTableHeader().setDefaultRenderer(new MyJTableCellRenderer());
-
+            table.setDefaultRenderer(Object.class, new MyJTableCellRenderer(listener));
+            table.getTableHeader().setDefaultRenderer(new MyJTableCellRenderer(listener));
             table.setPreferredScrollableViewportSize(new Dimension(650, 95));
-            // table.getTableHeader().setReorderingAllowed(false);
-            // table.setFont(new Font("SansSerif",Font.BOLD,10));
 
             JPanel buttons = new JPanel();
 
             JButton b1 = new JButton("Add State");
             b1.setVerticalTextPosition(AbstractButton.CENTER);
             b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-            //b1.setMnemonic(KeyEvent.VK_A);
             b1.setActionCommand("add_state");
             b1.addActionListener(listener);
 
@@ -611,7 +607,6 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             b1 = new JButton("Remove State");
             b1.setVerticalTextPosition(AbstractButton.CENTER);
             b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-            //b1.setMnemonic(KeyEvent.VK_A);
             b1.setActionCommand("remove_state");
             b1.addActionListener(listener);
 
@@ -643,7 +638,71 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         }
     }
 
+    protected class MyJTable extends JTable{
+        private JMachine machine;
+
+        MyJTable (Vector v1, Vector v2) {
+            super(v1,v2);
+        }
+
+        MyJTable (Object[][] data, Object[] columnNames, JMachine machine) {
+            // for (Object[] a : data) {
+            //     for (Object b : a) {
+            //         System.out.print(b);
+            //         System.out.print(" | ");
+            //     }
+            //     System.out.println("");
+            // }
+            // System.out.println(" --------------------------------------- ");
+            super(data,columnNames);
+            this.machine = machine;
+            for (Object[] a : data) {
+                for (Object b : a) {
+                    System.out.print(b);
+                    System.out.print(" | ");
+                }
+                System.out.println("");
+            }
+        }
+
+        public boolean isCellEditable(int row,int column) {
+            if (row >= 0 && column >= machine.getFirstEditableColumn()) {
+                // Transiciones
+                return true;
+            }
+            // TODO:
+            // Nombres de estados
+            // Nombres de s√≠mbolos JTableHeader subclass
+
+            return false;
+        }
+
+        /*
+         * JTable uses this method to determine the default renderer/
+         * editor for each cell.  If we didn't implement this method,
+         * then the last column would contain text ("true"/"false"),
+         * rather than a check box.
+         */
+        public Class getColumnClass(int c) {
+            Object firstValue = getValueAt(0, c);
+
+            if (firstValue != null) {
+                return getValueAt(0, c).getClass();
+            }
+
+            return jmachine.getColumnClass(c);
+
+        }
+    }
+
+
     protected static class MyJTableCellRenderer extends DefaultTableCellRenderer {
+        private JMachine machine;
+
+        protected MyJTableCellRenderer(JMachine machine) {
+            this.machine = machine;
+        }
+
         public Component getTableCellRendererComponent(JTable table,
                                                        Object value,
                                                        boolean isSelected,
@@ -664,14 +723,14 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
                 background = Color.white;
             }
 
-            // SÛlo el header
+            // S√≥lo el header
             if (row == -1) {
                 ((MyJTableCellRenderer) c).setHorizontalAlignment(SwingConstants.CENTER);
                 foreground = Color.white;
                 background = Color.gray;
             } else {
-                // SÛlo la primera columna
-                if (column == 0) {
+                // S√≥lo las columnas no editables
+                if (column < machine.getFirstEditableColumn()) {
                     foreground = Color.white;
                     background = Color.gray;
                 }
@@ -687,42 +746,55 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
         }
     }
 
-    protected class MyJTable extends JTable{
-        MyJTable(Vector v1, Vector v2){
-            super(v1,v2);
+    protected static class ButtonEditor<T extends javax.swing.JToggleButton> extends DefaultCellEditor implements ItemListener {
+        @SuppressWarnings("unchecked")
+        private T button;
+
+        public ButtonEditor(JCheckBox checkBox) {
+          super(checkBox);
         }
 
-        MyJTable(Object[][] data, Object[] columnNames){
-            super(data,columnNames);
+        @SuppressWarnings("unchecked")
+        public Component getTableCellEditorComponent(JTable table, Object value,
+            boolean isSelected, int row, int column) {
+          if (value == null)
+            return null;
+          button = (T) value;
+          button.addItemListener(this);
+          return (Component) value;
         }
 
-        public boolean isCellEditable(int row,int column) {
-            if (row >= 0 && column > 0) {
-                // Transiciones
-                return true;
-            }
-            // TODO:
-            // Nombres de estados
-            // Nombres de sÌmbolos JTableHeader subclass
-
-            return false;
+        public Object getCellEditorValue() {
+          button.removeItemListener(this);
+          return button;
         }
 
-        /*
-         * JTable uses this method to determine the default renderer/
-         * editor for each cell.  If we didn't implement this method,
-         * then the last column would contain text ("true"/"false"),
-         * rather than a check box.
-         */
-        public Class getColumnClass(int c) {
-            Object firstValue = getValueAt(0, c);
+        public void itemStateChanged(ItemEvent e) {
+          super.fireEditingStopped();
+        }
+    }
 
-            if (firstValue != null) {
-                return getValueAt(0, c).getClass();
-            }
+    protected static class ButtonRenderer<T extends javax.swing.JToggleButton> extends DefaultTableCellRenderer {
+        public ButtonRenderer() {
+          super();
+        }
 
-            return jmachine.getColumnClass(c);
+        @SuppressWarnings("unchecked")
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+          if (value == null){
+              return null;
+          }
 
+          if (isSelected) {
+              ((Component) value).setBackground(new Color(43,102,201));
+          } else {
+              ((Component) value).setBackground(Color.white);
+          }
+          ((T) value).setHorizontalAlignment(SwingConstants.CENTER);
+
+          return (Component) value;
         }
     }
 

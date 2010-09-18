@@ -1,7 +1,7 @@
 /**
 ** <JMachine.java> -- The graphical Machine's features
 **
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -51,13 +51,12 @@ import javax.swing.event.TableModelListener;
 import java.io.IOException;
 import java.lang.Math;
 
-public  interface JMachine extends TableModelListener, ActionListener {
+public interface JMachine extends TableModelListener, ActionListener {
     /**
      * Get the value of g.
      * @return value of g.
      */
     public Graphics getG();
-
 
     /**
      * Set the value of g.
@@ -65,6 +64,7 @@ public  interface JMachine extends TableModelListener, ActionListener {
      */
     public void setG(Graphics  v);
 
+    public int getFirstEditableColumn();
 
     /**
      * Get the value of machineframe.
@@ -146,10 +146,10 @@ public  interface JMachine extends TableModelListener, ActionListener {
 
 
     /**
-     * Regresa verdadero si podemo hacer un paso más o falso si no
+     * Regresa verdadero si podemo hacer un paso mÃ¡s o falso si no
      * podemos
      * @return <code>true</code> - si podemos seguir aplicando la
-     * función de transición delte, i.e. si la cadena a checar no es
+     * funciÃ³n de transiciÃ³n delte, i.e. si la cadena a checar no es
      * <epsilon> y si el estado en el que estamos es distinto de
      * <code>null</code>. <br> <code>false</code> - en otro caso.
      */
@@ -157,16 +157,16 @@ public  interface JMachine extends TableModelListener, ActionListener {
 
 
     /**
-     * Despliega el resultado de la ejecución del autómata como un cuadrito en el <code>dfaframe</code>
+     * Despliega el resultado de la ejecuciÃ³n del autÃ³mata como un cuadrito en el <code>dfaframe</code>
      * asociado
      */
     public void displayResult();
 
 
     /**
-     * Esta función se usa para asignar posiciones a los centros de
-     * los JStates.  Estas posiciones, están alrededor de un circulo
-     * de radio <code>r</code>, dividiendo y encontramos la posición
+     * Esta funciÃ³n se usa para asignar posiciones a los centros de
+     * los JStates.  Estas posiciones, estÃ¡n alrededor de un circulo
+     * de radio <code>r</code>, dividiendo y encontramos la posiciÃ³n
      * de cada estado por medio de coordenadas polares (<code>(x,y) =
      * (r*cos*theta, r*sin*theta)</code>).  Donde la theta es cada uno
      * de los intervalos de dividir 360 entre la cardinalidad de Q y r
@@ -195,14 +195,14 @@ public  interface JMachine extends TableModelListener, ActionListener {
 
     /**
      * Dado un estado dice si es o no es un estado inicial
-     * @param p el estado sobre el cual preguntaremos si es o no inicial en ésta máquina
+     * @param p el estado sobre el cual preguntaremos si es o no inicial en Ã©sta mÃ¡quina
      * @return <code>true</code> si <code>p</code> es estado inicial
      */
     public boolean esInicial(State p);
 
 
     /**
-     * Imprime la jmachine en un ambiente gráfico
+     * Imprime la jmachine en un ambiente grÃ¡fico
      */
     public void print(Graphics g);
 

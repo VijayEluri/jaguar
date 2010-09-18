@@ -91,6 +91,10 @@ public class JDFA extends DFA implements JMachine{
         g = v;
     }
 
+    public int getFirstEditableColumn() {
+        return 1;
+    }
+
     private JDfaFrame dfaframe;
 
     /**

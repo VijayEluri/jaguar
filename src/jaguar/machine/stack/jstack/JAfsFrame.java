@@ -369,58 +369,17 @@ public class JAfsFrame extends JMachineFrame{
         return null;
     }
 
-    private static class RadioButtonRenderer extends DefaultTableCellRenderer {
-      public Component getTableCellRendererComponent(JTable table, Object value,
-                                                     boolean isSelected, boolean hasFocus,
-                                                     int row, int column) {
-        if (value == null){
-            return null;
-        }
-
-        if (isSelected) {
-            ((Component) value).setBackground(new Color(43,102,201));
-        } else {
-            ((Component) value).setBackground(Color.white);
-        }
-        ((JRadioButton) value).setHorizontalAlignment(SwingConstants.CENTER);
-
-        return (Component) value;
-      }
-    }
-
-    private static class RadioButtonEditor extends DefaultCellEditor implements ItemListener {
-      private JRadioButton button;
-
-      public RadioButtonEditor(JCheckBox checkBox) {
-        super(checkBox);
-      }
-
-      public Component getTableCellEditorComponent(JTable table, Object value,
-          boolean isSelected, int row, int column) {
-        if (value == null)
-          return null;
-        button = (JRadioButton) value;
-        button.addItemListener(this);
-        return (Component) value;
-      }
-
-      public Object getCellEditorValue() {
-        button.removeItemListener(this);
-        return button;
-      }
-
-      public void itemStateChanged(ItemEvent e) {
-        super.fireEditingStopped();
-      }
-    }
-
     public void showTabular(){
         super.showTabular();
         MyJTable table = ttm.getMyJTable();
         table.getColumn("Initial").setCellRenderer(
-                new RadioButtonRenderer());
+                new ButtonRenderer<JRadioButton>());
         table.getColumn("Initial").setCellEditor(
-                new RadioButtonEditor(new JCheckBox()));
+                new ButtonEditor<JRadioButton>(new JCheckBox()));
+        table.getColumn("Final").setCellRenderer(
+                new ButtonRenderer<JCheckBox>());
+        table.getColumn("Final").setCellEditor(
+                new ButtonEditor<JCheckBox>(new JCheckBox()));
     }
 
 } // JAfsFrame
