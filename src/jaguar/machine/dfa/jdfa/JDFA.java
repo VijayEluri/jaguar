@@ -463,46 +463,6 @@ public class JDFA extends DFA implements JMachine{
     }
 
     /**
-     * funcion de acceso para obtener el valor de tableVector
-     * @return el valor actual de tableVector, donde la entrada
-     * tableVector.get(0) es el header y tableVector.get(1) es un
-     * vector que contiene los renglones
-     * @see #tableVector
-     */
-    public Vector<Vector> getTableVector(){
-        if(tableVector == DEFAULT_TABLEVECTOR) {
-            Symbol[] aSigma = getSigma().toArray();
-            State[] aQ = getQ().toArray();
-            Vector<String> header = new Vector<String>();
-            Vector<String> currentRow;
-            Vector<Vector<String>>data = new Vector<Vector<String>>();
-            State entry;
-            for (State i : aQ) {
-                currentRow = new Vector<String>();
-                for (Symbol j : aSigma) {
-                    entry = ((DfaDelta) getDelta()).apply(i,(Symbol) j);
-                    currentRow.add((entry != null)?entry.toString():null);
-                }
-                currentRow.add(0,i.toString());
-                currentRow.add(aSigma.length+1,""+esInicial(i));
-                currentRow.add(aSigma.length+2,""+i.getIsInF());
-                data.add(currentRow);
-            }
-
-            for(int j = 0 ; j < aSigma.length ; j++) {
-                header.add(((Symbol)aSigma[j]).getSym());
-            }
-            header.add(0,"Q");
-            header.add(aSigma.length+1,"Initial");
-            header.add(aSigma.length+2,"Final");
-            tableVector = new Vector<Vector>();
-            tableVector.add(header);
-            tableVector.add(data);
-        }
-        return tableVector;
-    }
-
-    /**
      ** Dado un estado dice si es o no es un estado inicial
      ** @param p el estado sobre el cual preguntaremos si es o no inicial en ésta máquina
      ** @return true si <code>p</code> es estado inicial
@@ -516,14 +476,6 @@ public class JDFA extends DFA implements JMachine{
      * TableModelListener implementation. This changes the delta object when necessary.
      */
     public void tableChanged(TableModelEvent e) {
-        // TODO:
-        //   Editar nombres de estados
-        // ✓ Editar transiciones
-        // ✓ Editar inicial
-        // ✓ Editar final
-        //   Agregar estados
-        //   Agregar símbolos
-
         int row = e.getFirstRow();
         int column = e.getColumn();
 
@@ -602,7 +554,7 @@ public class JDFA extends DFA implements JMachine{
                 }
                 dfaframe.getJdc().getJeList().remove(state);
                 Q.remove(state);
-                Hashtable<State,Hashtable<Symbol,State>> deltaHash = delta.getD();
+                Hashtable<State,Hashtable<Symbol,State>> deltaHash = ((JDfaDelta)delta).getD();
                 deltaHash.remove(state);
 
                 for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {

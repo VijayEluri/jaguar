@@ -174,14 +174,6 @@ public interface JMachine extends TableModelListener, ActionListener {
      */
     public Alphabet getSigma();
 
-    /**
-     * funcion de acceso para obtener el valor de tableVector
-     * @return el valor actual de tableVector, donde la entrada
-     * tableVector.get(0) es el header y tableVector.get(1) es un
-     * vector que contiene los renglones
-     */
-    public Vector getTableVector();
-
     public String[] getColumnNames();
     public Object[][] getData();
     public Class getColumnClass(int c);

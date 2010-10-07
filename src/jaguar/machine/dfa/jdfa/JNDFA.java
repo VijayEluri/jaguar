@@ -387,11 +387,11 @@ public class JNDFA extends NDFA implements JMachine{
     /**
      * La representación en vector de la función de transición delta
      */
-    protected Vector tableVector = DEFAULT_TABLEVECTOR;
+    protected Vector<Vector> tableVector = DEFAULT_TABLEVECTOR;
     /**
      * El valor por omisión para tableVector
      */
-    public static final Vector DEFAULT_TABLEVECTOR=null;
+    public static final Vector<Vector> DEFAULT_TABLEVECTOR=null;
 
     public Class getColumnClass(int c) {
         if (c > getSigma().size()) {
@@ -435,47 +435,7 @@ public class JNDFA extends NDFA implements JMachine{
         return data;
     }
 
-
-    /**
-     * funcion de acceso para obtener el valor de tableVector
-     * @return el valor actual de tableVector, donde la entrada tableVector.get(0) es el header y tableVector.get(1) es un vector que contiene los renglones
-     * @see #tableVector
-     */
-    public Vector getTableVector(){
-        if(tableVector == DEFAULT_TABLEVECTOR){
-            Symbol[] aSigma = getSigma().toArray();
-            State[] aQ = getQ().toArray();
-            Vector<String> header = new Vector<String>();
-            Vector<String> currentRow;
-            Vector<Vector<String>>data = new Vector<Vector<String>>();
-            StateSet entry;
-            for(State i : aQ) {
-                currentRow = new Vector<String>();
-                for(Symbol j : aSigma) {
-                    entry = ((NDfaDelta)getDelta()).apply(i,(Symbol) j);
-                    currentRow.add((entry != null) ? entry.toCommaSeparatedList() : null);
-                }
-                currentRow.add(0,i.toString());
-                data.add(currentRow);
-            }
-            for(int j = 0 ; j < aSigma.length ; j++) {
-                header.add(((Symbol)aSigma[j]).getSym());
-            }
-            header.add(0,"Q");
-            tableVector = new Vector();
-            tableVector.add(header);
-            tableVector.add(data);
-        }
-        return tableVector;
-    }
-
     public void tableChanged(TableModelEvent e) {
-        // TODO:
-        //   Editar nombres de estados
-        // ✓ Editar transiciones
-        //   Agregar estados
-        //   Agregar símbolos
-
         int row = e.getFirstRow();
         int column = e.getColumn();
 
@@ -569,13 +529,13 @@ public class JNDFA extends NDFA implements JMachine{
                 }
                 dfaframe.getJdc().getJeList().remove(state);
                 Q.remove(state);
-                Hashtable<State,Hashtable<Symbol,State>> deltaHash = delta.getD();
+                Hashtable<State,Hashtable<Symbol,StateSet>> deltaHash = ((NDfaDelta)delta).getD();
                 deltaHash.remove(state);
 
                 for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
                     // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
                     JState q = (JState)enu.nextElement();
-                    Hashtable<Symbol,State> toHash= deltaHash.get(q);
+                    Hashtable<Symbol,StateSet> toHash = deltaHash.get(q);
                     for(Enumeration f = toHash.keys();  f.hasMoreElements() ;) {
                         Symbol s = (Symbol)f.nextElement();
                         if (toHash.get(s).equals(state)) {
