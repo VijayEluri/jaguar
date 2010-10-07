@@ -1,7 +1,7 @@
 /**
 ** <ProductionSet.java> -- The productions set
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -39,7 +39,7 @@ import org.xml.sax.*;
 /**
  * El conjunto de producciones que va a tener una gramatica
  *
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:02 $
  */
 abstract public class ProductionSet extends HashSet<Production> implements Cloneable{
@@ -68,7 +68,7 @@ abstract public class ProductionSet extends HashSet<Production> implements Clone
      */
     public static final String END_TAG = "</"+ELEMENT_NAME+">";
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public ProductionSet (){
@@ -117,23 +117,23 @@ abstract public class ProductionSet extends HashSet<Production> implements Clone
     /**
      * Indica si otro <code>Object</code> es "igual" a este.
      * <br>
-     * El mÈtodo <code>equals</code> implementa una relaciÛn de equivalencia:
+     * El m√©todo <code>equals</code> implementa una relaci√≥n de equivalencia:
      * <ul>
      * <li> Es reflexiva: para toda referencia x, x.equals(x) debe regresar <code>true</code></li>
-     * <li> Es simÈtrica: para cualesquiera dos referencias <code>x</code> y <code>y</code>,
+     * <li> Es sim√©trica: para cualesquiera dos referencias <code>x</code> y <code>y</code>,
      * <code>x.equals(y)</code> debe regresar <code>true</code> si y solo si
      * <code>y.equals(x)</code> regresa <code>true</code></li>
      * <li> Es transitiva: Para cualesquiera tres referencias <code>x,y,z</code> si
      * <code>x.equals</code> regresa <code>true</code> y <code>y.equals(z)</code>
      * regresa <code>true</code>, entonces <code>x.equals(z)</code> debe regresar <code>true</code>.</li>
      * <li> Es consistente: para cualesquiera dos referencias <code>x</code> y <code>y</code>,
-     * m˙ltiples llamadas de <code>x.equals(y)</code> deben consistentemente regresar <code>true</code> o
-     * consistentemente regresar <code>false</code>, siempre y cuando no cambie en el objeto la informaciÛn usada
+     * m√∫ltiples llamadas de <code>x.equals(y)</code> deben consistentemente regresar <code>true</code> o
+     * consistentemente regresar <code>false</code>, siempre y cuando no cambie en el objeto la informaci√≥n usada
      * en las comparaciones de <code>equals</code> .</li>
      * <li> Para toda referencia no nula <code>x</code>,<code>x.equals(null)</code> debe regresar <code>false</code>.</li>
      * </ul>
      *
-     * El mÈtodo <code>equals</code> para la clase ProductionSet es implementado mediante el uso de == para los campos de tipos b·sicos
+     * El m√©todo <code>equals</code> para la clase ProductionSet es implementado mediante el uso de == para los campos de tipos b√°sicos
      * y llamadas a <code>equals</code> para los campos que son objetos.<br>
      *
      * @param o el objeto con el que voy a comparar a este.
@@ -149,7 +149,7 @@ abstract public class ProductionSet extends HashSet<Production> implements Clone
     }
 
     /**
-     * Esta es la funciÛn que debe de implementar cada una de los tipos de producciÛn dependiendo el tipo de gramatica que se quiere implementar .
+     * Esta es la funci√≥n que debe de implementar cada una de los tipos de producci√≥n dependiendo el tipo de gramatica que se quiere implementar .
      *
      * @return Regresa verdadero si esta bien "creada" la produccion con respecto al tipo de gramatica que se esta describiendo.
      *
@@ -162,13 +162,13 @@ abstract public class ProductionSet extends HashSet<Production> implements Clone
     }
 
     /**
-     * Guarda la representaciÛn de el conjunto de producciones
-     * Gram·tica en un archivo con el formato definido por el DTD correspondiente
+     * Guarda la representaci√≥n de el conjunto de producciones
+     * Gram√°tica en un archivo con el formato definido por el DTD correspondiente
      *
-     *Escribe el conjunto de producciones con su representaciÛn correspondiente con
+     *Escribe el conjunto de producciones con su representaci√≥n correspondiente con
      *tags.
      *
-     * @param fw El FileWriter donde se escribir· el conjunto de producciones.
+     * @param fw El FileWriter donde se escribir√° el conjunto de producciones.
      */
     public void toFile(FileWriter fw){
         try{
