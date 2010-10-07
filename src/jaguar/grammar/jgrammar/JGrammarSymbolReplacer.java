@@ -1,26 +1,26 @@
 /**
 ** <JGrammarSymbolReplacer.java> -- Utility to replace the symbols on a given grammar
-** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+**
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
@@ -34,10 +34,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-/** 
- * La interface para reemplazar sÌmbolos
- * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+/**
+ * La interface para reemplazar s√≠mbolos
+ *
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JGrammarSymbolReplacer extends JPanel{
@@ -51,7 +51,7 @@ public class JGrammarSymbolReplacer extends JPanel{
      * @see #N
      */
     public Alphabet getN(){
-	return N;
+        return N;
     }
     /**
      * funcion de acceso para modificar N
@@ -59,7 +59,7 @@ public class JGrammarSymbolReplacer extends JPanel{
      * @see #N
      */
     public void setN(Alphabet new_N){
-	N=new_N;
+        N=new_N;
     }
 
     /**
@@ -72,7 +72,7 @@ public class JGrammarSymbolReplacer extends JPanel{
      * @see #T
      */
     public Alphabet getT(){
-	return T;
+        return T;
     }
     /**
      * funcion de acceso para modificar T
@@ -80,113 +80,110 @@ public class JGrammarSymbolReplacer extends JPanel{
      * @see #T
      */
     public void setT(Alphabet new_T){
-	T=new_T;
+        T=new_T;
     }
 
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      */
-    public JGrammarSymbolReplacer (Alphabet N, Alphabet T){	
-	super();	
-	this.N = N ;
-	this.T = T ;
-	setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));	
-	createContent();
+    public JGrammarSymbolReplacer (Alphabet N, Alphabet T){
+        super();
+        this.N = N ;
+        this.T = T ;
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        createContent();
     }
 
     public void createContent(){
-	JPanel symbolsList = new JPanel();
-	JPanel NPanel=new JPanel(), TPanel=new JPanel();
-	symbolsList.setLayout(new BoxLayout(symbolsList,BoxLayout.Y_AXIS));
-	NPanel.setLayout(new BoxLayout(NPanel,BoxLayout.Y_AXIS));
-	TPanel.setLayout(new BoxLayout(TPanel,BoxLayout.Y_AXIS));
-	pairInfo = new Hashtable();
+        JPanel symbolsList = new JPanel();
+        JPanel NPanel=new JPanel(), TPanel=new JPanel();
+        symbolsList.setLayout(new BoxLayout(symbolsList,BoxLayout.Y_AXIS));
+        NPanel.setLayout(new BoxLayout(NPanel,BoxLayout.Y_AXIS));
+        TPanel.setLayout(new BoxLayout(TPanel,BoxLayout.Y_AXIS));
+        pairInfo = new Hashtable();
 
-	CheckBoxListener myListener = new CheckBoxListener();
-	JCheckBox currentCheckB;
-	JTextField currentTextF;
-	JPanel pairPanel;
-	Vector vInfo;
+        CheckBoxListener myListener = new CheckBoxListener();
+        JCheckBox currentCheckB;
+        JTextField currentTextF;
+        JPanel pairPanel;
+        Vector vInfo;
 
-	Object nA[] = getN().toArray();	
-	for(int i = 0 ; i < nA.length; i++){
-	    currentCheckB = new JCheckBox(nA[i].toString(),false);
-	    currentCheckB.addItemListener(myListener);
-	    
-	    currentTextF = new JTextField(20);
-	    currentTextF.setEnabled(false);	    
-	    vInfo = new Vector();
-	    vInfo.add(nA[i]);
-	    vInfo.add(currentTextF);	    
-	    pairInfo.put(currentCheckB,vInfo);
-	    
-	    pairPanel = new JPanel();
-	    pairPanel.setLayout(new BoxLayout(pairPanel,BoxLayout.X_AXIS));
-	    pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-	    pairPanel.add(currentCheckB);
-	    pairPanel.add(Box.createHorizontalGlue());
-	    pairPanel.add(currentTextF);
-	    pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        Object nA[] = getN().toArray();
+        for(int i = 0 ; i < nA.length; i++){
+            currentCheckB = new JCheckBox(nA[i].toString(),false);
+            currentCheckB.addItemListener(myListener);
 
-	    NPanel.add(pairPanel);	    
-	}
-	Object tA[] = getT().toArray();	
-	for(int i = 0 ; i < tA.length; i++){
-	    currentCheckB = new JCheckBox(tA[i].toString(),false);
-	    currentCheckB.addItemListener(myListener);
+            currentTextF = new JTextField(20);
+            currentTextF.setEnabled(false);
+            vInfo = new Vector();
+            vInfo.add(nA[i]);
+            vInfo.add(currentTextF);
+            pairInfo.put(currentCheckB,vInfo);
 
-	    currentTextF = new JTextField(20);
-	    currentTextF.setEnabled(false);
-	    
-	    vInfo = new Vector();
-	    vInfo.add(tA[i]);
-	    vInfo.add(currentTextF);	    
-	    pairInfo.put(currentCheckB,vInfo);
-	    
-	    pairPanel = new JPanel();
-	    pairPanel.setLayout(new BoxLayout(pairPanel,BoxLayout.X_AXIS));
-	    pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-	    pairPanel.add(currentCheckB);
-	    pairPanel.add(Box.createHorizontalGlue());
-	    pairPanel.add(currentTextF);
-	    pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+            pairPanel = new JPanel();
+            pairPanel.setLayout(new BoxLayout(pairPanel,BoxLayout.X_AXIS));
+            pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+            pairPanel.add(currentCheckB);
+            pairPanel.add(Box.createHorizontalGlue());
+            pairPanel.add(currentTextF);
+            pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-	    TPanel.add(pairPanel);	    
-	}
-	symbolsList.add(JMachineFrame.createJPanelBorder(NPanel,"N"));
-	symbolsList.add(Box.createVerticalGlue());
-	symbolsList.add(JMachineFrame.createJPanelBorder(TPanel,"T"));	
-	add(symbolsList);
+            NPanel.add(pairPanel);
+        }
+        Object tA[] = getT().toArray();
+        for(int i = 0 ; i < tA.length; i++){
+            currentCheckB = new JCheckBox(tA[i].toString(),false);
+            currentCheckB.addItemListener(myListener);
 
+            currentTextF = new JTextField(20);
+            currentTextF.setEnabled(false);
 
-	
+            vInfo = new Vector();
+            vInfo.add(tA[i]);
+            vInfo.add(currentTextF);
+            pairInfo.put(currentCheckB,vInfo);
+
+            pairPanel = new JPanel();
+            pairPanel.setLayout(new BoxLayout(pairPanel,BoxLayout.X_AXIS));
+            pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+            pairPanel.add(currentCheckB);
+            pairPanel.add(Box.createHorizontalGlue());
+            pairPanel.add(currentTextF);
+            pairPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+            TPanel.add(pairPanel);
+        }
+        symbolsList.add(JMachineFrame.createJPanelBorder(NPanel,"N"));
+        symbolsList.add(Box.createVerticalGlue());
+        symbolsList.add(JMachineFrame.createJPanelBorder(TPanel,"T"));
+        add(symbolsList);
     }
 
-    /** 
-     * Regresa una tabla de hash donde en la primer entrada est· el sÌmbolo a reemplazar y en la segunda entrada esta el nuevo sÌmbolo .
+    /**
+     * Regresa una tabla de hash donde en la primer entrada est√° el s√≠mbolo a reemplazar y en la segunda entrada esta el nuevo s√≠mbolo .
      *
      */
     public Hashtable getPairsToReplace(){
-	Symbol currNewSymbol;
-	Vector currPair;	
-	Hashtable result = new Hashtable();
-	Object keys[] = pairInfo.keySet().toArray();
-	for(int i = 0; i < keys.length; i++)
-	    if(((JCheckBox)keys[i]).isSelected()){
-		currPair = (Vector)pairInfo.get(keys[i]);		
-		currNewSymbol = new Symbol(((JTextField)currPair.get(1)).getText());
-		result.put(currPair.get(0),currNewSymbol);		
-	    }
-	return result;	
+        Symbol currNewSymbol;
+        Vector currPair;
+        Hashtable result = new Hashtable();
+        Object keys[] = pairInfo.keySet().toArray();
+        for(int i = 0; i < keys.length; i++)
+            if(((JCheckBox)keys[i]).isSelected()){
+                currPair = (Vector)pairInfo.get(keys[i]);
+                currNewSymbol = new Symbol(((JTextField)currPair.get(1)).getText());
+                result.put(currPair.get(0),currNewSymbol);
+            }
+        return result;
     }
 
     public void cancelSelections(){
-	setPairinfo(new Hashtable());
+        setPairinfo(new Hashtable());
     }
-    
+
     /**
-     * Aqui estan todos los simbolos con la info asociada para ver si tenemos que cambiar alguno 
+     * Aqui estan todos los simbolos con la info asociada para ver si tenemos que cambiar alguno
      */
     protected Hashtable pairInfo;
     /**
@@ -195,7 +192,7 @@ public class JGrammarSymbolReplacer extends JPanel{
      * @see #pairInfo
      */
     public Hashtable getPairinfo(){
-	return pairInfo;
+        return pairInfo;
     }
     /**
      * funcion de acceso para modificar pairInfo
@@ -203,31 +200,31 @@ public class JGrammarSymbolReplacer extends JPanel{
      * @see #pairInfo
      */
     public void setPairinfo(Hashtable new_pairInfo){
-	pairInfo=new_pairInfo;
+        pairInfo=new_pairInfo;
     }
-    
-    
+
+
     /**
-     * Regresa una cadena con una representaciÛn del objeto.
+     * Regresa una cadena con una representaci√≥n del objeto.
      * Toma los campos y los imprime en una lista junto con sus valores.
      *
      * @return una cadena con los valores del objeto.
      */
     public String toString(){
-	String salida="";
-	return salida; 
+        String salida="";
+        return salida;
     }
 
     class CheckBoxListener implements ItemListener {
-	public void itemStateChanged(ItemEvent e) {
-	    Object source = e.getItemSelectable();
-	    Vector vpair = (Vector)pairInfo.get(source);
-	    if(e.getStateChange() == ItemEvent.SELECTED)
-		((JTextField)vpair.get(1)).setEnabled(true);
-	    else ((JTextField)vpair.get(1)).setEnabled(false);
-	}
+        public void itemStateChanged(ItemEvent e) {
+            Object source = e.getItemSelectable();
+            Vector vpair = (Vector)pairInfo.get(source);
+            if(e.getStateChange() == ItemEvent.SELECTED)
+                ((JTextField)vpair.get(1)).setEnabled(true);
+            else ((JTextField)vpair.get(1)).setEnabled(false);
+        }
     }
-    
+
 }
 
 /* JGrammarSymbolReplacer.java ends here. */

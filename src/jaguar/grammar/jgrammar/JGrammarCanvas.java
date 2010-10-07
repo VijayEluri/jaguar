@@ -1,7 +1,7 @@
 /**
 ** <JGrammarCanvas.java> -- The canvas to show grammars
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -41,19 +41,19 @@ import jaguar.util.*;
 import jaguar.util.jutil.*;
 
 /**
- * El canvas donde se desplegar·n las gram·ticas
+ * El canvas donde se desplegar√°n las gram√°ticas
  *
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:02 $
  */
 
 public class JGrammarCanvas extends JPanel {
     /**
-     * La gram·tica que dibujar· el canvas
+     * La gram√°tica que dibujar√° el canvas
      */
     protected Grammar grammar;
     /**
-     * El valor por omisiÛn para grammar
+     * El valor por omisi√≥n para grammar
      */
     public static final Grammar DEFAULT_GRAMMAR=null;
     /**
@@ -74,7 +74,7 @@ public class JGrammarCanvas extends JPanel {
     }
 
     /**
-     * Se encarga de desplegar gr·ficamente la gram·tica asociada.
+     * Se encarga de desplegar gr√°ficamente la gram√°tica asociada.
      */
 
     public void displayGrammar(){
@@ -119,7 +119,7 @@ public class JGrammarCanvas extends JPanel {
     }
 
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JGrammarCanvas (){
@@ -149,8 +149,7 @@ public class JGrammarCanvas extends JPanel {
         JTextPane textPane = new JTextPane(new MachineGrammarStyledDocument(p.getAntecedente()));
 
         textPane.setEditable(false);
-        JPanel auxPanel = JGrammarFrame.createJPanelBorder(textPane,null,BorderFactory.createLineBorder(Color.blue));
-
+        JPanel auxPanel = JGrammarFrame.createJPanelBorder(textPane,null,BorderFactory.createLineBorder(Color.white));
         auxPanel.setBackground(Color.white);
         jprod.add(auxPanel);
 
@@ -162,7 +161,7 @@ public class JGrammarCanvas extends JPanel {
         textPane = new JTextPane(new MachineGrammarStyledDocument(p.getConsecuente()));
 
         textPane.setEditable(false);
-        auxPanel = JGrammarFrame.createJPanelBorder(textPane,null,BorderFactory.createLineBorder(Color.red));
+        auxPanel = JGrammarFrame.createJPanelBorder(textPane,null,BorderFactory.createLineBorder(Color.white));
 
         auxPanel.setBackground(Color.white);
         jprod.add(auxPanel);
@@ -176,14 +175,14 @@ public class JGrammarCanvas extends JPanel {
 
     /**
      * Rutinas de prueba para la clase JGrammarCanvas.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
         System.out.println("Esta es la clase JGrammarCanvas. \n"
-               +"Comentario: El canvas donde se desplegar·n las gram·ticas\n"
-               +"Autor: Ivan Hern·ndez Serrano\n"
+               +"Comentario: El canvas donde se desplegar√°n las gram√°ticas\n"
+               +"Autor: Ivan Hern√°ndez Serrano\n"
                +"E-mail: ivanx@users.sourceforge.net\n");
     }
 

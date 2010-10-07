@@ -1,26 +1,26 @@
 /**
-** <Production.java> -- The structure to represent a production  
-** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** <Production.java> -- The structure to represent a production
+**
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
@@ -37,10 +37,10 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
 
-/** 
- * Representa las producciones de la gr·matica, para cada una de las gramaticas  especializa estas producciones
- * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+/**
+ * Representa las producciones de la gr√°matica, para cada una de las gramaticas  especializa estas producciones
+ *
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version $Revision: 1.1 $ $Date: 2005/01/31 19:25:02 $
  */
 abstract public class Production implements Cloneable{
@@ -48,9 +48,9 @@ abstract public class Production implements Cloneable{
      ** El nombre del elemento que debe de ser igual al especificado en su respectivo DTD
      ** El valor de esta variable debe de ser igual a org.w3c.dom.Node.getNodeName()
      **/
-    static final public String ELEMENT_NAME = "p";    
+    static final public String ELEMENT_NAME = "p";
     /**
-     * El tag con el que se define el inicio del objeto de un 
+     * El tag con el que se define el inicio del objeto de un
      * en un archivo
      */
     public static final String BEG_TAG = "<"+ELEMENT_NAME+">";
@@ -58,13 +58,13 @@ abstract public class Production implements Cloneable{
      * El tag con el que se define el fin de un simbolo
      * en un archivo
      */
-    public static final String END_TAG = "</"+ELEMENT_NAME+">";    
+    public static final String END_TAG = "</"+ELEMENT_NAME+">";
 
     /**
      ** El nombre del elemento que debe de ser igual al especificado en su respectivo DTD
      ** El valor de esta variable debe de ser igual a org.w3c.dom.Node.getNodeName()
      **/
-    static final public String ANTECEDENTE_ELEMENT_NAME = "left";    
+    static final public String ANTECEDENTE_ELEMENT_NAME = "left";
     /**
      * El tag con el que se define el inicio del objeto de un antecedente
      * en un archivo
@@ -79,9 +79,9 @@ abstract public class Production implements Cloneable{
      ** El nombre del elemento que debe de ser igual al especificado en su respectivo DTD
      ** El valor de esta variable debe de ser igual a org.w3c.dom.Node.getNodeName()
      **/
-    static final public String CONSECUENTE_ELEMENT_NAME = "right";    
+    static final public String CONSECUENTE_ELEMENT_NAME = "right";
         /**
-     * El tag con el que se define el inicio del objeto de un 
+     * El tag con el que se define el inicio del objeto de un
      * en un archivo
      */
     public static final String CONSECUENTE_BEG_TAG = "<"+CONSECUENTE_ELEMENT_NAME+">";
@@ -92,15 +92,15 @@ abstract public class Production implements Cloneable{
     public static final String CONSECUENTE_END_TAG = "</"+CONSECUENTE_ELEMENT_NAME+">";
 //    public static final String CONSECUENTE_END_TAG = "</der>";
     /**
-     ** Para ver si ya leimos los tags 
+     ** Para ver si ya leimos los tags
      */
     public static final boolean TAGS_LEIDOS = true;
     /**
-     ** Para ver si ya leimos los tags 
+     ** Para ver si ya leimos los tags
      */
     public static final boolean TAGS_NO_LEIDOS = false;
      /**
-      * el antecedente de una producciÛn
+      * el antecedente de una producci√≥n
       */
     protected Str antecedente;
     /**
@@ -109,7 +109,7 @@ abstract public class Production implements Cloneable{
      * @see #antecedente
      */
     public Str getAntecedente(){
-	return antecedente;
+        return antecedente;
     }
     /**
      * funcion de acceso para modificar antecedente
@@ -117,11 +117,11 @@ abstract public class Production implements Cloneable{
      * @see #antecedente
      */
     public void setAntecedente(Str new_antecedente){
-	antecedente=new_antecedente;
+        antecedente=new_antecedente;
     }
 
     /**
-     * El consecuente de la producciÛn
+     * El consecuente de la producci√≥n
      */
     protected Str consecuente;
     /**
@@ -130,7 +130,7 @@ abstract public class Production implements Cloneable{
      * @see #consecuente
      */
     public Str getConsecuente(){
-	return consecuente;
+        return consecuente;
     }
     /**
      * funcion de acceso para modificar consecuente
@@ -138,198 +138,200 @@ abstract public class Production implements Cloneable{
      * @see #consecuente
      */
     public void setConsecuente(Str new_consecuente){
-	consecuente=new_consecuente;
+        consecuente=new_consecuente;
     }
     /**
      * Constructor.
      * Recibe los valores para antecedente  y consecuente.
      * Para el resto de los campos usa el valor por omision.
-     * @param _antecedente el valor con el que se inicalizar· el campo antecedente
-     * @param _consecuente el valor con el que se inicalizar· el campo consecuente
+     * @param _antecedente el valor con el que se inicalizar√° el campo antecedente
+     * @param _consecuente el valor con el que se inicalizar√° el campo consecuente
      * @see #consecuente
      * @see #antecedente
      */
     public Production (Str _antecedente, Str _consecuente){
-	antecedente = _antecedente;
-	consecuente = _consecuente;	
+        antecedente = _antecedente;
+        consecuente = _consecuente;
     }
     protected Production(){
-	this(new Str(), new Str());	
+        this(new Str(), new Str());
     }
 
     /**
      ** Construye un Production dado el documento DOM
      **/
     public Production(org.w3c.dom.Node domNode)throws Exception{
-	this();	
-	NodeList domPList = domNode.getChildNodes();
-	NodeList secondList;
-	
-	int i = 0;
-	boolean found = false;	
+        this();
+        NodeList domPList = domNode.getChildNodes();
+        NodeList secondList;
 
- 	for(; !found && i < domPList.getLength() ; i++)
- 	    if(domPList.item(i).getNodeType() == Node.ELEMENT_NODE){		
-		secondList = domPList.item(i).getChildNodes();		
-		for(int j = 0 ; !found && j < secondList.getLength(); j++){
-		    if(secondList.item(j).getNodeType() == Node.ELEMENT_NODE){
-			setAntecedente(new Str(secondList.item(j)));
-			found=true;
-		    }
-		}
-	    }
- 	found = false;	
- 	for(; !found && i < domPList.getLength() ; i++)
- 	    if(domPList.item(i).getNodeType() == Node.ELEMENT_NODE){		
-		secondList = domPList.item(i).getChildNodes();		
-		for(int j = 0 ; !found && j < secondList.getLength(); j++){
-		    if(secondList.item(j).getNodeType() == Node.ELEMENT_NODE){
-			setConsecuente(new Str(secondList.item(j)));
-			found=true;
-		    }
-		}
-	    }
+        int i = 0;
+        boolean found = false;
+
+        for(; !found && i < domPList.getLength() ; i++) {
+            if(domPList.item(i).getNodeType() == Node.ELEMENT_NODE){
+                secondList = domPList.item(i).getChildNodes();
+                for(int j = 0 ; !found && j < secondList.getLength(); j++){
+                    if(secondList.item(j).getNodeType() == Node.ELEMENT_NODE){
+                        setAntecedente(new Str(secondList.item(j)));
+                        found=true;
+                    }
+                }
+            }
+        }
+        found = false;
+        for(; !found && i < domPList.getLength() ; i++) {
+            if(domPList.item(i).getNodeType() == Node.ELEMENT_NODE){
+                secondList = domPList.item(i).getChildNodes();
+                for(int j = 0 ; !found && j < secondList.getLength(); j++){
+                    if(secondList.item(j).getNodeType() == Node.ELEMENT_NODE){
+                        setConsecuente(new Str(secondList.item(j)));
+                        found=true;
+                    }
+                }
+            }
+        }
     }
-    
-    /** 
-     * Guarda la representaciÛn de la ProducciÛn en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la m·quina con su representaciÛn correspondiente con tags.
+
+    /**
+     * Guarda la representaci√≥n de la Producci√≥n en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la m√°quina con su representaci√≥n correspondiente con tags.
      *
-     * @param FileName El nombre del archivo donde se guardar· el DFA.
+     * @param FileName El nombre del archivo donde se guardar√° el DFA.
      */
     public void toFile(String FileName){
-	toFile(FileName,"");	
+        toFile(FileName,"");
     }
-    
-    /** 
-     * Guarda la representaciÛn de la ProducciÛn en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la m·quina con su representaciÛn correspondiente con tags y con un comentario al principio de la descripciÛn.
+
+    /**
+     * Guarda la representaci√≥n de la Producci√≥n en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la m√°quina con su representaci√≥n correspondiente con tags y con un comentario al principio de la descripci√≥n.
      *
-     * @param FileName El nombre del archivo donde se guardar· el DFA.
-     * @param comment Comentario que se escribir· al principio de la descripciÛn de la M·quina.
+     * @param FileName El nombre del archivo donde se guardar√° el DFA.
+     * @param comment Comentario que se escribir√° al principio de la descripci√≥n de la M√°quina.
      *
      */
     public void toFile(String FileName, String comment ){
-	try{ 
-	    toFile(new FileWriter(FileName),comment);	
-	}catch(Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "El archivo " +  FileName + " no se pudo abrir: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try{
+            toFile(new FileWriter(FileName),comment);
+        }catch(Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "El archivo " +  FileName + " no se pudo abrir: " );
+            ouch.printStackTrace();
+        }
     }
-    /** 
-     * Guarda la representaciÛn de la ProducciÛn en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la m·quina con su representaciÛn correspondiente con tags.
+    /**
+     * Guarda la representaci√≥n de la Producci√≥n en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la m√°quina con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el DFA.
-     * @param comment Comentario que se escribir· al principio de la descripciÛn de la M·quina.
+     * @param fw El FileWriter donde se guardar√° el DFA.
+     * @param comment Comentario que se escribir√° al principio de la descripci√≥n de la M√°quina.
      */
     public void toFile(FileWriter fw, String comment){
-	try{ 
-	    fw.write(comment);
-	    toFile(fw);	
-	}catch( Exception ouch){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "Trying to toFile: " ); 
-	    ouch.printStackTrace(); 
-	}
+        try{
+            fw.write(comment);
+            toFile(fw);
+        }catch( Exception ouch){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            ouch.printStackTrace();
+        }
     }
-    /** 
-     * Guarda la representaciÛn de la ProducciÛn en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la m·quina con su representaciÛn correspondiente con tags.
+    /**
+     * Guarda la representaci√≥n de la Producci√≥n en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la m√°quina con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· la M·quina.
+     * @param fw El FileWriter donde se guardar√° la M√°quina.
      */
     public void toFile(FileWriter fw){
-	try{
-	    fw.write("\n");	    
-	    fw.write(BEG_TAG);
-	    fw.write(" "+ANTECEDENTE_BEG_TAG+" ");
-	    getAntecedente().toFile(fw);
-	    fw.write(" "+ANTECEDENTE_END_TAG+" "+CONSECUENTE_BEG_TAG+" ");	    
-	    getConsecuente().toFile(fw);	    
-	    fw.write(" "+CONSECUENTE_END_TAG+" " + END_TAG);
-	}catch(Exception e){
-	    System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName() 
-			       + "Trying to toFile: " );
-	    e.printStackTrace();	    
-	}
+        try{
+            fw.write("\n");
+            fw.write(BEG_TAG);
+            fw.write(" "+ANTECEDENTE_BEG_TAG+" ");
+            getAntecedente().toFile(fw);
+            fw.write(" "+ANTECEDENTE_END_TAG+" "+CONSECUENTE_BEG_TAG+" ");
+            getConsecuente().toFile(fw);
+            fw.write(" "+CONSECUENTE_END_TAG+" " + END_TAG);
+        }catch(Exception e){
+            System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
+                   + "Trying to toFile: " );
+            e.printStackTrace();
+        }
     }
-    /** 
-     * Indica si otro <code>Object</code> es "igual" a este. 
+    /**
+     * Indica si otro <code>Object</code> es "igual" a este.
      * <br>
-     * El mÈtodo <code>equals</code> implementa una relaciÛn de equivalencia: 
+     * El m√©todo <code>equals</code> implementa una relaci√≥n de equivalencia:
      *    <ul>
      *    <li> Es reflexiva: para toda referencia x, x.equals(x) debe regresar <code>true</code></li>
-     *    <li> Es simÈtrica: para cualesquiera dos referencias <code>x</code> y <code>y</code>,
+     *    <li> Es sim√©trica: para cualesquiera dos referencias <code>x</code> y <code>y</code>,
      *    <code>x.equals(y)</code> debe regresar <code>true</code> si y solo si
      *    <code>y.equals(x)</code> regresa <code>true</code></li>
      *    <li> Es transitiva: Para cualesquiera tres referencias <code>x,y,z</code> si
      *    <code>x.equals</code> regresa <code>true</code> y <code>y.equals(z)</code>
      *    regresa <code>true</code>, entonces <code>x.equals(z)</code> debe regresar <code>true</code>.</li>
      *    <li> Es consistente: para cualesquiera dos referencias <code>x</code> y <code>y</code>,
-     *    m˙ltiples llamadas de <code>x.equals(y)</code> deben consistentemente regresar <code>true</code> o
-     *    consistentemente regresar <code>false</code>, siempre y cuando no cambie en el objeto la informaciÛn usada
+     *    m√∫ltiples llamadas de <code>x.equals(y)</code> deben consistentemente regresar <code>true</code> o
+     *    consistentemente regresar <code>false</code>, siempre y cuando no cambie en el objeto la informaci√≥n usada
      *    en las comparaciones de <code>equals</code> .</li>
-     *    <li> Para toda referencia no nula <code>x</code>,<code>x.equals(null)</code> debe regresar <code>false</code>.</li> 
+     *    <li> Para toda referencia no nula <code>x</code>,<code>x.equals(null)</code> debe regresar <code>false</code>.</li>
      *    </ul>
-     * 
-     *    El mÈtodo <code>equals</code> para la clase Production es implementado mediante el uso de == para los campos de tipos b·sicos
+     *
+     *    El m√©todo <code>equals</code> para la clase Production es implementado mediante el uso de == para los campos de tipos b√°sicos
      *    y llamadas a <code>equals</code> para los campos que son objetos.<br>
-     * 
+     *
      *    @param o el objeto con el que voy a comparar a este.
-     * 
+     *
      *    @return <code>true<code> si este objeto es igual a <code>otro</code>.
      *    @see java.lang.Object#equals
-     */ 
+     */
     public boolean equals(Object o){
-	if (o instanceof Production){
-	    if( antecedente.equals(((Production)o).getAntecedente())
-		&& consecuente.equals(((Production)o).getConsecuente())){
-		return true;
-	    }
-	}
-	return false;
+        if (o instanceof Production){
+            if( antecedente.equals(((Production)o).getAntecedente())
+          && consecuente.equals(((Production)o).getConsecuente())){
+          return true;
+            }
+        }
+        return false;
     }
     /**
-     * Regresa una cadena con una representaciÛn del objeto.
+     * Regresa una cadena con una representaci√≥n del objeto.
      * Toma los campos y los imprime en una lista junto con sus valores.
      *
      * @return una cadena con los valores del objeto.
      */
     public String toString(){
-	return "" + getAntecedente() + " --> " + getConsecuente();
+        return "" + getAntecedente() + " --> " + getConsecuente();
     }
 
     public int hashCode(){
-	String s = "";
-	s = getAntecedente().stringToHashCode() + getConsecuente().stringToHashCode();
-	return s.hashCode();
+        String s = "";
+        s = getAntecedente().stringToHashCode() + getConsecuente().stringToHashCode();
+        return s.hashCode();
     }
-    /** 
-     * Esta es la funciÛn que debe de implementar cada una de los tipos de producciÛn dependiendo el tipo de gramatica que se quiere implementar .
+    /**
+     * Esta es la funci√≥n que debe de implementar cada una de los tipos de producci√≥n dependiendo el tipo de gramatica que se quiere implementar .
      *
-     * @param containsSToEpsilonProduction <code>true</code> si la producciÛn <code>S -> <epsilon> </code> est· presente en el conjunto de producciones, e.o.c. <code>false</code>
+     * @param containsSToEpsilonProduction <code>true</code> si la producci√≥n <code>S -> <epsilon> </code> est√° presente en el conjunto de producciones, e.o.c. <code>false</code>
      * @return Regresa verdadero si esta bien "creada" la produccion con respecto al tipo de gramatica que se esta describiendo.
      *
      */
     abstract public boolean validate(Alphabet N, Alphabet T, Symbol S, boolean containsSToEpsilonProduction)
-	throws ProductionNotValidTypeException;
+        throws ProductionNotValidTypeException;
     /**
      * Crea y regresa una copia de este objeto
      * @return la copia de este objeto
      */
     public Object clone() throws CloneNotSupportedException{
-	try{
-	    Production nueva = (Production)super.clone();
-	    nueva.antecedente = (Str)antecedente.clone();
-	    nueva.consecuente = (Str)consecuente.clone();
-	    return nueva;
-	}
-	catch (CloneNotSupportedException e){
-	    throw new InternalError(e.toString());
-	}
+        try{
+            Production nueva = (Production)super.clone();
+            nueva.antecedente = (Str)antecedente.clone();
+            nueva.consecuente = (Str)consecuente.clone();
+            return nueva;
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError(e.toString());
+        }
     }
 
 }
