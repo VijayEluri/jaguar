@@ -1,7 +1,7 @@
 /**
 ** <JDfaFrame.java> -- The frame to show a DFA
 **
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -129,8 +129,8 @@ public class JDfaFrame extends JMachineFrame{
 
 
     /**
-     ** Realiza un paso en la ejecución de la Máquina y regresa verdarero o falso dependiendo si puede seguir con la ejecución o no
-     ** @return boolean <code>true</code> si se puede continuar con la ejecución de la máquina, <code>false</code> en  otro caso.
+     ** Realiza un paso en la ejecuciÃ³n de la MÃ¡quina y regresa verdarero o falso dependiendo si puede seguir con la ejecuciÃ³n o no
+     ** @return boolean <code>true</code> si se puede continuar con la ejecuciÃ³n de la mÃ¡quina, <code>false</code> en  otro caso.
      **/
     public boolean nextStep() {
         //jdfa.nextStep();
@@ -259,61 +259,20 @@ public class JDfaFrame extends JMachineFrame{
 
     public static void main(String []argv){
         JDfaFrame f = new JDfaFrame();
-        f.show();
-    }
-
-    private static class RadioButtonRenderer extends DefaultTableCellRenderer {
-      public Component getTableCellRendererComponent(JTable table, Object value,
-                                                     boolean isSelected, boolean hasFocus,
-                                                     int row, int column) {
-        if (value == null){
-            return null;
-        }
-
-        if (isSelected) {
-            ((Component) value).setBackground(new Color(43,102,201));
-        } else {
-            ((Component) value).setBackground(Color.white);
-        }
-        ((JRadioButton) value).setHorizontalAlignment(SwingConstants.CENTER);
-
-        return (Component) value;
-      }
-    }
-
-    private static class RadioButtonEditor extends DefaultCellEditor implements ItemListener {
-      private JRadioButton button;
-
-      public RadioButtonEditor(JCheckBox checkBox) {
-        super(checkBox);
-      }
-
-      public Component getTableCellEditorComponent(JTable table, Object value,
-          boolean isSelected, int row, int column) {
-        if (value == null)
-          return null;
-        button = (JRadioButton) value;
-        button.addItemListener(this);
-        return (Component) value;
-      }
-
-      public Object getCellEditorValue() {
-        button.removeItemListener(this);
-        return button;
-      }
-
-      public void itemStateChanged(ItemEvent e) {
-        super.fireEditingStopped();
-      }
+        f.setVisible(true);
     }
 
     public void showTabular(){
         super.showTabular();
         MyJTable table = ttm.getMyJTable();
         table.getColumn("Initial").setCellRenderer(
-                new RadioButtonRenderer());
+                new ButtonRenderer<JRadioButton>());
         table.getColumn("Initial").setCellEditor(
-                new RadioButtonEditor(new JCheckBox()));
+                new ButtonEditor<JRadioButton>(new JCheckBox()));
+        table.getColumn("Final").setCellRenderer(
+                new ButtonRenderer<JCheckBox>());
+        table.getColumn("Final").setCellEditor(
+                new ButtonEditor<JCheckBox>(new JCheckBox()));
     }
 
 } // JDfaFrame
