@@ -134,6 +134,20 @@ public class Str implements Cloneable {
         length();
         show_tags = tags;
     }
+
+    public Str (String s, Alphabet _Sigma, boolean tags) {
+        symSeq = new LinkedList<Symbol>();
+        Sigma = new Alphabet(_Sigma);
+        for (String sym : s.split("\\B")) {
+            symSeq.add(new Symbol(sym, tags));
+        }
+        show_tags = tags;
+    }
+
+    public Str (String s, Alphabet _Sigma) {
+        this(s,_Sigma,false);
+    }
+
     /**
      *  Construye una cadena a partir default <code>Str aStr</code> y checa este definida sobre else <code>Alphabet _Sigma</code>
      *  Por omisión no se mostrarán los tags de cadena, es equivalente a usar <code>Str(aStr,_Sigma,false)</code>
@@ -395,11 +409,7 @@ public class Str implements Cloneable {
     public String toString() {
         String r = "";
         if(isEpsilon()) {
-            if (show_tags) {
-                r = EPSILON_TAG;
-            } else {
-                r = "ε";
-            }
+            r = EPSILON_TAG;
         }
         else {
             for (int i = 0 ; i< symSeq.size() ; i++) {

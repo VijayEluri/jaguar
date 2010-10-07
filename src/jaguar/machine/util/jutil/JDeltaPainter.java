@@ -1,7 +1,7 @@
 /**
 ** <JDeltaPainter.java> -- To paint deltas
 **
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,8 +19,8 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
-** Author: Juan Germán Castañeda Echevarría <juanger@ciencias.unam.mx>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Juan GermÃ¡n CastaÃ±eda EchevarrÃ­a <juanger@ciencias.unam.mx>
 **
 **/
 
@@ -40,25 +40,25 @@ import java.util.*;
 /**
  * Pinta las interfaces DeltaPaint
  *
- * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
- * @author Juan Germán Castañeda Echevarría <juanger@ciencias.unam.mx>
+ * @author Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Juan GermÃ¡n CastaÃ±eda EchevarrÃ­a <juanger@ciencias.unam.mx>
  * @version 0.1
  */
 public class JDeltaPainter{
     /**
-     * El color del cual se pintarán las transiciones
+     * El color del cual se pintarÃ¡n las transiciones
      **/
     public static final Color CURRENT_TRANSITION_COLOR = Color.green;
 
     /**
-     * El color del cual se pintarán las etiquetas de las transiciones
+     * El color del cual se pintarÃ¡n las etiquetas de las transiciones
      **/
     public static final Color ARROW_LABEL_COLOR = Color.black;
 
     public static final Font ARROW_LABEL_FONT = new Font("Sanserif",Font.BOLD,12);
 
     /**
-     * El color del cual se pintarán las etiquetas
+     * El color del cual se pintarÃ¡n las etiquetas
      **/
     public static final Color ARROW_COLOR = Color.black;
 
@@ -89,7 +89,7 @@ public class JDeltaPainter{
     }
 
     /**
-     * Constructor sin parámetros.
+     * Constructor sin parÃ¡metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JDeltaPainter (JDeltaGraphic _jdelta) {
@@ -100,7 +100,7 @@ public class JDeltaPainter{
     public void paintArrowHead(Graphics2D g2d, Point orig, Point dest) {
         paintArrowHead(g2d, orig, dest, ARROW_COLOR, "una etiqueta");
     }
-    // Este es el rudísimo (juanger)
+    // Este es el rudÃ­simo (juanger)
     public void paintArrowHead(Graphics2D g2d, Point orig, Point dest, Color c, String label) {
         double slope = (orig.getY()-dest.getY())/(orig.getX()-dest.getX());
         double headWidth = 5;
@@ -149,7 +149,17 @@ public class JDeltaPainter{
 
         double nx = (orig.getX() + dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
         g2d.setColor(ARROW_LABEL_COLOR);
-        g2d.drawString(label,(float)nx,(float)ny);
+        // Rotate
+        double adj = dest.getX() - orig.getX();
+        double op = dest.getY() - orig.getY();
+        double tetha = Math.atan(op/adj);
+
+        AffineTransform aT = g2d.getTransform();
+        g2d.translate((orig.getX() + dest.getX())/2, (orig.getY()+ dest.getY())/2);
+        g2d.rotate(tetha);
+
+        g2d.drawString(label,(float)0.0,(float)0.0);
+        g2d.setTransform(aT);
         g2d.setColor(ARROW_COLOR);
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -209,9 +219,9 @@ public class JDeltaPainter{
 
 
     public void paint(Graphics g){
-        Hashtable centrosp1 = new Hashtable();
-        Hashtable currentp=null, htmp=null;
-        HashSet currentDestinos;
+        Hashtable<Point,Hashtable<Point,Boolean>> centrosp1 = new Hashtable<Point,Hashtable<Point,Boolean>>();
+        Hashtable<Point,Boolean> currentp=null, htmp=null;
+        HashSet<State> currentDestinos;
         JState jq, jp;
         Point x,y;
         boolean first_check ;
@@ -227,7 +237,7 @@ public class JDeltaPainter{
             // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
             JState q = (JState)e.nextElement();
             vaux = ((Delta)jdelta).getTransitions(((State) q));
-            currentDestinos = new HashSet();
+            currentDestinos = new HashSet<State>();
             for(int i = 0 ; i < vaux.size(); i++){
                 vpair = (Vector)vaux.elementAt(i);
                 Symbol sym = (Symbol)vpair.elementAt(0);
@@ -269,7 +279,7 @@ public class JDeltaPainter{
                         jp = (JState) p;
                         x = jq.getCentro().getLocation();
                         y = jp.getCentro().getLocation();
-                        if((currentp = (Hashtable)centrosp1.get(x)) != null){
+                        if((currentp = centrosp1.get(x)) != null){
                             if(currentp.get(y) !=null){
                                 x.translate(10,10);
                                 y.translate(10,10);
@@ -280,7 +290,7 @@ public class JDeltaPainter{
                         } if (!first_check) {
                             x = jq.getCentro().getLocation();
                             y = jp.getCentro().getLocation();
-                            if ((currentp = (Hashtable)centrosp1.get(y)) != null) {
+                            if ((currentp = centrosp1.get(y)) != null) {
                                 if (currentp.get(y) !=null) {
                                     x.translate(10,10);
                                     y.translate(10,10);
@@ -289,7 +299,7 @@ public class JDeltaPainter{
                                     currentp.put(x,new Boolean(true));
                                 }
                             } else {
-                                htmp = new Hashtable();
+                                htmp = new Hashtable<Point,Boolean>();
                                 htmp.put(x,new Boolean(true));
                                 centrosp1.put(y,htmp);
                             }

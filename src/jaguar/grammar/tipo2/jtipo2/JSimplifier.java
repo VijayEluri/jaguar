@@ -1,25 +1,25 @@
 /**
-** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+**
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
-** 
+**
 ** This program is free software; you can redistribute it and/or
 ** modify it under the terms of the GNU General Public License
 ** as published by the Free Software Foundation; either version 2
 ** of the License, or (at your option) any later version.
-** 
+**
 ** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ** GNU General Public License for more details.
-** 
+**
 ** You should have received a copy of the GNU General Public License
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
-** 
+**
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
+**
 **/
 
 
@@ -32,10 +32,10 @@ import jaguar.grammar.tipo2.util.*;
 import java.io.*;
 import javax.swing.*;
 
-/** 
+/**
  * La extensi'on gr'afica para el convertidor Gtipo3 -> AF
- * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ *
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JSimplifier extends Simplifier implements JConverter{
@@ -44,7 +44,7 @@ public class JSimplifier extends Simplifier implements JConverter{
      */
     protected JTextArea detailsArea;
     /**
-     * El valor por omisiÛn para detailsArea
+     * El valor por omisi√≥n para detailsArea
      */
     public static final JTextArea DEFAULT_DETAILSAREA=null;
     /**
@@ -53,7 +53,7 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #detailsArea
      */
     public JTextArea getDetailsarea(){
-	return detailsArea;
+        return detailsArea;
     }
     /**
      * funcion de acceso para modificar detailsArea
@@ -61,42 +61,41 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #detailsArea
      */
     public void setDetailsarea(JTextArea new_detailsArea){
-	detailsArea=new_detailsArea;
+        detailsArea=new_detailsArea;
     }
     /**
      * Constructor.
      * Recibe los valores para detailsArea.
      * Para el resto de los campos usa el valor por omision.
-     * @param detailsArea el valor con el que se inicalizar· el campo detailsArea
+     * @param detailsArea el valor con el que se inicalizar√° el campo detailsArea
      * @see #detailsArea
      */
     public JSimplifier (JTextArea detailsArea){
-	this();
-	this.detailsArea=detailsArea;
-
+        this();
+        this.detailsArea=detailsArea;
     }
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      * @see #DEFAULT_DETAILSAREA
-     */    
+     */
     public JSimplifier (){
-//	super();
-	this.detailsArea=DEFAULT_DETAILSAREA;
+        //  super();
+        this.detailsArea=DEFAULT_DETAILSAREA;
     }
 
     public JSimplifier(Gtipo2 gt2){
-	this(gt2,null);
-    }    
-    
+        this(gt2,null);
+    }
+
     public JSimplifier(Gtipo2 gt2, JTextArea details){
-//	super();
-	originalGt2 = gt2;
-	detailsArea =details;
+        //  super();
+        originalGt2 = gt2;
+        detailsArea =details;
     }
 
      /**
-      * La gram·tica tipo 2 que nos dan como entrada
+      * La gram√°tica tipo 2 que nos dan como entrada
       */
     protected Gtipo2 originalGt2;
     /**
@@ -105,7 +104,7 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #originalGt2
      */
     public Gtipo2 getOriginalGt2(){
-	return originalGt2;
+        return originalGt2;
     }
     /**
      * funcion de acceso para modificar originalGt2
@@ -113,11 +112,11 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #originalGt2
      */
     public void setOriginalGt2(Gtipo2 new_originalGt2){
-	originalGt2=new_originalGt2;
+        originalGt2=new_originalGt2;
     }
-    
+
     /**
-     * La gram·tica sin sÌmbolos muertos
+     * La gram√°tica sin s√≠mbolos muertos
      */
     protected Gtipo2 noMuertosGt2;
     /**
@@ -126,7 +125,7 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #noMuertosGt2
      */
     public Gtipo2 getNomuertosgt2(){
-	return noMuertosGt2;
+        return noMuertosGt2;
     }
     /**
      * funcion de acceso para modificar noMuertosGt2
@@ -134,11 +133,11 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #noMuertosGt2
      */
     public void setNomuertosgt2(Gtipo2 new_noMuertosGt2){
-	noMuertosGt2=new_noMuertosGt2;
+        noMuertosGt2=new_noMuertosGt2;
     }
-    
+
     /**
-     * La gram·tica sin producciones epsilon
+     * La gram√°tica sin producciones epsilon
      */
     protected Gtipo2 noProduccionesEpsilon;
     /**
@@ -147,7 +146,7 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #noProduccionesEpsilon
      */
     public Gtipo2 getNoproduccionesepsilon(){
-	return noProduccionesEpsilon;
+        return noProduccionesEpsilon;
     }
     /**
      * funcion de acceso para modificar noProduccionesEpsilon
@@ -155,11 +154,11 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #noProduccionesEpsilon
      */
     public void setNoproduccionesepsilon(Gtipo2 new_noProduccionesEpsilon){
-	noProduccionesEpsilon=new_noProduccionesEpsilon;
+        noProduccionesEpsilon=new_noProduccionesEpsilon;
     }
-    
+
     /**
-     * La gram·tica sin producciones unitarias
+     * La gram√°tica sin producciones unitarias
      */
     protected Gtipo2 noProduccionesUnitarias;
     /**
@@ -168,7 +167,7 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #noProduccionesUnitarias
      */
     public Gtipo2 getNoproduccionesunitarias(){
-	return noProduccionesUnitarias;
+        return noProduccionesUnitarias;
     }
     /**
      * funcion de acceso para modificar noProduccionesUnitarias
@@ -176,39 +175,38 @@ public class JSimplifier extends Simplifier implements JConverter{
      * @see #noProduccionesUnitarias
      */
     public void setNoproduccionesunitarias(Gtipo2 new_noProduccionesUnitarias){
-	noProduccionesUnitarias=new_noProduccionesUnitarias;
-    }
-    
-    public void doConvertion(){
-	System.err.println("JSimplifier.doConvertion");
-//	doConvertion(Debug.DEBUG_OFF);	
+        noProduccionesUnitarias=new_noProduccionesUnitarias;
     }
 
-    /** 
-     * Muestra el status de la conversiÛn cada que se le llama.
-     * Dependiendo del tipo de convertidor (texto o gr·fico) esta funciÛn decide como enviar los mensajes que se van dando en el proceso de conversiÛn  .
+    public void doConvertion(){
+        System.err.println("JSimplifier.doConvertion");
+        //  doConvertion(Debug.DEBUG_OFF);
+    }
+
+    /**
+     * Muestra el status de la conversi√≥n cada que se le llama.
+     * Dependiendo del tipo de convertidor (texto o gr√°fico) esta funci√≥n decide como enviar los mensajes que se van dando en el proceso de conversi√≥n  .
      *
      * @param msg El mensaje para el status actual.
-     * @param debug_level para ver que tan verbose debemos hacer el status 
+     * @param debug_level para ver que tan verbose debemos hacer el status
      */
     public void showStatus(String msg, int debug_level){
-	if(detailsArea != null)
-	    detailsArea.append(msg);
-	else Debug.println("\n\nWARNING: the details area in the JDfa2Gtipo3 engine has not been initialized!!!");	
+        if(detailsArea != null)
+            detailsArea.append(msg);
+        else Debug.println("\n\nWARNING: the details area in the JDfa2Gtipo3 engine has not been initialized!!!");
     }
 
-    /** 
+    /**
      * Rutinas de prueba para la clase JSimplifier.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
-	System.out.println("Esta es la clase JSimplifier. \n"
-			   +"Comentario: La extensi'on gr'afica para el convertidor Gtipo3 -> AF\n"
-			   +"Autor: Ivan Hern·ndez Serrano\n"
-			   +"E-mail: ivanx@users.sourceforge.net\n");
- 	  
+        System.out.println("Esta es la clase JSimplifier. \n"
+               +"Comentario: La extensi'on gr'afica para el convertidor Gtipo3 -> AF\n"
+               +"Autor: Ivan Hern√°ndez Serrano\n"
+               +"E-mail: ivanx@users.sourceforge.net\n");
     }
 }
 

@@ -190,14 +190,14 @@ public class MachineGrammarStyledDocument extends DefaultStyledDocument{
     public MachineGrammarStyledDocument(Alphabet A) {
         this((A.size()*10)+11);
         try{
-            insertString(0,A.END_TAG,plainAtt);
+            insertString(0,A.END_SYM,plainAtt);
             Object oA[] = A.toArray();
             for(int i = 0; i < oA.length; i++){
-                insertString(0,((Symbol)oA[i]).getSym(),((i%2)==0)?primeroAtt:segundoAtt);
+                insertString(0,((Symbol)oA[i]).getSym(),plainAtt);
                 if(i+1 < oA.length)
                     insertString(0," , " , plainAtt);
             }
-            insertString(0,A.BEG_TAG,plainAtt);
+            insertString(0,A.BEG_SYM,plainAtt);
         }catch( Exception ouch){
             System.err.println("["+(new java.util.Date()).toString()+"]"+this.getClass().getName()
                    + " A: " +A);

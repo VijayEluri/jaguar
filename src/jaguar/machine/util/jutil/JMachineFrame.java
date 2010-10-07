@@ -697,9 +697,9 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
 
 
     protected static class MyJTableCellRenderer extends DefaultTableCellRenderer {
-        private JMachine machine;
+        protected JMachine machine;
 
-        protected MyJTableCellRenderer(JMachine machine) {
+        public MyJTableCellRenderer(JMachine machine) {
             this.machine = machine;
         }
 
@@ -743,6 +743,22 @@ abstract public class JMachineFrame extends JFrame implements ComponentListener,
             c.setBackground(background);
 
             return c;
+        }
+    }
+
+    protected static class StrRenderer extends MyJTableCellRenderer {
+        public StrRenderer(JMachine machine) {
+            super(machine);
+        }
+
+        public void setValue(Object value) {
+            String newString = "";
+            if (value != null) {
+                newString = ((String)value).replaceAll("<epsilon/>","ε");
+                newString = newString.replaceAll("<right/>","→");
+                newString = newString.replaceAll("<left/>","←");
+            }
+            setText(newString);
         }
     }
 
