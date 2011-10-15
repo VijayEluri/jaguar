@@ -109,6 +109,22 @@ public class StackDelta extends Delta<State,Hashtable<Symbol,Hashtable<Symbol,Qx
         return s;
     }
 
+    public void removeTransition(State q, Symbol sigmaSymb, Symbol gammaSym) {
+        Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>> t = delta.get(q);
+        if (t == null) {
+            return;
+        }
+        Hashtable<Symbol,QxGammaStarSet> res = t.get(sigmaSymb);
+        if (res == null) {
+            return;
+        }
+        QxGammaStarSet set = res.get(gammaSym);
+        if (set == null) {
+            return;
+        }
+        res.remove(gammaSym);
+    }
+
     /**
      ** Agrega una transición a la función de transición delta.
      ** Checa que la cadena <code>strGamma</code> este sobre Gamma^{*}.

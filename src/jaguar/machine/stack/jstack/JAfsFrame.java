@@ -372,6 +372,7 @@ public class JAfsFrame extends JMachineFrame{
     public void showTabular(){
         super.showTabular();
         MyJTable table = ttm.getMyJTable();
+        table.setDefaultRenderer(String.class, new StrRenderer(jmachine));
         table.getColumn("Initial").setCellRenderer(
                 new ButtonRenderer<JRadioButton>());
         table.getColumn("Initial").setCellEditor(

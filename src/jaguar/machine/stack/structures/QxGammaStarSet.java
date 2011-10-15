@@ -61,7 +61,7 @@ public class QxGammaStarSet extends LinkedHashSet<QxGammaStar> {
      */
     public static final String BEG_TAG="<"+ELEMENT_NAME+">";
 
-    protected QxGammaStarSet() {
+    public QxGammaStarSet() {
         super();
     }
 
@@ -121,6 +121,12 @@ public class QxGammaStarSet extends LinkedHashSet<QxGammaStar> {
                +"Comentario: HashSet\n"
                +"Autor: Ivan Hernández Serrano\n"
                +"E-mail: ivanx@users.sourceforge.net\n");
+    }
+
+    public String toCommaSeparatedList() {
+        String s = toString();
+        int i = s.length();
+        return s.substring(1,i-1);
     }
 
 }

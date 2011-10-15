@@ -213,13 +213,21 @@ public class JStackDelta extends StackDelta implements JDeltaGraphic{
             trans = (QxGammaStarSet)vp.elementAt(2);
             aTrans = trans.toArray();
             for(int j = 0 ; j < aTrans.length; j ++){
-          ctrans = (QxGammaStar)aTrans[j];
-          if(ctrans.getQ().equals(dest))
-              res += ((Symbol)vp.elementAt(0))+"/"+ ((Symbol)vp.elementAt(1))+", "+ctrans.getGammaStar() +";";
+                ctrans = (QxGammaStar)aTrans[j];
+                if(ctrans.getQ().equals(dest)) {
+                    res += ((Symbol)vp.elementAt(0))+","+ ((Symbol)vp.elementAt(1))+" / "+ withoutTags(ctrans.getGammaStar()) + " ; ";
+                }
             }
         }
-        res = res.substring(0,res.length()-1);
+        res = res.substring(0,res.length()-2);
         return res;
+    }
+
+    private String withoutTags(Str str) {
+        if (str.isEpsilon()) {
+            return "ε";
+        }
+        return str.toString();
     }
 }
 

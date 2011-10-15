@@ -44,7 +44,6 @@ import org.xml.sax.*;
  * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
-//public class QxGammaStar{
 public class QxGammaStar{
     /**
      ** El estado <em>p</em> del par ordenado QxGamma^{*}
@@ -119,7 +118,7 @@ public class QxGammaStar{
     }
 
     public String toString(){
-        return "( " + ((q==null)?"null":q.toString()) + " , " + ((gammaStar == null)? "null": gammaStar.toString()) + " ) " ;
+        return  ((q==null)?"null":q.toString()) + " : " + ((gammaStar == null)? "null": gammaStar.toString()) ;
     }
 
     public void toFile(FileWriter fw){

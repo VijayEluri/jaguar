@@ -61,6 +61,7 @@ import javax.swing.JFrame;
 import javax.swing.table.TableModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
 import java.io.File;
 import java.io.IOException;
@@ -454,7 +455,7 @@ public class JDFA extends DFA implements JMachine{
             JRadioButton inicial = new JRadioButton("",esInicial(i));
             inicialSelector.add(inicial);
             data[k][aSigma.length+1] = inicial;
-            data[k][aSigma.length+2] = new Boolean(i.getIsInF());
+            data[k][aSigma.length+2] = new JCheckBox("", i.getIsInF());
 
             l = 1;
             ++k;

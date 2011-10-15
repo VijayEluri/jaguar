@@ -317,7 +317,7 @@ public class JState extends jaguar.structures.State {
         if (esEstadoActual==DEFAULT_CURRENT_STATE) {// Si no lo quieren raise entonces lo quieren m'as obscuro
             g.setColor(DEFAULT_BG_CURRENT_STATE_COLOR);
         }
-        g2d.fill(getEllipse());
+        // g2d.fill(getEllipse());
         g.setColor(DEFAULT_STROKE_COLOR);
         g2d.setStroke(new BasicStroke(3.0f));
         g2d.draw(getEllipse());
@@ -336,8 +336,9 @@ public class JState extends jaguar.structures.State {
         } else {
             g.setColor(DEFAULT_STROKE_COLOR);
         }
+        FontMetrics fontMetrics = g2d.getFontMetrics();
         g2d.drawString(getLabel(),
-            (int)(getX()+(DIAMETRO/2)-(4*getLabel().length())),
+            (int)(getX()+(DIAMETRO/2)-(fontMetrics.stringWidth(getLabel())/2)),
             (int)(getY()+(DIAMETRO/2)+6));
         g2d.setStroke(origS);
     }

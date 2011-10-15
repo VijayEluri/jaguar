@@ -98,10 +98,10 @@ public class JDeltaPainter{
     }
 
     public void paintArrowHead(Graphics2D g2d, Point orig, Point dest) {
-        paintArrowHead(g2d, orig, dest, ARROW_COLOR, "una etiqueta");
+        paintArrowHead(g2d, orig, dest, ARROW_COLOR, "una etiqueta", false);
     }
     // Este es el rudísimo (juanger)
-    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest, Color c, String label) {
+    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest, Color c, String label, boolean first_check) {
         double slope = (orig.getY()-dest.getY())/(orig.getX()-dest.getX());
         double headWidth = 5;
         double headLength = 40;
@@ -147,16 +147,39 @@ public class JDeltaPainter{
         l2d.setLine(tmp, tip);
         g2d.draw(l2d);
 
-        double nx = (orig.getX() + dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
+        // double nx = (orig.getX() + dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
         g2d.setColor(ARROW_LABEL_COLOR);
-        // Rotate
+
+        // Rotate label with arrow
         double adj = dest.getX() - orig.getX();
         double op = dest.getY() - orig.getY();
-        double tetha = Math.atan(op/adj);
+        double theta = Math.atan(op/adj); // angle of transition line
+        double gamma = Math.atan(adj/op); // angle of perpendicular line
 
         AffineTransform aT = g2d.getTransform();
-        g2d.translate((orig.getX() + dest.getX())/2, (orig.getY()+ dest.getY())/2);
-        g2d.rotate(tetha);
+
+        double tx, ty;
+        int distance = 5;
+        if (first_check) {
+            distance = -12;
+        }
+
+        if (gamma < 0) { // Calculate distances from transition line
+            tx = - Math.cos(gamma)*distance;
+            ty = Math.sin(gamma)*distance;
+        } else {
+            tx = Math.cos(gamma)*distance;
+            ty = - Math.sin(gamma)*distance;
+        }
+        g2d.translate(tx, ty);
+
+        FontMetrics fontMetrics = g2d.getFontMetrics();
+        // Center the label
+        double nx = (orig.getX() + dest.getX())/2 - Math.cos(theta)*fontMetrics.stringWidth(label)/2;
+        double ny = (orig.getY() + dest.getY())/2 - Math.sin(theta)*fontMetrics.stringWidth(label)/2;
+        g2d.translate(nx, ny);
+        // Rotate the label acording to the transition line
+        g2d.rotate(theta);
 
         g2d.drawString(label,(float)0.0,(float)0.0);
         g2d.setTransform(aT);
@@ -210,8 +233,9 @@ public class JDeltaPainter{
         //                     (float)p.getX(), (float)p.getY(), (float)(p.getX()+5), (float)(p.getY() + JState.DIAMETRO/2));
         //
         //         g2d.draw(curve);
+        FontMetrics fontMetrics = g2d.getFontMetrics();
         g2d.setColor(ARROW_LABEL_COLOR);
-        g2d.drawString(label,(float)p.getX(), (float)p.getY()+30);
+        g2d.drawString(label,(float)(p.getX() - (JState.DIAMETRO/4) - fontMetrics.stringWidth(label)/2), (float)p.getY()+10);
         g2d.setColor(ARROW_COLOR);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                              RenderingHints.VALUE_ANTIALIAS_ON);
@@ -261,7 +285,7 @@ public class JDeltaPainter{
                     }
 
                     g2d.setStroke(new BasicStroke(2.0f));
-                    if(q.equals(p)){
+                    if(q.equals(p)){ // LOOP
                         if(q.equals(jdelta.getCurrent_p()) && p.equals(jdelta.getCurrent_q()))
                             g.setColor(CURRENT_TRANSITION_COLOR);
 
@@ -287,7 +311,8 @@ public class JDeltaPainter{
                             } else {
                                 currentp.put(y,new Boolean(true));
                             }
-                        } if (!first_check) {
+                        }
+                        if (!first_check) {
                             x = jq.getCentro().getLocation();
                             y = jp.getCentro().getLocation();
                             if ((currentp = centrosp1.get(y)) != null) {
@@ -307,7 +332,7 @@ public class JDeltaPainter{
                         l2d.setLine(x,y);
                         g2d.draw(l2d);
 
-                        paintArrowHead(g2d,x,y,g.getColor(), jdelta.getLabelString((JState)q,(JState)p));
+                        paintArrowHead(g2d,x,y,g.getColor(), jdelta.getLabelString((JState)q,(JState)p), first_check);
                     }
                     g2d.setStroke(origS);
                 }

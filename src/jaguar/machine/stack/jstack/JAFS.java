@@ -44,6 +44,8 @@ import java.io.*;
 import java.util.*;
 import java.awt.Graphics;
 import java.awt.Dimension;
+import javax.swing.table.TableModel;
+import javax.swing.event.TableModelEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
@@ -403,13 +405,6 @@ public class JAFS extends AFS implements JMachine{
         makeStateReferences();
     }
 
-
-    /**
-     * funcion de acceso para obtener el valor de tableVector
-     * @return el valor actual de tableVector, donde la entrada tableVector.get(0) es el header y tableVector.get(1) es un vector que contiene los renglones
-     */
-    public Vector getTableVector(){return null;}
-
     public Class getColumnClass(int c) {
         int idx = c - (getSigma().size()+2);
         switch (idx) {
@@ -454,7 +449,7 @@ public class JAFS extends AFS implements JMachine{
 
                 for (Symbol j : aSigma) {
                     entry = ((StackDelta) getDelta()).apply(i,j,h);
-                    data[k][l] = (entry != null) ? entry.toString() : null;
+                    data[k][l] = (entry != null) ? entry.toCommaSeparatedList() : null;
                     ++l;
                 }
                 ++k;
@@ -492,7 +487,63 @@ public class JAFS extends AFS implements JMachine{
 
 
     public void tableChanged(TableModelEvent e) {
+        int row = e.getFirstRow();
+        int column = e.getColumn();
 
+        TableModel model = (TableModel)e.getSource();
+        State[] aQ = getQ().toArray();
+
+        if (column - 2 < getSigma().size()) { // Changing delta
+            String qxgsetStr = (String) model.getValueAt(row, column); // Value edited
+            String sigmaSymbol = model.getColumnName(column);
+            JState fromState = (JState)aQ[row/3];
+            Symbol gammaSymbol = Gamma.toArray()[row % 3];
+            ((StackDelta)getDelta()).removeTransition(fromState, new Symbol(sigmaSymbol), new Symbol(gammaSymbol));
+            if (!qxgsetStr.isEmpty()) {
+                QxGammaStarSet qxgset = new QxGammaStarSet();
+                for (String qxg : qxgsetStr.split("\\s*,\\s*")) {
+                    System.out.println(qxg);
+                    String[] qxgAry = qxg.split("\\s*:\\s*");
+                    String toStateLabel = qxgAry[0];
+                    Str str;
+                    if (qxgAry[1].equals("<epsilon/>")) {
+                        str = new Str();
+                    } else {
+                        str = new Str(qxgAry[1], getSigma());
+                    }
+                    System.out.println(str);
+                    for (State state : aQ) {
+                        if (((JState) state).getLabel().equals(toStateLabel)) { // find the states in Q corresponding to the label
+                            qxgset.add(new QxGammaStar(state, str));
+                        }
+                    }
+                }
+                ((StackDelta)getDelta()).addTransition(fromState, new Symbol(sigmaSymbol), new Symbol(gammaSymbol), qxgset);
+            }
+        } else { // changing final or initial
+            boolean flag;
+            int idx = column - (getSigma().size()+2);
+            int stateIdx = row/3;
+            switch (idx) {
+                case 0:
+                    flag = ((JRadioButton) model.getValueAt(row, column)).isSelected();
+                    ((JState) getQ0()).setEsEstadoInicial(false);
+                    setQ0(aQ[stateIdx]);
+                    ((JState) aQ[stateIdx]).setEsEstadoInicial(true);
+                    break;
+                case 1:
+                    flag = ((JCheckBox) model.getValueAt(row, column)).isSelected();
+                    aQ[stateIdx].setIsInF(flag);
+                    if (flag) { // Marked as Final
+                        getF().add(aQ[stateIdx]);
+                    } else {
+                        getF().remove(aQ[stateIdx]);
+                    }
+                    break;
+            }
+        }
+
+        afsframe.getJdc().repaint();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -501,7 +552,7 @@ public class JAFS extends AFS implements JMachine{
             Q.add(newState);
             newState.setLocation(50,50);
             afsframe.getJdc().getJeList().add(newState);
-            //initStatesPositions();
+            // initStatesPositions();
             afsframe.showTabular();
             afsframe.getJdc().repaint();
             return;

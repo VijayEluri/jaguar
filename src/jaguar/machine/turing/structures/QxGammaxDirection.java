@@ -1,7 +1,7 @@
 /**
 ** <QxGammaxDirection.java> -- To represent part of the Turing Machine's delta transition
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -43,7 +43,7 @@ import org.xml.sax.*;
 /** 
  * La clase
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class QxGammaxDirection{
@@ -153,7 +153,13 @@ public class QxGammaxDirection{
 
     public String toString(){
 	return "( " + ((q==null)?"null":q.toString()) + " , " +
-	    ((aGamma == null)? "null": aGamma.toString()) + " , " + Turing.getStringDirection(direction)+ " ) ";
+	    ((aGamma == null)? "null": aGamma.toString()) + " , " + Turing.getStringDirection(direction)+ " )";
+    }
+
+    public String toCommaSeparatedList() {
+        String s = toString();
+        int i = s.length();
+        return s.substring(1,i-1);
     }
 
     public void toFile(FileWriter fw){
