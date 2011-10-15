@@ -178,6 +178,10 @@ public class State{
         return getLabel();
     }
 
+    public Symbol toSymbol() {
+        return new Symbol(getLabel());
+    }
+
 
     /**
      * Escribe la representación del <code>State</code> en un archivo con el formato definido por el DTD correspondiente
