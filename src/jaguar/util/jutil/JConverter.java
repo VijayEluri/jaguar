@@ -1,7 +1,7 @@
 /**
 ** <JConverter.java> -- The JConverter's generic structure
 ** 
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -30,9 +30,9 @@ import java.io.*;
 import javax.swing.JTextArea;
 
  /** 
- * La extensión gráfica para el convertidor de NDFA a DFA
+ * La extensiÃ³n grÃ¡fica para el convertidor de NDFA a DFA
  * 
- * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public interface JConverter{
@@ -46,8 +46,8 @@ public interface JConverter{
     public void doConvertion();
     
     /** 
-     * Muestra el status de la conversión cada que se le llama.
-     * Dependiendo del tipo de convertidor (texto o gráfico) esta función decide como enviar los mensajes que se van dando en el proceso de conversión  .
+     * Muestra el status de la conversiÃ³n cada que se le llama.
+     * Dependiendo del tipo de convertidor (texto o grÃ¡fico) esta funciÃ³n decide como enviar los mensajes que se van dando en el proceso de conversiÃ³n  .
      *
      * @param msg El mensaje para el status actual.
      * @param debug_level para ver que tan verbose debemos hacer el status 

@@ -1,7 +1,7 @@
 /**
 ** <JGtipo32AFFrame.java> -- The converter frame to show the convertion
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -42,7 +42,7 @@ import java.awt.event.ComponentEvent;
 /** 
  * El frame para la clase JDfa2Gtipo3
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JGtipo32AFFrame extends JConverterFrame{    
@@ -70,7 +70,7 @@ public class JGtipo32AFFrame extends JConverterFrame{
 
 
     /**
-     * La gram·tica que convertiremos en AF
+     * La gram√°tica que convertiremos en AF
      */
     protected Gtipo3 grammarOrig;
     /**
@@ -155,7 +155,7 @@ public class JGtipo32AFFrame extends JConverterFrame{
     
     
     /**
-     * El frame donde se mostrar· el ndfa
+     * El frame donde se mostrar√° el ndfa
      */
     protected JInternalFrame jorigframe;    
     
@@ -205,7 +205,7 @@ public class JGtipo32AFFrame extends JConverterFrame{
     }
     
     public JGtipo32AFFrame(){
-	this("Gram·tica T3 --> DFA");
+	this("Gram√°tica T3 --> DFA");
     }
 
     
@@ -214,7 +214,7 @@ public class JGtipo32AFFrame extends JConverterFrame{
     }    
 
     /**
-     ** Crea el men˙ con las configuraciones b·sicas de este Frame
+     ** Crea el men√∫ con las configuraciones b√°sicas de este Frame
      **/
     protected JMenuBar createMenu() {
 	return createMenu("Load Grammar T3 to Tranform...","Loads a new Grammar T3 to transform into a AF ","Transform",

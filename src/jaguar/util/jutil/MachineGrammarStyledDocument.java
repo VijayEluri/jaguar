@@ -1,7 +1,7 @@
 /**
 ** <MachineGrammarStyledDocument.java> -- To format  the string's  look and feel on the frames
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -36,7 +36,7 @@ import java.util.LinkedList;
 /**
  * La clase que tiene estilos para areas de texto para representar gramaticas, maquinas, etc
  *
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class MachineGrammarStyledDocument extends DefaultStyledDocument{
@@ -68,10 +68,10 @@ public class MachineGrammarStyledDocument extends DefaultStyledDocument{
      * Constructor.
      * Recibe los valores para plainAtt, segundoAtt, primeroAtt y maxCharacters.
      * Para el resto de los campos usa el valor por omision.
-     * @param plainAtt el valor con el que se inicalizar· el campo plainAtt
-     * @param segundoAtt el valor con el que se inicalizar· el campo segundoAtt
-     * @param primeroAtt el valor con el que se inicalizar· el campo primeroAtt
-     * @param maxCharacters el valor con el que se inicalizar· el campo maxCharacters
+     * @param plainAtt el valor con el que se inicalizar√° el campo plainAtt
+     * @param segundoAtt el valor con el que se inicalizar√° el campo segundoAtt
+     * @param primeroAtt el valor con el que se inicalizar√° el campo primeroAtt
+     * @param maxCharacters el valor con el que se inicalizar√° el campo maxCharacters
      * @see #plainAtt
      * @see #segundoAtt
      * @see #primeroAtt
@@ -89,7 +89,7 @@ public class MachineGrammarStyledDocument extends DefaultStyledDocument{
      * Constructor.
      * Recibe los valores para maxCharacters.
      * Para el resto de los campos usa el valor por omision.
-     * @param maxCharacters el valor con el que se inicalizar· el campo maxCharacters
+     * @param maxCharacters el valor con el que se inicalizar√° el campo maxCharacters
      * @see #maxCharacters
      * @see #plainAtt
      * @see #segundoAtt
@@ -293,14 +293,14 @@ public class MachineGrammarStyledDocument extends DefaultStyledDocument{
 
     /**
      * Rutinas de prueba para la clase MachineGrammarStyledDocument.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
         System.out.println("Esta es la clase MachineGrammarStyledDocument. \n"
                +"Comentario: La clase que tiene estilos para areas de texto para representar gramaticas, maquinas, etc\n"
-               +"Autor: Ivan Hern·ndez Serrano\n"
+               +"Autor: Ivan Hern√°ndez Serrano\n"
                +"E-mail: ivanx@users.sourceforge.net\n");
     }
 

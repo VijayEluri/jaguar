@@ -1,7 +1,7 @@
 /**
 ** <JDfa2Gtipo3.java> -- The graphical extension to the converter's engine
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -37,9 +37,9 @@ import java.io.*;
 import javax.swing.JTextArea;
 
 /** 
- * La extensiÛn gr·fica para el convertidor de DFA a Gramatica Tipo 3
+ * La extensi√≥n gr√°fica para el convertidor de DFA a Gramatica Tipo 3
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
@@ -50,7 +50,7 @@ public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
     
     
     /**
-     * El valor por omisiÛn para detailsArea
+     * El valor por omisi√≥n para detailsArea
      */
     public static final JTextArea DEFAULT_DETAILSAREA=null;
     
@@ -76,7 +76,7 @@ public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
     
     
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JDfa2Gtipo3 (){
@@ -94,7 +94,7 @@ public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
      * Constructor.
      * Recibe los valores para ndfa.
      * Para el resto de los campos usa el valor por omision.
-     * @param dfaToConvert el valor con el que se inicalizar· el campo dfaOrig
+     * @param dfaToConvert el valor con el que se inicalizar√° el campo dfaOrig
      * @see #dfa
      * @see #DEFAULT_DFA
      */
@@ -105,7 +105,7 @@ public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
      * Constructor.
      * Recibe los valores para dfa.
      * Para el resto de los campos usa el valor por omision.
-     * @param dfaToConvert el valor con el que se inicalizar· el campo dfaOrig
+     * @param dfaToConvert el valor con el que se inicalizar√° el campo dfaOrig
      * @see #dfa
      * @see #DEFAULT_DFA
      */
@@ -120,8 +120,8 @@ public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
     }
 
     /** 
-     * Muestra el status de la conversiÛn cada que se le llama.
-     * Dependiendo del tipo de convertidor (texto o gr·fico) esta funciÛn decide como enviar los mensajes que se van dando en el proceso de conversiÛn  .
+     * Muestra el status de la conversi√≥n cada que se le llama.
+     * Dependiendo del tipo de convertidor (texto o gr√°fico) esta funci√≥n decide como enviar los mensajes que se van dando en el proceso de conversi√≥n  .
      *
      * @param msg El mensaje para el status actual.
      * @param debug_level para ver que tan verbose debemos hacer el status 
@@ -134,14 +134,14 @@ public class JDfa2Gtipo3 extends Dfa2Gtipo3 implements JConverter {
     
     /** 
      * Rutinas de prueba para la clase JDfa2Gtipo3.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
 	System.out.println("Esta es la clase JDfa2Gtipo3. \n"
-			   +"Comentario: La extensiÛn gr·fica para el convertidor de NDFA a DFA\n"
-			   +"Autor: Ivan Hern·ndez Serrano\n"
+			   +"Comentario: La extensi√≥n gr√°fica para el convertidor de NDFA a DFA\n"
+			   +"Autor: Ivan Hern√°ndez Serrano\n"
 			   +"E-mail: ivanx@users.sourceforge.net\n");
  	  
     }

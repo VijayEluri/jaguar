@@ -1,7 +1,7 @@
 /**
 ** <JNDfaFrame.java> -- The frame to show a NDFA
 **
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -166,8 +166,8 @@ public class JNDfaFrame extends JMachineFrame{
 
 
     /**
-     ** Realiza un paso en la ejecución de la Máquina y regresa verdarero o falso dependiendo si puede seguir con la ejecución o no
-     ** @return boolean <code>true</code> si se puede continuar con la ejecución de la máquina, <code>false</code> en  otro caso.
+     ** Realiza un paso en la ejecuciÃ³n de la MÃ¡quina y regresa verdarero o falso dependiendo si puede seguir con la ejecuciÃ³n o no
+     ** @return boolean <code>true</code> si se puede continuar con la ejecuciÃ³n de la mÃ¡quina, <code>false</code> en  otro caso.
      **/
     public boolean nextStep(){
         boolean masTrans=jmachine.nextStep();

@@ -1,7 +1,7 @@
 /**
 ** <JDfa2Gtipo3Frame.java> -- The Frame to show all the convertion process
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -49,7 +49,7 @@ import java.awt.event.ComponentEvent;
 /** 
  * El frame para la clase JDfa2Gtipo3
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JDfa2Gtipo3Frame extends JConverterFrame{    
@@ -96,7 +96,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
 
 
      /**
-      * La gram·tica tipo3 equivalente al JDFA 
+      * La gram√°tica tipo3 equivalente al JDFA 
       */
     protected Gtipo3 rGrammar;
     /**
@@ -140,7 +140,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
 
 
     /**
-     * El canvas donde solo dibujaremos la Gram·tica equivalente
+     * El canvas donde solo dibujaremos la Gram√°tica equivalente
      */
     protected JGrammarCanvas jgrammarCanvas;
     /**
@@ -161,7 +161,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
     }
 
     /**
-     * El frame donde se mostrar· el ndfa
+     * El frame donde se mostrar√° el ndfa
      */
     protected JInternalFrame jorigframe;    
     
@@ -184,7 +184,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
 
 
     /**
-     * El frame donde pondremos el canvas de la gram·tica resultante
+     * El frame donde pondremos el canvas de la gram√°tica resultante
      */
     protected JInternalFrame jgrammarframe;
     /**
@@ -211,7 +211,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
     }
     
     public JDfa2Gtipo3Frame(){
-	this("DFA 2 Gram·tica T3");
+	this("DFA 2 Gram√°tica T3");
     }
 
     
@@ -220,7 +220,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
     }    
 
     /**
-     ** Crea el men˙ con las configuraciones b·sicas de este Frame
+     ** Crea el men√∫ con las configuraciones b√°sicas de este Frame
      **/
     protected JMenuBar createMenu() {
 	return createMenu("Load DFA to Tranform...","Loads a new DFA to transform into a T3 Grammar ","Transform",
@@ -292,7 +292,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
 	    JMenuBar menuBar = new JMenuBar();
 	    JMenu utilMenu = new JMenu("Util");
 	    JMenuItem replaceSymbol = new JMenuItem("Replace Symbols...",KeyEvent.VK_R);
-	    replaceSymbol.getAccessibleContext().setAccessibleDescription("Reemplaza sÌmbolos de la gram·tica");
+	    replaceSymbol.getAccessibleContext().setAccessibleDescription("Reemplaza s√≠mbolos de la gram√°tica");
 	    replaceSymbol.addActionListener(this);
 	    replaceSymbol.setActionCommand("replace");
 	    replaceSymbol.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7,0));		
@@ -300,7 +300,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
 
 	    JMenu fileMenu = new JMenu("File");
 	    JMenuItem saveCurrent = new JMenuItem("Save Grammar....",KeyEvent.VK_S);
-	    saveCurrent.getAccessibleContext().setAccessibleDescription("Guarda esta gram·tica");
+	    saveCurrent.getAccessibleContext().setAccessibleDescription("Guarda esta gram√°tica");
 	    saveCurrent.addActionListener(this);
 	    saveCurrent.setActionCommand("save");
 	    saveCurrent.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6,0));		
@@ -362,7 +362,7 @@ public class JDfa2Gtipo3Frame extends JConverterFrame{
 		gCanvas.displayGrammar();
 		getContentPane().validate();
 	    }
-	    Debug.println("\nDespuÈs: "+gCanvas.getGrammar());	    
+	    Debug.println("\nDespu√©s: "+gCanvas.getGrammar());	    
 	}
     }
 

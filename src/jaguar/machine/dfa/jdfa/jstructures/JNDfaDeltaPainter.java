@@ -1,7 +1,7 @@
 /**
 ** <JNDfaDeltaPainter.java> -- The NDFA's  specific delta painter  
 ** 
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -38,19 +38,19 @@ import java.util.*;
 /** 
  * Pinta una NdfaDelta
  * 
- * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JNDfaDeltaPainter extends JDeltaPainter{
     /**
-     * Constructor sin parámetros.
+     * Constructor sin parÃ¡metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JNDfaDeltaPainter (){super();}
 
 
     /**
-     * Constructor sin parámetros.
+     * Constructor sin parÃ¡metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JNDfaDeltaPainter (JDeltaGraphic _jdelta){

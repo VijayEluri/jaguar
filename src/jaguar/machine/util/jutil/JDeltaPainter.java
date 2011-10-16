@@ -93,8 +93,8 @@ public class JDeltaPainter{
      * Inicializa el objeto usando los valores por omision.
      */
     public JDeltaPainter (JDeltaGraphic _jdelta) {
-  this();
-  jdelta = _jdelta;
+        this();
+        jdelta = _jdelta;
     }
 
     public void paintArrowHead(Graphics2D g2d, Point orig, Point dest) {

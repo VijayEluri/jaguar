@@ -1,7 +1,7 @@
 /**
 ** <JConverterFrame.java> -- The JConverter's generic frame
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -39,7 +39,7 @@ import java.awt.event.ComponentEvent;
 /** 
  * El frame para la clase JConverter
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 abstract public class JConverterFrame extends JFrame implements ComponentListener, ActionListener{
@@ -50,7 +50,7 @@ abstract public class JConverterFrame extends JFrame implements ComponentListene
     protected JScrollPane textScroll;
     protected JTextArea detailsArea;    
     /**
-     ** El tamaÒo por omisiÛn para el convertidor.
+     ** El tama√±o por omisi√≥n para el convertidor.
      **/
     public static final Dimension DEFAULT_SIZE  = new Dimension(650,465);
 
@@ -59,8 +59,8 @@ abstract public class JConverterFrame extends JFrame implements ComponentListene
     public static final Dimension MACHINE_SIZE = new Dimension(300,300);
     
     /**
-     * El n˙mero de objeto cargado sobre el que estamos trabajando actualmente, este n˙mero se incrementa cada que cargamos un nuevo objeto a convertir
-     * este n˙mero tambiÈn se asocia al resultado
+     * El n√∫mero de objeto cargado sobre el que estamos trabajando actualmente, este n√∫mero se incrementa cada que cargamos un nuevo objeto a convertir
+     * este n√∫mero tambi√©n se asocia al resultado
      */
     protected int currentObjectToConvert = 0;
     /**
@@ -81,7 +81,7 @@ abstract public class JConverterFrame extends JFrame implements ComponentListene
     }
 
      /**
- * El motor para la conversiÛn
+ * El motor para la conversi√≥n
  */
  protected JConverter jEngineConverter;
  /**
@@ -141,7 +141,7 @@ abstract public class JConverterFrame extends JFrame implements ComponentListene
     protected JMenu menu;
     
     /**
-     ** Crea el men˙ con las configuraciones b·sicas de este Frame
+     ** Crea el men√∫ con las configuraciones b√°sicas de este Frame
      **/
     protected JMenuBar createMenu(String messageLoad,String messageTipLoad,String messageConvertion,String messageTipConvertion,
 				  String messageSaveResult, String messageTipSaveResult) {
@@ -262,7 +262,7 @@ abstract public class JConverterFrame extends JFrame implements ComponentListene
 	    JMenuBar menuBar = new JMenuBar();
 	    JMenu fileMenu = new JMenu("File");
 	    JMenuItem saveCurrent = new JMenuItem("Save Machine....",KeyEvent.VK_S);
-	    saveCurrent.getAccessibleContext().setAccessibleDescription("Guarda esta m·quina");
+	    saveCurrent.getAccessibleContext().setAccessibleDescription("Guarda esta m√°quina");
 	    saveCurrent.addActionListener(this);
 	    saveCurrent.setActionCommand("save");
 	    saveCurrent.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6,0));		

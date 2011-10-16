@@ -1,7 +1,7 @@
 /**
 ** <DfaDelta.java> -- The DFA's  specific delta
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -54,7 +54,7 @@ import org.w3c.dom.*;
 public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
 
     /**
-     * Iinicializa una funciÛn de transiciÛn delta
+     * Iinicializa una funci√≥n de transici√≥n delta
      */
     public DfaDelta(){
         super();
@@ -97,7 +97,7 @@ public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
     }
 
     /**
-     * Agrega una transiciÛn de la forma delta(q,symb)=transition
+     * Agrega una transici√≥n de la forma delta(q,symb)=transition
      */
     public void addTransition(State q, Symbol symb, State transition){
         Hashtable<Symbol,State> t = delta.get(q);
@@ -122,12 +122,12 @@ public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
     }
 
     /**
-     * Regresa el valor de la aplicar la funciÛn de transiciÛn delta.
+     * Regresa el valor de la aplicar la funci√≥n de transici√≥n delta.
      *
-     * @param q el <code>State</code> en el que se encuentra el autÛmata.
-     * @param symb el <code>Symbol</code> que est· leyendo.
+     * @param q el <code>State</code> en el que se encuentra el aut√≥mata.
+     * @param symb el <code>Symbol</code> que est√° leyendo.
      * @return el <code>State</code> al que se transfiere el automata con el
-     * sÌmbolo <code>symb</code> en el estado <code>q</code>
+     * s√≠mbolo <code>symb</code> en el estado <code>q</code>
      */
     public State apply(State q, Symbol symb){
         Hashtable<Symbol,State> t = delta.get(q);
@@ -142,12 +142,12 @@ public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
     /**
       * Regresa un estado con todas sus transiciones
       * @param p el estado del cual queremos conocer todas sus transiciones
-      * @return v un vector <code>v</code> donde cada entrada es un vector <code>vi</code> de tamaÒo 2 con la siguiente estructura: <p>
+      * @return v un vector <code>v</code> donde cada entrada es un vector <code>vi</code> de tama√±o 2 con la siguiente estructura: <p>
       * <ul>
-      *   <li> <code> vi.elelemAt(0) </code> tiene el sÌmbolo <code>s</code>, segundo elemento del par ordenado d:Q x Sigmma  </li>
-      *   <li> <code> vi.elelemAt(1) </code> tiene el estado resultante de aplicar la funciÛn de transiciÛn delta d(<code>p,s</code>) </li>
+      *   <li> <code> vi.elelemAt(0) </code> tiene el s√≠mbolo <code>s</code>, segundo elemento del par ordenado d:Q x Sigmma  </li>
+      *   <li> <code> vi.elelemAt(1) </code> tiene el estado resultante de aplicar la funci√≥n de transici√≥n delta d(<code>p,s</code>) </li>
       * </ul>
-      * el tamaÒo de v es el n˙mero de transiciones definidas desde el  estado  <code>p</code>
+      * el tama√±o de v es el n√∫mero de transiciones definidas desde el  estado  <code>p</code>
       */
     public Vector<Vector> getTransitions(State p){
         Vector<Vector> v = new Vector<Vector>();
@@ -167,10 +167,10 @@ public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
     }
 
     /**
-     * Escribe la representaciÛn de la funciÛn de transiciÛn delta en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la delta con su representaciÛn correspondiente con tags.
+     * Escribe la representaci√≥n de la funci√≥n de transici√≥n delta en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la delta con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se escribir· la delta
+     * @param fw El FileWriter donde se escribir√° la delta
      */
     public void toFile(FileWriter fw){
         try {
@@ -178,14 +178,14 @@ public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
             Object [] oKeys = delta.keySet().toArray();
             State currentSt;
             Symbol currentSym;
-            /** El estado resultante de la combinaciÛn QxSigma **/
+            /** El estado resultante de la combinaci√≥n QxSigma **/
             State currentResSt;
             Vector vaux, vtrans;
             for (int i = 0 ; i < oKeys.length; i++) {
                 currentSt = (State)oKeys[i];
                 vaux = getTransitions(currentSt);
                 for (int j = 0 ; j < vaux.size(); j ++) {
-                    /** checamos que el resultado de la transiciÛn sea distinto de nulo **/
+                    /** checamos que el resultado de la transici√≥n sea distinto de nulo **/
                     vtrans = (Vector)vaux.get(j);
                     if (vtrans.get(1) != null) {
                         fw.write("\n\t"+TRANS_BEG_TAG);
@@ -194,7 +194,7 @@ public class DfaDelta extends Delta<State,Hashtable<Symbol,State>>{
                         ((State)vtrans.get(1)).toFile(fw);
                         fw.write(TRANS_END_TAG);
                     } else {
-                        Debug.println("\n\t\tDfaDelta.toFile: OOPS, para currentSt ["+ currentSt+"] casÌ me rompo => vtrans[0,1] = (" + vtrans.get(0) +  ", " +vtrans.get(1) + ")\n");
+                        Debug.println("\n\t\tDfaDelta.toFile: OOPS, para currentSt ["+ currentSt+"] cas√≠ me rompo => vtrans[0,1] = (" + vtrans.get(0) +  ", " +vtrans.get(1) + ")\n");
                     }
                 }
             }

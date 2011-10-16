@@ -1,7 +1,7 @@
 /**
 ** <Delta.java> -- The Delta's basic features
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -94,7 +94,7 @@ abstract public class Delta<K,V> implements Cloneable{
         return delta.keys();
     }
     /**
-     * Iinicializa una funciÛn de transiciÛn delta
+     * Iinicializa una funci√≥n de transici√≥n delta
      */
     public Delta(){
         delta = new Hashtable<K,V>();
@@ -103,12 +103,12 @@ abstract public class Delta<K,V> implements Cloneable{
 
     /**
      * Obtiene todas las transiciones de un estado p en delta
-     * @return un vector de estados donde est·n todos los estados a los que se transfiere a partir de estado p
+     * @return un vector de estados donde est√°n todos los estados a los que se transfiere a partir de estado p
      */
     abstract public Vector getTransitions(State p);
 
     /**
-     * La representaciÛn como cadena de la funcÌon de transiciÛn
+     * La representaci√≥n como cadena de la func√≠on de transici√≥n
      */
     public String toString(){
         String s  = "";
@@ -130,15 +130,15 @@ abstract public class Delta<K,V> implements Cloneable{
         return delta.keySet();
     }
     /**
-     * Escribe la representaciÛn de la funciÛn de transiciÛn delta en un archivo con el formato definido por el DTD correspondiente
-     * Escribe la delta con su representaciÛn correspondiente con tags.
+     * Escribe la representaci√≥n de la funci√≥n de transici√≥n delta en un archivo con el formato definido por el DTD correspondiente
+     * Escribe la delta con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· la delta
+     * @param fw El FileWriter donde se guardar√° la delta
      */
     abstract public void toFile(FileWriter fw);
 
      /**
-      * Regresa la representaciÛn como cadena en html de las transiciones del estado <code>p</code> para los tooltips .
+      * Regresa la representaci√≥n como cadena en html de las transiciones del estado <code>p</code> para los tooltips .
       *
       * @param p El estado del cual queremos todas las transiciones definidas.
       * @return la cadena en formato html para los tooltips.

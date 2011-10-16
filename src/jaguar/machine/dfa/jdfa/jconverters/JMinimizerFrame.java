@@ -1,7 +1,7 @@
 /**
 ** <JMinimizerFrame.java> -- The Frame to show all the minimization process
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -43,7 +43,7 @@ import java.awt.event.ComponentEvent;
 /** 
  * El frame para la clase JMinimizer
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JMinimizerFrame extends JConverterFrame{    
@@ -89,7 +89,7 @@ public class JMinimizerFrame extends JConverterFrame{
     }
 
     /**
-     * El JDFA equivalente resultante del proceso de minimizaciÛn
+     * El JDFA equivalente resultante del proceso de minimizaci√≥n
      */
     protected JDFA jdfaMinimized;
     /**
@@ -131,7 +131,7 @@ public class JMinimizerFrame extends JConverterFrame{
     }
 
     /**
-     * El canvas donde solo dibujaremos el DFA equivalente resultante del proceso de minimizaciÛn 
+     * El canvas donde solo dibujaremos el DFA equivalente resultante del proceso de minimizaci√≥n 
      */
     protected JDfaCanvas jdfacanvasMinimized;
     /**
@@ -152,7 +152,7 @@ public class JMinimizerFrame extends JConverterFrame{
     }
     
     /**
-     * El frame donde se mostrar· el ndfa
+     * El frame donde se mostrar√° el ndfa
      */
 //    protected JFrame jorigframe;
     protected JInternalFrame jorigframe;    
@@ -212,7 +212,7 @@ public class JMinimizerFrame extends JConverterFrame{
     }    
 
     /**
-     ** Crea el men˙ con las configuraciones b·sicas de este Frame
+     ** Crea el men√∫ con las configuraciones b√°sicas de este Frame
      **/
     protected JMenuBar createMenu() {
 	return createMenu("Load DFA to Minimize...","Loads a new DFA to Minimize","Do Minimization",

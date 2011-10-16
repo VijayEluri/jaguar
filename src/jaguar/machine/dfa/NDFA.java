@@ -1,7 +1,7 @@
 /**
  ** <NDFA.java> -- The No Deterministic Finite Automata
  **
- ** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+ ** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
  **
  ** This file is part of JAGUAR
  **
@@ -19,7 +19,7 @@
  ** along with this program; if not, write to the Free Software
  ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  **
- ** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ ** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  **
  **/
 
@@ -88,7 +88,7 @@ public class NDFA extends Machine {
 
 
     /**
-     * El valor por omisiÛn para Q0
+     * El valor por omisi√≥n para Q0
      */
     public static final StateSet DEFAULT_Q0=null;
 
@@ -187,7 +187,7 @@ public class NDFA extends Machine {
 
     /**
      * Configura todos los campos del NDFA dado a partir del documento valido que le pasamos
-     * @param document es un documento DOM que cumple con la especificaciÛn DTD para los NDFAs
+     * @param document es un documento DOM que cumple con la especificaci√≥n DTD para los NDFAs
      * @param r el DFA que configuramos
      * @see <a href="http://ijaguar.sourceforge.net/DTD/ndfa.dtd">ndfa.dtd</a>
      */
@@ -307,17 +307,17 @@ public class NDFA extends Machine {
     }
 
     /**
-     * Regresa la representaciÛn como cadena del NDFA
+     * Regresa la representaci√≥n como cadena del NDFA
      **/
     public String toString(){
         return "NDFA " + super.toString() + "N = \n\tQ=" + getQ() + "\n\tSigma = "+ getSigma() + "\n\tdelta = "+ getDelta() + "\n\tQ0 = "+getQ0()+"\n\tF= " + getF();
     }
 
     /**
-     * Guarda la representaciÛn del DFA en un archivo con el formato definido por el DTD correspondiente
-     * Escribe el DFA con su representaciÛn correspondiente con tags.
+     * Guarda la representaci√≥n del DFA en un archivo con el formato definido por el DTD correspondiente
+     * Escribe el DFA con su representaci√≥n correspondiente con tags.
      *
-     * @param fw El FileWriter donde se guardar· el NDFA.
+     * @param fw El FileWriter donde se guardar√° el NDFA.
      */
     public void toFile(FileWriter fw){
         try{
@@ -326,7 +326,7 @@ public class NDFA extends Machine {
             fw.write("<!DOCTYPE ndfa SYSTEM \"ndfa.dtd\">"+"\n");
             fw.write(BEG_TAG);
             if (machineDescription.trim().length() > 0) {
-                  fw.write("\n\n <!-- DescripciÛn --> \n");
+                  fw.write("\n\n <!-- Descripci√≥n --> \n");
                   fw.write(DESCRIPTION_BEG_TAG);
                   fw.write(getMachineDescription());
                   fw.write(DESCRIPTION_END_TAG+"\n");
@@ -336,7 +336,7 @@ public class NDFA extends Machine {
             getQ().toFile(fw);
             fw.write("\n\n <!-- Alphabet de entrada Sigma --> \n");
             getSigma().toFile(fw);
-            fw.write("\n\n <!-- FunciÛn de TransiciÛn delta --> \n");
+            fw.write("\n\n <!-- Funci√≥n de Transici√≥n delta --> \n");
             getDelta().toFile(fw);
             fw.write("\n\n <!-- Conjunto de States iniciales Q0 --> \n");
             getQ0().toFile(fw);
@@ -353,7 +353,7 @@ public class NDFA extends Machine {
 
     /**
      ** Hace la referencia de todos los estados con respecto a <code>Q</code>
-     ** Es ˙til cuando leemos por separado los estados y tenemos que hacer las referencias
+     ** Es √∫til cuando leemos por separado los estados y tenemos que hacer las referencias
      **/
     public void makeStateReferences(){
         F = Q.makeSubSetReferences(getF());

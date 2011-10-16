@@ -1,7 +1,7 @@
 /**
 ** <Dfa2Gtipo3.java> -- The Dfa to type 3 grammar converter 
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -39,19 +39,19 @@ import java.util.*;
 import java.io.*;
 
 /** 
- * Esta clase toma un DFA y genera gram·tica tipo 3 equivalente.
+ * Esta clase toma un DFA y genera gram√°tica tipo 3 equivalente.
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class Dfa2Gtipo3{
     /**
-     * El DFA del cual generaremos una gram·tica tipo 3 equivalente.
+     * El DFA del cual generaremos una gram√°tica tipo 3 equivalente.
      */
     protected DFA dfa;
     
     /**
-     * El valor por omisiÛn para dfa
+     * El valor por omisi√≥n para dfa
      */
     public static final DFA DEFAULT_DFA = null;
     
@@ -72,11 +72,11 @@ public class Dfa2Gtipo3{
 	dfa=new_dfa;
     }
     /**
-     * La gram·tica resultante 
+     * La gram√°tica resultante 
      */
     protected Gtipo3 gt3;
     /**
-     * El valor por omisiÛn para gt3
+     * El valor por omisi√≥n para gt3
      */
     public static final Gtipo3 DEFAULT_GT3=null;
     /**
@@ -101,7 +101,7 @@ public class Dfa2Gtipo3{
      * Constructor.
      * Recibe los valores para dfa.
      * Para el resto de los campos usa el valor por omision.
-     * @param dfa el valor con el que se inicalizar· el campo dfa
+     * @param dfa el valor con el que se inicalizar√° el campo dfa
      * @see #dfa
      * @see #DEFAULT_GT3
      */
@@ -113,7 +113,7 @@ public class Dfa2Gtipo3{
     
     
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      * @see #DEFAULT_GT3
      * @see #DEFAULT_DFA
@@ -124,7 +124,7 @@ public class Dfa2Gtipo3{
     }
     
     /**
-     * Regresa una cadena con una representaciÛn del objeto.
+     * Regresa una cadena con una representaci√≥n del objeto.
      * Toma los campos y los imprime en una lista junto con sus valores.
      *
      * @return una cadena con los valores del objeto.
@@ -135,8 +135,8 @@ public class Dfa2Gtipo3{
     }
 
         /**
-     * Esta funciÛn hace la conversiÛn de una gram·tica tipo 3 lineal derecha a un NDFA. El NDFA resultante
-     * est· disponible usando la funciÛn getAf().
+     * Esta funci√≥n hace la conversi√≥n de una gram√°tica tipo 3 lineal derecha a un NDFA. El NDFA resultante
+     * est√° disponible usando la funci√≥n getAf().
      */
     public void doConvertion(){
 	System.err.println("Dfa2Gtipo3.doConvertion");
@@ -186,8 +186,8 @@ public class Dfa2Gtipo3{
 	}
     }
     /** 
-     * Muestra el status de la conversiÛn cada que se le llama.
-     * Dependiendo del tipo de convertidor (texto o gr·fico) esta funciÛn decide como enviar los mensajes que se van dando en el proceso de conversiÛn  .
+     * Muestra el status de la conversi√≥n cada que se le llama.
+     * Dependiendo del tipo de convertidor (texto o gr√°fico) esta funci√≥n decide como enviar los mensajes que se van dando en el proceso de conversi√≥n  .
      *
      * @param msg El mensaje para el status actual.
      *
@@ -197,8 +197,8 @@ public class Dfa2Gtipo3{
     }
     
     /**  
-     * Muestra el status de la conversiÛn cada que se le llama.
-     * Dependiendo del tipo de convertidor (texto o gr·fico) esta funciÛn decide como enviar los mensajes que se van dando en el proceso de conversiÛn  .
+     * Muestra el status de la conversi√≥n cada que se le llama.
+     * Dependiendo del tipo de convertidor (texto o gr√°fico) esta funci√≥n decide como enviar los mensajes que se van dando en el proceso de conversi√≥n  .
      *
      * @param msg El mensaje para el status actual.
      * @param debug_level para ver que tan verbose debemos hacer el status 
@@ -208,14 +208,14 @@ public class Dfa2Gtipo3{
     }
     /** 
      * Rutinas de prueba para la clase Dfa2Gtipo3.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
 	System.out.println("Esta es la clase Dfa2Gtipo3. \n"
-			   +"Comentario: Esta clase toma un DFA y genera gram·tica tipo 3 equivalente.\n"
-			   +"Autor: Ivan Hern·ndez Serrano\n"
+			   +"Comentario: Esta clase toma un DFA y genera gram√°tica tipo 3 equivalente.\n"
+			   +"Autor: Ivan Hern√°ndez Serrano\n"
 			   +"E-mail: ivanx@users.sourceforge.net\n");
 	try{ 
 	    

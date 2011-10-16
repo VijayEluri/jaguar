@@ -1,7 +1,7 @@
 /**
 ** <JNdfa2DfaFrame.java> -- The Frame to show all the convertion process
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -43,7 +43,7 @@ import java.awt.event.ComponentEvent;
 /** 
  * El frame para la clase JNdfa2Dfa
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JNdfa2DfaFrame extends JConverterFrame{
@@ -156,7 +156,7 @@ public class JNdfa2DfaFrame extends JConverterFrame{
 
     
     /**
-     * El frame donde se mostrar· el ndfa
+     * El frame donde se mostrar√° el ndfa
      */
     protected JInternalFrame jnframe;    
     
@@ -215,7 +215,7 @@ public class JNdfa2DfaFrame extends JConverterFrame{
     
 
     /**
-     ** Crea el men˙ con las configuraciones b·sicas de este Frame
+     ** Crea el men√∫ con las configuraciones b√°sicas de este Frame
      **/
     protected JMenuBar createMenu(){
 	return createMenu("Load NDFA to Convert...","Loads a new NDFA",

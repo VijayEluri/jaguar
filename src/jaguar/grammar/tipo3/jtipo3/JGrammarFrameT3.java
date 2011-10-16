@@ -1,7 +1,7 @@
 /**
 ** <JGrammarFrameT3.java> -- A frame for type 3 grammars
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -42,12 +42,12 @@ import java.awt.event.*;
 /** 
  * El frame para las gramaticas tipo 3
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JGrammarFrameT3 extends JGrammarFrame{
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      */
     public JGrammarFrameT3 (){
@@ -75,7 +75,7 @@ public class JGrammarFrameT3 extends JGrammarFrame{
 	 }
     }
     /**
-     * Regresa una cadena con una representaciÛn del objeto.
+     * Regresa una cadena con una representaci√≥n del objeto.
      * Toma los campos y los imprime en una lista junto con sus valores.
      *
      * @return una cadena con los valores del objeto.
@@ -87,7 +87,7 @@ public class JGrammarFrameT3 extends JGrammarFrame{
     JMenuItem loadTest, consTest;
     
     /**
-     ** Crea el men˙ con las configuraciones b·sicas de este Frame
+     ** Crea el men√∫ con las configuraciones b√°sicas de este Frame
      **/
     protected void createMenu(){
 	super.createMenu();
@@ -154,14 +154,14 @@ public class JGrammarFrameT3 extends JGrammarFrame{
     
     /** 
      * Rutinas de prueba para la clase JGrammarFrameT3.
-     * La implementaciÛn por omisiÛn simplemente imprime el nombre de la clase.
+     * La implementaci√≥n por omisi√≥n simplemente imprime el nombre de la clase.
      *
      * @param args los argumentos de la linea de comandos.
      */
     public static void main(String[] args){
 	System.out.println("Esta es la clase JGrammarFrameT3. \n"
 			   +"Comentario: El frame para las gramaticas tipo 3\n"
-			   +"Autor: Ivan Hern·ndez Serrano\n"
+			   +"Autor: Ivan Hern√°ndez Serrano\n"
 			   +"E-mail: ivanx@users.sourceforge.net\n");
  	  
 	JGrammarFrameT3 jgf = new JGrammarFrameT3();

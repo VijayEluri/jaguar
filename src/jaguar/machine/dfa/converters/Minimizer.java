@@ -1,7 +1,7 @@
 /**
 ** <Minimizer.java> -- To minimize a DFA
 **
-** Copyright (C) 2002 by  Ivan Hern醤dez Serrano
+** Copyright (C) 2002 by  Ivan Hern谩ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern醤dez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern谩ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -36,9 +36,9 @@ import jaguar.machine.dfa.structures.exceptions.*;
 import jaguar.util.*;
 import java.util.*;
 /**
- * Esta clase minimiza aut髆atas finitos. Dado un DFA M1 esta clase genera un DFA M2 reducido, i.e. sin estados equivalentes
+ * Esta clase minimiza aut贸matas finitos. Dado un DFA M1 esta clase genera un DFA M2 reducido, i.e. sin estados equivalentes
  *
- * @author Ivan Hern醤dez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern谩ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class Minimizer{
@@ -104,7 +104,7 @@ public class Minimizer{
         dfaOrig=new_dfaOrig;
     }
     /**
-     * El DFA resultante del proceso de minimizaci髇
+     * El DFA resultante del proceso de minimizaci贸n
      */
     protected DFA dfaMinimized;
     /**
@@ -139,7 +139,7 @@ public class Minimizer{
 
     /**
      * Constructor recibe el nombre  del archivod donde se especifica el DFA  a minimizar
-     * Para el resto de los campos usa el valor por omisi髇
+     * Para el resto de los campos usa el valor por omisi贸n
      * @param _dfaToMinimizeFileName el nombre del archivo donde se especifica el NDFA
      */
     public Minimizer(String _dfaToMinimizeFileName)throws Exception{
@@ -243,8 +243,8 @@ public class Minimizer{
     }
 
     /**
-     * Muestra el status de minimizaci髇 cada que se le llama.
-     * Dependiendo del tipo de minimizador (texto o gr醘ico) esta funci髇 decide como enviar los mensajes que se van dando en el proceso de conversi髇  .
+     * Muestra el status de minimizaci贸n cada que se le llama.
+     * Dependiendo del tipo de minimizador (texto o gr谩fico) esta funci贸n decide como enviar los mensajes que se van dando en el proceso de conversi贸n  .
      *
      * @param msg El mensaje para el status actual.
      *
@@ -254,8 +254,8 @@ public class Minimizer{
     }
 
     /**
-     * Muestra el status de la minimizaci髇 cada que se le llama.
-     * Dependiendo del tipo de minimizador (texto o gr醘ico) esta funci髇 decide como enviar los mensajes que se van dando en el proceso de conversi髇  .
+     * Muestra el status de la minimizaci贸n cada que se le llama.
+     * Dependiendo del tipo de minimizador (texto o gr谩fico) esta funci贸n decide como enviar los mensajes que se van dando en el proceso de conversi贸n  .
      *
      * @param msg El mensaje para el status actual.
      * @param debug_level para ver que tan verbose debemos hacer el status
@@ -266,11 +266,11 @@ public class Minimizer{
 
 
     /**
-     * Genera una nueva funci髇 de transici髇 delta a partir de un <code>s</code> subconjunto propio de <code>Q</code> de un <code>dfa</code>
+     * Genera una nueva funci贸n de transici贸n delta a partir de un <code>s</code> subconjunto propio de <code>Q</code> de un <code>dfa</code>
      *
      * @param s un subconjunto propio de un conjunto de estados <code>Q</code> de un DFA
-     * @param d la funci髇 de transici髇 <code>delta</code> de un DFA dado
-     * @return una nueva funci髇 de transici髇 <code>delta</code> tal que todos los estados a los que hace referencia est醤 en <code>s</code>
+     * @param d la funci贸n de transici贸n <code>delta</code> de un DFA dado
+     * @return una nueva funci贸n de transici贸n <code>delta</code> tal que todos los estados a los que hace referencia est谩n en <code>s</code>
      * #see jaguar.machine.dfa.structures.DfaDelta
      */
     public DfaDelta generaNuevaDelta(StateSet s, DfaDelta d){
@@ -361,8 +361,8 @@ public class Minimizer{
       * Genera las dos primeras clases de equivalencia, en una los que son
       * estados terminales y en otra los que no lo son .
       *
-      * @param dfa El DFA de quien sacaremos la primer partici髇.
-      * @return Regresa una partici髇 de equivalencia (<code>HashSet</code>) de
+      * @param dfa El DFA de quien sacaremos la primer partici贸n.
+      * @return Regresa una partici贸n de equivalencia (<code>HashSet</code>) de
       * <code>Q</code>, tiene dos clases de equivalencia (<code>StateSet</code>)
       * las clases 1-distinguibles.
       *
@@ -423,9 +423,9 @@ public class Minimizer{
     }
 
     /**
-     * Regresa el conjunto de estados alcanzables desde <code>p</code> dada la funci髇 de transici髇 DfaDelta <code>d</code>
+     * Regresa el conjunto de estados alcanzables desde <code>p</code> dada la funci贸n de transici贸n DfaDelta <code>d</code>
      * @param p El estado desde donde queremos alcanzar
-     * @param d la funci髇 de transici髇 DfaDelta
+     * @param d la funci贸n de transici贸n DfaDelta
      * @return un <code>StateSet</code> con los estados alcanzables
      */
     protected StateSet alcanzablesDesde(State p, DfaDelta d){
@@ -438,7 +438,7 @@ public class Minimizer{
     }
 
     /**
-     * Regresa una cadena con una representaci髇 del objeto.
+     * Regresa una cadena con una representaci贸n del objeto.
      * Toma los campos y los imprime en una lista junto con sus valores.
      *
      * @return una cadena con los valores del objeto.

@@ -1,7 +1,7 @@
 /**
 ** <JGtipo32AF.java> -- All the graphical extensions to Gtipo32AF 
 ** 
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -35,7 +35,7 @@ import javax.swing.*;
 /** 
  * La extensi'on gr'afica para el convertidor Gtipo3 -> AF
  * 
- * @author Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 public class JGtipo32AF extends Gtipo32AF implements JConverter{
@@ -44,7 +44,7 @@ public class JGtipo32AF extends Gtipo32AF implements JConverter{
      */
     protected JTextArea detailsArea;
     /**
-     * El valor por omisiÛn para detailsArea
+     * El valor por omisi√≥n para detailsArea
      */
     public static final JTextArea DEFAULT_DETAILSAREA=null;
     /**
@@ -67,7 +67,7 @@ public class JGtipo32AF extends Gtipo32AF implements JConverter{
      * Constructor.
      * Recibe los valores para detailsArea.
      * Para el resto de los campos usa el valor por omision.
-     * @param detailsArea el valor con el que se inicalizar· el campo detailsArea
+     * @param detailsArea el valor con el que se inicalizar√° el campo detailsArea
      * @see #detailsArea
      */
     public JGtipo32AF (JTextArea detailsArea){
@@ -76,7 +76,7 @@ public class JGtipo32AF extends Gtipo32AF implements JConverter{
 
     }
     /**
-     * Constructor sin par·metros.
+     * Constructor sin par√°metros.
      * Inicializa el objeto usando los valores por omision.
      * @see #DEFAULT_DETAILSAREA
      */
@@ -99,8 +99,8 @@ public class JGtipo32AF extends Gtipo32AF implements JConverter{
 	doConvertion(Debug.DEBUG_OFF);	
     }
         /** 
-     * Muestra el status de la conversiÛn cada que se le llama.
-     * Dependiendo del tipo de convertidor (texto o gr·fico) esta funciÛn decide como enviar los mensajes que se van dando en el proceso de conversiÛn  .
+     * Muestra el status de la conversi√≥n cada que se le llama.
+     * Dependiendo del tipo de convertidor (texto o gr√°fico) esta funci√≥n decide como enviar los mensajes que se van dando en el proceso de conversi√≥n  .
      *
      * @param msg El mensaje para el status actual.
      * @param debug_level para ver que tan verbose debemos hacer el status 

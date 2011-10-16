@@ -1,7 +1,7 @@
 /**
 ** <JDerivationTreeT3.java> -- Shows a derivationt tree
 ** 
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 ** 
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ** 
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 ** 
 **/
 
@@ -56,7 +56,7 @@ import jaguar.grammar.jgrammar.*;
  *
  * Created: Wed Aug 29 22:39:49 2001
  *
- * @author Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+ * @author Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
  * @version 0.1
  */
 
@@ -84,7 +84,7 @@ public class JDerivationTreeT3 extends JFrame {
 
 
      /**
- * La cadena que generamos y cuyo árbol dibujaremos 
+ * La cadena que generamos y cuyo Ã¡rbol dibujaremos 
  */
  protected Str cadena;
  /**

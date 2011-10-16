@@ -1,7 +1,7 @@
 /**
 ** <DFA.java> -- The Deterministic Finite Automata
 **
-** Copyright (C) 2002 by  Ivan Hern·ndez Serrano
+** Copyright (C) 2002 by  Ivan Hern√°ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hern·ndez Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan Hern√°ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -158,7 +158,7 @@ public class DFA extends Machine implements Cloneable{
 
     /**
      * Configura todos los campos del DFA dado a partir del documento valido que le pasamos
-     * @param document es un documento DOM que cumple con la especificaciÛn DTD para los DFAs
+     * @param document es un documento DOM que cumple con la especificaci√≥n DTD para los DFAs
      * @param r el DFA que configuramos
      * @see <a href="http://ijaguar.sourceforge.net/DTD/dfa.dtd">dfa.dtd</a>
      */
@@ -201,7 +201,7 @@ public class DFA extends Machine implements Cloneable{
 
     /** Lleva a cabo todas las transiciones posibles desde <code>currentSt</code> sobre  la cadena <code>cad</code>
      ** @param currentSt el estado desde donde comenzar'a a hacer las transiciones
-     ** @return <code>currentSt</code> si la cadena es vacia, el ˙ltomo estado al que pueda llegar haciendo las transiciones a partir de <code>currentSt</code> , null si no puede llevar a cabo la transici'on desde currentSt con alg˙n sÌmbolo de <code>cad</code>
+     ** @return <code>currentSt</code> si la cadena es vacia, el √∫ltomo estado al que pueda llegar haciendo las transiciones a partir de <code>currentSt</code> , null si no puede llevar a cabo la transici'on desde currentSt con alg√∫n s√≠mbolo de <code>cad</code>
      **/
     protected State doTransitions(State currentSt, Str cad){
         if(cad.length() == 0)
@@ -248,23 +248,23 @@ public class DFA extends Machine implements Cloneable{
     }
 
     /**
-     * Regresa la representaciÛn como cadena del DFA
+     * Regresa la representaci√≥n como cadena del DFA
      **/
     public String toString(){
         return "DFA " + super.toString() + "M = \n\tQ=" + getQ() + "\n\tSigma = "+ getSigma() + "\n\tdelta = "+ getDelta() + "\n\tq0 = "+getQ0()+"\n\tF= " + getF();
     }
     /**
-     *  Guarda la representaciÛn de la M·quina en un archivo XML v·lido con respecto al DTD de cada una de las m·quinas
-     * Escribe la m·quina en formato XML
+     *  Guarda la representaci√≥n de la M√°quina en un archivo XML v√°lido con respecto al DTD de cada una de las m√°quinas
+     * Escribe la m√°quina en formato XML
      *
-     * @param fw El FileWriter donde se guardar· el DFA.
+     * @param fw El FileWriter donde se guardar√° el DFA.
      */
     public void toFile(FileWriter fw){
         try{
             fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
             fw.write(BEG_TAG);
             if (machineDescription.trim().length() > 0) {
-                fw.write("\n\n <!-- DescripciÛn --> \n");
+                fw.write("\n\n <!-- Descripci√≥n --> \n");
                 fw.write(DESCRIPTION_BEG_TAG);
                 fw.write(getMachineDescription());
                 fw.write(DESCRIPTION_END_TAG+"\n");
@@ -274,7 +274,7 @@ public class DFA extends Machine implements Cloneable{
             getQ().toFile(fw, true);
             fw.write("\n\n <!-- Alphabet de entrada Sigma --> \n");
             getSigma().toFile(fw);
-            fw.write("\n\n <!-- FunciÛn de TransiciÛn delta --> \n");
+            fw.write("\n\n <!-- Funci√≥n de Transici√≥n delta --> \n");
             getDelta().toFile(fw);
             fw.write("\n\n <!-- State inicial q0 --> \n");
             getQ0().toFile(fw);
@@ -311,7 +311,7 @@ public class DFA extends Machine implements Cloneable{
 
     /**
      ** Hace la referencia de todos los estados con respecto a <code>Q</code>
-     ** Es ˙til cuando leemos por separado los estados y tenemos que hacer las referencias
+     ** Es √∫til cuando leemos por separado los estados y tenemos que hacer las referencias
      **/
     public void makeStateReferences(){
         F = Q.makeSubSetReferences(getF());
