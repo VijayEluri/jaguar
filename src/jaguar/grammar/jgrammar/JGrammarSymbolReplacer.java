@@ -107,16 +107,16 @@ public class JGrammarSymbolReplacer extends JPanel{
         JCheckBox currentCheckB;
         JTextField currentTextF;
         JPanel pairPanel;
-        Vector vInfo;
+        Vector<Object> vInfo;
 
-        Object nA[] = getN().toArray();
+        Symbol nA[] = getN().toArray();
         for(int i = 0 ; i < nA.length; i++){
             currentCheckB = new JCheckBox(nA[i].toString(),false);
             currentCheckB.addItemListener(myListener);
 
             currentTextF = new JTextField(20);
             currentTextF.setEnabled(false);
-            vInfo = new Vector();
+            vInfo = new Vector<Object>();
             vInfo.add(nA[i]);
             vInfo.add(currentTextF);
             pairInfo.put(currentCheckB,vInfo);

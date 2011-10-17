@@ -124,43 +124,43 @@ public class JCenter extends JPanel implements ComponentListener, ActionListener
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("jdfa")) {
             JDfaFrame jdfaf = new JDfaFrame();
-            jdfaf.show();
+            jdfaf.setVisible(true);
         }
         if (e.getActionCommand().equals("jndfa")) {
             JNDfaFrame jndfaf = new JNDfaFrame();
-            jndfaf.show();
+            jndfaf.setVisible(true);
         }
         if (e.getActionCommand().equals("jminimizer")) {
             JMinimizerFrame jminimizer = new JMinimizerFrame();
-            jminimizer.show();
+            jminimizer.setVisible(true);
         }
         if (e.getActionCommand().equals("jndfa2dfa")) {
             JNdfa2DfaFrame jndfa2dfa = new JNdfa2DfaFrame();
-            jndfa2dfa.show();
+            jndfa2dfa.setVisible(true);
         }
         if (e.getActionCommand().equals("jafs")) {
             JAfsFrame jafs = new JAfsFrame();
-            jafs.show();
+            jafs.setVisible(true);
         }
         if (e.getActionCommand().equals("gtipo3")) {
             JGrammarFrameT3 jgt3 = new JGrammarFrameT3();
-            jgt3.show();
+            jgt3.setVisible(true);
         }
         if (e.getActionCommand().equals("gtipo2Stand")) {
             JSimplifierFrame jgt2Simp = new JSimplifierFrame();
-            jgt2Simp.show();
+            jgt2Simp.setVisible(true);
         }
         if (e.getActionCommand().equals("jdfa2gt3")) {
             JDfa2Gtipo3Frame jdfa2gt3 = new JDfa2Gtipo3Frame();
-            jdfa2gt3.show();
+            jdfa2gt3.setVisible(true);
         }
         if (e.getActionCommand().equals("gtipo3ToAf")) {
             JGtipo32AFFrame jgt32af = new JGtipo32AFFrame();
-            jgt32af.show();
+            jgt32af.setVisible(true);
         }
         if (e.getActionCommand().equals("jtm")) {
             JTuringFrame jtmf = new JTuringFrame();
-            jtmf.show();
+            jtmf.setVisible(true);
         }
     }
 

@@ -28,8 +28,9 @@
   <target name="compile" depends="init" description="compile the source " >
     <!-- Compile the java code from ${src} to ${build}/${classes} -->
     <javac encoding="UTF-8" srcdir="${src}" destdir="${build}" debug="on">
-      <!-- <compilerarg value="-Xlint:unchecked"/> -->
-      <!-- <compilerarg value="-Xlint:deprecation"/> -->
+      <!-- <compilerarg value="-Xlint:unchecked"/>
+      <compilerarg value="-Xlint:deprecation"/>
+      <compilerarg value="-Werror"/> -->
     </javac>
   </target>
 

@@ -1,7 +1,7 @@
 /**
 ** <JState.java> -- The State's graphical extension
 **
-** Copyright (C) 2002 by  Ivan Hernández Serrano
+** Copyright (C) 2002 by  Ivan HernÃ¡ndez Serrano
 **
 ** This file is part of JAGUAR
 **
@@ -19,7 +19,7 @@
 ** along with this program; if not, write to the Free Software
 ** Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 **
-** Author: Ivan Hernández Serrano <ivanx@users.sourceforge.net>
+** Author: Ivan HernÃ¡ndez Serrano <ivanx@users.sourceforge.net>
 **
 **/
 
@@ -48,7 +48,7 @@ public class JState extends jaguar.structures.State {
 
 
     /**
-     * El diametro del circulo circunscrito que identificará gráficamente a un estado inicial
+     * El diametro del circulo circunscrito que identificarÃ¡ grÃ¡ficamente a un estado inicial
      */
     public static final double DIAMETRO_FINAL_STATE = 42;
 
@@ -245,7 +245,7 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Construye un estado gráfico con su posición, por omision no es estado final es equivalente a usar <code>JState(label,x,y,false)</code>
+     * Construye un estado grÃ¡fico con su posiciÃ³n, por omision no es estado final es equivalente a usar <code>JState(label,x,y,false)</code>
      *@param label La etiquta del estado
      *@param x posicion sobre el eje X
      *@param y posicion sobre el eje Y
@@ -255,7 +255,7 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Construye un estado gráfico con su posición y hace explicito si es un estado final o no
+     * Construye un estado grÃ¡fico con su posiciÃ³n y hace explicito si es un estado final o no
      *@param label La etiquta del estado
      *@param x posicion sobre el eje X
      *@param y posicion sobre el eje Y
@@ -276,11 +276,11 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Este nos dice si es un estado inicial para identificarlo gráficamente
+     * Este nos dice si es un estado inicial para identificarlo grÃ¡ficamente
      */
     protected boolean esEstadoInicial;
     /**
-     * El valor por omisión para esEstadoInicial
+     * El valor por omisiÃ³n para esEstadoInicial
      */
     public static final boolean DEFAULT_ESESTADOINICIAL=false;
     /**
@@ -301,9 +301,9 @@ public class JState extends jaguar.structures.State {
     }
 
     /**
-     * Pinta un estado en un contexto gráfico dependiendo del parametro lo pinta
+     * Pinta un estado en un contexto grÃ¡fico dependiendo del parametro lo pinta
      * en tercera dimension levantado o presionado
-     * @param g El contexto gráfico sobre el que se pintará el estado
+     * @param g El contexto grÃ¡fico sobre el que se pintarÃ¡ el estado
      * @param esEstadoActual si es verdadero lo hace levantado, si es falso lo dibuja aplastado
      */
     public void paint(Graphics g, boolean esEstadoActual){
@@ -314,10 +314,10 @@ public class JState extends jaguar.structures.State {
                             RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setColor(DEFAULT_BG_COLOR);
-        if (esEstadoActual==DEFAULT_CURRENT_STATE) {// Si no lo quieren raise entonces lo quieren m'as obscuro
+        if (esEstadoActual==DEFAULT_CURRENT_STATE) {// Si no lo quieren raise entonces lo quieren mÃ¡s obscuro
             g.setColor(DEFAULT_BG_CURRENT_STATE_COLOR);
         }
-        // g2d.fill(getEllipse());
+        g2d.fill(getEllipse()); // Comment to debug arcs and loops
         g.setColor(DEFAULT_STROKE_COLOR);
         g2d.setStroke(new BasicStroke(3.0f));
         g2d.draw(getEllipse());
@@ -328,7 +328,6 @@ public class JState extends jaguar.structures.State {
         }
         if (getEsEstadoInicial()) { // es inicial
             paintArrowHead(g2d,DEFAULT_STROKE_COLOR);
-            // TODO: flechita para los iniciales
         }
         // Dibuja la etiqueta
         if (esEstadoActual==DEFAULT_CURRENT_STATE) {
@@ -377,9 +376,9 @@ public class JState extends jaguar.structures.State {
 
 
     /**
-     * Pinta un estado en un contexto gráfico con el background del
+     * Pinta un estado en un contexto grÃ¡fico con el background del
      * color definido en <code>DEFAULT_BG_COLOR</code>
-     * @param g El contexto gráfico sobre el que se pintará el estado
+     * @param g El contexto grÃ¡fico sobre el que se pintarÃ¡ el estado
      * @see #DEFAULT_BG_COLOR
      */
     public void paint(Graphics g) {

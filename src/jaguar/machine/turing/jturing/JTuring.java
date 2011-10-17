@@ -405,7 +405,62 @@ public class JTuring extends Turing implements JMachine {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if ("add_state".equals(e.getActionCommand())) {
+            JState newState = new JState("q"+Q.size());
+            Q.add(newState);
+            newState.setLocation(50,50);
+            turingframe.getJdc().getJeList().add(newState);
+            // initStatesPositions();
+            turingframe.showTabular();
+            turingframe.getJdc().repaint();
+            return;
+        }else if ("remove_state".equals(e.getActionCommand())) {
+            // Ask for confirmation first
+            // find wich state is selected and delete it.
+            State[] states = Q.toArray();
+            int rowIdx = afsframe.getSelectedRowInTTM();
+            int idx = rowIdx/3;
+            if (idx >= 0) {
+                JState state = (JState)states[idx];
+                int n = JOptionPane.showConfirmDialog(afsframe,
+                    "Are you sure that you want to delete the state "
+                    + state + "?",
+                    "Confirm deletion",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+                if (n != 0) {
+                    return;
+                }
+                afsframe.getJdc().getJeList().remove(state);
+                Q.remove(state);
+                Hashtable<State,Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>>> deltaHash = ((StackDelta)delta).getD();
+                deltaHash.remove(state);
 
+                for(Enumeration enu = deltaHash.keys();  enu.hasMoreElements() ;) {
+                    // Ahora para cada estado de estos tenemos que sacar todas sus transiciones
+                    JState q = (JState)enu.nextElement();
+                    Hashtable<Symbol,Hashtable<Symbol,QxGammaStarSet>> toHash = deltaHash.get(q);
+                    for(Symbol s : toHash.keySet()) {
+                        Hashtable<Symbol,QxGammaStarSet> setHash = toHash.get(s);
+                        for (Symbol a : setHash.keySet()) {
+                            QxGammaStarSet set = setHash.get(a);
+                            for (QxGammaStar qxg : set) {
+                                if (qxg.getQ().equals(state)) {
+                                    set.remove(qxg);
+                                }
+
+                                if (set.isEmpty()) {
+                                    setHash.remove(a);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                afsframe.showTabular();
+                afsframe.getJdc().repaint();
+            }
+        }
     }
 }
 

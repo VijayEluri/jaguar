@@ -191,7 +191,7 @@ public class JTuringFrame extends JMachineFrame{
 
     public static void main(String []argv){
         JTuringFrame f = new JTuringFrame();
-        f.show();
+        f.setVisible(true);
     }
 
     protected JMachine createNew() {

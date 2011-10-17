@@ -31,6 +31,7 @@ import java.awt.*;
 import java.awt.geom.*;
 import jaguar.structures.*;
 import jaguar.machine.structures.*;
+import jaguar.machine.dfa.structures.*;
 import jaguar.machine.stack.structures.*;
 import jaguar.machine.turing.structures.*;
 import jaguar.structures.jstructures.*;
@@ -97,19 +98,24 @@ public class JDeltaPainter{
         jdelta = _jdelta;
     }
 
-    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest) {
-        paintArrowHead(g2d, orig, dest, ARROW_COLOR, "una etiqueta", false);
+    public void paintArrowHead(Graphics2D g2d, Point2D orig, Point2D dest) {
+        paintArrowHead(g2d, orig, dest, ARROW_COLOR, false);
     }
+
+    public void paintArrowHead(Graphics2D g2d, Point2D orig, Point2D dest, Color c) {
+        paintArrowHead(g2d, orig, dest, c, false);
+    }
+
     // Este es el rudísimo (juanger)
-    public void paintArrowHead(Graphics2D g2d, Point orig, Point dest, Color c, String label, boolean first_check) {
+    public void paintArrowHead(Graphics2D g2d, Point2D orig, Point2D dest, Color c, boolean curved) {
         double slope = (orig.getY()-dest.getY())/(orig.getX()-dest.getX());
         double headWidth = 5;
         double headLength = 40;
 
         // Perpendicular line
-        Point p1 = new Point();
+        Point2D.Double p1 = new Point2D.Double();
         p1.setLocation(0.0,0.0);
-        Point p2 = new Point();
+        Point2D.Double p2 = new Point2D.Double();
         p2.setLocation(1.0, (-1/slope)*(1-p1.getX()) + p1.getY());
 
         // Change in original line
@@ -117,14 +123,20 @@ public class JDeltaPainter{
         double dy = (orig.getY()-dest.getY());
         double dr = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
         double ratio = 1/dr;
-        // Intersection of line with state where arrow tip will be drawn
-        Point tip = new Point(dest);
-        double stateRadius = JState.DIAMETRO/2;
-        tip.translate((int) (dx*ratio*stateRadius),(int) (dy*ratio*stateRadius));
-        // Point at base of head
-        Point p3 = new Point(dest);
-        p3.translate((int) (dx*ratio*headLength),(int) (dy*ratio*headLength));
 
+        // Tip of arrow
+        Point2D.Double tip;
+        // Point at base of head
+        Point2D.Double p3;
+        if (curved) {
+            tip = new Point2D.Double(dest.getX(), dest.getY());
+            p3 = new Point2D.Double(dest.getX() + dx*ratio*headLength/2, dest.getY() + dy*ratio*headLength/2);
+        } else {
+            // Intersection of line with state where arrow tip will be drawn
+            double stateRadius = JState.DIAMETRO/2;
+            tip = new Point2D.Double(dest.getX() + dx*ratio*stateRadius, dest.getY() + dy*ratio*stateRadius);
+            p3 = new Point2D.Double(dest.getX() + dx*ratio*headLength, dest.getY() + dy*ratio*headLength);
+        }
         // Change in perpendicular line
         dx = (p1.getX()-p2.getX());
         dy = (p1.getY()-p2.getY());
@@ -137,17 +149,18 @@ public class JDeltaPainter{
         g2d.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
         g2d.setColor(c);
 
-        Point tmp = new Point(p3);
-        tmp.translate((int) (dx*ratio*headWidth),(int) (dy*ratio*headWidth));
+
+        // Draw arrow lines
+        Point2D.Double tmp = new Point2D.Double(p3.getX() +dx*ratio*headWidth, p3.getY() + dy*ratio*headWidth);
         l2d.setLine(tmp,tip);
         g2d.draw(l2d);
 
-        tmp = new Point(p3);
-        tmp.translate((int) (dx*ratio*-headWidth),(int) (dy*ratio*-headWidth));
+        tmp = new Point2D.Double(p3.getX() + dx*ratio*-headWidth, p3.getY() + dy*ratio*-headWidth);
         l2d.setLine(tmp, tip);
         g2d.draw(l2d);
+    }
 
-        // double nx = (orig.getX() + dest.getX())/2 , ny=(orig.getY()+ dest.getY())/2;
+    public void paintLabel(Graphics2D g2d, Point2D orig, Point2D dest, String label, boolean first_check) {
         g2d.setColor(ARROW_LABEL_COLOR);
 
         // Rotate label with arrow
@@ -161,7 +174,7 @@ public class JDeltaPainter{
         double tx, ty;
         int distance = 5;
         if (first_check) {
-            distance = -12;
+            distance = 35;
         }
 
         if (gamma < 0) { // Calculate distances from transition line
@@ -187,7 +200,6 @@ public class JDeltaPainter{
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                              RenderingHints.VALUE_ANTIALIAS_ON);
-
     }
 
     ////este es el de salva
@@ -217,22 +229,6 @@ public class JDeltaPainter{
 
     public void paintLabelSelfState(Graphics2D g2d, Point p, String label) {
         g2d.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
-        java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
-        Point p1 = new Point();
-        p1.setLocation((float)p.getX(), (float)p.getY()+40);
-        Point p2 = new Point();
-        p2.setLocation((float)p.getX(), (float)p.getY()+53);
-        l2d.setLine(p1,p2);
-        g2d.draw(l2d);
-        p1.translate(-5,0);
-        l2d.setLine(p1,p2);
-        g2d.draw(l2d);
-        // JState.DIAMETRO/2;
-        // java.awt.geom.CubicCurve2D.Float curve = new java.awt.geom.CubicCurve2D.Float(
-        //                     (float)p.getX(), (float)p.getY(), (float)(p.getX()-5), (float)(p.getY() + JState.DIAMETRO/2),
-        //                     (float)p.getX(), (float)p.getY(), (float)(p.getX()+5), (float)(p.getY() + JState.DIAMETRO/2));
-        //
-        //         g2d.draw(curve);
         FontMetrics fontMetrics = g2d.getFontMetrics();
         g2d.setColor(ARROW_LABEL_COLOR);
         g2d.drawString(label,(float)(p.getX() - (JState.DIAMETRO/4) - fontMetrics.stringWidth(label)/2), (float)p.getY()+10);
@@ -268,7 +264,7 @@ public class JDeltaPainter{
                 State p;
                 if(jdelta instanceof StackDelta){
                     p = ((QxGammaStar)((QxGammaStarSet)vpair.elementAt(2)).toArray()[0]).getQ();
-                } else if(jdelta instanceof TuringDelta){
+                } else if(jdelta instanceof TuringDelta) {
                     p = ((QxGammaxDirection)vpair.elementAt(1)).getQ();
                 } else {
                     p = (State)vpair.elementAt(1);
@@ -295,18 +291,19 @@ public class JDeltaPainter{
                                             (float)(c.getX()+JState.DIAMETRO/1.5), (float)(c.getY() - JState.DIAMETRO*1.4), (float)c.getX()+5, (float)c.getY());
 
                         g2d.draw(curve);
-
+                        paintArrowHead(g2d,new Point2D.Double(c.getX()+JState.DIAMETRO/3.5,c.getY() - JState.DIAMETRO*1.4),
+                                           new Point2D.Double(c.getX()+10, c.getY()), g.getColor(), first_check);
                         paintLabelSelfState(g2d, ((JState)q).getQuadCurveCP(), jdelta.getLabelString((JState)q,(JState)p));
-                    } else {
+                    } else { // ARC
                         java.awt.geom.Line2D.Double l2d = new java.awt.geom.Line2D.Double();
                         jq = (JState) q;
                         jp = (JState) p;
                         x = jq.getCentro().getLocation();
                         y = jp.getCentro().getLocation();
+                        boolean curved = false;
                         if((currentp = centrosp1.get(x)) != null){
                             if(currentp.get(y) !=null){
-                                x.translate(10,10);
-                                y.translate(10,10);
+                                curved = true;
                                 first_check = true;
                             } else {
                                 currentp.put(y,new Boolean(true));
@@ -317,8 +314,7 @@ public class JDeltaPainter{
                             y = jp.getCentro().getLocation();
                             if ((currentp = centrosp1.get(y)) != null) {
                                 if (currentp.get(y) !=null) {
-                                    x.translate(10,10);
-                                    y.translate(10,10);
+                                    curved = true;
                                     first_check = true;
                                 } else {
                                     currentp.put(x,new Boolean(true));
@@ -329,18 +325,48 @@ public class JDeltaPainter{
                                 centrosp1.put(y,htmp);
                             }
                         }
-                        l2d.setLine(x,y);
-                        g2d.draw(l2d);
+                        if (curved) {
+                            java.awt.geom.QuadCurve2D.Double q2d = new java.awt.geom.QuadCurve2D.Double();
+                            double dx = x.getX() - y.getX();
+                            double dy = x.getY() - y.getY();
+                            double dist = Math.sqrt(dx*dx + dy*dy);
+                            dx = dx/dist;
+                            dy = dy/dist;
 
-                        paintArrowHead(g2d,x,y,g.getColor(), jdelta.getLabelString((JState)q,(JState)p), first_check);
+                            q2d.setCurve(x.getX(), x.getY(), (x.getX() + y.getX())/2.0f - 50*dy, (x.getY() + y.getY())/2.0f + 50*dx, y.getX(), y.getY());
+                            g2d.draw(q2d);
+                            Point2D[] points = {new Point2D.Double(x.getX(), x.getY()), // initial
+                                              new Point2D.Double((x.getX() + y.getX())/2.0f - 50*dy, (x.getY() + y.getY())/2.0f + 50*dx), // bezier control
+                                              new Point2D.Double(y.getX() + 50/2*dx - 2500/dist*dy, y.getY()+50/2*dy + 2500/dist*dx), // potential arrow tip
+                                              new Point2D.Double(y.getX(), y.getY()), // final
+                                              new Point2D.Double(y.getX() + 4*dy, y.getY() - 4*dx)};
+                            // Point2D arrowStart = getPointOnBezierCurve(points, 50);
+
+                            g.setColor(Color.red);
+                            for (Point2D dot : points) {
+                                //g2d.fill(new Ellipse2D.Double(dot.getX(), dot.getY(), 5, 5)); // For debugging control points
+                            }
+                            g.setColor(Color.black);
+
+                            q2d.setCurve(y.getX(), y.getY(), (x.getX() + y.getX())/2, (x.getY() + y.getY())/2, x.getX(), x.getY());
+                            g2d.draw(q2d);
+
+                            //Point2D arrowStart = new Point2D(y);
+                            // arrowStart.setLocation(y.getX()-60, y.getY()+60);
+                            paintArrowHead(g2d,points[1],points[2],g.getColor(), first_check);
+                            paintLabel(g2d,points[0],points[3], jdelta.getLabelString((JState)q,(JState)p), first_check);
+                        } else {
+                            l2d.setLine(x,y);
+                            g2d.draw(l2d);
+                            paintArrowHead(g2d,x,y,g.getColor(), first_check);
+                            paintLabel(g2d,x,y, jdelta.getLabelString((JState)q,(JState)p), first_check);
+                        }
                     }
                     g2d.setStroke(origS);
                 }
             }
         }
     }
-
-
 }
 
 /* JDeltaPainter.java ends here. */

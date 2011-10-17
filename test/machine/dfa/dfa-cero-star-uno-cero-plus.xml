@@ -1,33 +1,30 @@
 <?xml version='1.0' encoding="iso-8859-1" ?>
-
-<!-- Un DFA  M es un quíntuplo (Q,Sigma,delta,q0,F) -->
-
 <dfa>
 
-  <description> Este autómata reconoce el lenguaje 0^{*}10^{+}</description>
+ <!-- Descripci?n --> 
+<description> Este aut?mata reconoce el lenguaje 0^{*}10^{+}</description>
 
-  <stateSet>
-  <state>A</state>
-  <state>B</state>
-  <state>C</state>
-  </stateSet>
 
-   <alph>
-  <sym>0</sym>
-  <sym>1</sym>
-   </alph>
+ <!-- Conjunto de States Q --> 
+<stateSet><state xpos="85" ypos="102" >A</state><state xpos="300" ypos="112" >B</state><state xpos="513" ypos="116" >C</state></stateSet>
 
-   <delta>
-  <trans> <state>A</state> <sym>0</sym> <state>A</state> </trans>
-  <trans> <state>A</state> <sym>1</sym> <state>B</state> </trans>
-  <trans> <state>B</state> <sym>0</sym> <state>C</state> </trans>
-  <trans> <state>C</state> <sym>0</sym> <state>C</state> </trans>
-   </delta>
+ <!-- Alphabet de entrada Sigma --> 
+<alph><sym>0</sym><sym>1</sym></alph>
 
-   <state>A</state>
+ <!-- Funci?n de Transici?n delta --> 
 
-   <stateSet>
-     <state>C</state>
-   </stateSet>
+<delta>
+	<trans><state>A</state><sym>1</sym><state>B</state></trans>
+	<trans><state>A</state><sym>0</sym><state>A</state></trans>
+	<trans><state>C</state><sym>1</sym><state>B</state></trans>
+	<trans><state>C</state><sym>0</sym><state>C</state></trans>
+	<trans><state>B</state><sym>0</sym><state>C</state></trans>
+</delta>
 
+
+ <!-- State inicial q0 --> 
+<state>A</state>
+
+ <!-- Conjunto de estados finales F --> 
+<stateSet><state>C</state></stateSet>
 </dfa>

@@ -25,79 +25,83 @@
 
 <delta>
 
-<trans> <state>q1</state> <sym>0</sym>
-  <QxGammaxDirection> <state>q2</state> <sym>_</sym> <right/> </QxGammaxDirection></trans>
+  <trans> <state>q1</state> <sym>0</sym>
+    <QxGammaxDirection> <state>q2</state> <sym>_</sym> <right/> </QxGammaxDirection>
+  </trans>
 
-<trans> <state>q1</state> <sym>_</sym>
-    <QxGammaxDirection>
-    <state>qreject</state>
-    <sym>_</sym><right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q1</state> <sym>_</sym>
+      <QxGammaxDirection>
+      <state>qreject</state>
+      <sym>_</sym><right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q1</state> <sym>x</sym><QxGammaxDirection> <state>qreject</state> <sym>x</sym> <right/> </QxGammaxDirection>
-</trans>
+  <trans> <state>q1</state> <sym>x</sym><QxGammaxDirection> <state>qreject</state> <sym>x</sym> <right/> </QxGammaxDirection>
+  </trans>
 
-<trans> <state>q2</state> <sym>x</sym><QxGammaxDirection> <state>q2</state> <sym>x</sym> <right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q2</state> <sym>x</sym><QxGammaxDirection> <state>q2</state> <sym>x</sym> <right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q2</state>
-<sym>_</sym><QxGammaxDirection>
-    <state>qaccept</state>
-    <sym>_</sym><right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q2</state>
+  <sym>_</sym><QxGammaxDirection>
+      <state>qaccept</state>
+      <sym>_</sym><right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q2</state>
-<sym>0</sym><QxGammaxDirection>
-    <state>q3</state>
-    <sym>x</sym><right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q2</state>
+  <sym>0</sym><QxGammaxDirection>
+      <state>q3</state>
+      <sym>x</sym><right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q3</state>
-<sym>x</sym><QxGammaxDirection>
-    <state>q3</state>
-    <sym>x</sym><right/></QxGammaxDirection>
-</trans>
-<trans> <state>q3</state>
-<sym>_</sym><QxGammaxDirection>
-    <state>q5</state>
-    <sym>_</sym><left/></QxGammaxDirection>
-</trans>
+  <trans> <state>q3</state>
+  <sym>x</sym><QxGammaxDirection>
+      <state>q3</state>
+      <sym>x</sym><right/></QxGammaxDirection>
+  </trans>
+  <trans> <state>q3</state>
+  <sym>_</sym><QxGammaxDirection>
+      <state>q5</state>
+      <sym>_</sym><left/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q3</state>
-<sym>0</sym><QxGammaxDirection>
-    <state>q4</state>
-    <sym>0</sym><right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q3</state>
+  <sym>0</sym><QxGammaxDirection>
+      <state>q4</state>
+      <sym>0</sym><right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q4</state>
-<sym>x</sym><QxGammaxDirection>
-    <state>q4</state>
-    <sym>x</sym><right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q4</state>
+  <sym>x</sym><QxGammaxDirection>
+      <state>q4</state>
+      <sym>x</sym><right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q4</state>
-<sym>0</sym><QxGammaxDirection>
-    <state>q3</state>
-    <sym>x</sym><right/></QxGammaxDirection>
-</trans>
+  <trans> <state>q4</state>
+  <sym>0</sym><QxGammaxDirection>
+      <state>q3</state>
+      <sym>x</sym><right/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q5</state>
-<sym>0</sym><QxGammaxDirection>
-    <state>q5</state>
-    <sym>0</sym><left/></QxGammaxDirection>
-</trans>
+  <trans> <state>q5</state>
+  <sym>0</sym><QxGammaxDirection>
+      <state>q5</state>
+      <sym>0</sym><left/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q5</state>
-<sym>x</sym><QxGammaxDirection>
-    <state>q5</state>
-    <sym>x</sym><left/></QxGammaxDirection>
-</trans>
+  <trans> <state>q5</state>
+  <sym>x</sym><QxGammaxDirection>
+      <state>q5</state>
+      <sym>x</sym><left/></QxGammaxDirection>
+  </trans>
 
-<trans> <state>q5</state>
-<sym>_</sym><QxGammaxDirection>
-    <state>q2</state>
-    <sym>_</sym><right/></QxGammaxDirection>
-</trans></delta><state>q1</state>
+  <trans> <state>q5</state>
+  <sym>_</sym><QxGammaxDirection>
+      <state>q2</state>
+      <sym>_</sym><right/></QxGammaxDirection>
+  </trans>
+</delta>
+
+<state>q1</state>
 
 <sym>_</sym>
 
