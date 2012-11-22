@@ -511,7 +511,7 @@ public class JDFA extends DFA implements JMachine{
                     ((JState) aQ[row]).setEsEstadoInicial(true);
                     break;
                 case 1:
-                    flag = ((Boolean) model.getValueAt(row, column)).booleanValue();
+                    flag = ((JCheckBox) model.getValueAt(row, column)).isSelected();
                     aQ[row].setIsInF(flag);
                     if (flag) { // Marked as Final
                         getF().add(aQ[row]);
