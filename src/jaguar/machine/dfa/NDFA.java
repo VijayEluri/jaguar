@@ -323,7 +323,6 @@ public class NDFA extends Machine {
         try{
 
             fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
-            fw.write("<!DOCTYPE ndfa SYSTEM \"ndfa.dtd\">"+"\n");
             fw.write(BEG_TAG);
             if (machineDescription.trim().length() > 0) {
                   fw.write("\n\n <!-- Descripción --> \n");

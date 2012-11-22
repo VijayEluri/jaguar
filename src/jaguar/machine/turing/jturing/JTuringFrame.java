@@ -146,7 +146,8 @@ public class JTuringFrame extends JMachineFrame{
             nextButton.setEnabled(true);
             resetButton.setEnabled(true);
             runAllButton.setEnabled(true);
-                  quickTestButton.setEnabled(true);
+            quickTestButton.setEnabled(true);
+            save.setEnabled(true);
             stopButton.setEnabled(false);
             currentStateLabel.setText(jmachine.getCurrentState().toString());
             jmachine.setStrToTest(new JStr());

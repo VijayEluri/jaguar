@@ -267,7 +267,7 @@ public class AFS extends Machine{
      * Configura todos los campos del AFS dado a partir del documento valido que le pasamos
      * @param document es un documento DOM que cumple con la especificación DTD para los AFSs
      * @param r el AFS que configuramos
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public void setupAFS(org.w3c.dom.Document document,AFS r)throws Exception{
         NodeList elementsList = document.getElementsByTagName(ELEMENT_NAME).item(0).getChildNodes();
@@ -347,7 +347,7 @@ public class AFS extends Machine{
 
     /**
      * Construye un AFS a partir del nombre de un archivo que es valido segun el DTD de los AFSs
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public AFS(org.w3c.dom.Document document)throws Exception{
         this();
@@ -529,13 +529,11 @@ public class AFS extends Machine{
      * Escribe el AFS con su representación correspondiente con tags.
      *
      * @param fw El FileWriter donde se guardará el AFS.
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public void toFile(FileWriter fw){
         try{
             fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
-            fw.write("<!DOCTYPE stack SYSTEM \"afs.dtd\">"+"\n");
-
             if(machineDescription.trim().length() > 0){
                 fw.write(DESCRIPTION_BEG_TAG);
                 fw.write(getMachineDescription());

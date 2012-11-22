@@ -317,7 +317,6 @@ public class Turing extends Machine implements Cloneable{
     public void toFile(FileWriter fw){
         try{
             fw.write("<?xml version='1.0' encoding=\"iso-8859-1\" ?>"+"\n");
-            fw.write("<!DOCTYPE turing SYSTEM \"turing.dtd\">"+"\n");
             if(machineDescription.trim().length() > 0){
                 fw.write(DESCRIPTION_BEG_TAG);
                 fw.write(getMachineDescription());

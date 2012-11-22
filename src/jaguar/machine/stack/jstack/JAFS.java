@@ -362,7 +362,7 @@ public class JAFS extends AFS implements JMachine{
 
     /**
      * Constructora que construye un JAFS a partir del nombre de un archivo que es valido segun el DTD de los AFSs
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public JAFS(String filename)throws Exception{
         this(new File(filename));
@@ -371,7 +371,7 @@ public class JAFS extends AFS implements JMachine{
     /**
      * Constructora que construye un JAFS a partir del nombre de un archivo que es valido segun el DTD de los AFSs
      * @param jafsframe asociado listo para inicializar las posiciones de los estados, si estos no fueroninicializados, y listo para mostrarse.
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public JAFS(String filename, JAfsFrame jafsframe)throws Exception{
         this(new File(filename),jafsframe);
@@ -380,7 +380,7 @@ public class JAFS extends AFS implements JMachine{
     /**
      * Constructora que construye un JAFS a partir del nombre de un archivo que es valido segun el DTD de los AFSs
      * @param jafsframe asociado listo para inicializar las posiciones de los estados, si estos no fueroninicializados, y listo para mostrarse.
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public JAFS(File file, JAfsFrame jafsframe)throws Exception{
         this(file);
@@ -391,7 +391,7 @@ public class JAFS extends AFS implements JMachine{
 
     /**
      * Constructora que construye un JAFS a partir del nombre de un archivo que es valido segun el DTD de los AFSs
-     * @see <a href="http://ijaguar.sourceforge.net/DTD/afs.dtd">afs.dtd</a>
+     * @see <a href="http://ijaguar.sourceforge.net/DTD/QxGammaStar">QxGammaStar</a>
      */
     public JAFS(File file)throws Exception{
         super(file);
@@ -523,16 +523,18 @@ public class JAFS extends AFS implements JMachine{
         } else { // changing final or initial
             boolean flag;
             int idx = column - (getSigma().size()+2);
-            int stateIdx = row/3;
+            int stateIdx = row/(getGamma().size());
             switch (idx) {
-                case 0:
+                case 0: // Change initial
                     flag = ((JRadioButton) model.getValueAt(row, column)).isSelected();
+                    System.out.println("changing initial: "+ flag);
                     ((JState) getQ0()).setEsEstadoInicial(false);
                     setQ0(aQ[stateIdx]);
                     ((JState) aQ[stateIdx]).setEsEstadoInicial(true);
                     break;
-                case 1:
+                case 1: // Change final
                     flag = ((JCheckBox) model.getValueAt(row, column)).isSelected();
+                    System.out.println("changing final: "+ flag);
                     aQ[stateIdx].setIsInF(flag);
                     if (flag) { // Marked as Final
                         getF().add(aQ[stateIdx]);

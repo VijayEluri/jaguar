@@ -262,6 +262,8 @@ public class JDeltaPainter{
                 vpair = (Vector)vaux.elementAt(i);
                 Symbol sym = (Symbol)vpair.elementAt(0);
                 State p;
+                Enumeration vEnum = vpair.elements(); 
+                
                 if(jdelta instanceof StackDelta){
                     p = ((QxGammaStar)((QxGammaStarSet)vpair.elementAt(2)).toArray()[0]).getQ();
                 } else if(jdelta instanceof TuringDelta) {

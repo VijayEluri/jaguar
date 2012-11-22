@@ -1,7 +1,4 @@
 <?xml version='1.0' encoding="iso-8859-1" ?>
-
-<!DOCTYPE stack SYSTEM "afs.dtd">
-
 <stack>
 
   <description>Pushdown automaton to accept L= { a^{i}b^{i} :i >=0 }</description>

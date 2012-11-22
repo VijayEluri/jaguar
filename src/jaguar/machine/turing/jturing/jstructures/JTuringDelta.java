@@ -184,9 +184,17 @@ public class JTuringDelta extends TuringDelta implements JDeltaGraphic{
             vp = (Vector) v.elementAt(i);
             qgd = (QxGammaxDirection)vp.elementAt(1);
             if(qgd.getQ().equals(dest))
-                res += ((Symbol)vp.elementAt(0))+"/"+qgd.getAGamma()+","+jaguar.machine.turing.Turing.getStringDirection(qgd.getDirection())+";";
+                res += ((Symbol)vp.elementAt(0))+"/"+qgd.getAGamma()+","+ withoutTags(qgd.getDirection())+";";
         }
         return res.substring(0,res.length()-1);
+    }
+
+    private String withoutTags(int _direction) {
+      if(_direction == jaguar.machine.turing.Turing.LEFT)
+          return "←";
+      if(_direction == jaguar.machine.turing.Turing.RIGHT)
+          return "→";
+      return "INVALID DIRECTION TAG!!!";
     }
 
 }// JTuringDelta

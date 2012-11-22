@@ -1,7 +1,4 @@
 <?xml version='1.0' encoding="iso-8859-1" ?>
-
-<!DOCTYPE stack SYSTEM "afs.dtd">
-
 <!--   Q = {q0, q1} -->
 <!--   Sigma = {a, b} -->
 <!--   Gamma = {A} -->

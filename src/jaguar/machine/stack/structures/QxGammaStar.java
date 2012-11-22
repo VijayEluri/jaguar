@@ -138,7 +138,7 @@ public class QxGammaStar{
      ** El nombre del elemento que debe de ser igual al especificado en su respectivo DTD
      ** El valor de esta variable debe de ser igual a org.w3c.dom.Node.getNodeName()
      **/
-    public static final String ELEMENT_NAME = "QxGammStar";
+    public static final String ELEMENT_NAME = "QxGammaStar";
 
     public static final String BEG_TAG = "<"+ELEMENT_NAME+">";
 

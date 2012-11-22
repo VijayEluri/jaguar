@@ -323,6 +323,7 @@ public class JAfsFrame extends JMachineFrame{
             nextButton.setEnabled(true);
             resetButton.setEnabled(true);
             runAllButton.setEnabled(true);
+            save.setEnabled(true);
             quickTestButton.setEnabled(true);
             tabular.setEnabled(true);
             stopButton.setEnabled(false);
@@ -365,8 +366,64 @@ public class JAfsFrame extends JMachineFrame{
     }
 
     protected JMachine createNew() {
-        // return new JDfa();
-        return null;
+        String alphabetStr = (String)JOptionPane.showInputDialog(
+                            this,
+                            "You must enter a comma separated list of symbols for use as input alphabet",
+                            "Provide input alphabet",
+                            JOptionPane.PLAIN_MESSAGE);
+
+        Alphabet sigma = new Alphabet(alphabetStr);
+
+        String gammaStr = (String)JOptionPane.showInputDialog(
+                            this,
+                            "You must enter a comma separated list of symbols for use as the stack alphabet, the first symbol will be the initial.",
+                            "Provide stack alphabet",
+                            JOptionPane.PLAIN_MESSAGE);
+
+        Alphabet gamma = new Alphabet(gammaStr);
+
+        String stateNumbStr = (String)JOptionPane.showInputDialog(
+                            this,
+                            "You must enter a number to set how many states your new AFS will have.",
+                            "How many states?",
+                            JOptionPane.PLAIN_MESSAGE);
+
+        int totalStates = Integer.parseInt(stateNumbStr);
+        JStateSet states = new JStateSet();
+        JState initial = new JState("q0");
+        states.add(initial);
+
+        for (int i = 1; i < totalStates; ++i) {
+            states.add(new JState("q" + i));
+        }
+
+        jmachine = new JAFS(states, sigma, gamma, new JStackDelta(),  initial, gamma.toArray()[0], new JStateSet());
+
+        jdc.initJMachineCanvas((JAFS)jmachine);
+        printM.setEnabled(true);
+        tabular.setEnabled(true);
+        save.setEnabled(true);
+        nextButton.setEnabled(true);
+        resetButton.setEnabled(true);
+        runAllButton.setEnabled(true);
+        quickTestButton.setEnabled(true);
+        stopButton.setEnabled(false);
+        currentStateLabel.setText(jmachine.getCurrentState().toString());
+        jmachine.setStrToTest(new JStr());
+        jmachine.setStrToTestOrig(new JStr());
+        sssd.insertStr(jmachine.getStrToTest());
+
+        jmachine.setJMachineFrame(this);
+        loadTest.setEnabled(true);
+        consTest.setEnabled(true);
+        jScrollPaneCanvas.getViewport().setViewPosition(new Point(0,0));
+        jmachine.resetMachine();
+        descriptionMI.setEnabled(true);
+
+        ((JAFS) jmachine).initStatesPosition(getJScrollPaneCanvas().getViewport().getViewSize());
+        file = null;
+
+        return jmachine;
     }
 
     public void showTabular(){
