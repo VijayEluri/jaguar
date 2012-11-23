@@ -1,6 +1,4 @@
 <?xml version='1.0' encoding="iso-8859-1" ?>
-<!DOCTYPE turing SYSTEM "turing.dtd">
-
 <turing>
 
 <description>Reconoce el lenguaje {0^n1^n | n > 0}</description>

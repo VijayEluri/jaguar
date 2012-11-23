@@ -496,8 +496,8 @@ public class JAFS extends AFS implements JMachine{
         if (column - 2 < getSigma().size()) { // Changing delta
             String qxgsetStr = (String) model.getValueAt(row, column); // Value edited
             String sigmaSymbol = model.getColumnName(column);
-            JState fromState = (JState)aQ[row/3];
-            Symbol gammaSymbol = Gamma.toArray()[row % 3];
+            JState fromState = (JState)aQ[row/getGamma().size()];
+            Symbol gammaSymbol = Gamma.toArray()[row % getGamma().size()];
             ((StackDelta)getDelta()).removeTransition(fromState, new Symbol(sigmaSymbol), new Symbol(gammaSymbol));
             if (!qxgsetStr.isEmpty()) {
                 QxGammaStarSet qxgset = new QxGammaStarSet();
@@ -565,7 +565,7 @@ public class JAFS extends AFS implements JMachine{
             // find wich state is selected and delete it.
             State[] states = Q.toArray();
             int rowIdx = afsframe.getSelectedRowInTTM();
-            int idx = rowIdx/3;
+            int idx = rowIdx/getGamma().size();
             if (idx >= 0) {
                 JState state = (JState)states[idx];
                 int n = JOptionPane.showConfirmDialog(afsframe,

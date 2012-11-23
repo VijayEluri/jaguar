@@ -4,7 +4,7 @@
 
 <dfa>
 
-   <stateSet><state xpos="123" ypos="987">PAR</state><state>IMPAR</state></stateSet>
+   <stateSet><state>PAR</state><state>IMPAR</state></stateSet>
 
    <alph>
   <sym>0</sym>

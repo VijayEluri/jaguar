@@ -114,6 +114,16 @@ public class TuringDelta extends Delta<State,Hashtable<Symbol,QxGammaxDirection>
     public void addTransition(State Qin, Symbol Tin, State Qresult, Symbol Tresult, int direction){
         addTransition(Qin, Tin, new QxGammaxDirection(Qresult,Tresult,direction));
     }
+    
+    public void removeTransition(State Qin, Symbol Tin){
+      Hashtable<Symbol,QxGammaxDirection> t = delta.get(Qin);
+      if(t == null) {
+          return;
+      } else {
+        t.remove(Tin);
+      }
+      return;
+    }
 
      protected void addTransition(State Qin, Symbol Tin, QxGammaxDirection terciaResultante){
         Hashtable<Symbol,QxGammaxDirection> t = delta.get(Qin);

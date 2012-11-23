@@ -55,6 +55,7 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
+import javax.swing.table.TableModel;
 import javax.swing.event.TableModelEvent;
 import java.io.File;
 import java.io.IOException;
@@ -341,7 +342,7 @@ public class JTuring extends Turing implements JMachine {
     }
 
     public Class getColumnClass(int c) {
-        int idx = c - (getSigma().size()+2);
+        int idx = c - (getGamma().size()+2);
         switch (idx) {
             case 0:
                 return JRadioButton.class;
@@ -400,7 +401,69 @@ public class JTuring extends Turing implements JMachine {
     }
 
     public void tableChanged(TableModelEvent e) {
+        int row = e.getFirstRow();
+        int column = e.getColumn();
 
+        TableModel model = (TableModel)e.getSource();
+        State[] aQ = getQ().toArray();
+
+        if (column <= getGamma().size()) { // Changing delta
+            String qxgxdLabel = (String) model.getValueAt(row, column); // Value edited
+            String symbol = model.getColumnName(column);
+            JState fromState = (JState)aQ[row];
+            if (qxgxdLabel.isEmpty()) {
+                ((TuringDelta)getDelta()).removeTransition(fromState, new Symbol(symbol));
+            } else {
+                String[] labels  = qxgxdLabel.split("\\s*,\\s*");
+                String toStateLabel = labels[0];
+                String toSymbolLabel = labels[1];
+                String toDirectionLabel = labels[2];
+
+                JState toState = null;
+                Symbol toSymbol = new Symbol(toSymbolLabel);
+                int toDirection;
+
+                for (State state : aQ) {
+                    if (((JState) state).getLabel().equals(toStateLabel)) { // find the state
+                        toState = (JState) state;
+                    }
+                }
+                if (toDirectionLabel.equals(jaguar.machine.turing.Turing.RIGHT_TAG)) {
+                    toDirection = jaguar.machine.turing.Turing.RIGHT;
+                } else {
+                    toDirection = jaguar.machine.turing.Turing.LEFT;
+                }
+                if (toState != null) {
+                  ((TuringDelta)getDelta()).addTransition(fromState, new Symbol(symbol), toState, toSymbol, toDirection);
+                }
+            }
+        } else { // changing final or initial
+            boolean flag;
+            int idx = column - (getGamma().size()+1);
+            int stateIdx = row;
+
+            switch (idx) {
+                case 0: // Change initial
+                    flag = ((JRadioButton) model.getValueAt(row, column)).isSelected();
+                    System.out.println("changing initial: "+ flag);
+                    ((JState) getQ0()).setEsEstadoInicial(false);
+                    setQ0(aQ[stateIdx]);
+                    ((JState) aQ[stateIdx]).setEsEstadoInicial(true);
+                    break;
+                case 1: // Change final
+                    flag = ((JCheckBox) model.getValueAt(row, column)).isSelected();
+                    System.out.println("changing final: "+ flag);
+                    aQ[stateIdx].setIsInF(flag);
+                    if (flag) { // Marked as Final
+                        getF().add(aQ[stateIdx]);
+                    } else {
+                        getF().remove(aQ[stateIdx]);
+                    }
+                    break;
+            }
+        }
+
+        turingFrame.getJdc().repaint();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -418,7 +481,7 @@ public class JTuring extends Turing implements JMachine {
             // find wich state is selected and delete it.
             State[] states = Q.toArray();
             int rowIdx = turingFrame.getSelectedRowInTTM();
-            int idx = rowIdx/3;
+            int idx = rowIdx;
             if (idx >= 0) {
                 JState state = (JState)states[idx];
                 int n = JOptionPane.showConfirmDialog(turingFrame,

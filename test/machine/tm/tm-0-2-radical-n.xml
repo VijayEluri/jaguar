@@ -1,6 +1,4 @@
 <?xml version='1.0' encoding="iso-8859-1" ?>
-<!DOCTYPE turing SYSTEM "turing.dtd">
-
 <turing>
 
 <description>Acepta el lenguaje L = { 0^{2^{n}} | n >= 0}</description>
@@ -20,7 +18,7 @@
 </alph>
 
 <alph>
-  <sym>0</sym> <sym>x</sym> <sym>_</sym> 
+  <sym>0</sym> <sym>x</sym> <sym>_</sym>
 </alph>
 
 <delta>
